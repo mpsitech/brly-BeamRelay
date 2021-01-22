@@ -1,6 +1,6 @@
 # BeamRelay
 
-The BeamRelay project is an airplane traffic simulation with the aim of determining reachability of airborne airplanes via multi-hop optical data relays.
+BeamRelay is an air traffic simulation with the aim of determining reachability of airborne airplanes via high-speed, relayed optical data communication.
 
 ![](_exp/conmap.jpg)
 
