@@ -1,0 +1,227 @@
+/**
+	* \file VecBrlyVJob.h
+	* vector VecBrlyVJob (declarations)
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 11 Jan 2021
+  */
+// IP header --- ABOVE
+
+#ifndef VECBRLYVJOB_H
+#define VECBRLYVJOB_H
+
+#include <sbecore/Xmlio.h>
+
+/**
+	* VecBrlyVJob
+	*/
+namespace VecBrlyVJob {
+	const Sbecore::uint CRDBRLYCON = 1;
+	const Sbecore::uint CRDBRLYFIL = 2;
+	const Sbecore::uint CRDBRLYFLT = 3;
+	const Sbecore::uint CRDBRLYLEG = 4;
+	const Sbecore::uint CRDBRLYLOC = 5;
+	const Sbecore::uint CRDBRLYNAV = 6;
+	const Sbecore::uint CRDBRLYOPR = 7;
+	const Sbecore::uint CRDBRLYPRS = 8;
+	const Sbecore::uint CRDBRLYPTY = 9;
+	const Sbecore::uint CRDBRLYREG = 10;
+	const Sbecore::uint CRDBRLYRLY = 11;
+	const Sbecore::uint CRDBRLYSEG = 12;
+	const Sbecore::uint CRDBRLYTTB = 13;
+	const Sbecore::uint CRDBRLYUSG = 14;
+	const Sbecore::uint CRDBRLYUSR = 15;
+	const Sbecore::uint DLGBRLYCONNEW = 16;
+	const Sbecore::uint DLGBRLYLEGNEW = 17;
+	const Sbecore::uint DLGBRLYNAVLOAINI = 18;
+	const Sbecore::uint DLGBRLYTTBIMPFLT = 19;
+	const Sbecore::uint DLGBRLYTTBNEW = 20;
+	const Sbecore::uint DLGBRLYTTBTRLORIG = 21;
+	const Sbecore::uint JOBBRLYIEXFLT = 22;
+	const Sbecore::uint JOBBRLYIEXINI = 23;
+	const Sbecore::uint JOBBRLYIEXTTB = 24;
+	const Sbecore::uint PNLBRLYCON1NRELAY = 25;
+	const Sbecore::uint PNLBRLYCONCONMNEQUIPMENT = 26;
+	const Sbecore::uint PNLBRLYCONDETAIL = 27;
+	const Sbecore::uint PNLBRLYCONHEADBAR = 28;
+	const Sbecore::uint PNLBRLYCONLIST = 29;
+	const Sbecore::uint PNLBRLYCONMAP = 30;
+	const Sbecore::uint PNLBRLYCONMNFLIGHT = 31;
+	const Sbecore::uint PNLBRLYCONMNSEGMENT = 32;
+	const Sbecore::uint PNLBRLYCONPRE = 33;
+	const Sbecore::uint PNLBRLYCONREC = 34;
+	const Sbecore::uint PNLBRLYCONREF1NSEGMENT = 35;
+	const Sbecore::uint PNLBRLYFILDETAIL = 36;
+	const Sbecore::uint PNLBRLYFILHEADBAR = 37;
+	const Sbecore::uint PNLBRLYFILLIST = 38;
+	const Sbecore::uint PNLBRLYFILREC = 39;
+	const Sbecore::uint PNLBRLYFLT1NCONNECTION = 40;
+	const Sbecore::uint PNLBRLYFLTDETAIL = 41;
+	const Sbecore::uint PNLBRLYFLTEQP1NNODE = 42;
+	const Sbecore::uint PNLBRLYFLTEQPMNCONNECTION = 43;
+	const Sbecore::uint PNLBRLYFLTFAFAWAYPOINT = 44;
+	const Sbecore::uint PNLBRLYFLTHEADBAR = 45;
+	const Sbecore::uint PNLBRLYFLTLIST = 46;
+	const Sbecore::uint PNLBRLYFLTMNCONNECTION = 47;
+	const Sbecore::uint PNLBRLYFLTMNLOCATION = 48;
+	const Sbecore::uint PNLBRLYFLTORGMNFLIGHT = 49;
+	const Sbecore::uint PNLBRLYFLTPRE = 50;
+	const Sbecore::uint PNLBRLYFLTREC = 51;
+	const Sbecore::uint PNLBRLYFLTREF1NSEGMENT = 52;
+	const Sbecore::uint PNLBRLYLEG1NFLIGHT = 53;
+	const Sbecore::uint PNLBRLYLEGCOR1NCONNECTION = 54;
+	const Sbecore::uint PNLBRLYLEGDETAIL = 55;
+	const Sbecore::uint PNLBRLYLEGHEADBAR = 56;
+	const Sbecore::uint PNLBRLYLEGLIST = 57;
+	const Sbecore::uint PNLBRLYLEGMAP = 58;
+	const Sbecore::uint PNLBRLYLEGMNLOCATION = 59;
+	const Sbecore::uint PNLBRLYLEGORGMNLEG = 60;
+	const Sbecore::uint PNLBRLYLEGPRE = 61;
+	const Sbecore::uint PNLBRLYLEGREC = 62;
+	const Sbecore::uint PNLBRLYLOCBGN1NLEG = 63;
+	const Sbecore::uint PNLBRLYLOCDETAIL = 64;
+	const Sbecore::uint PNLBRLYLOCEND1NLEG = 65;
+	const Sbecore::uint PNLBRLYLOCEQP1NNODE = 66;
+	const Sbecore::uint PNLBRLYLOCEQPMNCONNECTION = 67;
+	const Sbecore::uint PNLBRLYLOCHEADBAR = 68;
+	const Sbecore::uint PNLBRLYLOCLIST = 69;
+	const Sbecore::uint PNLBRLYLOCMAP = 70;
+	const Sbecore::uint PNLBRLYLOCMNFLIGHT = 71;
+	const Sbecore::uint PNLBRLYLOCMNLEG = 72;
+	const Sbecore::uint PNLBRLYLOCMNSEGMENT = 73;
+	const Sbecore::uint PNLBRLYLOCPROXORGMNLOCATION = 74;
+	const Sbecore::uint PNLBRLYLOCREC = 75;
+	const Sbecore::uint PNLBRLYLOCVISORGMNLOCATION = 76;
+	const Sbecore::uint PNLBRLYNAVADMIN = 77;
+	const Sbecore::uint PNLBRLYNAVBASE = 78;
+	const Sbecore::uint PNLBRLYNAVCONNECT = 79;
+	const Sbecore::uint PNLBRLYNAVHEADBAR = 80;
+	const Sbecore::uint PNLBRLYOPR1NEQUIPMENT = 81;
+	const Sbecore::uint PNLBRLYOPRDETAIL = 82;
+	const Sbecore::uint PNLBRLYOPRHEADBAR = 83;
+	const Sbecore::uint PNLBRLYOPRLIST = 84;
+	const Sbecore::uint PNLBRLYOPRREC = 85;
+	const Sbecore::uint PNLBRLYPRSADETAIL = 86;
+	const Sbecore::uint PNLBRLYPRSDETAIL = 87;
+	const Sbecore::uint PNLBRLYPRSHEADBAR = 88;
+	const Sbecore::uint PNLBRLYPRSLIST = 89;
+	const Sbecore::uint PNLBRLYPRSREC = 90;
+	const Sbecore::uint PNLBRLYPTY1NEQUIPMENT = 91;
+	const Sbecore::uint PNLBRLYPTYDETAIL = 92;
+	const Sbecore::uint PNLBRLYPTYHEADBAR = 93;
+	const Sbecore::uint PNLBRLYPTYLIST = 94;
+	const Sbecore::uint PNLBRLYPTYREC = 95;
+	const Sbecore::uint PNLBRLYREG1NLOCATION = 96;
+	const Sbecore::uint PNLBRLYREGADSTSWITCH = 97;
+	const Sbecore::uint PNLBRLYREGDETAIL = 98;
+	const Sbecore::uint PNLBRLYREGHEADBAR = 99;
+	const Sbecore::uint PNLBRLYREGLIST = 100;
+	const Sbecore::uint PNLBRLYREGREC = 101;
+	const Sbecore::uint PNLBRLYREGSUP1NREGION = 102;
+	const Sbecore::uint PNLBRLYRLY1NNODE = 103;
+	const Sbecore::uint PNLBRLYRLYDETAIL = 104;
+	const Sbecore::uint PNLBRLYRLYHEADBAR = 105;
+	const Sbecore::uint PNLBRLYRLYLIST = 106;
+	const Sbecore::uint PNLBRLYRLYREC = 107;
+	const Sbecore::uint PNLBRLYSEGDETAIL = 108;
+	const Sbecore::uint PNLBRLYSEGHEADBAR = 109;
+	const Sbecore::uint PNLBRLYSEGLIST = 110;
+	const Sbecore::uint PNLBRLYSEGMNCONNECTION = 111;
+	const Sbecore::uint PNLBRLYSEGMNLOCATION = 112;
+	const Sbecore::uint PNLBRLYSEGORGMNSEGMENT = 113;
+	const Sbecore::uint PNLBRLYSEGPRE = 114;
+	const Sbecore::uint PNLBRLYSEGREC = 115;
+	const Sbecore::uint PNLBRLYTTB1NFLIGHT = 116;
+	const Sbecore::uint PNLBRLYTTBDETAIL = 117;
+	const Sbecore::uint PNLBRLYTTBHEADBAR = 118;
+	const Sbecore::uint PNLBRLYTTBLIST = 119;
+	const Sbecore::uint PNLBRLYTTBREC = 120;
+	const Sbecore::uint PNLBRLYTTBREF1NFILE = 121;
+	const Sbecore::uint PNLBRLYUSGAACCESS = 122;
+	const Sbecore::uint PNLBRLYUSGDETAIL = 123;
+	const Sbecore::uint PNLBRLYUSGHEADBAR = 124;
+	const Sbecore::uint PNLBRLYUSGLIST = 125;
+	const Sbecore::uint PNLBRLYUSGMNUSER = 126;
+	const Sbecore::uint PNLBRLYUSGREC = 127;
+	const Sbecore::uint PNLBRLYUSR1NSESSION = 128;
+	const Sbecore::uint PNLBRLYUSRAACCESS = 129;
+	const Sbecore::uint PNLBRLYUSRDETAIL = 130;
+	const Sbecore::uint PNLBRLYUSRHEADBAR = 131;
+	const Sbecore::uint PNLBRLYUSRLIST = 132;
+	const Sbecore::uint PNLBRLYUSRMNUSERGROUP = 133;
+	const Sbecore::uint PNLBRLYUSRREC = 134;
+	const Sbecore::uint QRYBRLYCON1NRELAY = 135;
+	const Sbecore::uint QRYBRLYCONCONMNEQUIPMENT = 136;
+	const Sbecore::uint QRYBRLYCONLIST = 137;
+	const Sbecore::uint QRYBRLYCONMAPFLIGHT = 138;
+	const Sbecore::uint QRYBRLYCONMAPLEG = 139;
+	const Sbecore::uint QRYBRLYCONMAPLOCATION = 140;
+	const Sbecore::uint QRYBRLYCONMAPNODE = 141;
+	const Sbecore::uint QRYBRLYCONMAPRELAY = 142;
+	const Sbecore::uint QRYBRLYCONMNFLIGHT = 143;
+	const Sbecore::uint QRYBRLYCONMNSEGMENT = 144;
+	const Sbecore::uint QRYBRLYCONREF1NSEGMENT = 145;
+	const Sbecore::uint QRYBRLYFILLIST = 146;
+	const Sbecore::uint QRYBRLYFLT1NCONNECTION = 147;
+	const Sbecore::uint QRYBRLYFLTEQP1NNODE = 148;
+	const Sbecore::uint QRYBRLYFLTEQPMNCONNECTION = 149;
+	const Sbecore::uint QRYBRLYFLTFAFAWAYPOINT = 150;
+	const Sbecore::uint QRYBRLYFLTLIST = 151;
+	const Sbecore::uint QRYBRLYFLTMNCONNECTION = 152;
+	const Sbecore::uint QRYBRLYFLTMNLOCATION = 153;
+	const Sbecore::uint QRYBRLYFLTORGMNFLIGHT = 154;
+	const Sbecore::uint QRYBRLYFLTREF1NSEGMENT = 155;
+	const Sbecore::uint QRYBRLYLEG1NFLIGHT = 156;
+	const Sbecore::uint QRYBRLYLEGCOR1NCONNECTION = 157;
+	const Sbecore::uint QRYBRLYLEGLIST = 158;
+	const Sbecore::uint QRYBRLYLEGMAPLEG = 159;
+	const Sbecore::uint QRYBRLYLEGMAPLOCATION = 160;
+	const Sbecore::uint QRYBRLYLEGMNLOCATION = 161;
+	const Sbecore::uint QRYBRLYLEGORGMNLEG = 162;
+	const Sbecore::uint QRYBRLYLOCBGN1NLEG = 163;
+	const Sbecore::uint QRYBRLYLOCEND1NLEG = 164;
+	const Sbecore::uint QRYBRLYLOCEQP1NNODE = 165;
+	const Sbecore::uint QRYBRLYLOCEQPMNCONNECTION = 166;
+	const Sbecore::uint QRYBRLYLOCLIST = 167;
+	const Sbecore::uint QRYBRLYLOCMAPLEG = 168;
+	const Sbecore::uint QRYBRLYLOCMAPPROXLOCATION = 169;
+	const Sbecore::uint QRYBRLYLOCMAPVISLOCATION = 170;
+	const Sbecore::uint QRYBRLYLOCMNFLIGHT = 171;
+	const Sbecore::uint QRYBRLYLOCMNLEG = 172;
+	const Sbecore::uint QRYBRLYLOCMNSEGMENT = 173;
+	const Sbecore::uint QRYBRLYLOCPROXORGMNLOCATION = 174;
+	const Sbecore::uint QRYBRLYLOCVISORGMNLOCATION = 175;
+	const Sbecore::uint QRYBRLYOPR1NEQUIPMENT = 176;
+	const Sbecore::uint QRYBRLYOPRLIST = 177;
+	const Sbecore::uint QRYBRLYPRSADETAIL = 178;
+	const Sbecore::uint QRYBRLYPRSLIST = 179;
+	const Sbecore::uint QRYBRLYPTY1NEQUIPMENT = 180;
+	const Sbecore::uint QRYBRLYPTYLIST = 181;
+	const Sbecore::uint QRYBRLYREG1NLOCATION = 182;
+	const Sbecore::uint QRYBRLYREGADSTSWITCH = 183;
+	const Sbecore::uint QRYBRLYREGLIST = 184;
+	const Sbecore::uint QRYBRLYREGSUP1NREGION = 185;
+	const Sbecore::uint QRYBRLYRLY1NNODE = 186;
+	const Sbecore::uint QRYBRLYRLYLIST = 187;
+	const Sbecore::uint QRYBRLYSEGLIST = 188;
+	const Sbecore::uint QRYBRLYSEGMNCONNECTION = 189;
+	const Sbecore::uint QRYBRLYSEGMNLOCATION = 190;
+	const Sbecore::uint QRYBRLYSEGORGMNSEGMENT = 191;
+	const Sbecore::uint QRYBRLYTTB1NFLIGHT = 192;
+	const Sbecore::uint QRYBRLYTTBLIST = 193;
+	const Sbecore::uint QRYBRLYTTBREF1NFILE = 194;
+	const Sbecore::uint QRYBRLYUSGAACCESS = 195;
+	const Sbecore::uint QRYBRLYUSGLIST = 196;
+	const Sbecore::uint QRYBRLYUSGMNUSER = 197;
+	const Sbecore::uint QRYBRLYUSR1NSESSION = 198;
+	const Sbecore::uint QRYBRLYUSRAACCESS = 199;
+	const Sbecore::uint QRYBRLYUSRLIST = 200;
+	const Sbecore::uint QRYBRLYUSRMNUSERGROUP = 201;
+	const Sbecore::uint ROOTBRLY = 202;
+	const Sbecore::uint SESSBRLY = 203;
+
+	Sbecore::uint getIx(const std::string& sref);
+	std::string getSref(const Sbecore::uint ix);
+};
+
+#endif

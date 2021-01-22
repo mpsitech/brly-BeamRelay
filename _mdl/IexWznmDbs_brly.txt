@@ -1,0 +1,1925 @@
+IexWznmDbs v0.9.23
+ImeIMVector1.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+klst	KlstBrlyKAlliance
+	ImeIAMVectorTitle1.srefX1IxVType	srefX2RefWznmMLocale	Title
+	short	enus	alliance
+	short	dech	Allianz
+	full	enus	airline alliance
+	full	dech	Luftfahrtallianz
+	ImeIAMVectorTitle1.end
+	ImeIMVectoritem1.sref	Avail	Implied	Title	Comment
+	star			StarAlliance
+	ow			oneworld
+	st			SkyTeam
+	ImeIMVectoritem1.end
+klst	KlstBrlyKEqptype
+	ImeIAMVectorTitle1.srefX1IxVType	srefX2RefWznmMLocale	Title
+	short	enus	type
+	short	dech	Typ
+	full	enus	equipment type
+	full	dech	Ger\u00e4tetyp
+	ImeIAMVectorTitle1.end
+	ImeIMVectoritem1.sref	Avail	Implied	Title	Comment
+	bll
+		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
+		enus	balloon (low)
+		dech	Ballon (niedrig)
+		ImeIJMVectoritem1.end
+	blh
+		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
+		enus	balloon (high)
+		dech	Ballon (hoch)
+		ImeIJMVectoritem1.end
+	gnd
+		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
+		enus	ground station
+		dech	Bodenstation
+		ImeIJMVectoritem1.end
+	wby
+		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
+		enus	widebody plane
+		dech	Grossraumflugzeug
+		ImeIJMVectoritem1.end
+	nby
+		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
+		enus	narrowbody plane
+		dech	Standardrumpfflugzeug
+		ImeIJMVectoritem1.end
+	rgn
+		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
+		enus	regional plane
+		dech	Regionalflugzeug
+		ImeIJMVectoritem1.end
+	ImeIMVectoritem1.end
+ImeIMVector1.end
+ImeIMTable.srefIxVBasetype	srefRefIxVTbl	irefRefUref	sref	Short	unqSrefsWznmMTablecol	Comment
+main	void	0	TblBrlyMConnection	con
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	connection
+	sngfull	dech	f	Verbindung
+	plfull	enus	n	connections
+	plfull	dech	f	Verbindungen
+	ImeIAMTableTitle.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecBrlyVMConnectionModel		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	model
+		full	dech	Modell
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		spl
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	simple
+			dech	einfach
+			ImeIJMVectoritem2.end
+		ext
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	extended
+			dech	erweitert
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	grp		45	tbl	TblBrlyMUsergroup	grp	grp	void	void		false	false
+	own		46	tbl	TblBrlyMUser	own	own	void	void		false	false
+	tblref		47	tbl	TblBrlyMFlight	refBrlyMFlight	flt	trefspec	void		true	false
+	tblref		22	tbl	TblBrlyMLeg	corRefBrlyMLeg	cor	trefspec	void		true	false
+	timeval			void		start	sta	tmstamp	void	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	start time
+		full	dech	Start
+		ImeIAMTablecolTitle.end
+	timeval			void		stop	sto	tmstamp	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	stop time
+		full	dech	Stopp
+		ImeIAMTablecolTitle.end
+	vecref			vec	VecBrlyVMConnectionModel	ixVModel	mod	vreflin	void		true	false
+	tblref		21	tbl	TblBrlyMTimetable	refBrlyMTimetable	ttb	trefmin	void		false	false
+	klref			vec	KlstBrlyKEqptype	srefsBrlyKEqptype	ety	klrefmult	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	equipment types
+		full	dech	Ger\u00e4ttypen
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	refs	loadRefsByLeg	ref	refBrlyMLeg	start	void
+	rst	loadRstByLeg		refBrlyMLeg	start	void
+	ImeIAMTableLoadfct.end
+main	void	0	TblBrlyMEquipment	eqp
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	equipment
+	sngfull	dech	n	Ger\u00e4t
+	plfull	enus	n	equipment
+	plfull	dech	n	Ger\u00e4t
+	ImeIAMTableTitle.end
+	ImeIMSubset.sref	Short	Cond	Comment
+	SbsBrlyBMEquipmentPln	pln	hktEq(flt)
+		ImeIAMSubsetTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+		sngfull	enus	n	plane
+		sngfull	dech	n	Flugzeug
+		plfull	enus	n	planes
+		plfull	dech	n	Flugzeuge
+		ImeIAMSubsetTitle.end
+	ImeIMSubset.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecBrlyVMEquipmentHkTbl		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	hook table
+		full	dech	Aufh\u00e4ngetabelle
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		flt
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	flight
+			dech	Flug
+			ImeIJMVectoritem2.end
+		loc
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	location
+			dech	Ort
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	vecref		116	vec	VecBrlyVMEquipmentHkTbl	hkIxVTbl	hkt	vreflin	void	idx	true	false
+	tblref		116	tbl		hkUref	hku	trefuniv	void		true	false
+	tblref		17	tbl	TblBrlyMOperator	refBrlyMOperator	opr	trefspec	void		true	false
+	tblref		18	tbl	TblBrlyMPlntype	refBrlyMPlntype	pty	trefspec	void		true	false
+	klref			vec	KlstBrlyKEqptype	srefBrlyKEqptype	ety	klrefsng	void		true	false
+	boolval			void		Fiber	fib	void	void		false	false
+	ImeIMTablecol.end
+main	void	0	TblBrlyMFaflight	faf
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	FlightAware flight
+	sngfull	dech	m	FlightAware Flug
+	plfull	enus	n	FlightAware flights
+	plfull	dech	m	FlightAware Fl\u00fcge
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		19	tbl	TblBrlyMFlight	refBrlyMFlight	flt	trefspec	void		true	false
+	txtval			void		faFlightID	fid	txt50	void	idx	true	true
+	txtval			void		ident	idt	txt10	void	idx	true	false
+	txtval			void		aircrafttype	act	txt5	void		false	false
+	txtval			void		filed_ete	fet	txt10	void		false	false
+	timeval			void		filed_time	fti	tmstamp	void		false	false
+	timeval			void		filed_departuretime	fdt	tmstamp	void	idx	true	false
+	intval			void		filed_airspeed_kts	fsk	usmallint	void		false	false
+	dblval			void		filed_airspeed_mach	fsm	void	void		false	false
+	intval			void		filed_altitude	fat	usmallint	void		false	false
+	txtval			void		route	rte	txtlong	void		false	false
+	timeval			void		actualdeparturetime	adt	tmstamp	void		true	false
+	timeval			void		estimatedarrivaltime	eat	tmstamp	void		false	false
+	timeval			void		actualarrivaltime	aat	tmstamp	void		true	false
+	txtval			void		diverted	dvt	txt5	void		false	false
+	txtval			void		origin	org	txt5	void		true	false
+	txtval			void		destination	dst	txt5	void		true	false
+	txtval			void		originName	onm	txt50	void		false	false
+	txtval			void		originCity	oct	txt50	void		false	false
+	txtval			void		destinationName	dnm	txt50	void		false	false
+	txtval			void		destinationCity	dct	txt50	void		false	false
+	ImeIMTablecol.end
+main	void	0	TblBrlyMFile	fil
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	file
+	sngfull	dech	f	Datei
+	plfull	enus	n	files
+	plfull	dech	f	Dateien
+	ImeIAMTableTitle.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecBrlyVMFileRefTbl		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	table of reference
+		full	dech	Referenztabelle
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		void
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	none
+			dech	keine
+			ImeIJMVectoritem2.end
+		ttb
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	timetable
+			dech	Flugplan
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	klst	KlstBrlyKMFileContent
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	content
+		full	dech	Inhalt
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		etopo
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	ETOPO data
+			dech	ETOPO Daten
+			ImeIJMVectoritem2.end
+		rawtext
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	raw text
+			dech	unbearbeitete Textdaten
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	klst	KlstBrlyKMFileMimetype	mimetype	noloc
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	MIME type
+		full	dech	MIME-Typ
+		ImeIAMVectorTitle2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	grp		14	tbl	TblBrlyMUsergroup	grp	grp	void	void		false	false
+	own		15	tbl	TblBrlyMUser	own	own	void	void		false	false
+	tblref		16	tbl	TblBrlyCFile	refBrlyCFile	clu	trefclu	void		false	false
+	vecref		106	vec	VecBrlyVMFileRefTbl	refIxVTbl	ret	vreflin	void	idx	true	false
+	tblref		106	tbl		refUref	reu	trefuniv	void		true	false
+	klref			vec	KlstBrlyKMFileContent	osrefKContent	cnt	klrefopt	void		true	false
+	timeval			void		Archived	acv	tmstamp	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	arch. time
+		short	dech	Arch. Zeit
+		full	enus	archiving time
+		full	dech	Zeitpunkt der Archivierung
+		ImeIAMTablecolTitle.end
+	txtval			void		Filename	fnm	txt50	void	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	file name
+		full	dech	Dateiname
+		ImeIAMTablecolTitle.end
+	txtval			void		Archivename	anm	txt30	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	arch. name
+		short	dech	Archiv Name
+		full	enus	archive file name
+		full	dech	Dateiname in Archiv
+		ImeIAMTablecolTitle.end
+	klref			vec	KlstBrlyKMFileMimetype	srefKMimetype	mim	klrefsng	void		true	false
+	intval			void		Size	siz	usmallint	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	size [kB]
+		full	dech	Gr\u00f6sse [kB]
+		ImeIAMTablecolTitle.end
+	txtval			void		Comment	cmt	txtlong	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	comment
+		full	dech	Notiz
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	refs	loadRefsByRetReu	ref	refIxVTbl;refUref	Filename	void
+	ImeIAMTableLoadfct.end
+main	void	0	TblBrlyMFlight	flt
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	flight
+	sngfull	dech	m	Flug
+	plfull	enus	n	flights
+	plfull	dech	m	Fl\u00fcge
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		39	tbl	TblBrlyMTimetable	refBrlyMTimetable	ttb	trefspec	void		false	false
+	tblref		117	tbl	TblBrlyMEquipment	refBrlyMEquipment	eqp	trefspec	void		true	false
+	tblref		19	tbl	TblBrlyMFaflight	refBrlyMFaflight	faf	trefspec	void		true	false
+	tblref		41	tbl	TblBrlyMLeg	refBrlyMLeg	leg	trefspec	void		true	false
+	idsref			void		sref	srf	void	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	identifier
+		full	dech	Bezeichner
+		ImeIAMTablecolTitle.end
+	timeval			void		start	sta	tmstamp	void	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	departure
+		short	dech	Abflug
+		full	enus	departure time
+		full	dech	Abflugszeit
+		ImeIAMTablecolTitle.end
+	timeval			void		stop	sto	tmstamp	void	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	arrival
+		short	dech	Ankunft
+		full	enus	arrival time
+		full	dech	Ankunftszeit
+		ImeIAMTablecolTitle.end
+	timeval			void		xStart	xsa	tmstamp	void		false	false
+	timeval			void		xStop	xso	tmstamp	void		false	false
+	boolval			void		Calcdone	cdn	void	void	idx	false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	calculated
+		full	dech	berechnet
+		ImeIAMTablecolTitle.end
+	boolval			void		Segdone	sdn	void	void	idx	false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	segmented
+		full	dech	segmentiert
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	refs	loadRefsByLeg	ref	refBrlyMLeg	start	void
+	rst	loadRstByLeg		refBrlyMLeg	start	void
+	ImeIAMTableLoadfct.end
+main	void	0	TblBrlyMLeg	leg
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	leg
+	sngfull	dech	f	Strecke
+	plfull	enus	n	legs
+	plfull	dech	f	Strecken
+	ImeIAMTableTitle.end
+	ImeIMSubset.sref	Short	Cond	Comment
+	SbsBrlyBMLegCor	cor	typEq(corr)
+		ImeIAMSubsetTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+		sngfull	enus	n	corridor
+		sngfull	dech	m	Korridor
+		plfull	enus	n	corridors
+		plfull	dech	m	Korridore
+		ImeIAMSubsetTitle.end
+		ImeIRMSubsetMSubset.srefBsbRefWznmMSubset	srefIxVReltype
+		SbsBrlyBMLegRte	compl
+		ImeIRMSubsetMSubset.end
+	SbsBrlyBMLegRte	rte	typEq(rte)
+		ImeIAMSubsetTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+		sngfull	enus	n	route
+		sngfull	dech	f	Route
+		plfull	enus	n	routes
+		plfull	dech	f	Routen
+		ImeIAMSubsetTitle.end
+		ImeIRMSubsetMSubset.srefBsbRefWznmMSubset	srefIxVReltype
+		SbsBrlyBMLegCor	compl
+		ImeIRMSubsetMSubset.end
+	ImeIMSubset.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecBrlyVMLegBasetype		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	type
+		full	dech	Typ
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		corr
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	corridor
+			dech	Korridor
+			ImeIJMVectoritem2.end
+		rte
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	route
+			dech	Route
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	grp			tbl	TblBrlyMUsergroup	grp	grp	void	void		false	false
+	own			tbl	TblBrlyMUser	own	own	void	void		false	false
+	vecref			vec	VecBrlyVMLegBasetype	ixVBasetype	typ	vreflin	void	idx	true	false
+	tblref		36	tbl	TblBrlyCLeg	refBrlyCLeg	clu	trefclu	void		false	false
+	tblref		37	tbl	TblBrlyMLocation	bgnRefBrlyMLocation	blo	trefspec	void		true	true
+	tblref		38	tbl	TblBrlyMLocation	endRefBrlyMLocation	elo	trefspec	void		true	true
+	dblval			void		alt	alt	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	altitude [m]
+		full	dech	H\u00f6he [m]
+		ImeIAMTablecolTitle.end
+	dblval			void		deltaphi	dph	void	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	ang. dist. [\u00b0]
+		short	dech	Winkelabst. [\u00b0]
+		full	enus	angular distance [\u00b0]
+		full	dech	Winkelabstand [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		alpha	aph	void	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	opening [\u00b0]
+		short	dech	\u00d6ffnung [\u00b0]
+		full	enus	opening angle [\u00b0]
+		full	dech	\u00d6ffnungswinkel [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		xAlt	xal	void	void		false	false
+	dblval			void		xPhi0	xp0	void	void		false	false
+	dblval			void		xPhi1	xp1	void	void		false	false
+	dblval			void		xAlpha	xap	void	void		false	false
+	boolval			void		Calcdone	cdn	void	void	idx	false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	calculated
+		full	dech	berechnet
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	refs	loadRefsByBlo	ref	bgnRefBrlyMLocation	endRefBrlyMLocation	void
+	rst	loadRstByBlo		bgnRefBrlyMLocation	endRefBrlyMLocation	void
+	refs	loadRefsByElo	ref	endRefBrlyMLocation	bgnRefBrlyMLocation	void
+	rst	loadRstByElo		endRefBrlyMLocation	bgnRefBrlyMLocation	void
+	rst	loadRst			ref	limofs
+	rst	loadRstByTyp		ixVBasetype	ref	limofs
+	ref	loadRefByTypBloElo	ref	ixVBasetype;bgnRefBrlyMLocation;endRefBrlyMLocation		void
+	ImeIAMTableLoadfct.end
+main	void	0	TblBrlyMLocation	loc
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	location
+	sngfull	dech	m	Ort
+	plfull	enus	n	locations
+	plfull	dech	m	Orte
+	ImeIAMTableTitle.end
+	ImeIMSubset.sref	Short	Cond	Comment
+	SbsBrlyBMLocationApt	apt	typEq(apt)
+		ImeIAMSubsetTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+		sngfull	enus	n	airport
+		sngfull	dech	m	Flughafen
+		plfull	enus	n	airports
+		plfull	dech	m	Flugh\u00e4fen
+		ImeIAMSubsetTitle.end
+	ImeIMSubset.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecBrlyVMLocationBasetype		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	type
+		full	dech	Typ
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		apt
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	airport
+			dech	Flughafen
+			ImeIJMVectoritem2.end
+		gnd
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	ground location
+			dech	Ort am Boden
+			ImeIJMVectoritem2.end
+		elv
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	elevated location
+			dech	schwebender Ort
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	vecref			vec	VecBrlyVMLocationBasetype	ixVBasetype	typ	vreflin	void	idx	true	false
+	tblref		35	tbl	TblBrlyMRegion	refBrlyMRegion	reg	trefspec	void		true	false
+	tblref		118	tbl	TblBrlyMEquipment	refBrlyMEquipment	eqp	trefspec	void		true	false
+	idsref			void		sref	srf	void	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	identifier
+		full	dech	Bezeichner
+		ImeIAMTablecolTitle.end
+	txtval			void		srefICAO	ica	txt5	void	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	ICAO identifier
+		full	dech	ICAO Bezeichner
+		ImeIAMTablecolTitle.end
+	txtval			void		Title	tit	txt50	void	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	name
+		full	dech	Name
+		ImeIAMTablecolTitle.end
+	dblval			void		alt	alt	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	elevation [m]
+		full	dech	H\u00f6he [m]
+		ImeIAMTablecolTitle.end
+	dblval			void		theta	the	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	latitude [\u00b0]
+		full	dech	Breite [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		phi	phi	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	longitude [\u00b0]
+		full	dech	L\u00e4nge [\u00b0]
+		ImeIAMTablecolTitle.end
+	txtval			void		tz	tz	txt50	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	tz database code
+		full	dech	Code in tz-Datenbank
+		ImeIAMTablecolTitle.end
+	dblval			void		alpha	aph	void	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	opening [\u00b0]
+		short	dech	\u00d6ffnung [\u00b0]
+		full	enus	opening angle [\u00b0]
+		full	dech	\u00d6ffnungswinkel [\u00b0]
+		ImeIAMTablecolTitle.end
+	boolval			void		Calcdone	cdn	void	void	idx	false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	calculated
+		full	dech	berechnet
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	ref	loadRefBySrf	ref	sref		void
+	rec	loadRecBySrf		sref		void
+	refs	loadRefsByReg	ref	refBrlyMRegion	sref	void
+	rst	loadRst			ref	limofs
+	rst	loadRstByTyp		ixVBasetype	ref	limofs
+	ImeIAMTableLoadfct.end
+main	void	0	TblBrlyMNode	nde
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	node
+	sngfull	dech	m	Knotenpunkt
+	plfull	enus	n	nodes
+	plfull	dech	m	Knotenpunkte
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		120	tbl	TblBrlyMRelay	refBrlyMRelay	rly	trefspec	void		true	false
+	tblref		121	tbl	TblBrlyMNode	supRefBrlyMNode	sup	trefspec	void		true	false
+	lvl		121	void		supLvl	sul	void	void		false	false
+	enum		121	void		supNum	sun	enauto	void		false	false
+	tblref		122	tbl	TblBrlyMEquipment	refBrlyMEquipment	eqp	trefspec	void		true	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByRly		refBrlyMRelay	supLvl;supRefBrlyMNode;supNum	void
+	ImeIAMTableLoadfct.end
+main	void	0	TblBrlyMOperator	opr
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	operator
+	sngfull	dech	m	Betreiber
+	plfull	enus	n	operators
+	plfull	dech	m	Betreiber
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	idsref			void		sref	srf	void	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	identifier
+		full	dech	Bezeichner
+		ImeIAMTablecolTitle.end
+	txtval			void		srefICAO	ica	txt5	void	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	ICAO identifier
+		full	dech	ICAO Bezeichner
+		ImeIAMTablecolTitle.end
+	txtval			void		Title	tit	txt50	void	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	name
+		full	dech	Name
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+main	void	0	TblBrlyMPerson	prs
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	person
+	sngfull	dech	f	Person
+	plfull	enus	n	persons
+	plfull	dech	f	Personen
+	ImeIAMTableTitle.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	or	VecBrlyWMPersonDerivate		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	derivates
+		full	dech	Abwandlungen
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		usr
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	user
+			dech	Benutzer
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	lin	VecBrlyVMPersonSex	sex	filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	sex
+		full	dech	Geschlecht
+		ImeIAMVectorTitle2.end
+	vlst	VlstBrlyUMPersonTitle	prstit
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	title
+		full	dech	Anrede
+		ImeIAMVectorTitle2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	grp		23	tbl	TblBrlyMUsergroup	grp	grp	void	void		true	false
+	own		24	tbl	TblBrlyMUser	own	own	void	void		true	false
+	vecref			vec	VecBrlyWMPersonDerivate	ixWDerivate	drv	vrefand	void	idx	false	false
+	vecref			vec	VecBrlyVMPersonSex	ixVSex	sex	vreflin	void		true	false
+	txtval			vec	VlstBrlyUMPersonTitle	Title	tit	txt30	void		true	true
+	txtval			void		Firstname	fnm	txt30	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	first name
+		full	dech	Vorname
+		ImeIAMTablecolTitle.end
+	tblref		26	tbl	TblBrlyJMPersonLastname	refJLastname	jln	trefmin	void		false	true
+	txtval			void		Lastname	lnm	txt50	void	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	last name
+		full	dech	Nachname
+		ImeIAMTablecolTitle.end
+	tblref		28	tbl	TblBrlyAMPersonDetail	telRefADetail	ate	trefmin	void		false	false
+	txtval		0	void		telVal	tel	txt192	void		true	false
+	tblref		29	tbl	TblBrlyAMPersonDetail	emlRefADetail	aem	trefmin	void		false	false
+	txtval		0	void		emlVal	eml	txt192	void		true	false
+	txtval			void		Salutation	sal	txt100	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	salutation
+		full	dech	Briefanrede
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+main	void	0	TblBrlyMPlntype	pty
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	plane type
+	sngfull	dech	m	Flugzeugtyp
+	plfull	enus	n	plane types
+	plfull	dech	m	Flugzeugtypen
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	idsref			void		sref	srf	void	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	identifier
+		full	dech	Bezeichner
+		ImeIAMTablecolTitle.end
+	txtval			void		Title	tit	txt50	void	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	name
+		full	dech	Name
+		ImeIAMTablecolTitle.end
+	klref			vec	KlstBrlyKEqptype	srefBrlyKEqptype	ety	klrefsng	void		true	false
+	intval			void		Capacity	cap	usmallint	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	seats
+		full	dech	Sitze
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+main	void	0	TblBrlyMRegion	reg
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	region
+	sngfull	dech	f	Region
+	plfull	enus	n	regions
+	plfull	dech	f	Regionen
+	ImeIAMTableTitle.end
+	ImeIMSubset.sref	Short	Cond	Comment
+	SbsBrlyBMRegionRip	rip	isLeaf()
+		ImeIAMSubsetTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+		sngfull	enus	n	impartible region
+		sngfull	dech	f	unteilbare Region
+		plfull	enus	n	impartible regions
+		plfull	dech	f	unteilbare Regionen
+		ImeIAMSubsetTitle.end
+	ImeIMSubset.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecBrlyVMRegionDst		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	DST type
+		full	dech	Sommerzeit
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		none
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	none
+			dech	keine
+			ImeIJMVectoritem2.end
+		ndst
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	northern hemisphere
+			dech	Nordhalbkugel
+			ImeIJMVectoritem2.end
+		sdst
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	southern hemisphere
+			dech	S\u00fcdhalbkugel
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		30	tbl	TblBrlyMRegion	supRefBrlyMRegion	sup	trefspec	void		true	false
+	lvl		30	void		supLvl	sul	void	void		false	false
+	idsref			void		sref	srf	void	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	identifier
+		full	dech	Bezeichner
+		ImeIAMTablecolTitle.end
+	tblref		32	tbl	TblBrlyJMRegionTitle	refJTitle	jti	trefmin	void		false	true
+	txtval			void		Title	tit	txt50	void	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	name
+		full	dech	Name
+		ImeIAMTablecolTitle.end
+	tblref		34	tbl	TblBrlyJMRegion	refJ	j	trefmin	void		false	false
+	vecref			vec	VecBrlyVMRegionDst	ixVDst	dst	vreflin	void		true	false
+	dblval			void		toffset	tof	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	time zone
+		full	dech	Zeitzone
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	ref	loadRefBySupSrf	ref	supRefBrlyMRegion;sref		void
+	ImeIAMTableLoadfct.end
+main	void	0	TblBrlyMRelay	rly
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	relay
+	sngfull	dech	f	Verbindungskette
+	plfull	enus	n	relays
+	plfull	dech	f	Verbindungsketten
+	ImeIAMTableTitle.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecBrlyVMRelayDir		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	direction
+		full	dech	Richtung
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		bwd
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	backward
+			dech	r\u00fcckw\u00e4rts
+			ImeIJMVectoritem2.end
+		fwd
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	forward
+			dech	vorw\u00e4rts
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	timeval			void		x1Start	sta	tmstamp	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	start
+		short	dech	Start
+		ImeIAMTablecolTitle.end
+	timeval			void		x1Stop	sto	tmstamp	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	stop
+		short	dech	Stopp
+		ImeIAMTablecolTitle.end
+	tblref		119	tbl	TblBrlyMConnection	refBrlyMConnection	con	trefspec	void		true	false
+	vecref			vec	VecBrlyVMRelayDir	ixVDir	dir	vreflin	void	idx	true	false
+	boolval			void		Connected	ctd	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	connected
+		full	dech	verbunden
+		ImeIAMTablecolTitle.end
+	intval			void		Nhop	nhp	usmallint	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	hops
+		short	dech	Etappen
+		full	enus	number of hops
+		full	dech	Anzahl der Etappen
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByCon		refBrlyMConnection	x1Start;ixVDir	void
+	ImeIAMTableLoadfct.end
+main	void	0	TblBrlyMSegment	seg
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	segment
+	sngfull	dech	n	Segment
+	plfull	enus	n	segments
+	plfull	dech	n	Segmente
+	ImeIAMTableTitle.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecBrlyVMSegmentRefTbl		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	table of reference
+		full	dech	Referenztabelle
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		con
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	connection
+			dech	Verbindung
+			ImeIJMVectoritem2.end
+		flt
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	flight
+			dech	Flug
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	vecref		42	vec	VecBrlyVMSegmentRefTbl	refIxVTbl	ret	vreflin	void	idx	true	false
+	tblref		42	tbl		refUref	reu	trefuniv	void		true	false
+	enum		42	void		refNum	ren	enauto	void		true	false
+	dblval			void		deltaphi	dph	void	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	ang. dist. [\u00b0]
+		short	dech	Winkelabst. [\u00b0]
+		full	enus	angular distance [\u00b0]
+		full	dech	Winkelabstand [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		alt0	al0	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	start altitude [m]
+		full	dech	Start H\u00f6he [m]
+		ImeIAMTablecolTitle.end
+	dblval			void		alt1	al1	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	stop altitude [m]
+		full	dech	Stopp H\u00f6he [m]
+		ImeIAMTablecolTitle.end
+	dblval			void		theta0	th0	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	start latitude [\u00b0]
+		full	dech	Start Breite [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		theta1	th1	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	stop latitude [\u00b0]
+		full	dech	Stopp Breite [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		phi0	ph0	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	start longitude [\u00b0]
+		full	dech	Start L\u00e4nge [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		phi1	ph1	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	stop longitude [\u00b0]
+		full	dech	Stopp L\u00e4nge [\u00b0]
+		ImeIAMTablecolTitle.end
+	timeval			void		start	sta	tmstamp	void	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	start time
+		full	dech	Start
+		ImeIAMTablecolTitle.end
+	timeval			void		stop	sto	tmstamp	void	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	stop time
+		full	dech	Stopp
+		ImeIAMTablecolTitle.end
+	boolval			void		Calcdone	cdn	void	void	idx	false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	calculated
+		full	dech	berechnet
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+main	void	0	TblBrlyMSession	ses
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	session
+	sngfull	dech	f	Siztung
+	plfull	enus	n	sessions
+	plfull	dech	f	Sitzungen
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		13	tbl	TblBrlyMUser	refBrlyMUser	usr	trefspec	void		true	false
+	timeval			void		start	sta	tmstamp	void	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	start
+		short	dech	Start
+		full	enus	login time
+		full	dech	Login-Zeitpunkt
+		ImeIAMTablecolTitle.end
+	timeval			void		stop	sto	tmstamp	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	stop
+		short	dech	Stopp
+		full	enus	logout time
+		full	dech	Logout-Zeitpunkt
+		ImeIAMTablecolTitle.end
+	txtval			void		Ip	ip	txt30	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	IP
+		short	dech	IP
+		full	enus	IP address
+		full	dech	IP Adresse
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	refs	loadRefsByUsr	ref	refBrlyMUser	start	void
+	rst	loadRstByUsr		refBrlyMUser	start	void
+	ImeIAMTableLoadfct.end
+main	void	0	TblBrlyMTimetable	ttb
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	timetable
+	sngfull	dech	m	Flugplan
+	plfull	enus	n	timetables
+	plfull	dech	m	Flugpl\u00e4ne
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		108	tbl	TblBrlyMFile	refBrlyMFile	fil	trefspec	void		true	false
+	klref			vec	KlstBrlyKAlliance	srefBrlyKAlliance	ali	klrefsng	void		true	false
+	txtval			void		Title	tit	txt50	void	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	name
+		full	dech	Name
+		ImeIAMTablecolTitle.end
+	timeval			void		startd	sta	tmdate	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	start
+		short	dech	Start
+		full	enus	validity start
+		full	dech	G\u00fcltigkeitsbeginn
+		ImeIAMTablecolTitle.end
+	timeval			void		stopd	sto	tmdate	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	stop
+		short	dech	Stopp
+		full	enus	validity stop
+		full	dech	G\u00fcltigkeitsende
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+main	void	0	TblBrlyMUser	usr
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	user
+	sngfull	dech	m	Benutzer
+	plfull	enus	n	users
+	plfull	dech	m	Benutzer
+	ImeIAMTableTitle.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecBrlyVMUserState	usrste	filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	state
+		full	dech	Status
+		ImeIAMVectorTitle2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	grp		3	tbl	TblBrlyMUsergroup	grp	grp	void	void		false	false
+	own		4	tbl	TblBrlyMUser	own	own	void	void		false	false
+	tblref		8	tbl	TblBrlyRMUserMUsergroup	refRUsergroup	rug	trefmin	void		false	false
+	tblref		9	tbl	TblBrlyMUsergroup	refBrlyMUsergroup	usg	trefspec	void		true	false
+	tblref		10	tbl	TblBrlyMPerson	refBrlyMPerson	prs	trefspec	void		true	true
+	idsref			void		sref	srf	void	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	login
+		full	dech	Login
+		ImeIAMTablecolTitle.end
+	tblref		12	tbl	TblBrlyJMUserState	refJState	jst	trefmin	void		false	false
+	vecref			vec	VecBrlyVMUserState	ixVState	ste	vreflin	void	idx	true	false
+	vecref			vec	VecBrlyVLocale	ixBrlyVLocale	lcl	vreflin	void		true	false
+	vecref			vec	VecBrlyVUserlevel	ixBrlyVUserlevel	ulv	vreflin	void		true	false
+	txtval			void		Password	pwd	txt30	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	password
+		full	dech	Passwort
+		ImeIAMTablecolTitle.end
+	txtval		0	void		Fullkey	fky	txtlong	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	full key (X.509)
+		full	dech	vollst\u008andiger Schl\u009fssel (X.509)
+		ImeIAMTablecolTitle.end
+	txtval		0	void		Comment	cmt	txtlong	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	comment
+		full	dech	Notiz
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	ref	loadRefByPrs	ref	refBrlyMPerson		void
+	rec	loadRecByPrs		refBrlyMPerson		void
+	ref	loadRefBySrf	ref	sref		void
+	rec	loadRecBySrf		sref		void
+	rec	loadRecBySrfPwd		sref;Password		void
+	ImeIAMTableLoadfct.end
+main	void	0	TblBrlyMUsergroup	usg
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	user group
+	sngfull	dech	f	Benutzergruppe
+	plfull	enus	n	user groups
+	plfull	dech	f	Benutzergruppen
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	grp		1	tbl	TblBrlyMUsergroup	grp	grp	void	void		false	false
+	own		2	tbl	TblBrlyMUser	own	own	void	void		false	false
+	idsref			void		sref	srf	void	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	identifier
+		full	dech	Bezeichner
+		ImeIAMTablecolTitle.end
+	txtval			void		Comment	cmt	txtlong	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	comment
+		full	dech	Notiz
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	ref	loadRefBySrf	ref	sref		void
+	rec	loadRecBySrf		sref		void
+	ImeIAMTableLoadfct.end
+aux	void	0	TblBrlyAMFaflightWaypoint	fafAwpt
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	waypoints
+	plfull	dech	m	Wegpunkte
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		20	tbl	TblBrlyMFaflight	fafRefBrlyMFaflight	faf	trefspec	void		true	false
+	enum		20	void		fafNum	fan	enauto	void		true	false
+	timeval			void		timestamp	tms	tmstamp	void		true	true
+	dblval			void		latitude	lat	void	void		true	false
+	dblval			void		longitude	lon	void	void		true	false
+	intval			void		groundspeed	gsp	usmallint	void		true	false
+	intval			void		altitude	alt	usmallint	void		true	false
+	txtval			void		altitudeStatus	ast	txt5	void		true	false
+	txtval			void		updateType	uty	txt5	void		true	false
+	txtval			void		altitudeChange	ach	txt5	void		true	false
+	ImeIMTablecol.end
+aux	void	0	TblBrlyAMPersonDetail	prsAdet
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	contact details
+	plfull	dech	f	Kontaktangaben
+	ImeIAMTableTitle.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	klst	KlstBrlyKAMPersonDetailType	ctdet
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	type
+		full	dech	Typ
+		ImeIAMVectorTitle2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		27	tbl	TblBrlyMPerson	refBrlyMPerson	prs	trefspec	void		true	false
+	klref			vec	KlstBrlyKAMPersonDetailType	x1SrefKType	typ	klrefsng	pt		true	true
+	txtval			void		Val	val	txt192	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	value
+		full	dech	Wert
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rec	loadRecByPrsTyp		refBrlyMPerson;x1SrefKType		void
+	ImeIAMTableLoadfct.end
+aux	void	0	TblBrlyAMRegionDstswitch	regAdss
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	DST switches
+	plfull	dech	m	Sommerzeit-Wechsel
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		54	tbl	TblBrlyMRegion	refBrlyMRegion	reg	trefspec	void		true	false
+	timeval			void		startd	std	tmdate	void	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	date
+		full	dech	Datum
+		ImeIAMTablecolTitle.end
+	timeval			void		startt	stt	tmtime	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	time
+		full	dech	Uhrzeit
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByReg		refBrlyMRegion	startd	void
+	ImeIAMTableLoadfct.end
+aux	void	0	TblBrlyAMUserAccess	usrAacc
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	feature access rights
+	plfull	dech	n	Feature-Zugriffsrechte
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		56	tbl	TblBrlyMUser	refBrlyMUser	usr	trefspec	void		true	false
+	vecref		0	vec	VecBrlyVFeatgroup	x1IxBrlyVFeatgroup	feg	vreflin	pt	idx	true	true
+	uvsref		0	void		x2FeaSrefUix	fea	void	pt	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	feature
+		full	dech	Feature
+		ImeIAMTablecolTitle.end
+	vecref		0	vec	VecBrlyWAccess	ixBrlyWAccess	acc	vrefand	void		true	false
+	ImeIMTablecol.end
+aux	void	0	TblBrlyAMUsergroupAccess	usgAacc
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	feature access rights
+	plfull	dech	n	Feature-Zugriffsrechte
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		55	tbl	TblBrlyMUsergroup	refBrlyMUsergroup	usg	trefspec	void		true	false
+	vecref		0	vec	VecBrlyVFeatgroup	x1IxBrlyVFeatgroup	feg	vreflin	pt	idx	true	true
+	uvsref		0	void		x2FeaSrefUix	fea	void	pt	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	feature
+		full	dech	Feature
+		ImeIAMTablecolTitle.end
+	vecref		0	vec	VecBrlyWAccess	ixBrlyWAccess	acc	vrefand	void		true	false
+	ImeIMTablecol.end
+aux	void	0	TblBrlyAVControlPar	ctlApar
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	parameters
+	plfull	dech	m	Parameter
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	vecref			vec	VecBrlyVControl	ixBrlyVControl	ctl	vreflin	void	idx	true	false
+	tblref		105	tbl	TblBrlyMUser	x1RefBrlyMUser	usr	trefspec	pt		true	false
+	vecref			vec	VecBrlyVLocale	x2IxBrlyVLocale	lcl	vreflin	pt	idx	true	false
+	txtval			void		Par	par	txt192	void	idx	true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	parameter
+		full	dech	Parameter
+		ImeIAMTablecolTitle.end
+	txtval			void		Val	val	txt192	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	value
+		full	dech	Wert
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	string	loadValByCtlUsrPar	Val	ixBrlyVControl;x1RefBrlyMUser;Par		void
+	ref	loadRefByCtlUsrPar	ref	ixBrlyVControl;x1RefBrlyMUser;Par		void
+	ImeIAMTableLoadfct.end
+aux	void	0	TblBrlyAVKeylistKey	klsAkey
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	keys
+	plfull	dech	m	Schl\u00fcssel
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	vecref			vec	VecBrlyVKeylist	klsIxBrlyVKeylist	kls	vreflin	void	idx	true	false
+	enum			void		klsNum	kln	enauto	void		true	false
+	vecref		57	vec	VecBrlyVMaintable	x1IxBrlyVMaintable	mtb	vreflin	pt	idx	true	false
+	tblref		57	tbl		x1Uref	urf	trefuniv	pt		true	false
+	boolval			void		Fixed	fix	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	fixed
+		full	dech	statisch
+		ImeIAMTablecolTitle.end
+	idsref			void		sref	srf	void	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	identifier
+		full	dech	Bezeichner
+		ImeIAMTablecolTitle.end
+	expr			void		Avail	avl	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	avail. rule
+		short	dech	verf\u00fcgbar
+		full	enus	availability rule
+		full	dech	Verf\u00fcgbarkeitsregel
+		ImeIAMTablecolTitle.end
+	expr			void		Implied	imp	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	impl. rule
+		short	dech	impliziert
+		full	enus	rule for implied
+		full	dech	Implikationsregel
+		ImeIAMTablecolTitle.end
+	tblref		59	tbl	TblBrlyJAVKeylistKey	refJ	j	trefmin	void		true	true
+	txtval			void		Title	tit	txt192	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	name
+		full	dech	Name
+		ImeIAMTablecolTitle.end
+	txtval			void		Comment	cmt	txtlong	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	comment
+		full	dech	Notiz
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByKls		klsIxBrlyVKeylist	klsNum	void
+	rst	loadRstByKlsMtbUrf		klsIxBrlyVKeylist;x1IxBrlyVMaintable;x1Uref	klsNum	void
+	string	loadTitByRef	Title	ref		void
+	ref	loadRefByKlsSrf	ref	klsIxBrlyVKeylist;sref		void
+	ref	loadRefByKlsMtbUrfSrf	ref	klsIxBrlyVKeylist;x1IxBrlyVMaintable;x1Uref;sref		void
+	ImeIAMTableLoadfct.end
+aux	void	0	TblBrlyAVValuelistVal	vlsAval
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	values
+	plfull	dech	m	Werte
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	vecref			vec	VecBrlyVValuelist	vlsIxBrlyVValuelist	vls	vreflin	void	idx	true	false
+	enum			void		vlsNum	vln	enauto	void		true	false
+	vecref			vec	VecBrlyVLocale	x1IxBrlyVLocale	lcl	vreflin	pt	idx	true	false
+	txtval			void		Val	val	txt192	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	value
+		full	dech	Wert
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByVlsLcl		vlsIxBrlyVValuelist;x1IxBrlyVLocale	vlsNum	void
+	ImeIAMTableLoadfct.end
+jump	void	0	TblBrlyJAVKeylistKey	klkJkey
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	name and comment by locale
+	plfull	dech	m	Name und Notiz nach Sprachversion
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		58	tbl	TblBrlyAVKeylistKey	refBrlyAVKeylistKey	klk	trefspec	void		true	false
+	vecref			vec	VecBrlyVLocale	x1IxBrlyVLocale	lcl	vreflin	pt	idx	true	false
+	txtval			void		Title	tit	txt192	void		true	false
+	txtval			void		Comment	cmt	txtlong	void		true	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByKlk		refBrlyAVKeylistKey	x1IxBrlyVLocale	void
+	string	loadTitByKlkLcl	Title	refBrlyAVKeylistKey;x1IxBrlyVLocale		void
+	ImeIAMTableLoadfct.end
+jump	void	0	TblBrlyJMPersonLastname	prsJlnm
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	last name history
+	plfull	dech	m	Nachname im Zeitverlauf
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		25	tbl	TblBrlyMPerson	refBrlyMPerson	prs	trefspec	void		true	false
+	timeval			void		x1Startd	sta	tmdate	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	from
+		full	dech	ab
+		ImeIAMTablecolTitle.end
+	txtval			void		Lastname	lnm	txt50	void	idx	true	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rec	loadRecByPrsSta		refBrlyMPerson;x1Startd.leq	x1Startd.desc	first
+	ImeIAMTableLoadfct.end
+jump	void	0	TblBrlyJMRegionTitle	regJtit
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	name by locale
+	plfull	dech	m	Name nach Sprachversion
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		31	tbl	TblBrlyMRegion	refBrlyMRegion	reg	trefspec	void		true	false
+	vecref			vec	VecBrlyVLocale	x1IxBrlyVLocale	lcl	vreflin	pt	idx	true	false
+	txtval			void		Title	tit	txt50	void	idx	true	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByReg		refBrlyMRegion	x1IxBrlyVLocale	void
+	ImeIAMTableLoadfct.end
+jump	void	0	TblBrlyJMRegion	regJ
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	time zone history
+	plfull	dech	f	Historische Entwicklung der Zeitzone
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		33	tbl	TblBrlyMRegion	refBrlyMRegion	reg	trefspec	void		true	false
+	timeval			void		x1Startd	sta	tmdate	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	from
+		full	dech	ab
+		ImeIAMTablecolTitle.end
+	timeval			void		x1Stopd	sto	tmdate	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	until
+		full	dech	bis
+		ImeIAMTablecolTitle.end
+	vecref			vec	VecBrlyVMRegionDst	ixVDst	dst	vreflin	void		true	false
+	dblval			void		toffset	tof	void	void		true	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rec	loadRecByRegStaSto		refBrlyMRegion;x1Startd.leq;x1Stopd.geq		void
+	ImeIAMTableLoadfct.end
+jump	void	0	TblBrlyJMUserState	usrJste
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	plfull	enus	n	state history
+	plfull	dech	m	Status im Zeitverlauf
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		11	tbl	TblBrlyMUser	refBrlyMUser	usr	trefspec	void		true	false
+	timeval			void		x1Start	sta	tmstamp	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	from
+		full	dech	ab
+		ImeIAMTablecolTitle.end
+	vecref			vec	VecBrlyVMUserState	ixVState	ste	vreflin	void		true	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rec	loadRecByUsrSta		refBrlyMUser;x1Start.leq	x1Start.desc	first
+	ImeIAMTableLoadfct.end
+rel	rel	87	TblBrlyAccRMUserUniversal	ausrRunv
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		88	tbl	TblBrlyMUser	refBrlyMUser	usr	trefspec	void		true	false
+	vecref		89	vec	VecBrlyVMaintable	unvIxBrlyVMaintable	mtb	vreflin	void	idx	true	false
+	tblref		89	tbl		unvUref	unv	trefuniv	void		true	false
+	vecref		0	vec	VecBrlyVRecaccess	ixBrlyVRecaccess	rac	vreflin	void		true	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rec	loadRecByUsrMtbUnv		refBrlyMUser;unvIxBrlyVMaintable;unvUref		void
+	ImeIAMTableLoadfct.end
+rel	rel	90	TblBrlyHistRMUserUniversal	husrRunv
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		91	tbl	TblBrlyMUser	refBrlyMUser	usr	trefspec	void		true	false
+	vecref		92	vec	VecBrlyVMaintable	unvIxBrlyVMaintable	unm	vreflin	void	idx	true	false
+	tblref		92	tbl		unvUref	unu	trefuniv	void		true	false
+	vecref			vec	VecBrlyVCard	ixBrlyVCard	crd	vreflin	void	idx	true	false
+	vecref			vec	VecBrlyVPreset	ixBrlyVPreset	pre	vreflin	void	idx	true	false
+	vecref		100	vec	VecBrlyVMaintable	preIxBrlyVMaintable	prm	vreflin	void	idx	true	false
+	tblref		100	tbl		preUref	pru	trefuniv	void		true	false
+	timeval			void		start	sta	tmstamp	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	access time
+		full	dech	Zugriffszeit
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	ref	loadUnuByRef	unvUref	ref		void
+	rst	loadRstByUsrCrd		refBrlyMUser;ixBrlyVCard	start.desc	void
+	rec	loadRecByUsrMtbUnvCrd		refBrlyMUser;unvIxBrlyVMaintable;unvUref;ixBrlyVCard		void
+	refs	loadRefsByUsrMtbCrd	ref	refBrlyMUser;unvIxBrlyVMaintable;ixBrlyVCard	start.desc	limofs
+	ImeIAMTableLoadfct.end
+rel	rel	60	TblBrlyProxRMLocationMLocation	plocRloc
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		61	tbl	TblBrlyMLocation	dstRefBrlyMLocation	dlo	trefspec	void		true	false
+	tblref		62	tbl	TblBrlyMLocation	orgRefBrlyMLocation	olo	trefspec	void		true	false
+	dblval			void		deltaphi	dph	void	void	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	ang. dist. [\u00b0]
+		short	dech	Winkelabst. [\u00b0]
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+rel	rel	72	TblBrlyRMConnectionMFlight	conRflt
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	timeval			void		x1Start	sta	tmstamp	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	start
+		short	dech	Start
+		ImeIAMTablecolTitle.end
+	timeval			void		x1Stop	sto	tmstamp	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	stop
+		short	dech	Stopp
+		ImeIAMTablecolTitle.end
+	dblval			void		x2Legphi0	lp0	void	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	avail. from [\u00b0]
+		short	dech	verf\u00fcgb. von [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		x2Legphi1	lp1	void	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	avail. to [\u00b0]
+		short	dech	verf\u00fcgb. bis [\u00b0]
+		ImeIAMTablecolTitle.end
+	tblref		73	tbl	TblBrlyMConnection	refBrlyMConnection	con	trefspec	void		true	false
+	tblref		74	tbl	TblBrlyMFlight	refBrlyMFlight	flt	trefspec	void		true	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByCon		refBrlyMConnection	x1Start	void
+	rst	loadRstByFlt		refBrlyMFlight	x1Start	void
+	ImeIAMTableLoadfct.end
+rel	rel	48	TblBrlyRMConnectionMSegment	conRseg
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	timeval			void		x1Start	sta	tmstamp	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	start
+		short	dech	Start
+		ImeIAMTablecolTitle.end
+	timeval			void		x1Stop	sto	tmstamp	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	stop
+		short	dech	Stopp
+		ImeIAMTablecolTitle.end
+	dblval			void		x2Legphi0	lp0	void	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	avail. from [\u00b0]
+		short	dech	verf\u00fcgb. von [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		x2Legphi1	lp1	void	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	avail. to [\u00b0]
+		short	dech	verf\u00fcgb. bis [\u00b0]
+		ImeIAMTablecolTitle.end
+	tblref		49	tbl	TblBrlyMConnection	refBrlyMConnection	con	trefspec	void		true	false
+	tblref		50	tbl	TblBrlyMSegment	refBrlyMSegment	seg	trefspec	void		true	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByCon		refBrlyMConnection	x1Start	void
+	rst	loadRstBySeg		refBrlyMSegment	x1Start	void
+	ImeIAMTableLoadfct.end
+rel	rel	75	TblBrlyRMFlightMFlight	fltRflt
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	timeval			void		x1VisStart	sta	tmstamp	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	start
+		short	dech	Start
+		ImeIAMTablecolTitle.end
+	timeval			void		x1VisStop	sto	tmstamp	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	stop
+		short	dech	Stopp
+		ImeIAMTablecolTitle.end
+	tblref		76	tbl	TblBrlyMFlight	dstRefBrlyMFlight	dfl	trefspec	void		true	false
+	tblref		77	tbl	TblBrlyMFlight	orgRefBrlyMFlight	ofl	trefspec	void		true	false
+	timeval			void		xVisStart	xsa	tmstamp	void		false	false
+	timeval			void		xVisStop	xso	tmstamp	void		false	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByDfl		dstRefBrlyMFlight	x1VisStart	void
+	rst	loadRstByOfl		orgRefBrlyMFlight	x1VisStart	void
+	ImeIAMTableLoadfct.end
+rel	rel	69	TblBrlyRMFlightMLocation	fltRloc
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	timeval			void		x1VisStart	sta	tmstamp	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	start
+		short	dech	Start
+		ImeIAMTablecolTitle.end
+	timeval			void		x1VisStop	sto	tmstamp	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	stop
+		short	dech	Stopp
+		ImeIAMTablecolTitle.end
+	tblref		70	tbl	TblBrlyMFlight	refBrlyMFlight	flt	trefspec	void		true	false
+	tblref		71	tbl	TblBrlyMLocation	refBrlyMLocation	loc	trefspec	void		true	false
+	timeval			void		xVisStart	xsa	tmstamp	void		false	false
+	timeval			void		xVisStop	xso	tmstamp	void		false	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByFlt		refBrlyMFlight	x1VisStart	void
+	rst	loadRstByLoc		refBrlyMLocation	x1VisStart	void
+	ImeIAMTableLoadfct.end
+rel	rel	78	TblBrlyRMLegMLeg	legRleg
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	dblval			void		x1VisDstLegphi0	dp0	void	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. from [\u00b0]
+		short	dech	sichtb. von [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		x1VisDstLegphi1	dp1	void	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. to [\u00b0]
+		short	dech	sichtb. bis [\u00b0]
+		ImeIAMTablecolTitle.end
+	tblref		79	tbl	TblBrlyMLeg	dstRefBrlyMLeg	dlg	trefspec	void		true	false
+	tblref		80	tbl	TblBrlyMLeg	orgRefBrlyMLeg	olg	trefspec	void		true	false
+	dblval			void		VisOrgLegphi0	op0	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. leg vis. from [\u00b0]
+		short	dech	sichtb. Str. sichtb. von [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		VisOrgLegphi1	op1	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. leg vis. to [\u00b0]
+		short	dech	sichtb. Str. sichtb. bis [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		xVisDstLegphi0	xd0	void	void		false	false
+	dblval			void		xVisDstLegphi1	xd1	void	void		false	false
+	dblval			void		xVisOrgLegphi0	xo0	void	void		false	false
+	dblval			void		xVisOrgLegphi1	xo1	void	void		false	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByDlg		dstRefBrlyMLeg	x1VisDstLegphi0	void
+	ImeIAMTableLoadfct.end
+rel	rel	66	TblBrlyRMLegMLocation	legRloc
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	dblval			void		x1VisLegphi0	lp0	void	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. from [\u00b0]
+		short	dech	sichtb. von [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		x1VisLegphi1	lp1	void	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. to [\u00b0]
+		short	dech	sichtb. bis [\u00b0]
+		ImeIAMTablecolTitle.end
+	tblref		67	tbl	TblBrlyMLeg	refBrlyMLeg	leg	trefspec	void		true	false
+	tblref		68	tbl	TblBrlyMLocation	refBrlyMLocation	loc	trefspec	void		true	false
+	dblval			void		legphi	lph	void	void	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	azimuth [\u00b0]
+		full	dech	Azimut [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		legtheta	lth	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	elevation [\u00b0]
+		full	dech	Elevation [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		xVisLegphi0	xp0	void	void		false	false
+	dblval			void		xVisLegphi1	xp1	void	void		false	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByLeg		refBrlyMLeg	legphi	void
+	ImeIAMTableLoadfct.end
+rel	rel	51	TblBrlyRMLocationMSegment	locRseg
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	timeval			void		x1Start	sta	tmstamp	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	start
+		short	dech	Start
+		ImeIAMTablecolTitle.end
+	timeval			void		x1Stop	sto	tmstamp	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	stop
+		short	dech	Stopp
+		ImeIAMTablecolTitle.end
+	dblval			void		x2VisSegphi0	sp0	void	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. from [\u00b0]
+		short	dech	sichtb. von [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		x2VisSegphi1	sp1	void	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. to [\u00b0]
+		short	dech	sichtb. bis [\u00b0]
+		ImeIAMTablecolTitle.end
+	tblref		52	tbl	TblBrlyMLocation	refBrlyMLocation	loc	trefspec	void		true	false
+	tblref		53	tbl	TblBrlyMSegment	refBrlyMSegment	seg	trefspec	void		true	false
+	dblval			void		segphi	sph	void	void	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	azimuth [\u00b0]
+		full	dech	Azimut [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		segtheta	sth	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	elevation [\u00b0]
+		full	dech	Elevation [\u00b0]
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstBySeg		refBrlyMSegment	segphi	void
+	ImeIAMTableLoadfct.end
+rel	rel	81	TblBrlyRMSegmentMSegment	segRseg
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	timeval			void		x1Start	sta	tmstamp	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	start
+		short	dech	Start
+		ImeIAMTablecolTitle.end
+	timeval			void		x1Stop	sto	tmstamp	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	stop
+		short	dech	Stopp
+		ImeIAMTablecolTitle.end
+	dblval			void		x2VisDstSegphi0	dp0	void	spt	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. from [\u00b0]
+		short	dech	sichtb. von [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		x2VisDstSegphi1	dp1	void	ept	idx	true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. to [\u00b0]
+		short	dech	sichtb. bis [\u00b0]
+		ImeIAMTablecolTitle.end
+	tblref		82	tbl	TblBrlyMSegment	dstRefBrlyMSegment	dsg	trefspec	void		true	false
+	tblref		83	tbl	TblBrlyMSegment	orgRefBrlyMSegment	osg	trefspec	void		true	false
+	dblval			void		VisOrgSegphi0	op0	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. seg vis. from [\u00b0]
+		short	dech	sichtb. Seg. sichtb. von [\u00b0]
+		ImeIAMTablecolTitle.end
+	dblval			void		VisOrgSegphi1	op1	void	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	vis. seg vis. to [\u00b0]
+		short	dech	sichtb. Seg. sichtb. bis [\u00b0]
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByDsg		dstRefBrlyMSegment	x1VisDstSegphi0	void
+	ImeIAMTableLoadfct.end
+rel	rel	84	TblBrlyRMUsergroupUniversal	usgRunv
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		85	tbl	TblBrlyMUsergroup	refBrlyMUsergroup	usg	trefspec	void		true	false
+	vecref		86	vec	VecBrlyVMaintable	unvIxBrlyVMaintable	mtb	vreflin	void	idx	true	false
+	tblref		86	tbl		unvUref	unv	trefuniv	void		true	false
+	vecref		0	vec	VecBrlyVRecaccess	ixBrlyVRecaccess	rac	vreflin	void		true	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rec	loadRecByUsgMtbUnv		refBrlyMUsergroup;unvIxBrlyVMaintable;unvUref		void
+	ImeIAMTableLoadfct.end
+rel	rel	5	TblBrlyRMUserMUsergroup	usrRusg
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		6	tbl	TblBrlyMUser	refBrlyMUser	usr	trefspec	void		true	false
+	tblref		7	tbl	TblBrlyMUsergroup	refBrlyMUsergroup	usg	trefspec	void		true	false
+	vecref			vec	VecBrlyVUserlevel	ixBrlyVUserlevel	ulv	vreflin	void		false	false
+	ImeIMTablecol.end
+rel	rel	63	TblBrlyVisRMLocationMLocation	vlocRloc
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		64	tbl	TblBrlyMLocation	dstRefBrlyMLocation	dlo	trefspec	void		true	false
+	tblref		65	tbl	TblBrlyMLocation	orgRefBrlyMLocation	olo	trefspec	void		true	false
+	ImeIMTablecol.end
+list	rel	93	TblBrlyLRMConnectionMEquipment	conReqp
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	vecref		94	vec	VecBrlyVLat	conIxBrlyVLat	lat	vreflin	void	idx	false	false
+	tblref		94	tbl	TblBrlyMConnection	conRefBrlyMConnection	con	trefspec	void		true	false
+	enum		94	void		conNum	cnn	enauto	void		false	false
+	tblref		95	tbl	TblBrlyMEquipment	refBrlyMEquipment	eqp	trefspec	void		true	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByCon		conRefBrlyMConnection	conNum	void
+	ImeIAMTableLoadfct.end
+opr	rel	96	TblBrlyORMConnectionMEquipment	conOeqp
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		97	tbl	TblBrlyMConnection	refBrlyMConnection	con	trefspec	void		false	false
+	timeval			void		x1Start	sta	tmstamp	pt	idx	false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	time
+		full	dech	Zeitpunkt
+		ImeIAMTablecolTitle.end
+	vecref			vec	VecBrlyVOolop	ixBrlyVOolop	lop	vreflin	void	idx	false	false
+	tblref		98	tbl	TblBrlyLRMConnectionMEquipment	pr1RefLR	p1l	trefspec	void		false	false
+	tblref		99	tbl	TblBrlyLRMConnectionMEquipment	pr2RefLR	p2l	trefspec	void		false	false
+	ImeIMTablecol.end
+	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
+	rst	loadRstByCon		refBrlyMConnection	x1Start;ixBrlyVOolop;ref	void
+	rec	loadRecByP1lP2lLop		pr1RefLR;pr2RefLR;ixBrlyVOolop		void
+	ImeIAMTableLoadfct.end
+clust	void	0	TblBrlyCFile	filC
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	ImeIMTablecol.end
+clust	void	0	TblBrlyCLeg	legC
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	ImeIMTablecol.end
+ImeIMTable.end
+ImeIMRelation.iref	srefIxVBasetype	irefRefWznmCRelation	irefSupRefWznmMRelation	srefSupIxVSubrole	srefFrRefWznmMTable	srefFrsRefWznmMSubset	srefToRefWznmMTable	srefTosRefWznmMSubset	srefRefWznmMTable	Prefix	srefsKOption
+1	grp	0	0	void	TblBrlyMUsergroup		TblBrlyMUsergroup
+2	own	0	0	void	TblBrlyMUser		TblBrlyMUsergroup
+3	grp	0	0	void	TblBrlyMUsergroup		TblBrlyMUser
+4	own	0	0	void	TblBrlyMUser		TblBrlyMUser
+5	mn	0	0	void	TblBrlyMUser		TblBrlyMUsergroup		TblBrlyRMUserMUsergroup		preffrom
+6	_1n	0	5	from1n	TblBrlyMUser		TblBrlyRMUserMUsergroup
+7	_1n	0	5	to1n	TblBrlyMUsergroup		TblBrlyRMUserMUsergroup
+8	_1n	0	111	r1n	TblBrlyRMUserMUsergroup		TblBrlyMUser
+9	_1n	0	111	mn1n	TblBrlyMUsergroup		TblBrlyMUser
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	fromsngfull	enus	primary user group
+	fromsngfull	dech	prim\u00e4re Benutzergruppe
+	ImeIAMRelationTitle.end
+10	drvsub	0	112	sub	TblBrlyMPerson		TblBrlyMUser			usr
+11	j	0	0	void	TblBrlyMUser		TblBrlyJMUserState				pref
+12	jpref	0	11	pref	TblBrlyJMUserState		TblBrlyMUser
+13	_1n	0	0	void	TblBrlyMUser		TblBrlyMSession
+14	grp	0	0	void	TblBrlyMUsergroup		TblBrlyMFile
+15	own	0	0	void	TblBrlyMUser		TblBrlyMFile
+16	clust	0	0	void	TblBrlyCFile		TblBrlyMFile
+17	_1n	0	0	void	TblBrlyMOperator		TblBrlyMEquipment
+18	_1n	0	0	void	TblBrlyMPlntype		TblBrlyMEquipment	SbsBrlyBMEquipmentPln
+19	inc	0	0	void	TblBrlyMFlight		TblBrlyMFaflight				affil
+20	aux	0	0	void	TblBrlyMFaflight		TblBrlyAMFaflightWaypoint			faf	enum
+21	a1n	0	0	void	TblBrlyMTimetable		TblBrlyMConnection
+22	_1n	0	0	void	TblBrlyMLeg	SbsBrlyBMLegCor	TblBrlyMConnection			cor
+23	grp	0	0	void	TblBrlyMUsergroup		TblBrlyMPerson
+24	own	0	0	void	TblBrlyMUser		TblBrlyMPerson
+25	j	0	0	void	TblBrlyMPerson		TblBrlyJMPersonLastname				pref
+26	jpref	0	25	pref	TblBrlyJMPersonLastname		TblBrlyMPerson
+27	aux	0	0	void	TblBrlyMPerson		TblBrlyAMPersonDetail				pref
+28	auxpref	0	27	pref	TblBrlyAMPersonDetail		TblBrlyMPerson			tel
+29	auxpref	0	27	pref	TblBrlyAMPersonDetail		TblBrlyMPerson			eml
+30	h1n	0	0	void	TblBrlyMRegion		TblBrlyMRegion			sup
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	fromsngfull	enus	super region
+	fromsngfull	dech	\u00dcberregion
+	toplfull	enus	sub-regions
+	toplfull	dech	Unterregionen
+	ImeIAMRelationTitle.end
+31	j	0	0	void	TblBrlyMRegion		TblBrlyJMRegionTitle				pref
+32	jpref	0	31	pref	TblBrlyJMRegionTitle		TblBrlyMRegion
+33	j	0	0	void	TblBrlyMRegion		TblBrlyJMRegion				pref
+34	jpref	0	33	pref	TblBrlyJMRegion		TblBrlyMRegion
+35	_1n	0	0	void	TblBrlyMRegion	SbsBrlyBMRegionRip	TblBrlyMLocation				affil
+36	clust	0	0	void	TblBrlyCLeg		TblBrlyMLeg
+37	_1n	0	0	void	TblBrlyMLocation	SbsBrlyBMLocationApt	TblBrlyMLeg			bgn
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	fromsngfull	enus	begin location
+	fromsngfull	dech	Beginn
+	toplfull	enus	legs beginning here
+	toplfull	dech	hier beginnende Strecken
+	ImeIAMRelationTitle.end
+38	_1n	0	0	void	TblBrlyMLocation	SbsBrlyBMLocationApt	TblBrlyMLeg			end
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	fromsngfull	enus	end location
+	fromsngfull	dech	Ende
+	toplfull	enus	legs ending here
+	toplfull	dech	hier endende Strecken
+	ImeIAMRelationTitle.end
+39	_1n	0	0	void	TblBrlyMTimetable		TblBrlyMFlight
+41	_1n	0	0	void	TblBrlyMLeg	SbsBrlyBMLegRte	TblBrlyMFlight
+42	u1n	0	0	void			TblBrlyMSegment			ref	affil
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	fromsngfull	enus	reference
+	fromsngfull	dech	Referenz
+	ImeIAMRelationTitle.end
+43	u1nsub	0	42	sub	TblBrlyMConnection		TblBrlyMSegment			con
+44	u1nsub	0	42	sub	TblBrlyMFlight		TblBrlyMSegment			flt
+45	grp	0	0	void	TblBrlyMUsergroup		TblBrlyMConnection
+46	own	0	0	void	TblBrlyMUser		TblBrlyMConnection
+47	_1n	0	0	void	TblBrlyMFlight		TblBrlyMConnection
+48	mn	0	0	void	TblBrlyMConnection		TblBrlyMSegment		TblBrlyRMConnectionMSegment
+49	_1n	0	48	from1n	TblBrlyMConnection		TblBrlyRMConnectionMSegment
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	segments available
+	toplfull	dech	verf\u00fcgbare Segmente
+	ImeIAMRelationTitle.end
+50	_1n	0	48	to1n	TblBrlyMSegment		TblBrlyRMConnectionMSegment
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	availability for connections
+	toplfull	dech	Verf\u00fcgbarkeit f\u00fcr Verbindungen
+	ImeIAMRelationTitle.end
+51	mn	0	0	void	TblBrlyMLocation		TblBrlyMSegment		TblBrlyRMLocationMSegment
+52	_1n	0	51	from1n	TblBrlyMLocation		TblBrlyRMLocationMSegment
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	segments within visibility range
+	toplfull	dech	Segmente im Bereich der Sichtbarkeit
+	ImeIAMRelationTitle.end
+53	_1n	0	51	to1n	TblBrlyMSegment		TblBrlyRMLocationMSegment
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	locations within visiblity range
+	toplfull	dech	Orte im Bereich der Sichtbarkeit
+	ImeIAMRelationTitle.end
+54	aux	0	0	void	TblBrlyMRegion		TblBrlyAMRegionDstswitch
+55	aux	0	0	void	TblBrlyMUsergroup		TblBrlyAMUsergroupAccess
+56	aux	0	0	void	TblBrlyMUser		TblBrlyAMUserAccess
+57	um1n	0	0	void			TblBrlyAVKeylistKey
+58	j	0	0	void	TblBrlyAVKeylistKey		TblBrlyJAVKeylistKey				pref
+59	jpref	0	58	pref	TblBrlyJAVKeylistKey		TblBrlyAVKeylistKey
+60	mn	0	0	void	TblBrlyMLocation		TblBrlyMLocation		TblBrlyProxRMLocationMLocation	prox	self
+61	_1n	0	60	from1n	TblBrlyMLocation		TblBrlyProxRMLocationMLocation			dst
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	locations in proximity
+	toplfull	dech	Orte in der N\u00e4he
+	ImeIAMRelationTitle.end
+62	_1n	0	60	to1n	TblBrlyMLocation		TblBrlyProxRMLocationMLocation			org
+63	mn	0	0	void	TblBrlyMLocation		TblBrlyMLocation		TblBrlyVisRMLocationMLocation	vis	self
+64	_1n	0	63	from1n	TblBrlyMLocation		TblBrlyVisRMLocationMLocation			dst
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	locations within visiblity range
+	toplfull	dech	Orte im Bereich der Sichtbarkeit
+	ImeIAMRelationTitle.end
+65	_1n	0	63	to1n	TblBrlyMLocation		TblBrlyVisRMLocationMLocation			org
+66	mn	0	0	void	TblBrlyMLeg		TblBrlyMLocation		TblBrlyRMLegMLocation
+67	_1n	0	66	from1n	TblBrlyMLeg		TblBrlyRMLegMLocation
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	locations within visiblity range
+	toplfull	dech	Orte im Bereich der Sichtbarkeit
+	ImeIAMRelationTitle.end
+68	_1n	0	66	to1n	TblBrlyMLocation		TblBrlyRMLegMLocation
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	legs within visibility range
+	toplfull	dech	Strecken im Bereich der Sichtbarkeit
+	ImeIAMRelationTitle.end
+69	mn	0	0	void	TblBrlyMFlight		TblBrlyMLocation		TblBrlyRMFlightMLocation
+70	_1n	0	69	from1n	TblBrlyMFlight		TblBrlyRMFlightMLocation
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	locations within visiblity range
+	toplfull	dech	Orte im Bereich der Sichtbarkeit
+	ImeIAMRelationTitle.end
+71	_1n	0	69	to1n	TblBrlyMLocation		TblBrlyRMFlightMLocation
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	flights within visibility range
+	toplfull	dech	Fl\u00fcge im Bereich der Sichtbarkeit
+	ImeIAMRelationTitle.end
+72	mn	0	0	void	TblBrlyMConnection		TblBrlyMFlight		TblBrlyRMConnectionMFlight
+73	_1n	0	72	from1n	TblBrlyMConnection		TblBrlyRMConnectionMFlight
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	flights available
+	toplfull	dech	verf\u00fcgbare Fl\u00fcge
+	ImeIAMRelationTitle.end
+74	_1n	0	72	to1n	TblBrlyMFlight		TblBrlyRMConnectionMFlight
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	availability for connections
+	toplfull	dech	Verf\u00fcgbarkeit f\u00fcr Verbindungen
+	ImeIAMRelationTitle.end
+75	mn	0	0	void	TblBrlyMFlight		TblBrlyMFlight		TblBrlyRMFlightMFlight		self
+76	_1n	0	75	from1n	TblBrlyMFlight		TblBrlyRMFlightMFlight			dst
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	flights within visibility range
+	toplfull	dech	Fl\u00fcge im Bereich der Sichtbarkeit
+	ImeIAMRelationTitle.end
+77	_1n	0	75	to1n	TblBrlyMFlight		TblBrlyRMFlightMFlight			org
+78	mn	0	0	void	TblBrlyMLeg		TblBrlyMLeg		TblBrlyRMLegMLeg		self
+79	_1n	0	78	from1n	TblBrlyMLeg		TblBrlyRMLegMLeg			dst
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	legs within visibility range
+	toplfull	dech	Strecken im Bereich der Sichtbarkeit
+	ImeIAMRelationTitle.end
+80	_1n	0	78	to1n	TblBrlyMLeg		TblBrlyRMLegMLeg			org
+81	mn	0	0	void	TblBrlyMSegment		TblBrlyMSegment		TblBrlyRMSegmentMSegment		self
+82	_1n	0	81	from1n	TblBrlyMSegment		TblBrlyRMSegmentMSegment			dst
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	segments within visibility range
+	toplfull	dech	Segmente im Bereich der Sichtbarkeit
+	ImeIAMRelationTitle.end
+83	_1n	0	81	to1n	TblBrlyMSegment		TblBrlyRMSegmentMSegment			org
+84	umn	0	0	void	TblBrlyMUsergroup				TblBrlyRMUsergroupUniversal
+85	_1n	0	84	from1n	TblBrlyMUsergroup		TblBrlyRMUsergroupUniversal
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	record access rights
+	toplfull	dech	Datensatz Zugriffsrechte
+	ImeIAMRelationTitle.end
+86	um1n	0	84	toum1n			TblBrlyRMUsergroupUniversal			unv
+87	umn	0	0	void	TblBrlyMUser				TblBrlyAccRMUserUniversal	acc
+88	_1n	0	87	from1n	TblBrlyMUser		TblBrlyAccRMUserUniversal
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	record access rights
+	toplfull	dech	Datensatz Zugriffsrechte
+	ImeIAMRelationTitle.end
+89	um1n	0	87	toum1n			TblBrlyAccRMUserUniversal			unv
+90	umn	0	0	void	TblBrlyMUser				TblBrlyHistRMUserUniversal	hist
+91	_1n	0	90	from1n	TblBrlyMUser		TblBrlyHistRMUserUniversal
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	access history
+	toplfull	dech	Zugriffsverlauf
+	ImeIAMRelationTitle.end
+92	um1n	0	90	toum1n			TblBrlyHistRMUserUniversal			unv
+93	lmn	0	0	void	TblBrlyMConnection		TblBrlyMEquipment		TblBrlyLRMConnectionMEquipment		enumfrom
+94	_1n	0	93	from1n	TblBrlyMConnection		TblBrlyLRMConnectionMEquipment			con	enum
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	equipment line-up
+	toplfull	dech	Aufreihung von Ger\u00e4t
+	ImeIAMRelationTitle.end
+95	_1n	0	93	to1n	TblBrlyMEquipment		TblBrlyLRMConnectionMEquipment
+96	lmnop	0	93	op					TblBrlyORMConnectionMEquipment		ina;tob;toa;rmv
+97	_1n	0	96	from1n	TblBrlyMConnection		TblBrlyORMConnectionMEquipment
+98	lmnoppr	0	96	pr1	TblBrlyMEquipment		TblBrlyORMConnectionMEquipment			pr1
+99	lmnoppr	0	96	pr2	TblBrlyMEquipment		TblBrlyORMConnectionMEquipment			pr2
+100	um1n	0	0	void			TblBrlyHistRMUserUniversal			pre
+105	_1n	0	0	void	TblBrlyMUser		TblBrlyAVControlPar
+106	u1n	0	0	void			TblBrlyMFile			ref	affil
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	fromsngfull	enus	reference
+	fromsngfull	dech	Referenz
+	ImeIAMRelationTitle.end
+107	u1nsub	0	106	sub	TblBrlyMTimetable		TblBrlyMFile			ttb	pref
+108	u1nsubpref	0	107	pref	TblBrlyMFile		TblBrlyMTimetable
+111	mnpref	0	5	frompref
+112	drv	0	0	void	TblBrlyMPerson
+116	u1n	0	0	void			TblBrlyMEquipment			hk
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	fromsngfull	enus	hook
+	fromsngfull	dech	Aufh\u00e4nger
+	ImeIAMRelationTitle.end
+117	u1nsubinc	0	116	subinc	TblBrlyMFlight		TblBrlyMEquipment				affil
+118	u1nsubinc	0	116	subinc	TblBrlyMLocation		TblBrlyMEquipment				affil
+119	_1n	0	0	void	TblBrlyMConnection		TblBrlyMRelay				affil
+120	_1n	0	0	void	TblBrlyMRelay		TblBrlyMNode
+121	h1n	0	0	void	TblBrlyMNode		TblBrlyMNode			sup	enum
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	fromsngshort	enus	super
+	fromsngshort	dech	\u00fcbergeordnet
+	fromsngfull	enus	super node
+	fromsngfull	dech	\u00dcbergeordneter Verbindungsknoten
+	toplfull	enus	sub-nodes
+	toplfull	dech	nachgeordnete Verbindungsknoten
+	ImeIAMRelationTitle.end
+122	_1n	0	0	void	TblBrlyMEquipment		TblBrlyMNode
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	employment as node
+	toplfull	dech	Verwendung als Verbindungsknoten
+	ImeIAMRelationTitle.end
+ImeIMRelation.end
+ImeIMStub.srefIxVBasetype	srefRefWznmMTable	srefRefWznmMSubset	sref	Hierarch	srefRefWznmMTablecol	Localized	Example
+cust	TblBrlyMConnection		StubBrlyConStd	false		true	SK1228 2006-12-1 FRA-JFK simplified
+cust	TblBrlyMEquipment		StubBrlyEqpShort	false		false	SK1228 2006-12-1 A346
+cust	TblBrlyMEquipment		StubBrlyEqpStd	false		false	Lufthansa Airbus A340-600
+tco	TblBrlyMFaflight		StubBrlyFafStd	false	faFlightID	false	AAL1-1394087399-airline-0116
+cust	TblBrlyMFile		StubBrlyFilStd	false		false	StarFlugplan.txt
+tco	TblBrlyMFlight		StubBrlyFltStd	false	sref	false	SK1228 2006-12-1 FRA-JFK
+cust	TblBrlyMFlight		StubBrlyFltSref	false		false	SK1228 2006-12-1
+cust	TblBrlyMLeg		StubBrlyLegShort	false		false	FRA-JFK
+cust	TblBrlyMLeg		StubBrlyLegStd	false		true	(route) Frankfurt - New York JFK
+tco	TblBrlyMLocation		StubBrlyLocSref	false	sref	false	FRA
+cust	TblBrlyMLocation		StubBrlyLocStd	false		true	(airport) Frankfurt
+tco	TblBrlyMLocation		StubBrlyLocTitle	false	Title	false	Frankfurt
+cust	TblBrlyMNode		StubBrlyNdeLong	false		true	#5, 0:0:0-0:10:23 for conn. SK1228 2006-12-1 FRA-JFK simplified
+cust	TblBrlyMNode		StubBrlyNdeStd	false		false	SK1228 2006-12-1 LH A346
+tco	TblBrlyMOperator		StubBrlyOprStd	false	Title	false	Lufthansa
+tco	TblBrlyMOperator		StubBrlyOprSref	false	sref	false	LH
+cust	TblBrlyMPerson		StubBrlyPrsStd	false		false	Franz Kuntz
+tco	TblBrlyMPlntype		StubBrlyPtySref	false	sref	false	A346
+tco	TblBrlyMPlntype		StubBrlyPtyStd	false	Title	false	Airbus A340-600
+tco	TblBrlyMRegion		StubBrlyRegHsref	true	sref	false	eu;c
+cust	TblBrlyMRegion		StubBrlyRegStd	false		true	Germany
+cust	TblBrlyMRegion		StubBrlyRegLong	true		true	Europe;Central
+cust	TblBrlyMRelay		StubBrlyRlyLong	false		true	0:0:0-0:10:23 for conn. SK1228 2006-12-1 FRA-JFK simplified
+cust	TblBrlyMRelay		StubBrlyRlyStd	false		true	forward, conn., 5 hops
+cust	TblBrlyMSegment		StubBrlySegStd	false		false	#4, 12:30:55-13:20:20
+cust	TblBrlyMSession		StubBrlySesMenu	false		true	Session by Franz Kuntz (fkuntz);logged in from 127.0.0.1;since 01-01-2010 10:34
+cust	TblBrlyMSession		StubBrlySesStd	false		true	7-2-2013 22:29:41 von 192.168.0.12
+cust	TblBrlyMTimetable		StubBrlyTtbStd	false		false	Star Alliance 2006/07 1-12-2006 - 16-2-2007
+tco	TblBrlyMTimetable		StubBrlyTtbTitle	false	Title	false	Star Alliance 2006/07
+cust	TblBrlyMUser		StubBrlyUsrStd	false		false	Franz Kuntz (fkuntz)
+tco	TblBrlyMUsergroup		StubBrlyUsgStd	false	sref	false	super
+ImeIMStub.end
+ImeIRMStubMStub.srefSupRefWznmMStub	srefSubRefWznmMStub
+StubBrlyFltStd	StubBrlyConStd
+StubBrlyFltSref	StubBrlyEqpShort
+StubBrlyLocSref	StubBrlyEqpShort
+StubBrlyOprSref	StubBrlyEqpStd
+StubBrlyPtySref	StubBrlyEqpShort
+StubBrlyOprStd	StubBrlyEqpStd
+StubBrlyPtyStd	StubBrlyEqpStd
+StubBrlyLegShort	StubBrlyFltStd
+StubBrlyLocSref	StubBrlyLegShort
+StubBrlyLocSref	StubBrlyLegShort
+StubBrlyLocTitle	StubBrlyLegStd
+StubBrlyLocTitle	StubBrlyLegStd
+StubBrlyRlyLong	StubBrlyNdeLong
+StubBrlyEqpShort	StubBrlyNdeStd
+StubBrlyRegHsref	StubBrlyRegHsref
+StubBrlyRegLong	StubBrlyRegLong
+StubBrlyConStd	StubBrlyRlyLong
+StubBrlyUsrStd	StubBrlySesMenu
+StubBrlyPrsStd	StubBrlyUsrStd
+StubBrlyLocSref	StubBrlyLegShort
+StubBrlyLocSref	StubBrlyLegShort
+ImeIRMStubMStub.end

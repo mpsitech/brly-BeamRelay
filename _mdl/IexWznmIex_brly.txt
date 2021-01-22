@@ -1,0 +1,239 @@
+IexWznmIex v0.9.23
+ImeIMImpexpcplx.sref	Short	Title	Minversion	Comment
+IexBrlyIni	ini		0.2.9
+	ImeIJMImpexpcplxTitle.srefX1RefWznmMLocale	Title
+	enus	initialization data
+	dech	Initialisierungsdaten
+	ImeIJMImpexpcplxTitle.end
+	ImeIMImpexp.iref	irefSupRefWznmMImpexp	srefRefWznmMTable	sref	rtrSrefsWznmMImpexpcol	srefsIxWIop	Comment
+	1	0	TblBrlyAVKeylistKey	ImeIAVKeylistKey		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		vsref	fil	klsIxBrlyVKeylist	srefKlsIxBrlyVKeylist	kls		ixsref
+		tbl	tbl	klsNum	klsNum			cust
+		tbl	tbl	x1IxBrlyVMaintable	x1IxBrlyVMaintable			void				void
+		tbl	tbl	Fixed	Fixed			void	true
+		tbl	fil;tbl	sref	sref	srf		void
+		tbl	fil;tbl	Avail	Avail	avl		void
+		tbl	fil;tbl	Implied	Implied	imp		void
+		tbl	tbl	refJ	refJ		2	sub
+		tbl	fil;tbl	Title	Title	tit	2	void
+		tbl	fil;tbl	Comment	Comment	cmt	2	void
+		ImeIMImpexpcol.end
+	2	1	TblBrlyJAVKeylistKey	ImeIJAVKeylistKey		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refBrlyAVKeylistKey	refBrlyAVKeylistKey		1	sup
+		vsref	fil	x1IxBrlyVLocale	srefX1IxBrlyVLocale	lcl		ixsref				enus
+		tbl	fil;tbl	Title	Title	tit		void
+		tbl	fil;tbl	Comment	Comment	cmt		void
+		ImeIMImpexpcol.end
+	3	0	TblBrlyAVValuelistVal	ImeIAVValuelistVal		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		vsref	fil	vlsIxBrlyVValuelist	srefVlsIxBrlyVValuelist	vls		ixsref
+		tbl	tbl	vlsNum	vlsNum			cust
+		vsref	fil	x1IxBrlyVLocale	srefX1IxBrlyVLocale	lcl		ixsref
+		tbl	fil;tbl	Val	Val	val		void
+		ImeIMImpexpcol.end
+	4	0	TblBrlyAVControlPar	ImeIAVControlPar		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		vsref	fil	ixBrlyVControl	srefIxBrlyVControl	ctl		ixsref
+		tbl	fil;tbl	Par	Par	par		void
+		tbl	fil;tbl	Val	Val	val		void
+		ImeIMImpexpcol.end
+	5	0	TblBrlyMFile	ImeIMFile		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refIxVTbl	refIxVTbl			void				void
+		tbl	fil;tbl	osrefKContent	osrefKContent	cnt		void
+		tbl	fil;tbl	Filename	Filename	fnm		void
+		tbl	fil;tbl	srefKMimetype	srefKMimetype	mim		void
+		tbl	fil;tbl	Comment	Comment	cmt		void
+		ImeIMImpexpcol.end
+	6	0	TblBrlyMUsergroup	ImeIMUsergroup		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	fil;tbl	sref	sref	srf		void
+		tbl	fil;tbl	Comment	Comment	cmt		void
+		ImeIMImpexpcol.end
+	7	6	TblBrlyAMUsergroupAccess	ImeIAMUsergroupAccess		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refBrlyMUsergroup	refBrlyMUsergroup		6	sup
+		vsref	fil	x1IxBrlyVFeatgroup	srefX1IxBrlyVFeatgroup	feg	0	ixsref
+		tbl	fil;tbl	x2FeaSrefUix	x2FeaSrefUix	fea	0	void
+		vsref	fil	ixBrlyWAccess	srefsIxBrlyWAccess	acc	0	ixsref
+		ImeIMImpexpcol.end
+	8	6	TblBrlyMUser	ImeIMUser		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refRUsergroup	refRUsergroup			imppp
+		tbl	tbl	refBrlyMUsergroup	refBrlyMUsergroup		6	sup
+		tbl	tbl	refBrlyMPerson	refBrlyMPerson		10	sub
+		tbl	fil;tbl	sref	sref	srf		void
+		tbl	tbl	refJState	refJState		9	sub
+		vsref	fil	ixVState	srefIxVState	ste	9	ixsref
+		vsref	fil	ixBrlyVLocale	srefIxBrlyVLocale	lcl		ixsref
+		vsref	fil	ixBrlyVUserlevel	srefIxBrlyVUserlevel	ulv		ixsref
+		tbl	fil;tbl	Password	Password	pwd		void
+		tbl	fil;tbl	Fullkey	Fullkey	fky	0	void
+		tbl	fil;tbl	Comment	Comment	cmt	0	void
+		ImeIMImpexpcol.end
+	9	8	TblBrlyJMUserState	ImeIJMUserState		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refBrlyMUser	refBrlyMUser		8	sup
+		tbl	tbl	x1Start	x1Start		0	void	&now;
+		vsref	fil	ixVState	srefIxVState	ste		ixsref
+		ImeIMImpexpcol.end
+	10	8	TblBrlyMPerson	ImeIMPerson		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	ixWDerivate	ixWDerivate			void				usr
+		vsref	fil	ixVSex	srefIxVSex	sex		ixsref
+		tbl	fil;tbl	Title	Title	tit		void
+		tbl	fil;tbl	Firstname	Firstname	fnm		void
+		tbl	tbl	refJLastname	refJLastname		11	sub
+		tbl	fil;tbl	Lastname	Lastname	lnm	11	void
+		ImeIMImpexpcol.end
+	11	10	TblBrlyJMPersonLastname	ImeIJMPersonLastname		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refBrlyMPerson	refBrlyMPerson		10	sup
+		tbl	tbl	x1Startd	x1Startd		0	void	&today;
+		tbl	fil;tbl	Lastname	Lastname	lnm		void
+		ImeIMImpexpcol.end
+	23	8	TblBrlyAMUserAccess	ImeIAMUserAccess		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refBrlyMUser	refBrlyMUser		8	sup
+		vsref	fil	x1IxBrlyVFeatgroup	srefX1IxBrlyVFeatgroup	feg	0	ixsref
+		tbl	fil;tbl	x2FeaSrefUix	x2FeaSrefUix	fea	0	void
+		vsref	fil	ixBrlyWAccess	srefsIxBrlyWAccess	acc	0	ixsref
+		ImeIMImpexpcol.end
+	12	0	TblBrlyMRegion	ImeIMRegion		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		thsref	fil	supRefBrlyMRegion	hsrefSupRefBrlyMRegion	sup		imppp			StubBrlyRegHsref
+		tbl	fil;tbl	sref	sref	srf		void
+		tbl	tbl	refJTitle	refJTitle		13	sub
+		tbl	fil;tbl	Title	Title	tit	13	void
+		tbl	tbl	refJ	refJ		14	sub
+		vsref	fil	ixVDst	srefIxVDst	dst	14	ixsref
+		tbl	fil;tbl	toffset	toffset	tof	14	void
+		ImeIMImpexpcol.end
+	13	12	TblBrlyJMRegionTitle	ImeIJMRegionTitle		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refBrlyMRegion	refBrlyMRegion		12	sup
+		vsref	fil	x1IxBrlyVLocale	srefX1IxBrlyVLocale	lcl		ixsref				enus
+		tbl	fil;tbl	Title	Title	tit		void
+		ImeIMImpexpcol.end
+	14	12	TblBrlyJMRegion	ImeIJMRegion		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refBrlyMRegion	refBrlyMRegion		12	sup
+		ftm	fil	x1Startd	ftmX1Startd	sta		invftm
+		ftm	fil	x1Stopd	ftmX1Stopd	sto		invftm
+		vsref	fil	ixVDst	srefIxVDst	dst		ixsref
+		tbl	fil;tbl	toffset	toffset	tof		void
+		ImeIMImpexpcol.end
+	22	12	TblBrlyAMRegionDstswitch	ImeIAMRegionDstswitch		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refBrlyMRegion	refBrlyMRegion		12	sup
+		ftm	fil	startd	ftmStartd	std		invftm
+		ftm	fil	startt	ftmStartt	stt		invftm
+		ImeIMImpexpcol.end
+	15	0	TblBrlyMLocation	ImeIMLocation		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		vsref	fil	ixVBasetype	srefIxVBasetype	typ		ixsref
+		thsref	fil	refBrlyMRegion	hsrefRefBrlyMRegion	reg		previmp			StubBrlyRegHsref
+		tbl	tbl	refBrlyMEquipment	refBrlyMEquipment			custsqlpp
+		tbl	fil;tbl	sref	sref	srf		void
+		tbl	fil;tbl	srefICAO	srefICAO	ica		void
+		tbl	fil;tbl	Title	Title	tit		void
+		tbl	fil;tbl	alt	alt	alt		void
+		tbl	fil;tbl	theta	theta	the		void
+		tbl	fil;tbl	phi	phi	phi		void
+		tbl	fil;tbl	tz	tz	tz		void
+		tbl	tbl	alpha	alpha			void	0.0
+		tbl	tbl	Calcdone	Calcdone			void	false
+		ImeIMImpexpcol.end
+	16	0	TblBrlyMOperator	ImeIMOperator		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	fil;tbl	sref	sref	srf		void
+		tbl	fil;tbl	srefICAO	srefICAO	ica		void
+		tbl	fil;tbl	Title	Title	tit		void
+		ImeIMImpexpcol.end
+	17	0	TblBrlyMPlntype	ImeIMPlntype		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	fil;tbl	sref	sref	srf		void
+		tbl	fil;tbl	Title	Title	tit		void
+		tbl	fil;tbl	srefBrlyKEqptype	srefBrlyKEqptype	ety		void
+		tbl	fil;tbl	Capacity	Capacity	cap		void
+		ImeIMImpexpcol.end
+	ImeIMImpexp.end
+IexBrlyTtb	ttb
+	ImeIJMImpexpcplxTitle.srefX1RefWznmMLocale	Title
+	enus	timetable raw data
+	dech	Flugplan Rohdaten
+	ImeIJMImpexpcplxTitle.end
+	ImeIMImpexp.iref	irefSupRefWznmMImpexp	srefRefWznmMTable	sref	rtrSrefsWznmMImpexpcol	srefsIxWIop	Comment
+	18	0	TblBrlyMLeg	ImeIMLeg	srefBgnRefBrlyMLocation;srefEndRefBrlyMLocation	retrins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		idiref	fil	ref	iref	irf		void
+		tbl	tbl	ixVBasetype	ixVBasetype			void				rte
+		tsref	fil	bgnRefBrlyMLocation	srefBgnRefBrlyMLocation	bgn		rst			StubBrlyLocSref
+		tsref	fil	endRefBrlyMLocation	srefEndRefBrlyMLocation	end		rst			StubBrlyLocSref
+		tbl	tbl	alt	alt			void	0.0
+		tbl	tbl	deltaphi	deltaphi			void	0.0
+		tbl	tbl	alpha	alpha			void	0.0
+		tbl	tbl	Calcdone	Calcdone			void	false
+		ImeIMImpexpcol.end
+	19	0	TblBrlyMFlight	ImeIMFlight		cust
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refBrlyMTimetable	refBrlyMTimetable			preset		PreBrlyRefTtb
+		thint	fil	refBrlyMEquipment	hintRefBrlyMEquipment	eqp		void
+		iref	fil	refBrlyMLeg	irefRefBrlyMLeg	leg	18	previmp
+		tbl	fil;tbl	sref	sref	srf		void
+		thint	fil	start	hintStart	sta		void
+		thint	fil	stop	hintStop	sto		void
+		tbl	tbl	Calcdone	Calcdone			void	false
+		iarg	fil		iDate	dte		void
+		iarg	fil		iWeekday	wdy		void
+		ImeIMImpexpcol.end
+	ImeIMImpexp.end
+IexBrlyFlt	flt
+	ImeIJMImpexpcplxTitle.srefX1RefWznmMLocale	Title
+	enus	FlightAware flight data
+	dech	FlightAware Flugdaten
+	ImeIJMImpexpcplxTitle.end
+	ImeIMImpexp.iref	irefSupRefWznmMImpexp	srefRefWznmMTable	sref	rtrSrefsWznmMImpexpcol	srefsIxWIop	Comment
+	20	0	TblBrlyMFaflight	ImeIMFaflight	faFlightID	retr;ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		iop	fil		srefIxBrlyVIop	iop		ixsref
+		iarg	fil		iLeg	leg		void
+		thint	fil	refBrlyMFlight	hintRefBrlyMFlight	flt		custsql
+		tbl	fil;tbl	faFlightID	faFlightID	fid		void
+		tbl	fil;tbl	ident	ident	idt		void
+		tbl	fil;tbl	aircrafttype	aircrafttype	act		void
+		tbl	fil;tbl	filed_ete	filed_ete	fet		void
+		tbl	fil;tbl	filed_time	filed_time	fti		void
+		tbl	fil;tbl	filed_departuretime	filed_departuretime	fdt		void
+		tbl	fil;tbl	filed_airspeed_kts	filed_airspeed_kts	fsk		void
+		tbl	fil;tbl	filed_airspeed_mach	filed_airspeed_mach	fsm		void
+		tbl	fil;tbl	filed_altitude	filed_altitude	fat		void
+		tbl	fil;tbl	route	route	rte		void
+		tbl	fil;tbl	actualdeparturetime	actualdeparturetime	adt		void
+		tbl	fil;tbl	estimatedarrivaltime	estimatedarrivaltime	eat		void
+		tbl	fil;tbl	actualarrivaltime	actualarrivaltime	aat		void
+		tbl	fil;tbl	diverted	diverted	dvt		void
+		tbl	fil;tbl	origin	origin	org		void
+		tbl	fil;tbl	destination	destination	dst		void
+		tbl	fil;tbl	originName	originName	onm		void
+		tbl	fil;tbl	originCity	originCity	oct		void
+		tbl	fil;tbl	destinationName	destinationName	dnm		void
+		tbl	fil;tbl	destinationCity	destinationCity	dct		void
+		ImeIMImpexpcol.end
+	21	20	TblBrlyAMFaflightWaypoint	ImeIAMFaflightWaypoint		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	fafRefBrlyMFaflight	fafRefBrlyMFaflight		20	sup
+		tbl	tbl	fafNum	fafNum			incr
+		tbl	fil;tbl	timestamp	timestamp	tms		void
+		tbl	fil;tbl	latitude	latitude	lat		void
+		tbl	fil;tbl	longitude	longitude	lon		void
+		tbl	fil;tbl	groundspeed	groundspeed	gsp		void
+		tbl	fil;tbl	altitude	altitude	alt		void
+		tbl	fil;tbl	altitudeStatus	altitudeStatus	ast		void
+		tbl	fil;tbl	updateType	updateType	uty		void
+		tbl	fil;tbl	altitudeChange	altitudeChange	ach		void
+		ImeIMImpexpcol.end
+	ImeIMImpexp.end
+ImeIMImpexpcplx.end

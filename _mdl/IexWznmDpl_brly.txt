@@ -1,0 +1,36 @@
+IexWznmDpl v1.0.9
+ImeIMComponent.srefIxVBasetype	sref	Title	Comment
+eng	brlyd	BeamRelay main engine
+	ImeIMRelease.hsrefRefWznmMMachine	sref	srefsKOption	Comment
+	any;mac	brlyd_mac
+	any;ubuntu	brlyd_ubuntu
+	ImeIMRelease.end
+	ImeIRMComponentMLibrary.srefRefWznmMLibrary
+	netcdf
+	ImeIRMComponentMLibrary.end
+openg	brlyopd	BeamRelay operation engine
+	ImeIMRelease.hsrefRefWznmMMachine	sref	srefsKOption	Comment
+	any;mac	brlyopd_mac
+	any;ubuntu	brlyopd_ubuntu
+	ImeIMRelease.end
+	ImeIRMComponentMLibrary.srefRefWznmMLibrary
+	netcdf
+	ImeIRMComponentMLibrary.end
+cmbeng	brlycmbd	BeamRelay combined engine
+	ImeIMRelease.hsrefRefWznmMMachine	sref	srefsKOption	Comment
+	any;mac	brlycmbd_mac
+	any;ubuntu	brlycmbd_ubuntu
+	ImeIMRelease.end
+	ImeIRMComponentMLibrary.srefRefWznmMLibrary
+	netcdf
+	ImeIRMComponentMLibrary.end
+dbs	dbsbrly	BeamRelay database access library
+	ImeIMRelease.hsrefRefWznmMMachine	sref	srefsKOption	Comment
+	any;mac	dbsbrly_mac
+	any;ubuntu	dbsbrly_ubuntu
+	ImeIMRelease.end
+webapp	webappbrly	BeamRelay web app user interface files
+	ImeIMRelease.hsrefRefWznmMMachine	sref	srefsKOption	Comment
+	any	webappbrly_any
+	ImeIMRelease.end
+ImeIMComponent.end

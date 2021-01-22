@@ -1,0 +1,38 @@
+IexWznmBui v0.9.23
+ImeIMModule.sref
+MdlBrlyAdmin
+	ImeIJMModule.srefX1RefWznmMLocale	Title	Comment
+	enus	administration module
+	dech	Verwaltung
+	ImeIJMModule.end
+	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Avail	Active
+	tbl	TblBrlyMUsergroup	CrdBrlyUsg
+	tbl	TblBrlyMUser	CrdBrlyUsr
+	tbl	TblBrlyMPerson	CrdBrlyPrs
+	tbl	TblBrlyMFile	CrdBrlyFil
+	tbl	TblBrlyMOperator	CrdBrlyOpr
+	tbl	TblBrlyMPlntype	CrdBrlyPty
+	ImeIMCard.end
+MdlBrlyBase
+	ImeIJMModule.srefX1RefWznmMLocale	Title	Comment
+	enus	basic data module
+	dech	Stammdaten
+	ImeIJMModule.end
+	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Avail	Active
+	tbl	TblBrlyMRegion	CrdBrlyReg
+	tbl	TblBrlyMLocation	CrdBrlyLoc
+	tbl	TblBrlyMLeg	CrdBrlyLeg
+	tbl	TblBrlyMTimetable	CrdBrlyTtb
+	tbl	TblBrlyMFlight	CrdBrlyFlt
+	tbl	TblBrlyMSegment	CrdBrlySeg		pre.refFlt() > pre.refCon()
+	ImeIMCard.end
+MdlBrlyConnect
+	ImeIJMModule.srefX1RefWznmMLocale	Title	Comment
+	enus	connection module
+	dech	Verbindungsdaten
+	ImeIJMModule.end
+	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Avail	Active
+	tbl	TblBrlyMConnection	CrdBrlyCon
+	tbl	TblBrlyMRelay	CrdBrlyRly		pre.refCon()
+	ImeIMCard.end
+ImeIMModule.end

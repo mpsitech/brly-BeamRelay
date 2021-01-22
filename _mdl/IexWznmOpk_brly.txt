@@ -1,0 +1,331 @@
+IexWznmOpk v0.9.23
+ImeIMOppack.srefIxVBasetype	sref	Title	Shrdat	Comment
+stat	BrlyBase	static calculation	false
+	ImeIRMComponentMOppack.srefRefWznmMComponent
+	brlyopd
+	ImeIRMComponentMOppack.end
+	ImeIMOp.sref	Shrdat	Comment
+	BrlyBaseLegleg	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	numFirst	uint
+		0	numLast	uint
+		0	refsBrlyMLeg	ubigintvec
+		0	append	boolean
+		0	intermix	boolean
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			calculate leg-to-leg visibility
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	calculate leg-to-leg visibility
+			dech	berechne Sichtbarkeit unter Strecken
+			ImeIJMSquawkTitle2.end
+		ImeIMSquawk2.end
+	BrlyBaseLegloc	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	numFirst	uint
+		0	numLast	uint
+		0	refsBrlyMLeg	ubigintvec
+		0	refsBrlyMLocation	ubigintvec
+		0	append	boolean
+		0	appendloc	boolean
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			calculate location-to-leg visibility
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	calculate location-to-leg visibility
+			dech	berechne Sichtbarkeit zwischen Orten und Strecken
+			ImeIJMSquawkTitle2.end
+		ImeIMSquawk2.end
+	BrlyBaseLocloc	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	numFirst	uint
+		0	numLast	uint
+		0	refsBrlyMLocation	ubigintvec
+		0	append	boolean
+		0	intermix	boolean
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			calculate location-to-location proximity and visibility
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	calculate location-to-location proximity and visibility
+			dech	berechne Nachbarschaft und Sichtbarkeit unter Orten
+			ImeIJMSquawkTitle2.end
+		ImeIMSquawk2.end
+	ImeIMOp.end
+stat	BrlyDnsmap	density map generation	false
+	ImeIRMComponentMOppack.srefRefWznmMComponent
+	brlyopd
+	ImeIRMComponentMOppack.end
+	ImeIRMLibraryMOppack.srefRefWznmMLibrary
+	png
+	ImeIRMLibraryMOppack.end
+	ImeIMOp.sref	Shrdat	Comment
+	BrlyDnsmapCollect	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	capacity	boolean
+		0	con	boolean
+		0	dt	uint
+		0	flt	boolean
+		0	fullheight	uint
+		0	fullwidth	uint
+		0	leg	boolean
+		0	pacctr	boolean
+		0	phi0	double
+		0	phi1	double
+		0	pReach	boolean
+		0	seg	boolean
+		0	srefArena	string
+		0	srefsBrlyKEqptype	string
+		0	start	uint
+		0	stop	uint
+		0	theta0	double
+		0	theta1	double
+		ImeIAMOpInvarg.end
+		ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refBrlyMFile	ubigint
+		ImeIAMOpRetval.end
+		ImeIMSquawk2.Title	Example
+			collect data for time-resolved density map
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	collect data for time-resolved density map
+			dech	sammle Daten f\u00fcr zeitaufgel\u00f6ste Dichtekarte
+			ImeIJMSquawkTitle2.end
+		ImeIMSquawk2.end
+	BrlyDnsmapFrame	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refBrlyMFile	ubigint
+		0	fullsize	boolean
+		0	grayscale	boolean
+		0	altzmax	double
+		0	tIx	uint
+		ImeIAMOpInvarg.end
+		ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	filename	string
+		ImeIAMOpRetval.end
+		ImeIMSquawk2.Title	Example
+			generate video out of time-resolved density map
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	generate video out of time-resolved density map
+			dech	erzeuge Video von zeitaufgel\u00f6ster Dichtekarte
+			ImeIJMSquawkTitle2.end
+		ImeIMSquawk2.end
+	BrlyDnsmapVideo	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	altzmax	double
+		0	frmrate	uint
+		0	fullsize	boolean
+		0	grayscale	boolean
+		0	refBrlyMFile	ubigint
+		ImeIAMOpInvarg.end
+		ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	folder	string
+		ImeIAMOpRetval.end
+		ImeIMSquawk2.Title	Example
+			generate video out of time-resolved density map
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	generate video out of time-resolved density map
+			dech	erzeuge Video von zeitaufgel\u00f6ster Dichtekarte
+			ImeIJMSquawkTitle2.end
+		ImeIMSquawk2.end
+	ImeIMOp.end
+stat	BrlyDyn	dynamic calculation	false
+	ImeIRMComponentMOppack.srefRefWznmMComponent
+	brlyopd
+	ImeIRMComponentMOppack.end
+	ImeIMOp.sref	Shrdat	Comment
+	BrlyDynConflt	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refBrlyMConnection	ubigint
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			calculate flight availability for connection '(region) eu-c-de - (flight) LH403 2007-2-16 FRA-JFK, t0: 16-02-2007 0:00'
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	calculate flight availability for connection '&StubBrlyConStd;'
+			dech	berechne verf\u00fcgbare Fl\u00fcge f\u00fcr Verbindung '&StubBrlyConStd;'
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubBrlyConStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
+	BrlyDynConseg	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refBrlyMConnection	ubigint
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			calculate segment availability for connection '(region) eu-c-de - (flight) LH403 2007-2-16 FRA-JFK, t0: 16-02-2007 0:00'
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	calculate segment availability for connection '&StubBrlyConStd;'
+			dech	berechne verf\u00fcgbare Segmente f\u00fcr Verbindung '&StubBrlyConStd;'
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubBrlyConStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
+	BrlyDynEqplist	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refBrlyMConnection	ubigint
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			calculate equipment line-up for connection '(region) eu-c-de - (flight) LH403 2007-2-16 FRA-JFK, t0: 16-02-2007 0:00'
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	calculate equipment line-up for connection '&StubBrlyConStd;'
+			dech	berechne Aufreihung von Ger\u00e4t f\u00fcr Verbindung '&StubBrlyConStd;'
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubBrlyConStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
+	BrlyDynFltfltloc	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refsBrlyMFlight	ubigintvec
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			calculate flight-to-flight and flight-to-location visibility
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	calculate flight-to-flight and flight-to-location visibility
+			dech	berechne Sichtbarkeit unter Fl\u00fcgen sowie zwischen Fl\u00fcgen und Orten
+			ImeIJMSquawkTitle2.end
+		ImeIMSquawk2.end
+	BrlyDynFltseg	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	numFirst	uint
+		0	numLast	uint
+		0	refsBrlyMFlight	ubigintvec
+		0	start	uint
+		0	stop	uint
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			calculate flight segmentation
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	calculate flight segmentation
+			dech	berechne Flug-Segmentierung
+			ImeIJMSquawkTitle2.end
+		ImeIMSquawk2.end
+	BrlyDynRly	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refBrlyMConnection	ubigint
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			calculate relays for connection '(region) eu-c-de - (flight) LH403 2007-2-16 FRA-JFK, t0: 16-02-2007 0:00'
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	calculate relays for connection '&StubBrlyConStd;'
+			dech	berechne Verbindungsketten f\u00fcr Verbindung '&StubBrlyConStd;'
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubBrlyConStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
+	BrlyDynSeglocseg	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refsBrlyMFlight	ubigintvec
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			calculate segment-to-location and segment-to-segment visibility
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	calculate segment-to-location and segment-to-segment visibility
+			dech	berechne Sichtbarkeit zwischen Segmenten und Orten sowie unter Segmenten
+			ImeIJMSquawkTitle2.end
+		ImeIMSquawk2.end
+	ImeIMOp.end
+stat	BrlyMapgen	map generation	true
+	ImeIRMComponentMOppack.srefRefWznmMComponent
+	brlyopd
+	ImeIRMComponentMOppack.end
+	ImeIRMLibraryMOppack.srefRefWznmMLibrary
+	png
+	ImeIRMLibraryMOppack.end
+	ImeIMOp.sref	Shrdat	Comment
+	BrlyMapgenConmap	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refBrlyMConnection	ubigint
+		0	jrefLeg	ubigint
+		0	jrefLoc	ubigint
+		0	jrefFlt	ubigint
+		0	jrefRly	ubigint
+		0	jrefNde	ubigint
+		0	scale	uint		1
+		0	width	uint		300
+		0	height	uint		300
+		0	xoffset	int
+		0	yoffset	int
+		0	wrtree	boolean		false
+		0	filename	string
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			generate map for connection '(region) eu-c-de - (flight) LH403 2007-2-16 FRA-JFK, t0: 16-02-2007 0:00'
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	generate map for connection '&StubBrlyConStd;'
+			dech	erzeuge Karte f\u00fcr Verbindung '&StubBrlyConStd;'
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubBrlyConStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
+	BrlyMapgenLegmap	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refBrlyMLeg	ubigint
+		0	jrefLeg	ubigint
+		0	jrefLoc	ubigint
+		0	scale	uint		1
+		0	width	uint		300
+		0	height	uint		300
+		0	xoffset	int
+		0	yoffset	int
+		0	filename	string
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			generate map for leg 'FRA-JFK'
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	generate map for leg '&StubBrlyLegStd;'
+			dech	erzeuge Karte f\u00fcr Strecke '&StubBrlyLegStd;'
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubBrlyLegStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
+	BrlyMapgenLocmap	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refBrlyMLocation	ubigint
+		0	jrefLeg	ubigint
+		0	jrefProxloc	ubigint
+		0	jrefVisloc	ubigint
+		0	scale	uint		1
+		0	width	uint		300
+		0	height	uint		300
+		0	xoffset	int
+		0	yoffset	int
+		0	filename	string
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			generate map for location '(airport) Frankfurt'
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	generate map for location '&StubBrlyLocStd;'
+			dech	erzeuge Karte f\u00fcr Ort '&StubBrlyLocStd;'
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubBrlyLocStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
+	ImeIMOp.end
+stat	BrlyTtimp	timetable import	false
+	ImeIRMComponentMOppack.srefRefWznmMComponent
+	brlyopd
+	ImeIRMComponentMOppack.end
+	ImeIMOp.sref	Shrdat	Comment
+	BrlyTtimpRawstar	false
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	infile	string
+		0	outfile	string
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			transform file 'Star01122006_16022007.txt' from Star Alliance into intermediate format
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	translate file '&StubBrlyFilShort;' from StarAlliance into intermediate format
+			dech	\u00fcbersetze Datei '&StubBrlyFilShort;' von StarAlliance-Format in Zwischenformat
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubBrlyFilStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
+	ImeIMOp.end
+ImeIMOppack.end

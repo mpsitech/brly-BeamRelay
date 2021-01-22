@@ -1,0 +1,38 @@
+# file Makefile
+# make file for CrdBrlyFlt card job handler, release brlycmbd_mac
+# copyright: (C) 2016-2020 MPSI Technologies GmbH
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 11 Jan 2021
+# IP header --- ABOVE
+
+include ../Makefile.inc
+
+CPP = g++
+CPPFLAGS = -std=c++11 -g -Wall -Os -pthread -DBRLYCMBD
+
+STATLIB = ar
+STATLIBFLAGS = rcs
+
+INCPATH = -I$(BUILDROOT)/dbsbrly -I$(BUILDROOT)/brlycmbd/VecBrly -I$(BUILDROOT)/brlycmbd/IexBrly -I$(BUILDROOT)/brlycmbd
+INCPATH += -I${WHIZSDKROOT}/build -I/usr/local/include -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/libpng/include -I/usr/local/opt/sqlite/include
+
+OBJS = CrdBrlyFlt.o PnlBrlyFltList.o QryBrlyFltList.o PnlBrlyFltHeadbar.o PnlBrlyFltRec.o PnlBrlyFltEqpMNConnection.o QryBrlyFltEqpMNConnection.o PnlBrlyFltOrgMNFlight.o QryBrlyFltOrgMNFlight.o PnlBrlyFltMNConnection.o QryBrlyFltMNConnection.o PnlBrlyFltMNLocation.o QryBrlyFltMNLocation.o PnlBrlyFltEqp1NNode.o QryBrlyFltEqp1NNode.o PnlBrlyFltRef1NSegment.o QryBrlyFltRef1NSegment.o PnlBrlyFlt1NConnection.o QryBrlyFlt1NConnection.o PnlBrlyFltFafAWaypoint.o QryBrlyFltFafAWaypoint.o PnlBrlyFltDetail.o PnlBrlyFltPre.o
+
+LIB = libcrdbrlyflt
+
+.SUFFIXES: .cpp
+
+.cpp.o :
+	$(CPP) $(CPPFLAGS) $(INCPATH) -o $@ -c $<
+
+all:	$(LIB)
+
+$(LIB):	$(OBJS)
+	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
+	rm -f *.o
+
+install:
+	mv $(LIB).a $(LIBROOT)/brlycmbd/
+
+clean:
+	rm -f *.o

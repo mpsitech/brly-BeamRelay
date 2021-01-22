@@ -1,0 +1,21 @@
+IexWznmGbl v0.9.29
+ImeIMBlock.srefsReaIxWznmWScop	srefsWriIxWznmWScope	sref	Comment
+cmbeng;eng;openg	cmbeng;eng;openg	StgBrlyGeometry
+	ImeIAMBlockItem.irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	Defval	Comment
+	0	var	acraltitude	double	10500
+	0	var	corrwidth1	double	100000
+	0	var	corrwidth2	double	500000
+	0	var	earthradius	double	6371000
+	0	var	hrznaltitude	double	2000
+	ImeIAMBlockItem.end
+cmbeng;eng;openg	cmbeng;eng;openg	StgBrlyFlightaware
+	ImeIAMBlockItem.irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	Defval	Comment
+	0	var	ip	string	flightxml.flightaware.com/json/FlightXML2
+	0	var	key	string	YXdpcnRobToyMjY5NzU4ZmI0NGIxODQxNjBlZTk2NWU4ZTAyZjk3OTZkZTJmMzE0
+	ImeIAMBlockItem.end
+ImeIMBlock.end
+ImeIMCapability.srefTplRefWznmMCapability	sref	Title
+acv	Acv
+arm	Arm
+dlgloaini	DlgBrlyNavLoaini
+ImeIMCapability.end

@@ -1,0 +1,38 @@
+# file Makefile
+# make file for CrdBrlyCon card job handler, release brlycmbd_ubuntu
+# copyright: (C) 2016-2020 MPSI Technologies GmbH
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 11 Jan 2021
+# IP header --- ABOVE
+
+include ../Makefile.inc
+
+CPP = g++
+CPPFLAGS = -std=c++11 -g -Wall -Os -pthread -DBRLYCMBD
+
+STATLIB = ar
+STATLIBFLAGS = rcs
+
+INCPATH = -I$(BUILDROOT)/dbsbrly -I$(BUILDROOT)/brlycmbd/VecBrly -I$(BUILDROOT)/brlycmbd/IexBrly -I$(BUILDROOT)/brlycmbd
+INCPATH += -I${WHIZSDKROOT}/build -I/usr/include -I/usr/include/libxml2 -I/usr/include/mariadb
+
+OBJS = CrdBrlyCon.o PnlBrlyConList.o QryBrlyConList.o PnlBrlyConHeadbar.o PnlBrlyConRec.o PnlBrlyConMNSegment.o QryBrlyConMNSegment.o PnlBrlyConMNFlight.o QryBrlyConMNFlight.o PnlBrlyConConMNEquipment.o QryBrlyConConMNEquipment.o PnlBrlyConRef1NSegment.o QryBrlyConRef1NSegment.o PnlBrlyCon1NRelay.o QryBrlyCon1NRelay.o PnlBrlyConMap.o QryBrlyConMapNode.o QryBrlyConMapLocation.o QryBrlyConMapLeg.o QryBrlyConMapFlight.o QryBrlyConMapRelay.o PnlBrlyConDetail.o PnlBrlyConPre.o DlgBrlyConNew.o
+
+LIB = libcrdbrlycon
+
+.SUFFIXES: .cpp
+
+.cpp.o :
+	$(CPP) $(CPPFLAGS) $(INCPATH) -o $@ -c $<
+
+all:	$(LIB)
+
+$(LIB):	$(OBJS)
+	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
+	rm -f *.o
+
+install:
+	mv $(LIB).a $(LIBROOT)/brlycmbd/
+
+clean:
+	rm -f *.o

@@ -1,0 +1,38 @@
+# file Makefile
+# make file for CrdBrlyUsr card job handler, release brlycmbd_ubuntu
+# copyright: (C) 2016-2020 MPSI Technologies GmbH
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 11 Jan 2021
+# IP header --- ABOVE
+
+include ../Makefile.inc
+
+CPP = g++
+CPPFLAGS = -std=c++11 -g -Wall -Os -pthread -DBRLYCMBD
+
+STATLIB = ar
+STATLIBFLAGS = rcs
+
+INCPATH = -I$(BUILDROOT)/dbsbrly -I$(BUILDROOT)/brlycmbd/VecBrly -I$(BUILDROOT)/brlycmbd/IexBrly -I$(BUILDROOT)/brlycmbd
+INCPATH += -I${WHIZSDKROOT}/build -I/usr/include -I/usr/include/libxml2 -I/usr/include/mariadb
+
+OBJS = CrdBrlyUsr.o PnlBrlyUsrList.o QryBrlyUsrList.o PnlBrlyUsrHeadbar.o PnlBrlyUsrRec.o PnlBrlyUsrMNUsergroup.o QryBrlyUsrMNUsergroup.o PnlBrlyUsr1NSession.o QryBrlyUsr1NSession.o PnlBrlyUsrAAccess.o QryBrlyUsrAAccess.o PnlBrlyUsrDetail.o
+
+LIB = libcrdbrlyusr
+
+.SUFFIXES: .cpp
+
+.cpp.o :
+	$(CPP) $(CPPFLAGS) $(INCPATH) -o $@ -c $<
+
+all:	$(LIB)
+
+$(LIB):	$(OBJS)
+	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
+	rm -f *.o
+
+install:
+	mv $(LIB).a $(LIBROOT)/brlycmbd/
+
+clean:
+	rm -f *.o

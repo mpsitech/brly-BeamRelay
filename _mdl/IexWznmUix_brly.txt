@@ -1,0 +1,1285 @@
+IexWznmUix v0.9.23
+ImeIMCard.sref
+CrdBrlyCon
+	ImeIMControl1.srefIxVBasetype	srefHkIxVSection	srefRefIxVTbl	srefRefUref	srefSupRefWznmMControl	supNum	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	Avail	Active	srefsKOption
+	msp	mbar	void		MenCrd	1	app	MspCrd1	void			MitCrdNewAvail()
+	mit	mbar	dlg	DlgBrlyConNew	MenCrd	2	shr	MitCrdNew	void	new		pre.ixCrdaccConIncl(edit|exec)		cap;ddd
+	ImeIMControl1.end
+	ImeIMDialog.srefIxVBasetype	srefRefIxVTbl	srefRefUref	sref	Comment
+	new	tbl	TblBrlyMConnection	DlgBrlyConNew
+		ImeICControl3.iref
+		1
+		ImeICControl3.end
+		ImeIMControl3.iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Create new connection
+			dech	Neue Verbindung erstellen
+			ImeIJMControlTitle3.end
+		2	sge	0	void	void		0	shr	Sge	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFSge
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyConNewSge		noloc;notit;filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		3	dse	0	hdr	void		0	shr	Dse	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFDse
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyConNewDit		filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		4	dit	0	void	void		0	shr	DitDet	ditstd	detail						cap
+		5	txf	0	cont	void		4	shr	DetTxfFlt	void
+		6	cpt	0	cont	void		5	app	DetCptFlt	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Flight
+			dech	Flug
+			ImeIJMControlTitle3.end
+		7	pup	0	cont	void		4	shr	DetPupMdl	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec	VecBrlyVMConnectionModel	FeedFDetPupMdl
+			ImeIMFeed3.end
+		8	cpt	0	cont	void		7	app	DetCptMdl	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Model
+			dech	Modell
+			ImeIJMControlTitle3.end
+		9	pup	0	cont	void		4	shr	DetPupTtb	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			tbl	TblBrlyMTimetable	FeedFDetPupTtb
+			ImeIMFeed3.end
+		10	cpt	0	cont	void		9	app	DetCptTtb	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Timetable
+			dech	Flugplan
+			ImeIJMControlTitle3.end
+		11	txf	0	cont	void		4	shr	DetTxfEty	void
+		12	cpt	0	cont	void		11	app	DetCptEty	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Equipment types
+			dech	Ger\u00e4ttypen
+			ImeIJMControlTitle3.end
+		13	sep	0	cont	void		4	app	DetSep1	void
+		14	but	0	cont	void		4	shr	DetButCre	void	create					sge(idle)&valid()	cap
+		15	dit	0	void	void		0	shr	DitCal	ditprg
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Calculation
+			dech	Berechnung
+			ImeIJMControlTitle3.end
+		16	txt	0	cont	void		15	shr	CalTxtPrg	void							t
+		17	cpt	0	cont	void		16	app	CalCptPrg	void	progress						cap
+		18	sep	0	cont	void		15	app	CalSep1	void
+		19	but	1	cont	void		15	shr	CalButRun	void	run					sge(credone)	cap
+		20	but	1	cont	void		15	shr	CalButSto	void	stop					sge(calc1|calc2|calc3|calc4)	cap
+		21	but	0	ftr	void		0	shr	ButDne	void	done					sge(idle|done)	cap
+			ImeIAMControlPar3.x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			action		dlgclose
+			ImeIAMControlPar3.end
+		ImeIMControl3.end
+	ImeIMDialog.end
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	retr			PnlBrlyConList
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoCor
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		250
+			ImeIAMControlPar2.end
+		retr		tco							TcoFlt
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		225
+			ImeIAMControlPar2.end
+		retr		tco							TcoSta
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		retr		tco							TcoSto
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ins	recform	4	PnlBrlyConPre	false
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		ins	1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	Time and angular position
+			ins	dech	Zeit und Winkelposition
+			ImeIJMControlTitle2.end
+		ins	2	but	0	side	void		0	app	ButRegularize	void							icon
+		ins	3	but	0	side	void		0	app	ButMinimize	void							icon
+		ins	4	sld	0	cont	void		0	shr	SldTme	void
+		ins	5	cpt	0	cont	void		4	app	CptTme	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	time
+			ins	dech	Zeit
+			ImeIJMControlTitle2.end
+		ins	6	sld	0	cont	void		0	shr	SldPhi	void
+		ins	7	cpt	0	cont	void		6	app	CptPhi	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	angular position [\u00b0]
+			ins	dech	Winkelposition [\u00b0]
+			ImeIJMControlTitle2.end
+		ImeIMControl2.end
+	ins	recform	6	PnlBrlyConMap	true
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		ins	1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	Map
+			ins	dech	Landkarte
+			ImeIJMControlTitle2.end
+		ins	2	but	0	side	void		0	shr	ButRegularize	void							icon
+		ins	3	but	0	side	void		0	shr	ButMinimize	void							icon
+		ins	4	sge	0	void	void		0	shr	Sge	void
+			ImeIMFeed2.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFSge
+				ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVBrlyConMapSge		noloc;notit;filfed
+				ImeIMVector2.end
+			ImeIMFeed2.end
+		ins	5	but	0	hdr	void		0	app	ButDetach	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		detach
+			ImeIAMControlPar2.end
+		ins	6	but	0	hdr	void		0	app	ButAttach	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		attach
+			ImeIAMControlPar2.end
+		ins	7	sld	0	cont	void		0	shr	SldH	void
+		ins	8	sld	0	cont	void		0	shr	SldV	void
+		ins	9	but	0	cont	void		0	shr	ButHome	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		home
+			ImeIAMControlPar2.end
+		ins	10	sld	0	cont	void		0	shr	SldScl	void							rast
+		ins	11	cpt	0	cont	void		10	app	CptScl	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	Scale
+			ins	dech	Skalierung
+			ImeIJMControlTitle2.end
+		ins	12	txf	0	cont	void		10	app	TxfScl	void
+		ins	13	but	0	cont	void		0	shr	ButRefresh	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		refresh
+			ImeIAMControlPar2.end
+		ins	14	dld	0	cont	void		0	app	Dld	void	download						cap
+		ImeIMControl2.end
+	retr			PnlBrlyConConMNEquipment
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		250
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	retr			PnlBrlyConMNFlight
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		150
+			ImeIAMControlPar2.end
+		retr		tco							TcoSta
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		retr		tco							TcoSto
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		retr		tco							TcoLp0
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		125
+			ImeIAMControlPar2.end
+		retr		tco							TcoLp1
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		125
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ImeIMPanel.end
+CrdBrlyFil
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	retr			PnlBrlyFilList
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoFnm
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ImeIMPanel.end
+CrdBrlyFlt
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	rmv			PnlBrlyFltDstMNFlight
+	retr			PnlBrlyFltList
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoSrf
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		150
+			ImeIAMControlPar2.end
+		retr		tco							TcoLeg
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		250
+			ImeIAMControlPar2.end
+		retr		tco							TcoSta
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		retr		tco							TcoSto
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ins	recform	4	PnlBrlyFltPre	false
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		ins	1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	Time
+			ins	dech	Zeit
+			ImeIJMControlTitle2.end
+		ins	2	but	0	side	void		0	app	ButRegularize	void							icon
+		ins	3	but	0	side	void		0	app	ButMinimize	void							icon
+		ins	4	sld	0	cont	void		0	shr	SldTme	void
+		ins	5	cpt	0	cont	void		4	app	CptTme	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	time
+			ins	dech	Zeit
+			ImeIJMControlTitle2.end
+		ImeIMControl2.end
+	retr			PnlBrlyFltMNConnection
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		250
+			ImeIAMControlPar2.end
+		retr		tco							TcoSta
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		retr		tco							TcoSto
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	retr			PnlBrlyFltMNLocation
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		200
+			ImeIAMControlPar2.end
+		retr		tco							TcoSta
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		retr		tco							TcoSto
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	retr			PnlBrlyFltOrgMNFlight
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		150
+			ImeIAMControlPar2.end
+		retr		tco							TcoSta
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		retr		tco							TcoSto
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ImeIMPanel.end
+CrdBrlyLeg
+	ImeIMControl1.srefIxVBasetype	srefHkIxVSection	srefRefIxVTbl	srefRefUref	srefSupRefWznmMControl	supNum	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	Avail	Active	srefsKOption
+	msp	mbar	void		MenCrd	1	app	MspCrd1	void			MitCrdNewAvail()
+	mit	mbar	dlg	DlgBrlyLegNew	MenCrd	2	shr	MitCrdNew	void	new		pre.ixCrdaccLegIncl(edit|exec)		cap;ddd
+	ImeIMControl1.end
+	ImeIMDialog.srefIxVBasetype	srefRefIxVTbl	srefRefUref	sref	Comment
+	new	tbl	TblBrlyMLeg	DlgBrlyLegNew
+		ImeICControl3.iref
+		1
+		ImeICControl3.end
+		ImeIMControl3.iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Create new leg
+			dech	Neue Strecke erstellen
+			ImeIJMControlTitle3.end
+		2	sge	0	void	void		0	shr	Sge	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFSge
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyLegNewSge		noloc;notit;filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		3	dse	0	hdr	void		0	shr	Dse	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFDse
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyLegNewDit		filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		4	dit	0	void	void		0	shr	DitDet	ditstd	detail						cap
+		5	pup	0	cont	void		4	shr	DetPupTyp	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec	VecBrlyVMLegBasetype	FeedFDetPupTyp
+			ImeIMFeed3.end
+		6	cpt	0	cont	void		5	app	DetCptTyp	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Type
+			dech	Typ
+			ImeIJMControlTitle3.end
+		7	txf	0	cont	void		4	shr	DetTxfBgn	void
+		8	cpt	0	cont	void		7	app	DetCptBgn	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Begin location
+			dech	Beginn
+			ImeIJMControlTitle3.end
+		9	txf	0	cont	void		4	shr	DetTxfEnd	void
+		10	cpt	0	cont	void		9	app	DetCptEnd	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	End location
+			dech	Ende
+			ImeIJMControlTitle3.end
+		11	sep	0	cont	void		4	app	DetSep1	void
+		12	but	0	cont	void		4	shr	DetButCre	void	create					sge(idle)&valid()	cap
+		13	dit	0	void	void		0	shr	DitInc	ditprg
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Incorporation
+			dech	Einberechnung
+			ImeIJMControlTitle3.end
+		14	txt	0	cont	void		13	shr	IncTxtPrg	void							t
+		15	cpt	0	cont	void		14	app	IncCptPrg	void	progress						cap
+		16	sep	0	cont	void		13	app	IncSep1	void
+		17	but	1	cont	void		13	shr	IncButRun	void	run					sge(credone)	cap
+		18	but	1	cont	void		13	shr	IncButSto	void	stop					sge(inco)	cap
+		19	but	0	ftr	void		0	shr	ButDne	void	done					sge(idle|done)	cap
+			ImeIAMControlPar3.x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			action		dlgclose
+			ImeIAMControlPar3.end
+		ImeIMControl3.end
+	ImeIMDialog.end
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	rmv			PnlBrlyLegDstMNLeg
+	retr			PnlBrlyLegList
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoBlo
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		retr		tco							TcoElo
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ins	recform	4	PnlBrlyLegPre	false
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		ins	1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	Angular position
+			ins	dech	Winkelposition
+			ImeIJMControlTitle2.end
+		ins	2	but	0	side	void		0	app	ButRegularize	void							icon
+		ins	3	but	0	side	void		0	app	ButMinimize	void							icon
+		ins	4	sld	0	cont	void		0	shr	SldPhi	void
+		ins	5	cpt	0	cont	void		4	app	CptPhi	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	angular position [\u00b0]
+			ins	dech	Winkelposition [\u00b0]
+			ImeIJMControlTitle2.end
+		ImeIMControl2.end
+	ins	recform	6	PnlBrlyLegMap	true
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		ins	1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	Map
+			ins	dech	Landkarte
+			ImeIJMControlTitle2.end
+		ins	2	but	0	side	void		0	shr	ButRegularize	void							icon
+		ins	3	but	0	side	void		0	shr	ButMinimize	void							icon
+		ins	4	sge	0	void	void		0	shr	Sge	void
+			ImeIMFeed2.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFSge
+				ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVBrlyLegMapSge		noloc;notit;filfed
+				ImeIMVector2.end
+			ImeIMFeed2.end
+		ins	5	but	0	hdr	void		0	app	ButDetach	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		detach
+			ImeIAMControlPar2.end
+		ins	6	but	0	hdr	void		0	app	ButAttach	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		attach
+			ImeIAMControlPar2.end
+		ins	7	sld	0	cont	void		0	shr	SldH	void
+		ins	8	sld	0	cont	void		0	shr	SldV	void
+		ins	9	but	0	cont	void		0	shr	ButHome	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		home
+			ImeIAMControlPar2.end
+		ins	10	sld	0	cont	void		0	shr	SldScl	void							rast
+		ins	11	cpt	0	cont	void		10	app	CptScl	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	Scale
+			ins	dech	Skalierung
+			ImeIJMControlTitle2.end
+		ins	12	txf	0	cont	void		10	app	TxfScl	void
+		ins	13	but	0	cont	void		0	shr	ButRefresh	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		refresh
+			ImeIAMControlPar2.end
+		ins	14	dld	0	cont	void		0	app	Dld	void	download						cap
+		ImeIMControl2.end
+	retr			PnlBrlyLegMNLocation
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		200
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	retr			PnlBrlyLegOrgMNLeg
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		250
+			ImeIAMControlPar2.end
+		retr		tco							TcoOp0
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		150
+			ImeIAMControlPar2.end
+		retr		tco							TcoOp1
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		150
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ImeIMPanel.end
+CrdBrlyLoc
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	retr			PnlBrlyLocList
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoTit
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ins	recform	5	PnlBrlyLocMap	true
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		ins	1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	Map
+			ins	dech	Landkarte
+			ImeIJMControlTitle2.end
+		ins	2	but	0	side	void		0	shr	ButRegularize	void							icon
+		ins	3	but	0	side	void		0	shr	ButMinimize	void							icon
+		ins	4	sge	0	void	void		0	shr	Sge	void
+			ImeIMFeed2.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFSge
+				ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVBrlyLocMapSge		noloc;notit;filfed
+				ImeIMVector2.end
+			ImeIMFeed2.end
+		ins	5	but	0	hdr	void		0	app	ButDetach	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		detach
+			ImeIAMControlPar2.end
+		ins	6	but	0	hdr	void		0	app	ButAttach	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		attach
+			ImeIAMControlPar2.end
+		ins	7	sld	0	cont	void		0	shr	SldH	void
+		ins	8	sld	0	cont	void		0	shr	SldV	void
+		ins	9	but	0	cont	void		0	shr	ButHome	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		home
+			ImeIAMControlPar2.end
+		ins	10	sld	0	cont	void		0	shr	SldScl	void							rast
+		ins	11	cpt	0	cont	void		10	app	CptScl	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	Scale
+			ins	dech	Skalierung
+			ImeIJMControlTitle2.end
+		ins	12	txf	0	cont	void		10	app	TxfScl	void
+		ins	13	but	0	cont	void		0	shr	ButRefresh	void
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	icon		refresh
+			ImeIAMControlPar2.end
+		ins	14	dld	0	cont	void		0	app	Dld	void	download						cap
+		ImeIMControl2.end
+	retr			PnlBrlyLocMNFlight
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		150
+			ImeIAMControlPar2.end
+		retr		tco							TcoSta
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		retr		tco							TcoSto
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	retr			PnlBrlyLocMNLeg
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		250
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	rmv			PnlBrlyLocProxDstMNLocation
+	retr			PnlBrlyLocProxOrgMNLocation
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		200
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	rmv			PnlBrlyLocVisDstMNLocation
+	retr			PnlBrlyLocVisOrgMNLocation
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		200
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ImeIMPanel.end
+CrdBrlyOpr
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	retr			PnlBrlyOprList
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoTit
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ImeIMPanel.end
+CrdBrlyNav
+	ImeIMControl1.srefIxVBasetype	srefHkIxVSection	srefRefIxVTbl	srefRefUref	srefSupRefWznmMControl	supNum	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	Avail	Active	srefsKOption
+	msp	mbar	void		MenApp	4	app	MspApp2	void			MitAppLoiAvail()
+	mit	mbar	dlg	DlgBrlyNavLoaini	MenApp	5	shr	MitAppLoi	void	loaini		virgin()		cap;ddd
+	ImeIMControl1.end
+	ImeIMDialog.srefIxVBasetype	srefRefIxVTbl	srefRefUref	sref	Comment
+	import	iex	IexBrlyIni	DlgBrlyNavLoaini
+		ImeICControl3.iref
+		1
+		2
+		ImeICControl3.end
+		ImeIMControl3.iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		1	cpt	0	hdr	void		0	app	Cpt	void	loaini						cap
+		2	sge	0	void	void		0	shr	Sge	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFSge
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyNavLoainiSge		noloc;notit;filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		3	dse	0	hdr	void		0	shr	Dse	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFDse
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyNavLoainiDit		filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		4	dit	0	void	void		0	shr	DitIfi	dituld
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Initialization file
+			dech	Initialisierungsdatei
+			ImeIJMControlTitle3.end
+		5	uld	0	cont	void		4	app	IfiUld	void	upload					sge(idle)	cap
+		6	cpt	0	cont	void		5	app	IfiCpt	void	filename						cap
+		7	dit	0	void	void		0	shr	DitImp	ditprg	import						cap
+		8	txt	0	cont	void		7	shr	ImpTxtPrg	void							t
+		9	cpt	0	cont	void		8	app	ImpCptPrg	void	progress						cap
+		10	sep	0	cont	void		7	app	ImpSep1	void
+		11	but	1	cont	void		7	shr	ImpButRun	void	run					sge(prsdone)	cap
+		12	but	1	cont	void		7	shr	ImpButSto	void	stop					sge(impidle|import)	cap
+		13	dit	0	void	void		0	shr	DitPpr	ditprg
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Postprocessing
+			dech	Nachbearbeitung
+			ImeIJMControlTitle3.end
+		14	txt	0	cont	void		13	shr	PprTxtPrg	void							t
+		15	cpt	0	cont	void		14	app	PprCptPrg	void	progress						cap
+		16	sep	0	cont	void		13	app	PprSep1	void
+		17	but	2	cont	void		13	shr	PprButRun	void	run					sge(impdone)	cap
+		18	but	2	cont	void		13	shr	PprButSto	void	stop					sge(postprc)	cap
+		19	dit	0	void	void		0	shr	DitLfi	ditdld
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Log file
+			dech	Protokoll
+			ImeIJMControlTitle3.end
+		20	dld	0	cont	void		19	app	LfiDld	void	download					sge(done)	cap
+		21	but	0	ftr	void		0	shr	ButDne	void	done					sge(idle|done)	cap
+			ImeIAMControlPar3.x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			action		dlgclose
+			ImeIAMControlPar3.end
+		ImeIMControl3.end
+	ImeIMDialog.end
+CrdBrlyReg
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	retr			PnlBrlyRegList
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoTit
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ImeIMPanel.end
+CrdBrlySeg
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	ins	recform	4	PnlBrlySegPre	false
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		ins	1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	Time and angular position
+			ins	dech	Zeit und Winkelposition
+			ImeIJMControlTitle2.end
+		ins	2	but	0	side	void		0	app	ButRegularize	void							icon
+		ins	3	but	0	side	void		0	app	ButMinimize	void							icon
+		ins	4	sld	0	cont	void		0	shr	SldTme	void
+		ins	5	cpt	0	cont	void		4	app	CptTme	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	time
+			ins	dech	Zeit
+			ImeIJMControlTitle2.end
+		ins	6	sld	0	cont	void		0	shr	SldPhi	void
+		ins	7	cpt	0	cont	void		6	app	CptPhi	void
+			ImeIJMControlTitle2.srefIxWznmVIop	srefX1RefWznmMLocale	Title
+			ins	enus	angular position [\u00b0]
+			ins	dech	Winkelposition [\u00b0]
+			ImeIJMControlTitle2.end
+		ImeIMControl2.end
+	rmv			PnlBrlySegDstMNSegment
+	ImeIMPanel.end
+CrdBrlyTtb
+	ImeIMControl1.srefIxVBasetype	srefHkIxVSection	srefRefIxVTbl	srefRefUref	srefSupRefWznmMControl	supNum	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	Avail	Active	srefsKOption
+	msp	mbar	void		MenCrd	1	app	MspCrd1	void			MitCrdNewAvail()
+	mit	mbar	dlg	DlgBrlyTtbNew	MenCrd	2	shr	MitCrdNew	void	new		pre.ixCrdaccTtbIncl(edit)		cap;ddd
+	mit	mbar	dlg	DlgBrlyTtbTrlorig	MenCrd	5	shr	MitCrdTrl	void			pre.ixCrdaccTtbIncl(exec)
+		ImeIJMControlTitle1.srefX1RefWznmMLocale	Title
+		enus	Translate from original format ...
+		dech	Aus Original-Format \u00fcbersetzen ...
+		ImeIJMControlTitle1.end
+	mit	mbar	dlg	DlgBrlyTtbImpflt	MenCrd	6	shr	MitCrdIfl	void			pre.ixCrdaccTtbIncl(edit|exec)	pre.refTtb()
+		ImeIJMControlTitle1.srefX1RefWznmMLocale	Title
+		enus	Import flights ...
+		dech	Fl\u00fcge importieren ...
+		ImeIJMControlTitle1.end
+	ImeIMControl1.end
+	ImeIMDialog.srefIxVBasetype	srefRefIxVTbl	srefRefUref	sref	Comment
+	import	iex	IexBrlyTtb	DlgBrlyTtbImpflt
+		ImeICControl3.iref
+		1
+		2
+		ImeICControl3.end
+		ImeIMControl3.iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Import flights
+			dech	Fl\u00fcge importieren
+			ImeIJMControlTitle3.end
+		2	sge	0	void	void		0	shr	Sge	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFSge
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyTtbImpfltSge		noloc;notit;filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		3	dse	0	hdr	void		0	shr	Dse	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFDse
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyTtbImpfltDit		filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		4	dit	0	void	void		0	shr	DitIfi	dituld
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Input file
+			dech	Import-Datei
+			ImeIJMControlTitle3.end
+		5	uld	0	cont	void		4	app	IfiUld	void	upload					sge(idle)	cap
+		6	cpt	0	cont	void		5	app	IfiCpt	void	filename						cap
+		7	dit	0	void	void		0	shr	DitImp	ditprg	import						cap
+		8	txt	0	cont	void		7	shr	ImpTxtPrg	void							t
+		9	cpt	0	cont	void		8	app	ImpCptPrg	void	progress						cap
+		10	sep	0	cont	void		7	app	ImpSep1	void
+		11	but	1	cont	void		7	shr	ImpButRun	void	run					sge(prsdone)	cap
+		12	but	1	cont	void		7	shr	ImpButSto	void	stop					sge(impidle|import)	cap
+		13	dit	0	void	void		0	shr	DitPpr	ditprg
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Postprocessing
+			dech	Nachbearbeitung
+			ImeIJMControlTitle3.end
+		14	txt	0	cont	void		13	shr	PprTxtPrg	void							t
+		15	cpt	0	cont	void		14	app	PprCptPrg	void	progress						cap
+		16	sep	0	cont	void		13	app	PprSep1	void
+		17	but	2	cont	void		13	shr	PprButRun	void	run					sge(impdone)	cap
+		18	but	2	cont	void		13	shr	PprButSto	void	stop					sge(postprc)	cap
+		19	dit	0	void	void		0	shr	DitLfi	ditdld
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Log file
+			dech	Protokoll
+			ImeIJMControlTitle3.end
+		20	dld	0	cont	void		19	app	LfiDld	void	download					sge(done)	cap
+		21	but	0	ftr	void		0	shr	ButDne	void	done					sge(idle|done)	cap
+			ImeIAMControlPar3.x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			action		dlgclose
+			ImeIAMControlPar3.end
+		ImeIMControl3.end
+	new	tbl	TblBrlyMTimetable	DlgBrlyTtbNew
+		ImeIMControl3.iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Create new timetable
+			dech	Neuen Flugplan erstellen
+			ImeIJMControlTitle3.end
+		2	sge	0	void	void		0	shr	Sge	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFSge
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyTtbNewSge		noloc;notit;filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		3	pup	0	cont	void			shr	DetPupAli	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec	KlstBrlyKAlliance	FeedFDetPupAli
+			ImeIMFeed3.end
+		4	cpt	0	cont	void		3	app	DetCptAli	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Airline alliance
+			dech	Luftfahrtallianz
+			ImeIJMControlTitle3.end
+		5	txf	0	cont	void		0	shr	DetTxfTit	void
+		6	cpt	0	cont	void		5	app	DetCptTit	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Name
+			dech	Name
+			ImeIJMControlTitle3.end
+		7	txf	0	cont	void		0	shr	DetTxfSta	void
+		8	cpt	0	cont	void		7	app	DetCptSta	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Validity start
+			dech	G\u00fcltigkeitsbeginn
+			ImeIJMControlTitle3.end
+		9	txf	0	cont	void		0	shr	DetTxfSto	void
+		10	cpt	0	cont	void		9	app	DetCptSto	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Validity stop
+			dech	G\u00fcltigkeitsende
+			ImeIJMControlTitle3.end
+		11	but	0	ftr	void		0	shr	ButCnc	void	cancel					sge(!create)	cap
+			ImeIAMControlPar3.x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			action		dlgclose
+			ImeIAMControlPar3.end
+		12	but	0	ftr	void		0	shr	ButCre	void	create					sge(idle)&valid()	cap
+			ImeIAMControlPar3.x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			action		dlgclose
+			ImeIAMControlPar3.end
+		ImeIMControl3.end
+	cust	void		DlgBrlyTtbTrlorig
+		ImeICControl3.iref
+		1
+		ImeICControl3.end
+		ImeIMControl3.iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		1	cpt	0	hdr	void		0	app	Cpt	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Translate from original format
+			dech	Aus Original-Format \u00fcbersetzen
+			ImeIJMControlTitle3.end
+		2	sge	0	void	void		0	shr	Sge	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFSge
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyTtbTrlorigSge		noloc;notit;filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		3	dse	0	hdr	void		0	shr	Dse	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFDse
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyTtbTrlorigDit		filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		4	dit	0	void	void		0	shr	DitDet	ditstd
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Details
+			dech	Details
+			ImeIJMControlTitle3.end
+		5	pup	0	cont	void		4	shr	DetPupSrc	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFDetPupSrc
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgBrlyTtbTrlorigSrc		noloc;filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		6	cpt	0	cont	void		5	app	DetCptSrc	void
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Source
+			dech	Quelle
+			ImeIJMControlTitle3.end
+		7	dit	0	void	void		0	shr	DitRfi	dituld
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Raw data file
+			dech	Rohdaten-Datei
+			ImeIJMControlTitle3.end
+		8	uld	0	cont	void		7	app	RfiUld	void	upload					sge(idle)	cap
+		9	cpt	0	cont	void		8	app	RfiCpt	void	filename						cap
+		10	dit	0	void	void		0	shr	DitTrl	ditprg							cap
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Translation
+			dech	\u00dcbersetzung
+			ImeIJMControlTitle3.end
+		11	txt	0	cont	void		10	shr	TrlTxtPrg	void							t
+		12	cpt	0	cont	void		11	app	TrlCptPrg	void	progress						cap
+		13	sep	0	cont	void		10	app	TrlSep1	void
+		14	but	1	cont	void		10	shr	TrlButRun	void	run					sge(ulddone)	cap
+		15	but	1	cont	void		10	shr	TrlButSto	void	stop					sge(translate)	cap
+		16	dit	0	void	void		0	shr	DitTfi	ditdld
+			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
+			enus	Translated file
+			dech	\u00dcbersetzte Datei
+			ImeIJMControlTitle3.end
+		17	dld	0	cont	void		16	app	TfiDld	void	download					sge(done)	cap
+		18	but	0	ftr	void		0	shr	ButDne	void	done					sge(idle|done)	cap
+			ImeIAMControlPar3.x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			action		dlgclose
+			ImeIAMControlPar3.end
+		ImeIMControl3.end
+	ImeIMDialog.end
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	retr			PnlBrlyTtbList
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoTit
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		200
+			ImeIAMControlPar2.end
+		retr		tco							TcoFil
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		200
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ImeIMPanel.end
+CrdBrlyUsg
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	retr			PnlBrlyUsgMNUser
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoMref
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		200
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ImeIMPanel.end
+CrdBrlyUsr
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	retr			PnlBrlyUsrList
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoUsg
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		175
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ImeIMPanel.end
+ImeIMCard.end
+ImeIMPreset.srefIxWznmVIop	srefRefIxVTbl	srefRefUref	srefIxVScope	sref	srefIxWznmWArgtype	Title
+ins	void		pnlrec	PreBrlyTime	intval
+	ImeIJMPresetTitle.srefX1RefWznmMLocale	Title
+	enus	time
+	dech	Zeit
+	ImeIJMPresetTitle.end
+ins	void		pnlrec	PreBrlyPhi	dblval
+	ImeIJMPresetTitle.srefX1RefWznmMLocale	Title
+	enus	angular position [\u00b0]
+	dech	Winkelposition [\u00b0]
+	ImeIJMPresetTitle.end
+ImeIMPreset.end
+ImeIMQuery.srefIxWznmVIop	iref	srefIxVBasetype	irefSupRefWznmMQuery	srefSupIxVSubrole	sref	Limofs	Comment
+retr					QryBrlyCon1NRelay
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	retrupd			PreBrlyTime	tco	TblBrlyMRelay.x1Start
+	retrupd			PreBrlyTime	tco	TblBrlyMRelay.x1Stop
+	ImeIMQuerymod.end
+ins	1	std	0	void	QryBrlyConMapFlight	false
+	ImeIRMQueryMTable.srefRefWznmMTable	Source	Prefix
+	TblBrlyRMConnectionMFlight	true
+	TblBrlyMFlight	true	m
+	ImeIRMQueryMTable.end
+	ImeIAMQueryClause.irefX1RefWznmMQuerymod	srefIxVBasetype	Clause	srefRefWznmMPreset	srefRefWznmMVector	srefRefWznmMVectoritem
+	0	pre	TblBrlyRMConnectionMFlight.refBrlyMConnection = &pre;	PreBrlyRefCon
+	0	eqn	TblBrlyMFlight.ref = TblBrlyRMConnectionMFlight.refBrlyMFlight
+	ImeIAMQueryClause.end
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	ins	qidref	qtb		qref
+	ins	qwr	qtb		qwr
+	ins	qjref	qtb		jref
+	ins	qjenum	qtb		jnum
+	ins	tbl	qtb;btb	TblBrlyRMConnectionMFlight.ref	ref
+	ins	tbl	qtb;btb	TblBrlyRMConnectionMFlight.x1Start	x1Start
+	ins	tbl	qtb;btb	TblBrlyRMConnectionMFlight.x1Stop	x1Stop
+	ins	tbl	qtb;btb	TblBrlyRMConnectionMFlight.x2Legphi0	x2Legphi0
+	ins	tbl	qtb;btb	TblBrlyRMConnectionMFlight.x2Legphi1	x2Legphi1
+	ins	tbl	qtb;btb	TblBrlyMFlight.ref	mref
+	ins	stub	xml	TblBrlyMFlight.ref	stubMref	mref	StubBrlyFltStd
+	ins	tbl	qtb;btb	TblBrlyMFlight.refBrlyMEquipment	mrefBrlyMEquipment
+	ins	tbl	qtb;btb	TblBrlyMFlight.refBrlyMLeg	mrefBrlyMLeg
+	ins	tbl	qtb;btb	TblBrlyMFlight.start	mstart
+	ins	tbl	qtb;btb	TblBrlyMFlight.stop	mstop
+	ins	dblval	qtb;xml		x0	x0
+	ins	dblval	qtb;xml		y0	y0
+	ins	intval	qtb;xml		t0	t0
+	ins	dblval	qtb;xml		dx	dx
+	ins	dblval	qtb;xml		dy	dy
+	ins	intval	qtb;xml		dt	dt
+	ImeIMQuerycol.end
+ins	2	std	0	void	QryBrlyConMapLeg	false
+	ImeIRMQueryMTable.srefRefWznmMTable	Source	Prefix
+	TblBrlyRMLegMLeg	true
+	TblBrlyMConnection	true	c
+	TblBrlyMLeg	true	m
+	ImeIRMQueryMTable.end
+	ImeIAMQueryClause.irefX1RefWznmMQuerymod	srefIxVBasetype	Clause	srefRefWznmMPreset	srefRefWznmMVector	srefRefWznmMVectoritem
+	0	pre	TblBrlyMConnection.ref = &pre;	PreBrlyRefCon
+	0	eqn	TblBrlyRMLegMLeg.dstRefBrlyMLeg = TblBrlyMConnection.corRefBrlyMLeg
+	0	eqn	TblBrlyMLeg.ref = TblBrlyRMLegMLeg.orgRefBrlyMLeg
+	0	vit	TblBrlyMLeg.ixVBasetype = &vit;		VecBrlyVMLegBasetype	rte
+	ImeIAMQueryClause.end
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	ins	qidref	qtb		qref
+	ins	qwr	qtb		qwr
+	ins	qjref	qtb		jref
+	ins	qjenum	qtb		jnum
+	ins	tbl	qtb;btb	TblBrlyRMLegMLeg.ref	ref
+	ins	tbl	qtb;btb	TblBrlyRMLegMLeg.VisOrgLegphi0	VisOrgLegphi0
+	ins	tbl	qtb;btb	TblBrlyRMLegMLeg.VisOrgLegphi1	VisOrgLegphi1
+	ins	tbl	qtb;btb	TblBrlyMLeg.ref	mref
+	ins	stub	xml	TblBrlyMLeg.ref	stubMref	mref	StubBrlyLegStd
+	ins	tbl	qtb;btb	TblBrlyMLeg.bgnRefBrlyMLocation	mbgnRefBrlyMLocation
+	ins	tbl	qtb;btb	TblBrlyMLeg.endRefBrlyMLocation	mendRefBrlyMLocation
+	ins	tbl	qtb;btb	TblBrlyMLeg.deltaphi	mdeltaphi
+	ins	dblval	qtb;xml		dx	dx
+	ins	dblval	qtb;xml		dy	dy
+	ins	dblval	qtb;xml		x0	x0
+	ins	dblval	qtb;xml		y0	y0
+	ImeIMQuerycol.end
+ins	3	std	0	void	QryBrlyConMapLocation	false
+	ImeIRMQueryMTable.srefRefWznmMTable	Source	Prefix
+	TblBrlyRMLegMLocation	true
+	TblBrlyMConnection	true	c
+	TblBrlyMLocation	true	m
+	ImeIRMQueryMTable.end
+	ImeIAMQueryClause.irefX1RefWznmMQuerymod	srefIxVBasetype	Clause	srefRefWznmMPreset	srefRefWznmMVector	srefRefWznmMVectoritem
+	0	pre	TblBrlyMConnection.ref = &pre;	PreBrlyRefCon
+	0	eqn	TblBrlyRMLegMLocation.refBrlyMLeg = TblBrlyMConnection.corRefBrlyMLeg
+	0	eqn	TblBrlyMLocation.ref = TblBrlyRMLegMLocation.refBrlyMLocation
+	ImeIAMQueryClause.end
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	ins	qidref	qtb		qref
+	ins	qwr	qtb		qwr
+	ins	qjref	qtb		jref
+	ins	qjenum	qtb		jnum
+	ins	tbl	qtb;btb	TblBrlyRMLegMLocation.ref	ref
+	ins	tbl	qtb;btb	TblBrlyRMLegMLocation.legphi	legphi
+	ins	tbl	qtb;btb	TblBrlyRMLegMLocation.legtheta	legtheta
+	ins	tbl	qtb;btb	TblBrlyMLocation.ref	mref
+	ins	stub	xml	TblBrlyMLocation.ref	stubMref	mref	StubBrlyLocStd
+	ins	tbl	qtb;btb	TblBrlyMLocation.refBrlyMEquipment	mrefBrlyMEquipment
+	ins	dblval	qtb;xml		x	x
+	ins	dblval	qtb;xml		y	y
+	ImeIMQuerycol.end
+ins	4	std	0	void	QryBrlyConMapNode	false
+	ImeIRMQueryMTable.srefRefWznmMTable	Source	Prefix
+	TblBrlyMNode	true
+	TblBrlyMRelay	true	r
+	ImeIRMQueryMTable.end
+	ImeIAMQueryClause.irefX1RefWznmMQuerymod	srefIxVBasetype	Clause	srefRefWznmMPreset	srefRefWznmMVector	srefRefWznmMVectoritem
+	0	pre	TblBrlyMRelay.refBrlyMConnection = &pre;	PreBrlyRefCon
+	0	eqn	TblBrlyMNode.refBrlyMRelay = TblBrlyMRelay.ref
+	ImeIAMQueryClause.end
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	ins	qidref	qtb		qref
+	ins	qwr	qtb		qwr
+	ins	qjref	qtb		jref
+	ins	qjenum	qtb		jnum
+	ins	tbl	qtb;btb	TblBrlyMNode.ref	ref
+	ins	stub	xml	TblBrlyMNode.ref	stubRef	ref	StubBrlyNdeStd
+	ins	tbl	qtb;btb	TblBrlyMNode.refBrlyMRelay	refBrlyMRelay
+	ins	tbl	qtb;btb	TblBrlyMNode.supRefBrlyMNode	supRefBrlyMNode
+	ins	tbl	qtb;btb	TblBrlyMNode.refBrlyMEquipment	refBrlyMEquipment
+	ins	intval	qtb;xml		jnumRly	jnr
+	ins	dblval	qtb;xml		x0	x0
+	ins	dblval	qtb;xml		y0	y0
+	ins	dblval	qtb;xml		u0	u0
+	ins	dblval	qtb;xml		v0	v0
+	ins	intval	qtb;xml		t0	t0
+	ins	dblval	qtb;xml		dx	dx
+	ins	dblval	qtb;xml		dy	dy
+	ins	dblval	qtb;xml		du	du
+	ins	dblval	qtb;xml		dv	dv
+	ins	intval	qtb;xml		dt	dt
+	ImeIMQuerycol.end
+ins	5	std	0	void	QryBrlyConMapRelay	false
+	ImeIRMQueryMTable.srefRefWznmMTable	Source	Prefix
+	TblBrlyMRelay	true
+	ImeIRMQueryMTable.end
+	ImeIAMQueryClause.irefX1RefWznmMQuerymod	srefIxVBasetype	Clause	srefRefWznmMPreset	srefRefWznmMVector	srefRefWznmMVectoritem
+	0	pre	TblBrlyMRelay.refBrlyMConnection = &pre;	PreBrlyRefCon
+	ImeIAMQueryClause.end
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	ins	qidref	qtb		qref
+	ins	qwr	qtb		qwr
+	ins	qjref	qtb		jref
+	ins	qjenum	qtb		jnum
+	ins	tbl	qtb;btb	ref	ref
+	ins	tbl	qtb;xml;btb	x1Start	x1Start	sta
+	ins	tbl	qtb;xml;btb	x1Stop	x1Stop	sto
+	ins	tbl	qtb;btb	ixVDir	ixVDir
+	ins	vsref	xml	ixVDir	srefIxVDir	dir
+	ins	tbl	qtb;btb	Connected	Connected
+	ins	yesno	xml	Connected	yesnoConnected	ctd
+	ins	tbl	qtb;xml;btb	Nhop	Nhop	nhp
+	ImeIMQuerycol.end
+retr					QryBrlyConConMNEquipment.opr
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	retrupd			PreBrlyTime	tco	TblBrlyORMConnectionMEquipment.x1Start
+	ImeIMQuerymod.end
+retr					QryBrlyConMNFlight
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	retrupd			PreBrlyTime	tco	TblBrlyRMConnectionMFlight.x1Start
+	retrupd			PreBrlyTime	tco	TblBrlyRMConnectionMFlight.x1Stop
+	retrupd			PreBrlyPhi	tco	TblBrlyRMConnectionMFlight.x2Legphi0
+	retrupd			PreBrlyPhi	tco	TblBrlyRMConnectionMFlight.x2Legphi1
+	ImeIMQuerymod.end
+retr					QryBrlyConMNSegment
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	retrupd			PreBrlyTime	tco	TblBrlyRMConnectionMSegment.x1Start
+	retrupd			PreBrlyTime	tco	TblBrlyRMConnectionMSegment.x1Stop
+	retrupd			PreBrlyPhi	tco	TblBrlyRMConnectionMSegment.x2Legphi0
+	retrupd			PreBrlyPhi	tco	TblBrlyRMConnectionMSegment.x2Legphi1
+	ImeIMQuerymod.end
+rmv					QryBrlyFltDstMNFlight
+retr					QryBrlyFltMNConnection
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	rmv				tco	TblBrlyRMConnectionMFlight.x1Start
+	rmv				tco	TblBrlyRMConnectionMFlight.x1Stop
+	rmv				tco	TblBrlyRMConnectionMFlight.x2Legphi0
+	rmv				tco	TblBrlyRMConnectionMFlight.x2Legphi1
+	ImeIMQuerymod.end
+retr					QryBrlyFltMNLocation
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	retrupd			PreBrlyTime	tco	TblBrlyRMFlightMLocation.x1VisStart
+	retrupd			PreBrlyTime	tco	TblBrlyRMFlightMLocation.x1VisStop
+	ImeIMQuerymod.end
+retr					QryBrlyFltOrgMNFlight
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	retrupd			PreBrlyTime	tco	TblBrlyRMFlightMFlight.x1VisStart
+	retrupd			PreBrlyTime	tco	TblBrlyRMFlightMFlight.x1VisStop
+	ImeIMQuerymod.end
+retr					QryBrlyLeg1NFlight
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	retrupd				stubRef		StubBrlyFltSref
+	ImeIMQuerycol.end
+rmv					QryBrlyLegDstMNLeg
+ins	6	std	0	void	QryBrlyLegMapLeg	false
+	ImeIRMQueryMTable.srefRefWznmMTable	Source	Prefix
+	TblBrlyRMLegMLeg	true
+	TblBrlyMLeg	true	m
+	ImeIRMQueryMTable.end
+	ImeIAMQueryClause.irefX1RefWznmMQuerymod	srefIxVBasetype	Clause	srefRefWznmMPreset	srefRefWznmMVector	srefRefWznmMVectoritem
+	0	pre	TblBrlyRMLegMLeg.dstRefBrlyMLeg = &pre;	PreBrlyRefLeg
+	0	eqn	TblBrlyMLeg.ref = TblBrlyRMLegMLeg.orgRefBrlyMLeg
+	0	vit	TblBrlyMLeg.ixVBasetype = &vit;		VecBrlyVMLegBasetype	rte
+	ImeIAMQueryClause.end
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	ins	qidref	qtb		qref
+	ins	qwr	qtb		qwr
+	ins	qjref	qtb		jref
+	ins	qjenum	qtb		jnum
+	ins	tbl	qtb;btb	TblBrlyRMLegMLeg.ref	ref
+	ins	tbl	qtb;btb	TblBrlyRMLegMLeg.VisOrgLegphi0	VisOrgLegphi0
+	ins	tbl	qtb;btb	TblBrlyRMLegMLeg.VisOrgLegphi1	VisOrgLegphi1
+	ins	tbl	qtb;btb	TblBrlyMLeg.ref	mref
+	ins	stub	xml	TblBrlyMLeg.ref	stubMref	mref	StubBrlyLegStd
+	ins	tbl	qtb;btb	TblBrlyMLeg.bgnRefBrlyMLocation	mbgnRefBrlyMLocation
+	ins	tbl	qtb;btb	TblBrlyMLeg.endRefBrlyMLocation	mendRefBrlyMLocation
+	ins	dblval	qtb;xml		dx	dx
+	ins	dblval	qtb;xml		dy	dy
+	ins	dblval	qtb;xml		x0	x0
+	ins	dblval	qtb;xml		y0	y0
+	ImeIMQuerycol.end
+ins	7	std	0	void	QryBrlyLegMapLocation	false
+	ImeIRMQueryMTable.srefRefWznmMTable	Source	Prefix
+	TblBrlyRMLegMLocation	true
+	TblBrlyMLocation	true	m
+	ImeIRMQueryMTable.end
+	ImeIAMQueryClause.irefX1RefWznmMQuerymod	srefIxVBasetype	Clause	srefRefWznmMPreset	srefRefWznmMVector	srefRefWznmMVectoritem
+	0	pre	TblBrlyRMLegMLocation.refBrlyMLeg = &pre;	PreBrlyRefLeg
+	0	eqn	TblBrlyMLocation.ref = TblBrlyRMLegMLocation.refBrlyMLocation
+	ImeIAMQueryClause.end
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	ins	qidref	qtb		qref
+	ins	qwr	qtb		qwr
+	ins	qjref	qtb		jref
+	ins	qjenum	qtb		jnum
+	ins	tbl	qtb;btb	TblBrlyRMLegMLocation.ref	ref
+	ins	tbl	qtb;btb	TblBrlyRMLegMLocation.legphi	legphi
+	ins	tbl	qtb;btb	TblBrlyRMLegMLocation.legtheta	legtheta
+	ins	tbl	qtb;btb	TblBrlyMLocation.ref	mref
+	ins	stub	xml	TblBrlyMLocation.ref	stubMref	mref	StubBrlyLocStd
+	ins	dblval	qtb;xml		x	x
+	ins	dblval	qtb;xml		y	y
+	ImeIMQuerycol.end
+retr					QryBrlyLegMNLocation
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	retrupd			PreBrlyPhi	tco	TblBrlyRMLegMLocation.x1VisLegphi0
+	retrupd			PreBrlyPhi	tco	TblBrlyRMLegMLocation.x1VisLegphi1
+	ImeIMQuerymod.end
+retr					QryBrlyLegOrgMNLeg
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	retrupd			PreBrlyPhi	tco	TblBrlyRMLegMLeg.x1VisDstLegphi0
+	retrupd			PreBrlyPhi	tco	TblBrlyRMLegMLeg.x1VisDstLegphi1
+	ImeIMQuerymod.end
+ins	8	std	0	void	QryBrlyLocMapLeg	false
+	ImeIRMQueryMTable.srefRefWznmMTable	Source	Prefix
+	TblBrlyRMLegMLocation	true
+	TblBrlyMLeg	true	m
+	ImeIRMQueryMTable.end
+	ImeIAMQueryClause.irefX1RefWznmMQuerymod	srefIxVBasetype	Clause	srefRefWznmMPreset	srefRefWznmMVector	srefRefWznmMVectoritem
+	0	pre	TblBrlyRMLegMLocation.refBrlyMLocation = &pre;	PreBrlyRefLoc
+	0	eqn	TblBrlyMLeg.ref = TblBrlyRMLegMLocation.refBrlyMLeg
+	0	vit	TblBrlyMLeg.ixVBasetype = &vit;		VecBrlyVMLegBasetype	rte
+	ImeIAMQueryClause.end
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	ins	qidref	qtb		qref
+	ins	qwr	qtb		qwr
+	ins	qjref	qtb		jref
+	ins	qjenum	qtb		jnum
+	ins	tbl	qtb;btb	TblBrlyRMLegMLocation.ref	ref
+	ins	tbl	qtb;btb	TblBrlyRMLegMLocation.x1VisLegphi0	x1VisLegphi0
+	ins	tbl	qtb;btb	TblBrlyRMLegMLocation.x1VisLegphi1	x1VisLegphi1
+	ins	tbl	qtb;btb	TblBrlyMLeg.ref	mref
+	ins	stub	xml	TblBrlyMLeg.ref	stubMref	mref	StubBrlyLegStd
+	ins	tbl	qtb;btb	TblBrlyMLeg.bgnRefBrlyMLocation	mbgnRefBrlyMLocation
+	ins	tbl	qtb;btb	TblBrlyMLeg.endRefBrlyMLocation	mendRefBrlyMLocation
+	ins	dblval	qtb;xml		dx	dx
+	ins	dblval	qtb;xml		dy	dy
+	ins	dblval	qtb;xml		x0	x0
+	ins	dblval	qtb;xml		y0	y0
+	ins	dblval	qtb;xml		lam1	lm1
+	ins	dblval	qtb;xml		lam2	lm2
+	ins	dblval	qtb;xml		lam3	lm3
+	ImeIMQuerycol.end
+ins	9	std	0	void	QryBrlyLocMapProxLocation	false
+	ImeIRMQueryMTable.srefRefWznmMTable	Source	Prefix
+	TblBrlyProxRMLocationMLocation	true
+	TblBrlyMLocation	true	m
+	ImeIRMQueryMTable.end
+	ImeIAMQueryClause.irefX1RefWznmMQuerymod	srefIxVBasetype	Clause	srefRefWznmMPreset	srefRefWznmMVector	srefRefWznmMVectoritem
+	0	pre	TblBrlyProxRMLocationMLocation.dstRefBrlyMLocation = &pre;	PreBrlyRefLoc
+	0	eqn	TblBrlyMLocation.ref = TblBrlyProxRMLocationMLocation.orgRefBrlyMLocation
+	ImeIAMQueryClause.end
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	ins	qidref	qtb		qref
+	ins	qwr	qtb		qwr
+	ins	qjref	qtb		jref
+	ins	qjenum	qtb		jnum
+	ins	tbl	qtb;btb	TblBrlyProxRMLocationMLocation.ref	ref
+	ins	tbl	qtb;btb	TblBrlyMLocation.ref	mref
+	ins	stub	xml	TblBrlyMLocation.ref	stubMref	mref	StubBrlyLocStd
+	ins	tbl	qtb;btb	TblBrlyMLocation.theta	mtheta	mthe
+	ins	tbl	qtb;btb	TblBrlyMLocation.phi	mphi	mphi
+	ins	dblval	qtb;xml		x	x
+	ins	dblval	qtb;xml		y	y
+	ImeIMQuerycol.end
+ins	10	std	0	void	QryBrlyLocMapVisLocation	false
+	ImeIRMQueryMTable.srefRefWznmMTable	Source	Prefix
+	TblBrlyVisRMLocationMLocation	true
+	TblBrlyMLocation	true	m
+	ImeIRMQueryMTable.end
+	ImeIAMQueryClause.irefX1RefWznmMQuerymod	srefIxVBasetype	Clause	srefRefWznmMPreset	srefRefWznmMVector	srefRefWznmMVectoritem
+	0	pre	TblBrlyVisRMLocationMLocation.dstRefBrlyMLocation = &pre;	PreBrlyRefLoc
+	0	eqn	TblBrlyMLocation.ref = TblBrlyVisRMLocationMLocation.orgRefBrlyMLocation
+	ImeIAMQueryClause.end
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	ins	qidref	qtb		qref
+	ins	qwr	qtb		qwr
+	ins	qjref	qtb		jref
+	ins	qjenum	qtb		jnum
+	ins	tbl	qtb;btb	TblBrlyVisRMLocationMLocation.ref	ref
+	ins	tbl	qtb;btb	TblBrlyMLocation.ref	mref
+	ins	stub	xml	TblBrlyMLocation.ref	stubMref	mref	StubBrlyLocStd
+	ins	tbl	qtb;btb	TblBrlyMLocation.theta	mtheta	mthe
+	ins	tbl	qtb;btb	TblBrlyMLocation.phi	mphi	mphi
+	ins	dblval	qtb;xml		x	x
+	ins	dblval	qtb;xml		y	y
+	ImeIMQuerycol.end
+retr					QryBrlyLocMNFlight
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	rmv				tco	TblBrlyRMFlightMLocation.x1VisStart
+	rmv				tco	TblBrlyRMFlightMLocation.x1VisStop
+	ImeIMQuerymod.end
+retr					QryBrlyLocMNLeg
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	rmv				tco	TblBrlyRMLegMLocation.x1VisLegphi0
+	rmv				tco	TblBrlyRMLegMLocation.x1VisLegphi1
+	ImeIMQuerymod.end
+retr					QryBrlyLocMNSegment
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	rmv				tco	TblBrlyRMLocationMSegment.x1Start
+	rmv				tco	TblBrlyRMLocationMSegment.x1Stop
+	rmv				tco	TblBrlyRMLocationMSegment.x2VisSegphi0
+	rmv				tco	TblBrlyRMLocationMSegment.x2VisSegphi1
+	ImeIMQuerymod.end
+rmv					QryBrlyLocProxDstMNLocation
+rmv					QryBrlyLocVisDstMNLocation
+retr					QryBrlyPrsList
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	ins		jovr	PreBrlySysdate	tbl	TblBrlyJMPersonLastname
+	ImeIMQuerymod.end
+retr					QryBrlyRegList
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	ins		jovr	PreBrlyIxLcl	tbl	TblBrlyJMRegionTitle
+	ins		jovr	PreBrlySysdate	tbl	TblBrlyJMRegion
+	ImeIMQuerymod.end
+	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
+	retrupd				stubSupRefBrlyMRegion		StubBrlyRegHsref
+	ImeIMQuerycol.end
+rmv					QryBrlySegDstMNSegment
+retr					QryBrlySegMNConnection
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	rmv				tco	TblBrlyRMConnectionMSegment.x1Start
+	rmv				tco	TblBrlyRMConnectionMSegment.x1Stop
+	rmv				tco	TblBrlyRMConnectionMSegment.x2Legphi0
+	rmv				tco	TblBrlyRMConnectionMSegment.x2Legphi1
+	ImeIMQuerymod.end
+retr					QryBrlySegMNLocation
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	retrupd			PreBrlyTime	tco	TblBrlyRMLocationMSegment.x1Start
+	retrupd			PreBrlyTime	tco	TblBrlyRMLocationMSegment.x1Stop
+	retrupd			PreBrlyPhi	tco	TblBrlyRMLocationMSegment.x2VisSegphi0
+	retrupd			PreBrlyPhi	tco	TblBrlyRMLocationMSegment.x2VisSegphi1
+	ImeIMQuerymod.end
+retr					QryBrlySegOrgMNSegment
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	retrupd			PreBrlyTime	tco	TblBrlyRMSegmentMSegment.x1Start
+	retrupd			PreBrlyTime	tco	TblBrlyRMSegmentMSegment.x1Stop
+	retrupd			PreBrlyPhi	tco	TblBrlyRMSegmentMSegment.x2VisDstSegphi0
+	retrupd			PreBrlyPhi	tco	TblBrlyRMSegmentMSegment.x2VisDstSegphi1
+	ImeIMQuerymod.end
+retr					QryBrlyUsrList
+	ImeIMQuerymod.srefIxWznmVIop	iref	srefIxVBasetype	srefRefWznmMPreset	srefRefIxVTbl	srefRefUref	Avail
+	ins		jovr	PreBrlySystime	tbl	TblBrlyJMUserState
+	ImeIMQuerymod.end
+ImeIMQuery.end
+ImeIRMPanelMQuery.srefRefWznmMPanel	srefRefWznmMQuery
+PnlBrlyLocMap	QryBrlyLocMapLeg
+PnlBrlyLocMap	QryBrlyLocMapProxLocation
+PnlBrlyLocMap	QryBrlyLocMapVisLocation
+PnlBrlyLegMap	QryBrlyLegMapLeg
+PnlBrlyLegMap	QryBrlyLegMapLocation
+PnlBrlyConMap	QryBrlyConMapLeg
+PnlBrlyConMap	QryBrlyConMapLocation
+PnlBrlyConMap	QryBrlyConMapFlight
+PnlBrlyConMap	QryBrlyConMapRelay
+PnlBrlyConMap	QryBrlyConMapNode
+ImeIRMPanelMQuery.end
