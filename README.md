@@ -6,7 +6,7 @@ BeamRelay is an air traffic simulation with the aim of determining reachability 
 
 ## Additional resources
 
-- An [animated version of above map](https://old.mpsitech.com/conmap/mapLH400/conmap.xml), representing a flight from Frankfurt (FRA) to New York (JFK)
+- An [animated version of above map](https://content.mpsitech.cloud/conmap/mapLH400/conmap.xml), representing a flight from Frankfurt (FRA) to New York (JFK)
 - The [proceedings article](https://content.mpsitech.cloud/Global_coverage_free_space.pdf) of BeamRelay's ICNS 2014 presentation
 
 ## Contact
