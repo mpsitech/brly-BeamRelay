@@ -31,7 +31,7 @@ void BrlyopdEngsrv::stop(
 	MHD_stop_daemon(d);
 };
 
-int BrlyopdEngsrv::MhdAccept(
+MHD_Result BrlyopdEngsrv::MhdAccept(
 			void* cls
 			, const sockaddr* addr
 			, socklen_t addrlen
@@ -39,7 +39,7 @@ int BrlyopdEngsrv::MhdAccept(
 	return MHD_YES;
 };
 
-int BrlyopdEngsrv::MhdCallback(
+MHD_Result BrlyopdEngsrv::MhdCallback(
 			void* cls
 			, MHD_Connection* connection
 			, const char* url
@@ -52,7 +52,7 @@ int BrlyopdEngsrv::MhdCallback(
 	XchgBrlyopd* xchg = (XchgBrlyopd*) cls;
 
 	MHD_Response* response;
-	int retval = MHD_YES;
+	MHD_Result retval = MHD_YES;
 
 	ReqopBrly* req = NULL;
 
@@ -230,7 +230,7 @@ int BrlyopdEngsrv::MhdCallback(
 	return retval;
 };
 
-int BrlyopdEngsrv::MhdPostrecv(
+MHD_Result BrlyopdEngsrv::MhdPostrecv(
 			void* con_cls
 			, MHD_ValueKind kind
 			, const char* key

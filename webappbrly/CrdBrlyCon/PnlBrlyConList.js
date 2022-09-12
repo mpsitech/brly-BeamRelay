@@ -115,9 +115,9 @@ function refreshB(chgcol) {
 			} else if (i == 2) {
 				doc.cols.push("TcoOwn"); doc.widths.push(TcoOwnWidth); doc.fs.push("own"); doc.tos.push(4); wtot += TcoOwnWidth;
 			} else if (i == 3) {
-				doc.cols.push("TcoFlt"); doc.widths.push(TcoFltWidth); doc.fs.push("flt"); doc.tos.push(3); wtot += TcoFltWidth;
+				doc.cols.push("TcoFlt"); doc.widths.push(TcoFltWidth); doc.fs.push("flt"); doc.tos.push(2); wtot += TcoFltWidth;
 			} else if (i == 4) {
-				doc.cols.push("TcoCor"); doc.widths.push(TcoCorWidth); doc.fs.push("cor"); doc.tos.push(2); wtot += TcoCorWidth;
+				doc.cols.push("TcoCor"); doc.widths.push(TcoCorWidth); doc.fs.push("cor"); doc.tos.push(3); wtot += TcoCorWidth;
 			} else if (i == 5) {
 				doc.cols.push("TcoSta"); doc.widths.push(TcoStaWidth); doc.fs.push("sta"); doc.tos.push(1); wtot += TcoStaWidth;
 			} else if (i == 6) {

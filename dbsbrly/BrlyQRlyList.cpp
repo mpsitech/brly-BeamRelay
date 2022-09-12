@@ -51,6 +51,31 @@ BrlyQRlyList::BrlyQRlyList(
 	this->yesnoConnected = yesnoConnected;
 };
 
+void BrlyQRlyList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["sta"] = ftmX1Start;
+		me["sto"] = ftmX1Stop;
+		me["con"] = stubRefBrlyMConnection;
+		me["dir"] = srefIxVDir;
+		me["dir2"] = titIxVDir;
+		me["ctd"] = yesnoConnected;
+	} else {
+		me["ftmX1Start"] = ftmX1Start;
+		me["ftmX1Stop"] = ftmX1Stop;
+		me["stubRefBrlyMConnection"] = stubRefBrlyMConnection;
+		me["srefIxVDir"] = srefIxVDir;
+		me["titIxVDir"] = titIxVDir;
+		me["yesnoConnected"] = yesnoConnected;
+	};
+};
+
 void BrlyQRlyList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -126,6 +151,16 @@ ListBrlyQRlyList& ListBrlyQRlyList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQRlyList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQRlyList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQRlyList::writeXML(

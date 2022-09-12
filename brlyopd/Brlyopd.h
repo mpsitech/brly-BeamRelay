@@ -1,6 +1,6 @@
 /**
-	* \file Brlyopd.h
-	* inter-thread exchange object for Brly operation daemon brlyopd (declarations)
+	* \file Brlycmbd.h
+	* inter-thread exchange object for Brly combined daemon (declarations)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
 	* \date created: 11 Jan 2021
@@ -32,6 +32,9 @@
 #endif
 
 #include <microhttpd.h>
+#if MHD_VERSION < 0x0097002
+	#define MHD_Result int
+#endif
 
 #include <curl/curl.h>
 
@@ -84,7 +87,7 @@ namespace DpchBrlyopdUnreg {
 /**
 	* StgBrlyDatabase
 	*/
-class StgBrlyDatabase : public Sbecore::Xmlio::Block {
+class StgBrlyDatabase : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint IXDBSVDBSTYPE = 1;
@@ -117,7 +120,7 @@ public:
 /**
 	* StgBrlyFlightaware
 	*/
-class StgBrlyFlightaware : public Sbecore::Xmlio::Block {
+class StgBrlyFlightaware : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint IP = 1;
@@ -140,7 +143,7 @@ public:
 /**
 	* StgBrlyGeometry
 	*/
-class StgBrlyGeometry : public Sbecore::Xmlio::Block {
+class StgBrlyGeometry : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint ACRALTITUDE = 1;
@@ -169,7 +172,7 @@ public:
 /**
 	* StgBrlyMonitor
 	*/
-class StgBrlyMonitor : public Sbecore::Xmlio::Block {
+class StgBrlyMonitor : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint USERNAME = 1;
@@ -206,7 +209,7 @@ public:
 /**
 	* StgBrlyopd
 	*/
-class StgBrlyopd : public Sbecore::Xmlio::Block {
+class StgBrlyopd : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint ENGIP = 1;
@@ -235,7 +238,7 @@ public:
 /**
 	* StgBrlyPath
 	*/
-class StgBrlyPath : public Sbecore::Xmlio::Block {
+class StgBrlyPath : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint ACVPATH = 1;

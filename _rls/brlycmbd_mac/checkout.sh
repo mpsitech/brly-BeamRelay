@@ -3,7 +3,7 @@
 # checkout script for Brly combined daemon, release brlycmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 11 Jan 2021
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -34,10 +34,10 @@ mkdir $BUILDROOT/brlycmbd/CrdBrlySeg
 mkdir $BUILDROOT/brlycmbd/CrdBrlyCon
 mkdir $BUILDROOT/brlycmbd/CrdBrlyRly
 mkdir $BUILDROOT/brlycmbd/BrlyTtimp
-mkdir $BUILDROOT/brlycmbd/BrlyMapgen
 mkdir $BUILDROOT/brlycmbd/BrlyDyn
-mkdir $BUILDROOT/brlycmbd/BrlyDnsmap
+mkdir $BUILDROOT/brlycmbd/BrlyMapgen
 mkdir $BUILDROOT/brlycmbd/BrlyBase
+mkdir $BUILDROOT/brlycmbd/BrlyDnsmap
 
 mkdir $LIBROOT/brlycmbd
 
@@ -169,22 +169,22 @@ cp Makefile_BrlyTtimp $BUILDROOT/brlycmbd/BrlyTtimp/Makefile
 cp ../../brlycmbd/BrlyTtimp/*.h $BUILDROOT/brlycmbd/BrlyTtimp/
 cp ../../brlycmbd/BrlyTtimp/*.cpp $BUILDROOT/brlycmbd/BrlyTtimp/
 
-cp Makefile_BrlyMapgen $BUILDROOT/brlycmbd/BrlyMapgen/Makefile
-
-cp ../../brlycmbd/BrlyMapgen/*.h $BUILDROOT/brlycmbd/BrlyMapgen/
-cp ../../brlycmbd/BrlyMapgen/*.cpp $BUILDROOT/brlycmbd/BrlyMapgen/
-
 cp Makefile_BrlyDyn $BUILDROOT/brlycmbd/BrlyDyn/Makefile
 
 cp ../../brlycmbd/BrlyDyn/*.h $BUILDROOT/brlycmbd/BrlyDyn/
 cp ../../brlycmbd/BrlyDyn/*.cpp $BUILDROOT/brlycmbd/BrlyDyn/
 
-cp Makefile_BrlyDnsmap $BUILDROOT/brlycmbd/BrlyDnsmap/Makefile
+cp Makefile_BrlyMapgen $BUILDROOT/brlycmbd/BrlyMapgen/Makefile
 
-cp ../../brlycmbd/BrlyDnsmap/*.h $BUILDROOT/brlycmbd/BrlyDnsmap/
-cp ../../brlycmbd/BrlyDnsmap/*.cpp $BUILDROOT/brlycmbd/BrlyDnsmap/
+cp ../../brlycmbd/BrlyMapgen/*.h $BUILDROOT/brlycmbd/BrlyMapgen/
+cp ../../brlycmbd/BrlyMapgen/*.cpp $BUILDROOT/brlycmbd/BrlyMapgen/
 
 cp Makefile_BrlyBase $BUILDROOT/brlycmbd/BrlyBase/Makefile
 
 cp ../../brlycmbd/BrlyBase/*.h $BUILDROOT/brlycmbd/BrlyBase/
 cp ../../brlycmbd/BrlyBase/*.cpp $BUILDROOT/brlycmbd/BrlyBase/
+
+cp Makefile_BrlyDnsmap $BUILDROOT/brlycmbd/BrlyDnsmap/Makefile
+
+cp ../../brlycmbd/BrlyDnsmap/*.h $BUILDROOT/brlycmbd/BrlyDnsmap/
+cp ../../brlycmbd/BrlyDnsmap/*.cpp $BUILDROOT/brlycmbd/BrlyDnsmap/

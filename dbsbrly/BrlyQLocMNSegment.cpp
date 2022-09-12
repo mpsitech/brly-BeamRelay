@@ -49,6 +49,33 @@ BrlyQLocMNSegment::BrlyQLocMNSegment(
 	this->segtheta = segtheta;
 };
 
+void BrlyQLocMNSegment::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["sta"] = ftmX1Start;
+		me["sto"] = ftmX1Stop;
+		me["sp0"] = x2VisSegphi0;
+		me["sp1"] = x2VisSegphi1;
+		me["sph"] = segphi;
+		me["sth"] = segtheta;
+	} else {
+		me["stubMref"] = stubMref;
+		me["ftmX1Start"] = ftmX1Start;
+		me["ftmX1Stop"] = ftmX1Stop;
+		me["x2VisSegphi0"] = x2VisSegphi0;
+		me["x2VisSegphi1"] = x2VisSegphi1;
+		me["segphi"] = segphi;
+		me["segtheta"] = segtheta;
+	};
+};
+
 void BrlyQLocMNSegment::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -126,6 +153,16 @@ ListBrlyQLocMNSegment& ListBrlyQLocMNSegment::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLocMNSegment::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLocMNSegment";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLocMNSegment::writeXML(

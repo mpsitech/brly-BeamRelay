@@ -25,6 +25,17 @@ PnlBrlyNavHeadbar::StatShr::StatShr(
 	mask = {MENCRDAVAIL};
 };
 
+void PnlBrlyNavHeadbar::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrBrlyNavHeadbar";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["MenCrdAvail"] = MenCrdAvail;
+};
+
 void PnlBrlyNavHeadbar::StatShr::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -69,6 +80,32 @@ set<uint> PnlBrlyNavHeadbar::StatShr::diff(
  class PnlBrlyNavHeadbar::StgInf
  ******************************************************************************/
 
+void PnlBrlyNavHeadbar::StgInf::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgInfBrlyNavHeadbar";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["MenAppCptwidth"] = "100";
+		me["MenAppWidth"] = "204";
+		me["MenSesCptwidth"] = "66";
+		me["MenSesWidth"] = "323";
+		me["MenCrdCptwidth"] = "100";
+		me["MenCrdWidth"] = "113";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["MenAppCptwidth"] = "100";
+		me["MenAppWidth"] = "225";
+		me["MenSesCptwidth"] = "66";
+		me["MenSesWidth"] = "323";
+		me["MenCrdCptwidth"] = "100";
+		me["MenCrdWidth"] = "155";
+	};
+};
+
 void PnlBrlyNavHeadbar::StgInf::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -103,6 +140,24 @@ void PnlBrlyNavHeadbar::StgInf::writeXML(
 /******************************************************************************
  class PnlBrlyNavHeadbar::Tag
  ******************************************************************************/
+
+void PnlBrlyNavHeadbar::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyNavHeadbar";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["MenApp"] = "BeamRelay";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["MenApp"] = "BeamRelay";
+	};
+	me["MenSes"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::SESS, ixBrlyVLocale));
+	me["MenCrd"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::NAV, ixBrlyVLocale));
+};
 
 void PnlBrlyNavHeadbar::Tag::writeXML(
 			const uint ixBrlyVLocale
@@ -167,6 +222,18 @@ void PnlBrlyNavHeadbar::DpchEngData::merge(
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(STGINF)) add(STGINF);
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlBrlyNavHeadbar::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyNavHeadbarData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(STGINF)) StgInf::writeJSON(ixBrlyVLocale, me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
 };
 
 void PnlBrlyNavHeadbar::DpchEngData::writeXML(

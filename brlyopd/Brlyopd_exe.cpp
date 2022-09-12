@@ -1,6 +1,6 @@
 /**
-	* \file Brlyopd_exe.cpp
-	* Brly operation daemon brlyopd main (implementation)
+	* \file Brlycmbd_exe.cpp
+	* Brly combined daemon main (implementation)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
 	* \date created: 11 Jan 2021
@@ -202,7 +202,7 @@ bool Brlyopd::CurlPostDpch(
 
 		curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1);
 
-		// string to be sent is "xml=<xbuf>"
+		// string to be sent is "xml=<xbuf (URI encoded)>"
 		buflen = xbuf->use + 4;
 		buf = new char[buflen];
 

@@ -3,10 +3,14 @@
 	<StgBrlyAppearance>
 		<Si sref="histlength">20</Si>
 		<Si sref="suspsess">true</Si>
+		<Si sref="sesstterm">0</Si>
+		<Si sref="sesstwarn">0</Si>
+		<Si sref="roottterm">0</Si>
 	</StgBrlyAppearance>
 	<StgBrlyAppsrv>
 		<Si sref="port">13100</Si>
 		<Si sref="https">false</Si>
+		<Si sref="cors"></Si>
 	</StgBrlyAppsrv>
 	<StgBrlyd>
 		<Si sref="jobprcn">4</Si>

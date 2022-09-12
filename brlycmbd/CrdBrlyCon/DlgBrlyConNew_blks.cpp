@@ -187,6 +187,25 @@ DlgBrlyConNew::ContIac::ContIac(
 	mask = {NUMFDSE};
 };
 
+bool DlgBrlyConNew::ContIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgBrlyConNew"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("numFDse")) {numFDse = me["numFDse"].asUInt(); add(NUMFDSE);};
+	};
+
+	return basefound;
+};
+
 bool DlgBrlyConNew::ContIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -208,6 +227,17 @@ bool DlgBrlyConNew::ContIac::readXML(
 	};
 
 	return basefound;
+};
+
+void DlgBrlyConNew::ContIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContIacDlgBrlyConNew";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFDse"] = numFDse;
 };
 
 void DlgBrlyConNew::ContIac::writeXML(
@@ -270,6 +300,28 @@ DlgBrlyConNew::ContIacDet::ContIacDet(
 	mask = {TXFFLT, NUMFPUPMDL, NUMFPUPTTB, TXFETY};
 };
 
+bool DlgBrlyConNew::ContIacDet::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgBrlyConNewDet"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("TxfFlt")) {TxfFlt = me["TxfFlt"].asString(); add(TXFFLT);};
+		if (me.isMember("numFPupMdl")) {numFPupMdl = me["numFPupMdl"].asUInt(); add(NUMFPUPMDL);};
+		if (me.isMember("numFPupTtb")) {numFPupTtb = me["numFPupTtb"].asUInt(); add(NUMFPUPTTB);};
+		if (me.isMember("TxfEty")) {TxfEty = me["TxfEty"].asString(); add(TXFETY);};
+	};
+
+	return basefound;
+};
+
 bool DlgBrlyConNew::ContIacDet::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -294,6 +346,20 @@ bool DlgBrlyConNew::ContIacDet::readXML(
 	};
 
 	return basefound;
+};
+
+void DlgBrlyConNew::ContIacDet::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContIacDlgBrlyConNewDet";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxfFlt"] = TxfFlt;
+	me["numFPupMdl"] = numFPupMdl;
+	me["numFPupTtb"] = numFPupTtb;
+	me["TxfEty"] = TxfEty;
 };
 
 void DlgBrlyConNew::ContIacDet::writeXML(
@@ -356,6 +422,17 @@ DlgBrlyConNew::ContInf::ContInf(
 	mask = {NUMFSGE};
 };
 
+void DlgBrlyConNew::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfDlgBrlyConNew";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFSge"] = numFSge;
+};
+
 void DlgBrlyConNew::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -410,6 +487,17 @@ DlgBrlyConNew::ContInfCal::ContInfCal(
 	mask = {TXTPRG};
 };
 
+void DlgBrlyConNew::ContInfCal::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfDlgBrlyConNewCal";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxtPrg"] = TxtPrg;
+};
+
 void DlgBrlyConNew::ContInfCal::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -454,6 +542,20 @@ set<uint> DlgBrlyConNew::ContInfCal::diff(
  class DlgBrlyConNew::StatApp
  ******************************************************************************/
 
+void DlgBrlyConNew::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const bool initdone
+			, const string& shortMenu
+		) {
+	if (difftag.length() == 0) difftag = "StatAppDlgBrlyConNew";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["initdone"] = initdone;
+	me["shortMenu"] = shortMenu;
+};
+
 void DlgBrlyConNew::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -485,6 +587,17 @@ DlgBrlyConNew::StatShr::StatShr(
 	this->ButDneActive = ButDneActive;
 
 	mask = {BUTDNEACTIVE};
+};
+
+void DlgBrlyConNew::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgBrlyConNew";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButDneActive"] = ButDneActive;
 };
 
 void DlgBrlyConNew::StatShr::writeXML(
@@ -543,6 +656,18 @@ DlgBrlyConNew::StatShrCal::StatShrCal(
 	mask = {BUTRUNACTIVE, BUTSTOACTIVE};
 };
 
+void DlgBrlyConNew::StatShrCal::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgBrlyConNewCal";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButRunActive"] = ButRunActive;
+	me["ButStoActive"] = ButStoActive;
+};
+
 void DlgBrlyConNew::StatShrCal::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -599,6 +724,17 @@ DlgBrlyConNew::StatShrDet::StatShrDet(
 	mask = {BUTCREACTIVE};
 };
 
+void DlgBrlyConNew::StatShrDet::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgBrlyConNewDet";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButCreActive"] = ButCreActive;
+};
+
 void DlgBrlyConNew::StatShrDet::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -643,6 +779,23 @@ set<uint> DlgBrlyConNew::StatShrDet::diff(
  class DlgBrlyConNew::Tag
  ******************************************************************************/
 
+void DlgBrlyConNew::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgBrlyConNew";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["Cpt"] = "Create new connection";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["Cpt"] = "Neue Verbindung erstellen";
+	};
+	me["ButDne"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::DONE, ixBrlyVLocale));
+};
+
 void DlgBrlyConNew::Tag::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -669,6 +822,23 @@ void DlgBrlyConNew::Tag::writeXML(
  class DlgBrlyConNew::TagCal
  ******************************************************************************/
 
+void DlgBrlyConNew::TagCal::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgBrlyConNewCal";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+	};
+	me["CptPrg"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::PROGRESS, ixBrlyVLocale));
+	me["ButRun"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::RUN, ixBrlyVLocale));
+	me["ButSto"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::STOP, ixBrlyVLocale));
+};
+
 void DlgBrlyConNew::TagCal::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -694,6 +864,29 @@ void DlgBrlyConNew::TagCal::writeXML(
 /******************************************************************************
  class DlgBrlyConNew::TagDet
  ******************************************************************************/
+
+void DlgBrlyConNew::TagDet::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgBrlyConNewDet";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["CptFlt"] = "Flight";
+		me["CptMdl"] = "Model";
+		me["CptTtb"] = "Timetable";
+		me["CptEty"] = "Equipment types";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["CptFlt"] = "Flug";
+		me["CptMdl"] = "Modell";
+		me["CptTtb"] = "Flugplan";
+		me["CptEty"] = "Ger\\u00e4ttypen";
+	};
+	me["ButCre"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::CREATE, ixBrlyVLocale));
+};
 
 void DlgBrlyConNew::TagDet::writeXML(
 			const uint ixBrlyVLocale
@@ -743,6 +936,28 @@ string DlgBrlyConNew::DpchAppData::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void DlgBrlyConNew::DpchAppData::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgBrlyConNewData"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (contiac.readJSON(me, true)) add(CONTIAC);
+		if (contiacdet.readJSON(me, true)) add(CONTIACDET);
+	} else {
+		contiac = ContIac();
+		contiacdet = ContIacDet();
+	};
 };
 
 void DlgBrlyConNew::DpchAppData::readXML(
@@ -798,6 +1013,27 @@ string DlgBrlyConNew::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void DlgBrlyConNew::DpchAppDo::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgBrlyConNewDo"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+		if (me.isMember("srefIxVDoCal")) {ixVDoCal = VecVDoCal::getIx(me["srefIxVDoCal"].asString()); add(IXVDOCAL);};
+		if (me.isMember("srefIxVDoDet")) {ixVDoDet = VecVDoDet::getIx(me["srefIxVDoDet"].asString()); add(IXVDODET);};
+	} else {
+	};
 };
 
 void DlgBrlyConNew::DpchAppDo::readXML(
@@ -924,6 +1160,30 @@ void DlgBrlyConNew::DpchEngData::merge(
 	if (src->has(TAG)) add(TAG);
 	if (src->has(TAGCAL)) add(TAGCAL);
 	if (src->has(TAGDET)) add(TAGDET);
+};
+
+void DlgBrlyConNew::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngDlgBrlyConNewData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTIAC)) contiac.writeJSON(me);
+	if (has(CONTIACDET)) contiacdet.writeJSON(me);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(CONTINFCAL)) continfcal.writeJSON(me);
+	if (has(FEEDFDETPUPMDL)) feedFDetPupMdl.writeJSON(me);
+	if (has(FEEDFDETPUPTTB)) feedFDetPupTtb.writeJSON(me);
+	if (has(FEEDFDSE)) feedFDse.writeJSON(me);
+	if (has(FEEDFSGE)) feedFSge.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(STATSHRCAL)) statshrcal.writeJSON(me);
+	if (has(STATSHRDET)) statshrdet.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
+	if (has(TAGCAL)) TagCal::writeJSON(ixBrlyVLocale, me);
+	if (has(TAGDET)) TagDet::writeJSON(ixBrlyVLocale, me);
 };
 
 void DlgBrlyConNew::DpchEngData::writeXML(

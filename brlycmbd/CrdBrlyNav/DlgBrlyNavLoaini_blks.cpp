@@ -201,6 +201,25 @@ DlgBrlyNavLoaini::ContIac::ContIac(
 	mask = {NUMFDSE};
 };
 
+bool DlgBrlyNavLoaini::ContIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgBrlyNavLoaini"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("numFDse")) {numFDse = me["numFDse"].asUInt(); add(NUMFDSE);};
+	};
+
+	return basefound;
+};
+
 bool DlgBrlyNavLoaini::ContIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -222,6 +241,17 @@ bool DlgBrlyNavLoaini::ContIac::readXML(
 	};
 
 	return basefound;
+};
+
+void DlgBrlyNavLoaini::ContIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContIacDlgBrlyNavLoaini";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFDse"] = numFDse;
 };
 
 void DlgBrlyNavLoaini::ContIac::writeXML(
@@ -278,6 +308,17 @@ DlgBrlyNavLoaini::ContInf::ContInf(
 	mask = {NUMFSGE};
 };
 
+void DlgBrlyNavLoaini::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfDlgBrlyNavLoaini";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFSge"] = numFSge;
+};
+
 void DlgBrlyNavLoaini::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -330,6 +371,17 @@ DlgBrlyNavLoaini::ContInfImp::ContInfImp(
 	this->TxtPrg = TxtPrg;
 
 	mask = {TXTPRG};
+};
+
+void DlgBrlyNavLoaini::ContInfImp::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfDlgBrlyNavLoainiImp";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxtPrg"] = TxtPrg;
 };
 
 void DlgBrlyNavLoaini::ContInfImp::writeXML(
@@ -386,6 +438,17 @@ DlgBrlyNavLoaini::ContInfLfi::ContInfLfi(
 	mask = {DLD};
 };
 
+void DlgBrlyNavLoaini::ContInfLfi::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfDlgBrlyNavLoainiLfi";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["Dld"] = Dld;
+};
+
 void DlgBrlyNavLoaini::ContInfLfi::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -440,6 +503,17 @@ DlgBrlyNavLoaini::ContInfPpr::ContInfPpr(
 	mask = {TXTPRG};
 };
 
+void DlgBrlyNavLoaini::ContInfPpr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfDlgBrlyNavLoainiPpr";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxtPrg"] = TxtPrg;
+};
+
 void DlgBrlyNavLoaini::ContInfPpr::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -484,6 +558,20 @@ set<uint> DlgBrlyNavLoaini::ContInfPpr::diff(
  class DlgBrlyNavLoaini::StatApp
  ******************************************************************************/
 
+void DlgBrlyNavLoaini::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const bool initdone
+			, const string& shortMenu
+		) {
+	if (difftag.length() == 0) difftag = "StatAppDlgBrlyNavLoaini";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["initdone"] = initdone;
+	me["shortMenu"] = shortMenu;
+};
+
 void DlgBrlyNavLoaini::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -515,6 +603,17 @@ DlgBrlyNavLoaini::StatShr::StatShr(
 	this->ButDneActive = ButDneActive;
 
 	mask = {BUTDNEACTIVE};
+};
+
+void DlgBrlyNavLoaini::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgBrlyNavLoaini";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButDneActive"] = ButDneActive;
 };
 
 void DlgBrlyNavLoaini::StatShr::writeXML(
@@ -569,6 +668,17 @@ DlgBrlyNavLoaini::StatShrIfi::StatShrIfi(
 	this->UldActive = UldActive;
 
 	mask = {ULDACTIVE};
+};
+
+void DlgBrlyNavLoaini::StatShrIfi::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgBrlyNavLoainiIfi";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["UldActive"] = UldActive;
 };
 
 void DlgBrlyNavLoaini::StatShrIfi::writeXML(
@@ -627,6 +737,18 @@ DlgBrlyNavLoaini::StatShrImp::StatShrImp(
 	mask = {BUTRUNACTIVE, BUTSTOACTIVE};
 };
 
+void DlgBrlyNavLoaini::StatShrImp::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgBrlyNavLoainiImp";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButRunActive"] = ButRunActive;
+	me["ButStoActive"] = ButStoActive;
+};
+
 void DlgBrlyNavLoaini::StatShrImp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -681,6 +803,17 @@ DlgBrlyNavLoaini::StatShrLfi::StatShrLfi(
 	this->DldActive = DldActive;
 
 	mask = {DLDACTIVE};
+};
+
+void DlgBrlyNavLoaini::StatShrLfi::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgBrlyNavLoainiLfi";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["DldActive"] = DldActive;
 };
 
 void DlgBrlyNavLoaini::StatShrLfi::writeXML(
@@ -739,6 +872,18 @@ DlgBrlyNavLoaini::StatShrPpr::StatShrPpr(
 	mask = {BUTRUNACTIVE, BUTSTOACTIVE};
 };
 
+void DlgBrlyNavLoaini::StatShrPpr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgBrlyNavLoainiPpr";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButRunActive"] = ButRunActive;
+	me["ButStoActive"] = ButStoActive;
+};
+
 void DlgBrlyNavLoaini::StatShrPpr::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -785,6 +930,22 @@ set<uint> DlgBrlyNavLoaini::StatShrPpr::diff(
  class DlgBrlyNavLoaini::Tag
  ******************************************************************************/
 
+void DlgBrlyNavLoaini::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgBrlyNavLoaini";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+	};
+	me["Cpt"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::LOAINI, ixBrlyVLocale));
+	me["ButDne"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::DONE, ixBrlyVLocale));
+};
+
 void DlgBrlyNavLoaini::Tag::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -810,6 +971,22 @@ void DlgBrlyNavLoaini::Tag::writeXML(
  class DlgBrlyNavLoaini::TagIfi
  ******************************************************************************/
 
+void DlgBrlyNavLoaini::TagIfi::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgBrlyNavLoainiIfi";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+	};
+	me["Uld"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::UPLOAD, ixBrlyVLocale));
+	me["Cpt"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::FILENAME, ixBrlyVLocale));
+};
+
 void DlgBrlyNavLoaini::TagIfi::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -834,6 +1011,23 @@ void DlgBrlyNavLoaini::TagIfi::writeXML(
 /******************************************************************************
  class DlgBrlyNavLoaini::TagImp
  ******************************************************************************/
+
+void DlgBrlyNavLoaini::TagImp::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgBrlyNavLoainiImp";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+	};
+	me["CptPrg"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::PROGRESS, ixBrlyVLocale));
+	me["ButRun"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::RUN, ixBrlyVLocale));
+	me["ButSto"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::STOP, ixBrlyVLocale));
+};
 
 void DlgBrlyNavLoaini::TagImp::writeXML(
 			const uint ixBrlyVLocale
@@ -861,6 +1055,21 @@ void DlgBrlyNavLoaini::TagImp::writeXML(
  class DlgBrlyNavLoaini::TagLfi
  ******************************************************************************/
 
+void DlgBrlyNavLoaini::TagLfi::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgBrlyNavLoainiLfi";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+	};
+	me["Dld"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::DOWNLOAD, ixBrlyVLocale));
+};
+
 void DlgBrlyNavLoaini::TagLfi::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -884,6 +1093,23 @@ void DlgBrlyNavLoaini::TagLfi::writeXML(
 /******************************************************************************
  class DlgBrlyNavLoaini::TagPpr
  ******************************************************************************/
+
+void DlgBrlyNavLoaini::TagPpr::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgBrlyNavLoainiPpr";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+	};
+	me["CptPrg"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::PROGRESS, ixBrlyVLocale));
+	me["ButRun"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::RUN, ixBrlyVLocale));
+	me["ButSto"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::STOP, ixBrlyVLocale));
+};
 
 void DlgBrlyNavLoaini::TagPpr::writeXML(
 			const uint ixBrlyVLocale
@@ -926,6 +1152,26 @@ string DlgBrlyNavLoaini::DpchAppData::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void DlgBrlyNavLoaini::DpchAppData::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgBrlyNavLoainiData"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (contiac.readJSON(me, true)) add(CONTIAC);
+	} else {
+		contiac = ContIac();
+	};
 };
 
 void DlgBrlyNavLoaini::DpchAppData::readXML(
@@ -979,6 +1225,27 @@ string DlgBrlyNavLoaini::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void DlgBrlyNavLoaini::DpchAppDo::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgBrlyNavLoainiDo"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+		if (me.isMember("srefIxVDoImp")) {ixVDoImp = VecVDoImp::getIx(me["srefIxVDoImp"].asString()); add(IXVDOIMP);};
+		if (me.isMember("srefIxVDoPpr")) {ixVDoPpr = VecVDoPpr::getIx(me["srefIxVDoPpr"].asString()); add(IXVDOPPR);};
+	} else {
+	};
 };
 
 void DlgBrlyNavLoaini::DpchAppDo::readXML(
@@ -1113,6 +1380,33 @@ void DlgBrlyNavLoaini::DpchEngData::merge(
 	if (src->has(TAGIMP)) add(TAGIMP);
 	if (src->has(TAGLFI)) add(TAGLFI);
 	if (src->has(TAGPPR)) add(TAGPPR);
+};
+
+void DlgBrlyNavLoaini::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngDlgBrlyNavLoainiData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTIAC)) contiac.writeJSON(me);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(CONTINFIMP)) continfimp.writeJSON(me);
+	if (has(CONTINFLFI)) continflfi.writeJSON(me);
+	if (has(CONTINFPPR)) continfppr.writeJSON(me);
+	if (has(FEEDFDSE)) feedFDse.writeJSON(me);
+	if (has(FEEDFSGE)) feedFSge.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(STATSHRIFI)) statshrifi.writeJSON(me);
+	if (has(STATSHRIMP)) statshrimp.writeJSON(me);
+	if (has(STATSHRLFI)) statshrlfi.writeJSON(me);
+	if (has(STATSHRPPR)) statshrppr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
+	if (has(TAGIFI)) TagIfi::writeJSON(ixBrlyVLocale, me);
+	if (has(TAGIMP)) TagImp::writeJSON(ixBrlyVLocale, me);
+	if (has(TAGLFI)) TagLfi::writeJSON(ixBrlyVLocale, me);
+	if (has(TAGPPR)) TagPpr::writeJSON(ixBrlyVLocale, me);
 };
 
 void DlgBrlyNavLoaini::DpchEngData::writeXML(

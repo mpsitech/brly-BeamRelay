@@ -49,6 +49,37 @@ BrlyQLegOrgMNLeg::BrlyQLegOrgMNLeg(
 	this->xVisOrgLegphi1 = xVisOrgLegphi1;
 };
 
+void BrlyQLegOrgMNLeg::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["dp0"] = x1VisDstLegphi0;
+		me["dp1"] = x1VisDstLegphi1;
+		me["op0"] = VisOrgLegphi0;
+		me["op1"] = VisOrgLegphi1;
+		me["xd0"] = xVisDstLegphi0;
+		me["xd1"] = xVisDstLegphi1;
+		me["xo0"] = xVisOrgLegphi0;
+		me["xo1"] = xVisOrgLegphi1;
+	} else {
+		me["stubMref"] = stubMref;
+		me["x1VisDstLegphi0"] = x1VisDstLegphi0;
+		me["x1VisDstLegphi1"] = x1VisDstLegphi1;
+		me["VisOrgLegphi0"] = VisOrgLegphi0;
+		me["VisOrgLegphi1"] = VisOrgLegphi1;
+		me["xVisDstLegphi0"] = xVisDstLegphi0;
+		me["xVisDstLegphi1"] = xVisDstLegphi1;
+		me["xVisOrgLegphi0"] = xVisOrgLegphi0;
+		me["xVisOrgLegphi1"] = xVisOrgLegphi1;
+	};
+};
+
 void BrlyQLegOrgMNLeg::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -130,6 +161,16 @@ ListBrlyQLegOrgMNLeg& ListBrlyQLegOrgMNLeg::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLegOrgMNLeg::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLegOrgMNLeg";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLegOrgMNLeg::writeXML(

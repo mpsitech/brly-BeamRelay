@@ -185,8 +185,8 @@ void QryBrlyConList::rerun_orderSQL(
 			, const uint preIxOrd
 		) {
 	if (preIxOrd == VecVOrd::STA) sqlstr += " ORDER BY TblBrlyMConnection.start ASC";
-	else if (preIxOrd == VecVOrd::COR) sqlstr += " ORDER BY TblBrlyMConnection.corRefBrlyMLeg ASC";
 	else if (preIxOrd == VecVOrd::FLT) sqlstr += " ORDER BY TblBrlyMConnection.refBrlyMFlight ASC";
+	else if (preIxOrd == VecVOrd::COR) sqlstr += " ORDER BY TblBrlyMConnection.corRefBrlyMLeg ASC";
 	else if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblBrlyMConnection.own ASC";
 	else if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblBrlyMConnection.grp ASC";
 };
@@ -378,27 +378,13 @@ void QryBrlyConList::handleCall(
 			DbsBrly* dbsbrly
 			, Call* call
 		) {
-	if (call->ixVCall == VecBrlyVCall::CALLBRLYCONUPD_REFEQ) {
-		call->abort = handleCallBrlyConUpd_refEq(dbsbrly, call->jref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYCONMOD) {
+	if (call->ixVCall == VecBrlyVCall::CALLBRLYCONMOD) {
 		call->abort = handleCallBrlyConMod(dbsbrly, call->jref);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYCONUPD_REFEQ) {
+		call->abort = handleCallBrlyConUpd_refEq(dbsbrly, call->jref);
 	} else if ((call->ixVCall == VecBrlyVCall::CALLBRLYSTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallBrlyStubChgFromSelf(dbsbrly);
 	};
-};
-
-bool QryBrlyConList::handleCallBrlyConUpd_refEq(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if (ixBrlyVQrystate != VecBrlyVQrystate::OOD) {
-		ixBrlyVQrystate = VecBrlyVQrystate::OOD;
-		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
-	};
-
-	return retval;
 };
 
 bool QryBrlyConList::handleCallBrlyConMod(
@@ -409,6 +395,20 @@ bool QryBrlyConList::handleCallBrlyConMod(
 
 	if ((ixBrlyVQrystate == VecBrlyVQrystate::UTD) || (ixBrlyVQrystate == VecBrlyVQrystate::SLM)) {
 		ixBrlyVQrystate = VecBrlyVQrystate::MNR;
+		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
+	};
+
+	return retval;
+};
+
+bool QryBrlyConList::handleCallBrlyConUpd_refEq(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if (ixBrlyVQrystate != VecBrlyVQrystate::OOD) {
+		ixBrlyVQrystate = VecBrlyVQrystate::OOD;
 		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
 	};
 

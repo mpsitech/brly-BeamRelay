@@ -47,6 +47,31 @@ BrlyQTtbList::BrlyQTtbList(
 	this->ftmStopd = ftmStopd;
 };
 
+void BrlyQTtbList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["tit"] = Title;
+		me["fil"] = stubRefBrlyMFile;
+		me["ali"] = srefBrlyKAlliance;
+		me["ali2"] = titSrefBrlyKAlliance;
+		me["sta"] = ftmStartd;
+		me["sto"] = ftmStopd;
+	} else {
+		me["Title"] = Title;
+		me["stubRefBrlyMFile"] = stubRefBrlyMFile;
+		me["srefBrlyKAlliance"] = srefBrlyKAlliance;
+		me["titSrefBrlyKAlliance"] = titSrefBrlyKAlliance;
+		me["ftmStartd"] = ftmStartd;
+		me["ftmStopd"] = ftmStopd;
+	};
+};
+
 void BrlyQTtbList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -122,6 +147,16 @@ ListBrlyQTtbList& ListBrlyQTtbList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQTtbList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQTtbList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQTtbList::writeXML(

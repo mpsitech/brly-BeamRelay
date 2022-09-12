@@ -31,6 +31,21 @@ BrlyQCon1NRelay::BrlyQCon1NRelay(
 	this->stubRef = stubRef;
 };
 
+void BrlyQCon1NRelay::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void BrlyQCon1NRelay::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListBrlyQCon1NRelay& ListBrlyQCon1NRelay::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQCon1NRelay::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQCon1NRelay";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQCon1NRelay::writeXML(

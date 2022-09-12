@@ -28,6 +28,9 @@
 #include <sys/stat.h>
 
 #include <microhttpd.h>
+#if MHD_VERSION < 0x0097002
+	#define MHD_Result int
+#endif
 
 #include <sbecore/Txtrd.h>
 #include <sbecore/DbsMon.h>
@@ -64,6 +67,7 @@ public:
 	static bool all(const std::set<Sbecore::uint>& items);
 	virtual std::string getSrefsMask();
 
+	virtual void readJSON(const Json::Value& sup, bool addbasetag = false);
 	virtual void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 };
 
@@ -86,6 +90,7 @@ public:
 	static bool all(const std::set<Sbecore::uint>& items);
 	std::string getSrefsMask();
 
+	void readJSON(const Json::Value& sup, bool addbasetag = false);
 	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 };
 
@@ -127,6 +132,7 @@ public:
 	virtual std::string getSrefsMask();
 	virtual void merge(DpchEngBrly* dpcheng);
 
+	virtual void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup);
 	virtual void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr);
 };
 
@@ -151,17 +157,18 @@ public:
 	static const Sbecore::uint ALL = 4;
 
 public:
-	DpchEngBrlyAlert(const Sbecore::ubigint jref = 0, ContInfBrlyAlert* continf = NULL, Sbecore::Xmlio::Feed* feedFMcb = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+	DpchEngBrlyAlert(const Sbecore::ubigint jref = 0, ContInfBrlyAlert* continf = NULL, Sbecore::Feed* feedFMcb = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 public:
 	ContInfBrlyAlert continf;
-	Sbecore::Xmlio::Feed feedFMcb;
+	Sbecore::Feed feedFMcb;
 
 public:
 	static bool all(const std::set<Sbecore::uint>& items);
 	std::string getSrefsMask();
 	void merge(DpchEngBrly* dpcheng);
 
+	void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup);
 	void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr);
 };
 
@@ -188,6 +195,7 @@ public:
 	std::string getSrefsMask();
 	void merge(DpchEngBrly* dpcheng);
 
+	void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup);
 	void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr);
 };
 
@@ -203,18 +211,24 @@ public:
 /**
 	* StgBrlyAppearance
 	*/
-class StgBrlyAppearance : public Sbecore::Xmlio::Block {
+class StgBrlyAppearance : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint HISTLENGTH = 1;
 	static const Sbecore::uint SUSPSESS = 2;
+	static const Sbecore::uint SESSTTERM = 3;
+	static const Sbecore::uint SESSTWARN = 4;
+	static const Sbecore::uint ROOTTTERM = 5;
 
 public:
-	StgBrlyAppearance(const Sbecore::usmallint histlength = 20, const bool suspsess = true);
+	StgBrlyAppearance(const Sbecore::usmallint histlength = 20, const bool suspsess = true, const Sbecore::uint sesstterm = 0, const Sbecore::uint sesstwarn = 0, const Sbecore::uint roottterm = 0);
 
 public:
 	Sbecore::usmallint histlength;
 	bool suspsess;
+	Sbecore::uint sesstterm;
+	Sbecore::uint sesstwarn;
+	Sbecore::uint roottterm;
 
 public:
 	bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -226,18 +240,20 @@ public:
 /**
 	* StgBrlyAppsrv
 	*/
-class StgBrlyAppsrv : public Sbecore::Xmlio::Block {
+class StgBrlyAppsrv : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint PORT = 1;
 	static const Sbecore::uint HTTPS = 2;
+	static const Sbecore::uint CORS = 3;
 
 public:
-	StgBrlyAppsrv(const Sbecore::usmallint port = 13100, const bool https = false);
+	StgBrlyAppsrv(const Sbecore::usmallint port = 13100, const bool https = false, const std::string& cors = "");
 
 public:
 	Sbecore::usmallint port;
 	bool https;
+	std::string cors;
 
 public:
 	bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -249,7 +265,7 @@ public:
 /**
 	* StgBrlycmbd
 	*/
-class StgBrlycmbd : public Sbecore::Xmlio::Block {
+class StgBrlycmbd : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint JOBPRCN = 1;
@@ -274,7 +290,7 @@ public:
 /**
 	* StgBrlyDatabase
 	*/
-class StgBrlyDatabase : public Sbecore::Xmlio::Block {
+class StgBrlyDatabase : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint IXDBSVDBSTYPE = 1;
@@ -307,7 +323,7 @@ public:
 /**
 	* StgBrlyFlightaware
 	*/
-class StgBrlyFlightaware : public Sbecore::Xmlio::Block {
+class StgBrlyFlightaware : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint IP = 1;
@@ -330,7 +346,7 @@ public:
 /**
 	* StgBrlyGeometry
 	*/
-class StgBrlyGeometry : public Sbecore::Xmlio::Block {
+class StgBrlyGeometry : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint ACRALTITUDE = 1;
@@ -359,7 +375,7 @@ public:
 /**
 	* StgBrlyMonitor
 	*/
-class StgBrlyMonitor : public Sbecore::Xmlio::Block {
+class StgBrlyMonitor : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint USERNAME = 1;
@@ -396,7 +412,7 @@ public:
 /**
 	* StgBrlyPath
 	*/
-class StgBrlyPath : public Sbecore::Xmlio::Block {
+class StgBrlyPath : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint ACVPATH = 1;
@@ -428,10 +444,12 @@ public:
 	* AlrBrly
 	*/
 namespace AlrBrly {
-	DpchEngBrlyAlert* prepareAlrAbt(const Sbecore::ubigint jref, const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feedFMcbAlert);
-	DpchEngBrlyAlert* prepareAlrIer(const Sbecore::ubigint jref, const Sbecore::uint ixBrlyVLocale, const std::string& iexsqk, Sbecore::Xmlio::Feed& feedFMcbAlert);
-	DpchEngBrlyAlert* prepareAlrPer(const Sbecore::ubigint jref, const Sbecore::uint ixBrlyVLocale, const std::string& iexsqk, Sbecore::Xmlio::Feed& feedFMcbAlert);
-	DpchEngBrlyAlert* prepareAlrSav(const Sbecore::ubigint jref, const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feedFMcbAlert);
+	DpchEngBrlyAlert* prepareAlrAbt(const Sbecore::ubigint jref, const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feedFMcbAlert);
+	DpchEngBrlyAlert* prepareAlrIer(const Sbecore::ubigint jref, const Sbecore::uint ixBrlyVLocale, const std::string& iexsqk, Sbecore::Feed& feedFMcbAlert);
+	DpchEngBrlyAlert* prepareAlrPer(const Sbecore::ubigint jref, const Sbecore::uint ixBrlyVLocale, const std::string& iexsqk, Sbecore::Feed& feedFMcbAlert);
+	DpchEngBrlyAlert* prepareAlrSav(const Sbecore::ubigint jref, const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feedFMcbAlert);
+	DpchEngBrlyAlert* prepareAlrTrm(const Sbecore::ubigint jref, const Sbecore::uint ixBrlyVLocale, const Sbecore::uint sesstterm, const Sbecore::uint sesstwarn, Sbecore::Feed& feedFMcbAlert);
+	std::string prepareAlrTrm_dtToString(const uint ixBrlyVLocale, const time_t dt);
 };
 
 /**
@@ -448,17 +466,18 @@ public:
 	public:
 		static const Sbecore::uint NONE = 0; // invalid
 		static const Sbecore::uint REDIRECT = 1; // web client triggered root request (GET)
-		static const Sbecore::uint WEB = 2; // web client triggered ui file request (GET)
-		static const Sbecore::uint CMD = 3; // command line request
-		static const Sbecore::uint DPCHAPP = 4; // web client triggered Dpch request (POST+DpchApp)
-		static const Sbecore::uint NOTIFY = 5; // web client triggered notify-on-Dpch request (GET)
-		static const Sbecore::uint POLL = 6; // web client triggered Dpch poll request (GET)
-		static const Sbecore::uint UPLOAD = 7; // web client triggered file upload request (POST)
-		static const Sbecore::uint DOWNLOAD = 8; // web client triggered file download request (GET)
-		static const Sbecore::uint DPCHRET = 9; // op engine or opprc triggered op return (DpchRet)
-		static const Sbecore::uint METHOD = 10; // M2M interface triggered method request
-		static const Sbecore::uint TIMER = 11; // timer triggered request
-		static const Sbecore::uint EXTCALL = 12; // externally triggered call request
+		static const Sbecore::uint PREFLIGHT = 2; // web client triggered Dpch pre-flight request (OPTIONS)
+		static const Sbecore::uint WEB = 3; // web client triggered ui file request (GET)
+		static const Sbecore::uint CMD = 4; // command line request
+		static const Sbecore::uint DPCHAPP = 5; // web client triggered Dpch request (POST+DpchApp)
+		static const Sbecore::uint NOTIFY = 6; // web client triggered notify-on-Dpch request (GET)
+		static const Sbecore::uint POLL = 7; // web client triggered Dpch poll request (GET)
+		static const Sbecore::uint UPLOAD = 8; // web client triggered file upload request (POST)
+		static const Sbecore::uint DOWNLOAD = 9; // web client triggered file download request (GET)
+		static const Sbecore::uint DPCHRET = 10; // op engine or opprc triggered op return (DpchRet)
+		static const Sbecore::uint METHOD = 11; // M2M interface triggered method request
+		static const Sbecore::uint TIMER = 12; // timer triggered request
+		static const Sbecore::uint EXTCALL = 13; // externally triggered call request
 	};
 
 	/**
@@ -503,6 +522,9 @@ public:
 	// specific data for base types DPCHAPP, NOTIFY, POLL, DPCHRET
 	char* request;
 	size_t requestlen;
+
+	// specifc data for base types DPCHAPP, NOTIFY, POLL
+	bool jsonNotXml;
 
 	// specific data for base types CMD, DPCHAPP, NOTIFY, POLL, UPLOAD, DOWNLOAD, DPCHRET, TIMER
 	Sbecore::ubigint jref;
@@ -610,6 +632,9 @@ public:
 	ReqBrly* reqCmd;
 
 public:
+	Sbecore::ubigint insertSubjob(std::map<Sbecore::ubigint, JobBrly*>& subjobs, JobBrly* subjob);
+	bool eraseSubjobByJref(std::map<Sbecore::ubigint, JobBrly*>& subjobs, const Sbecore::ubigint _jref);
+
 	virtual DpchEngBrly* getNewDpchEng(std::set<Sbecore::uint> items);
 
 	virtual void refresh(DbsBrly* dbsbrly, std::set<Sbecore::uint>& moditems, const bool unmute = false);
@@ -726,7 +751,7 @@ public:
 class WakeupBrly {
 
 public:
-	WakeupBrly(XchgBrly* xchg, const Sbecore::ubigint wref, const Sbecore::ubigint jref, const std::string sref, const unsigned int deltat = 0, const bool weak = false);
+	WakeupBrly(XchgBrly* xchg, const Sbecore::ubigint wref, const Sbecore::ubigint jref, const std::string sref, const uint64_t deltat = 0, const bool weak = false);
 
 public:
 	XchgBrly* xchg;
@@ -735,7 +760,7 @@ public:
 
 	Sbecore::ubigint jref;
 	std::string sref;
-	unsigned int deltat;
+	uint64_t deltat;
 	bool weak;
 };
 
@@ -1016,7 +1041,7 @@ public:
 	std::set<Sbecore::ubigint> getCsjobClisByJref(const Sbecore::ubigint jref);
 
 	// timer methods
-	Sbecore::ubigint addWakeup(const Sbecore::ubigint jref, const std::string sref, const unsigned int deltat = 0, const bool weak = false);
+	Sbecore::ubigint addWakeup(const Sbecore::ubigint jref, const std::string sref, const uint64_t deltat = 0, const bool weak = false);
 	static void* runWakeup(void* arg);
 
 	// external call methods

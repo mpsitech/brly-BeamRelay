@@ -57,6 +57,35 @@ BrlyQLocMapLeg::BrlyQLocMapLeg(
 	this->lam3 = lam3;
 };
 
+void BrlyQLocMapLeg::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["dx"] = dx;
+		me["dy"] = dy;
+		me["x0"] = x0;
+		me["y0"] = y0;
+		me["lm1"] = lam1;
+		me["lm2"] = lam2;
+		me["lm3"] = lam3;
+	} else {
+		me["stubMref"] = stubMref;
+		me["dx"] = dx;
+		me["dy"] = dy;
+		me["x0"] = x0;
+		me["y0"] = y0;
+		me["lam1"] = lam1;
+		me["lam2"] = lam2;
+		me["lam3"] = lam3;
+	};
+};
+
 void BrlyQLocMapLeg::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -136,6 +165,16 @@ ListBrlyQLocMapLeg& ListBrlyQLocMapLeg::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLocMapLeg::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLocMapLeg";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) if (nodes[i]->qwr) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLocMapLeg::writeXML(

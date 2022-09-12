@@ -58,7 +58,7 @@ public:
 	/**
 	  * ContInf (full: ContInfBrlyLocRec)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTREF = 1;
@@ -70,6 +70,7 @@ public:
 		std::string TxtRef;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const ContInf* comp);
 		std::set<Sbecore::uint> diff(const ContInf* comp);
@@ -81,13 +82,14 @@ public:
 	class StatApp {
 
 	public:
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneMap = false, const bool initdoneBgn1NLeg = false, const bool initdoneEnd1NLeg = false, const bool initdoneEqp1NNode = false, const bool initdoneMNSegment = false, const bool initdoneMNFlight = false, const bool initdoneMNLeg = false, const bool initdoneVisOrgMNLocation = false, const bool initdoneProxOrgMNLocation = false, const bool initdoneEqpMNConnection = false);
 		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneMap = false, const bool initdoneBgn1NLeg = false, const bool initdoneEnd1NLeg = false, const bool initdoneEqp1NNode = false, const bool initdoneMNSegment = false, const bool initdoneMNFlight = false, const bool initdoneMNLeg = false, const bool initdoneVisOrgMNLocation = false, const bool initdoneProxOrgMNLocation = false, const bool initdoneEqpMNConnection = false);
 	};
 
 	/**
 		* StatShr (full: StatShrBrlyLocRec)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXBRLYVEXPSTATE = 1;
@@ -131,6 +133,7 @@ public:
 		bool ButRegularizeActive;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -142,6 +145,7 @@ public:
 	class Tag {
 
 	public:
+		static void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup, std::string difftag = "");
 		static void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	};
 
@@ -163,6 +167,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -190,6 +195,7 @@ public:
 		std::string getSrefsMask();
 		void merge(DpchEngBrly* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr);
 	};
 
@@ -257,11 +263,11 @@ public:
 private:
 	bool handleCallBrlyLocUpd_refEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
 	bool handleCallBrlyEqpUpd_refEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
-	bool handleCallBrlyLoc_eqpEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallBrlyEqp_oprEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallBrlyLoc_typEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallBrlyLoc_inSbs(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallBrlyLoc_eqpEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallBrlyEqp_ptyEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallBrlyEqp_oprEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallBrlyEqp_inSbs(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallBrlyEqp_hktEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 

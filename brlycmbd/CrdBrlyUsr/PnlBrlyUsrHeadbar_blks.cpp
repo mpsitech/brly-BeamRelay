@@ -15,6 +15,28 @@ using namespace Xmlio;
  class PnlBrlyUsrHeadbar::StgInf
  ******************************************************************************/
 
+void PnlBrlyUsrHeadbar::StgInf::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgInfBrlyUsrHeadbar";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["MenAppCptwidth"] = "100";
+		me["MenAppWidth"] = "176";
+		me["MenCrdCptwidth"] = "46";
+		me["MenCrdWidth"] = "323";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["MenAppCptwidth"] = "100";
+		me["MenAppWidth"] = "176";
+		me["MenCrdCptwidth"] = "82";
+		me["MenCrdWidth"] = "323";
+	};
+};
+
 void PnlBrlyUsrHeadbar::StgInf::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -45,6 +67,24 @@ void PnlBrlyUsrHeadbar::StgInf::writeXML(
 /******************************************************************************
  class PnlBrlyUsrHeadbar::Tag
  ******************************************************************************/
+
+void PnlBrlyUsrHeadbar::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyUsrHeadbar";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["MenApp"] = "BeamRelay";
+		me["MenCrd"] = "User";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["MenApp"] = "BeamRelay";
+		me["MenCrd"] = "Benutzer";
+	};
+};
 
 void PnlBrlyUsrHeadbar::Tag::writeXML(
 			const uint ixBrlyVLocale
@@ -105,6 +145,17 @@ void PnlBrlyUsrHeadbar::DpchEngData::merge(
 	if (src->has(JREF)) {jref = src->jref; add(JREF);};
 	if (src->has(STGINF)) add(STGINF);
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlBrlyUsrHeadbar::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyUsrHeadbarData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(STGINF)) StgInf::writeJSON(ixBrlyVLocale, me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
 };
 
 void PnlBrlyUsrHeadbar::DpchEngData::writeXML(

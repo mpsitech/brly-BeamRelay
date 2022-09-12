@@ -24,6 +24,7 @@ uint VecBrlyVTag::getIx(
 
 	if (s == "about") return ABOUT;
 	if (s == "always") return ALWAYS;
+	if (s == "announce") return ANNOUNCE;
 	if (s == "cancel") return CANCEL;
 	if (s == "close") return CLOSE;
 	if (s == "clsess") return CLSESS;
@@ -41,9 +42,13 @@ uint VecBrlyVTag::getIx(
 	if (s == "goto") return GOTO;
 	if (s == "grp") return GRP;
 	if (s == "help") return HELP;
+	if (s == "hour") return HOUR;
+	if (s == "hours") return HOURS;
 	if (s == "imperr") return IMPERR;
 	if (s == "import") return IMPORT;
 	if (s == "loaini") return LOAINI;
+	if (s == "minute") return MINUTE;
+	if (s == "minutes") return MINUTES;
 	if (s == "nav") return NAV;
 	if (s == "new") return NEW;
 	if (s == "no") return NO;
@@ -57,6 +62,8 @@ uint VecBrlyVTag::getIx(
 	if (s == "rec") return REC;
 	if (s == "reverse") return REVERSE;
 	if (s == "run") return RUN;
+	if (s == "second") return SECOND;
+	if (s == "seconds") return SECONDS;
 	if (s == "sess") return SESS;
 	if (s == "showlong") return SHOWLONG;
 	if (s == "showshort") return SHOWSHORT;
@@ -74,6 +81,7 @@ string VecBrlyVTag::getSref(
 		) {
 	if (ix == ABOUT) return("about");
 	if (ix == ALWAYS) return("always");
+	if (ix == ANNOUNCE) return("announce");
 	if (ix == CANCEL) return("cancel");
 	if (ix == CLOSE) return("close");
 	if (ix == CLSESS) return("clsess");
@@ -91,9 +99,13 @@ string VecBrlyVTag::getSref(
 	if (ix == GOTO) return("goto");
 	if (ix == GRP) return("grp");
 	if (ix == HELP) return("help");
+	if (ix == HOUR) return("hour");
+	if (ix == HOURS) return("hours");
 	if (ix == IMPERR) return("imperr");
 	if (ix == IMPORT) return("import");
 	if (ix == LOAINI) return("loaini");
+	if (ix == MINUTE) return("minute");
+	if (ix == MINUTES) return("minutes");
 	if (ix == NAV) return("nav");
 	if (ix == NEW) return("new");
 	if (ix == NO) return("no");
@@ -107,6 +119,8 @@ string VecBrlyVTag::getSref(
 	if (ix == REC) return("rec");
 	if (ix == REVERSE) return("reverse");
 	if (ix == RUN) return("run");
+	if (ix == SECOND) return("second");
+	if (ix == SECONDS) return("seconds");
 	if (ix == SESS) return("sess");
 	if (ix == SHOWLONG) return("showlong");
 	if (ix == SHOWSHORT) return("showshort");
@@ -126,6 +140,7 @@ string VecBrlyVTag::getTitle(
 	if (ixBrlyVLocale == 1) {
 		if (ix == ABOUT) return("About BeamRelay");
 		if (ix == ALWAYS) return("always");
+		if (ix == ANNOUNCE) return("announcement");
 		if (ix == CANCEL) return("cancel");
 		if (ix == CLOSE) return("close");
 		if (ix == CLSESS) return("close session");
@@ -143,9 +158,13 @@ string VecBrlyVTag::getTitle(
 		if (ix == GOTO) return("go to");
 		if (ix == GRP) return("group");
 		if (ix == HELP) return("BeamRelay help");
+		if (ix == HOUR) return("hour");
+		if (ix == HOURS) return("hours");
 		if (ix == IMPERR) return("import error");
 		if (ix == IMPORT) return("import");
 		if (ix == LOAINI) return("load initialization data");
+		if (ix == MINUTE) return("minute");
+		if (ix == MINUTES) return("minutes");
 		if (ix == NAV) return("navigation");
 		if (ix == NEW) return("new");
 		if (ix == NO) return("no");
@@ -159,6 +178,8 @@ string VecBrlyVTag::getTitle(
 		if (ix == REC) return("records &firstload; to &lastload; of &ntot;");
 		if (ix == REVERSE) return("reverse");
 		if (ix == RUN) return("execute");
+		if (ix == SECOND) return("second");
+		if (ix == SECONDS) return("seconds");
 		if (ix == SESS) return("session");
 		if (ix == SHOWLONG) return("showing &firstdisp; to &lastdisp; of &ntot;");
 		if (ix == SHOWSHORT) return("&firstdisp;-&lastdisp; of &ntot;");
@@ -170,6 +191,7 @@ string VecBrlyVTag::getTitle(
 	} else if (ixBrlyVLocale == 2) {
 		if (ix == ABOUT) return("\\u00dcber BeamRelay");
 		if (ix == ALWAYS) return("immer");
+		if (ix == ANNOUNCE) return("Ank\\u00fcndigung");
 		if (ix == CANCEL) return("abbrechen");
 		if (ix == CLOSE) return("Schliessen");
 		if (ix == CLSESS) return("Sitzung beenden");
@@ -187,9 +209,13 @@ string VecBrlyVTag::getTitle(
 		if (ix == GOTO) return("gehe zu");
 		if (ix == GRP) return("Gruppe");
 		if (ix == HELP) return("BeamRelay Hilfe");
+		if (ix == HOUR) return("Stunde");
+		if (ix == HOURS) return("Stunden");
 		if (ix == IMPERR) return("Fehler beim Importieren");
 		if (ix == IMPORT) return("importieren");
 		if (ix == LOAINI) return("Initialisierungsdaten laden");
+		if (ix == MINUTE) return("Minute");
+		if (ix == MINUTES) return("Minuten");
 		if (ix == NAV) return("Navigation");
 		if (ix == NEW) return("neu");
 		if (ix == NO) return("nein");
@@ -203,6 +229,8 @@ string VecBrlyVTag::getTitle(
 		if (ix == REC) return("Datens\\u00e4tze &firstload; bis &lastload; von &ntot;");
 		if (ix == REVERSE) return("umkehren");
 		if (ix == RUN) return("ausf\\u00fchren");
+		if (ix == SECOND) return("Sekunde");
+		if (ix == SECONDS) return("Sekunden");
 		if (ix == SESS) return("Sitzung");
 		if (ix == SHOWLONG) return("zeige &firstdisp; bis &lastdisp; von &ntot;");
 		if (ix == SHOWSHORT) return("&firstdisp;-&lastdisp; von &ntot;");

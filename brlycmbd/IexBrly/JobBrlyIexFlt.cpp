@@ -189,7 +189,7 @@ string JobBrlyIexFlt::getSquawk(
 		if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
 			if (ixVSge == VecVSge::PARSE) retval = "parsing FlightAware flight data";
 			else if (ixVSge == VecVSge::PRSDONE) retval = "FlightAware flight data parsed";
-			else if (ixVSge == VecVSge::IMPORT) retval = "importing FlightAware flight data (" + to_string(impcnt) + " records added)";
+			else if (ixVSge == VecVSge::IMPORT) retval = "importing FlightAware flight data (&impcnt; records added)";
 			else if (ixVSge == VecVSge::REVERSE) retval = "reversing FlightAware flight data import";
 			else if (ixVSge == VecVSge::COLLECT) retval = "collecting FlightAware flight data for export";
 			else if (ixVSge == VecVSge::CLTDONE) retval = "FlightAware flight data collected for export";
@@ -197,7 +197,7 @@ string JobBrlyIexFlt::getSquawk(
 		} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
 			if (ixVSge == VecVSge::PARSE) retval = "parsing FlightAware flight data";
 			else if (ixVSge == VecVSge::PRSDONE) retval = "FlightAware flight data parsed";
-			else if (ixVSge == VecVSge::IMPORT) retval = "importing FlightAware flight data (" + to_string(impcnt) + " records added)";
+			else if (ixVSge == VecVSge::IMPORT) retval = "importing FlightAware flight data (&impcnt; records added)";
 			else if (ixVSge == VecVSge::REVERSE) retval = "reversing FlightAware flight data import";
 			else if (ixVSge == VecVSge::COLLECT) retval = "collecting FlightAware flight data for export";
 			else if (ixVSge == VecVSge::CLTDONE) retval = "FlightAware flight data collected for export";
@@ -446,7 +446,6 @@ uint JobBrlyIexFlt::enterSgeImport(
 				};
 			};
 		};
-		// IP enterSgeImport.traverse --- REND
 
 		// -- ImeIMFaflight
 		for (unsigned int ix0 = 0; ix0 < imeimfaflight.nodes.size(); ix0++) {
@@ -503,7 +502,7 @@ uint JobBrlyIexFlt::enterSgeImport(
 				impcnt++;
 			};
 		};
-		// IP enterSgeImport.traverse --- END
+		// IP enterSgeImport.traverse --- REND
 
 		// IP enterSgeImport.ppr --- INSERT
 	} catch (SbeException& e) {

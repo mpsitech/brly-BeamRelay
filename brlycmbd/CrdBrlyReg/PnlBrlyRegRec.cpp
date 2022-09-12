@@ -47,8 +47,8 @@ PnlBrlyRegRec::PnlBrlyRegRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecBrlyVCall::CALLBRLYREG_ISLEAF, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYREG_SUPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYREG_ISLEAF, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYREG_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
@@ -263,10 +263,10 @@ void PnlBrlyRegRec::handleCall(
 		) {
 	if (call->ixVCall == VecBrlyVCall::CALLBRLYREGUPD_REFEQ) {
 		call->abort = handleCallBrlyRegUpd_refEq(dbsbrly, call->jref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYREG_ISLEAF) {
-		call->abort = handleCallBrlyReg_isLeaf(dbsbrly, call->jref, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYREG_SUPEQ) {
 		call->abort = handleCallBrlyReg_supEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYREG_ISLEAF) {
+		call->abort = handleCallBrlyReg_isLeaf(dbsbrly, call->jref, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYREG_INSBS) {
 		call->abort = handleCallBrlyReg_inSbs(dbsbrly, call->jref, call->argInv.ix, call->argRet.boolval);
 	};
@@ -281,16 +281,6 @@ bool PnlBrlyRegRec::handleCallBrlyRegUpd_refEq(
 	return retval;
 };
 
-bool PnlBrlyRegRec::handleCallBrlyReg_isLeaf(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = [&](){uint cnt = 0; if (recReg.ref != 0) dbsbrly->loadUintBySQL("SELECT COUNT(ref) FROM TblBrlyMRegion WHERE supRefBrlyMRegion = " + to_string(recReg.ref), cnt); return(cnt == 0);}(); // IP handleCallBrlyReg_isLeaf --- LINE
-	return retval;
-};
-
 bool PnlBrlyRegRec::handleCallBrlyReg_supEq(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
@@ -299,6 +289,16 @@ bool PnlBrlyRegRec::handleCallBrlyReg_supEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recReg.supRefBrlyMRegion == refInv); // IP handleCallBrlyReg_supEq --- LINE
+	return retval;
+};
+
+bool PnlBrlyRegRec::handleCallBrlyReg_isLeaf(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = [&](){uint cnt = 0; if (recReg.ref != 0) dbsbrly->loadUintBySQL("SELECT COUNT(ref) FROM TblBrlyMRegion WHERE supRefBrlyMRegion = " + to_string(recReg.ref), cnt); return(cnt == 0);}(); // IP handleCallBrlyReg_isLeaf --- LINE
 	return retval;
 };
 

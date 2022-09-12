@@ -25,6 +25,17 @@ QryBrlyLegMapLocation::StatShr::StatShr(
 	mask = {NTOT};
 };
 
+void QryBrlyLegMapLocation::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrQryBrlyLegMapLocation";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ntot"] = ntot;
+};
+
 void QryBrlyLegMapLocation::StatShr::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -78,6 +89,25 @@ QryBrlyLegMapLocation::StgIac::StgIac(
 	mask = {JNUM};
 };
 
+bool QryBrlyLegMapLocation::StgIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryBrlyLegMapLocation"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("jnum")) {jnum = me["jnum"].asUInt(); add(JNUM);};
+	};
+
+	return basefound;
+};
+
 bool QryBrlyLegMapLocation::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -99,6 +129,17 @@ bool QryBrlyLegMapLocation::StgIac::readXML(
 	};
 
 	return basefound;
+};
+
+void QryBrlyLegMapLocation::StgIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgIacQryBrlyLegMapLocation";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["jnum"] = jnum;
 };
 
 void QryBrlyLegMapLocation::StgIac::writeXML(

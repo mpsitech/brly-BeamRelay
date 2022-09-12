@@ -43,8 +43,8 @@ CrdBrlyFil::CrdBrlyFil(
 	VecVSge::fillFeed(feedFSge);
 
 	pnllist = NULL;
-	pnlheadbar = NULL;
 	pnlrec = NULL;
+	pnlheadbar = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -54,8 +54,8 @@ CrdBrlyFil::CrdBrlyFil(
 	changeRef(dbsbrly, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
 	pnllist = new PnlBrlyFilList(xchg, dbsbrly, jref, ixBrlyVLocale);
-	pnlheadbar = new PnlBrlyFilHeadbar(xchg, dbsbrly, jref, ixBrlyVLocale);
 	pnlrec = new PnlBrlyFilRec(xchg, dbsbrly, jref, ixBrlyVLocale);
+	pnlheadbar = new PnlBrlyFilHeadbar(xchg, dbsbrly, jref, ixBrlyVLocale);
 
 	// IP constructor.cust2 --- INSERT
 

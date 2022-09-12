@@ -43,6 +43,29 @@ BrlyQUsrAAccess::BrlyQUsrAAccess(
 	this->titsIxBrlyWAccess = titsIxBrlyWAccess;
 };
 
+void BrlyQUsrAAccess::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["feg"] = srefX1IxBrlyVFeatgroup;
+		me["feg2"] = titX1IxBrlyVFeatgroup;
+		me["fea"] = x2FeaSrefUix;
+		me["acc"] = srefsIxBrlyWAccess;
+		me["acc2"] = titsIxBrlyWAccess;
+	} else {
+		me["srefX1IxBrlyVFeatgroup"] = srefX1IxBrlyVFeatgroup;
+		me["titX1IxBrlyVFeatgroup"] = titX1IxBrlyVFeatgroup;
+		me["x2FeaSrefUix"] = x2FeaSrefUix;
+		me["srefsIxBrlyWAccess"] = srefsIxBrlyWAccess;
+		me["titsIxBrlyWAccess"] = titsIxBrlyWAccess;
+	};
+};
+
 void BrlyQUsrAAccess::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -116,6 +139,16 @@ ListBrlyQUsrAAccess& ListBrlyQUsrAAccess::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQUsrAAccess::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQUsrAAccess";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQUsrAAccess::writeXML(

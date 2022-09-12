@@ -141,7 +141,7 @@ void* BrlycmbdOpprc::run(
 		throw;
 	};
 
-	pthread_cleanup_pop(0);
+	pthread_cleanup_pop(1);
 
 	return(NULL);
 };

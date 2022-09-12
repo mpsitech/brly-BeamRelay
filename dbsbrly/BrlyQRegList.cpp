@@ -45,6 +45,31 @@ BrlyQRegList::BrlyQRegList(
 	this->toffset = toffset;
 };
 
+void BrlyQRegList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["tit"] = Title;
+		me["sup"] = stubSupRefBrlyMRegion;
+		me["dst"] = srefIxVDst;
+		me["dst2"] = titIxVDst;
+		me["tof"] = toffset;
+	} else {
+		me["sref"] = sref;
+		me["Title"] = Title;
+		me["stubSupRefBrlyMRegion"] = stubSupRefBrlyMRegion;
+		me["srefIxVDst"] = srefIxVDst;
+		me["titIxVDst"] = titIxVDst;
+		me["toffset"] = toffset;
+	};
+};
+
 void BrlyQRegList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -120,6 +145,16 @@ ListBrlyQRegList& ListBrlyQRegList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQRegList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQRegList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQRegList::writeXML(

@@ -329,27 +329,13 @@ void QryBrlyTtbList::handleCall(
 			DbsBrly* dbsbrly
 			, Call* call
 		) {
-	if (call->ixVCall == VecBrlyVCall::CALLBRLYTTBUPD_REFEQ) {
-		call->abort = handleCallBrlyTtbUpd_refEq(dbsbrly, call->jref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYTTBMOD) {
+	if (call->ixVCall == VecBrlyVCall::CALLBRLYTTBMOD) {
 		call->abort = handleCallBrlyTtbMod(dbsbrly, call->jref);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYTTBUPD_REFEQ) {
+		call->abort = handleCallBrlyTtbUpd_refEq(dbsbrly, call->jref);
 	} else if ((call->ixVCall == VecBrlyVCall::CALLBRLYSTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallBrlyStubChgFromSelf(dbsbrly);
 	};
-};
-
-bool QryBrlyTtbList::handleCallBrlyTtbUpd_refEq(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if (ixBrlyVQrystate != VecBrlyVQrystate::OOD) {
-		ixBrlyVQrystate = VecBrlyVQrystate::OOD;
-		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
-	};
-
-	return retval;
 };
 
 bool QryBrlyTtbList::handleCallBrlyTtbMod(
@@ -360,6 +346,20 @@ bool QryBrlyTtbList::handleCallBrlyTtbMod(
 
 	if ((ixBrlyVQrystate == VecBrlyVQrystate::UTD) || (ixBrlyVQrystate == VecBrlyVQrystate::SLM)) {
 		ixBrlyVQrystate = VecBrlyVQrystate::MNR;
+		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
+	};
+
+	return retval;
+};
+
+bool QryBrlyTtbList::handleCallBrlyTtbUpd_refEq(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if (ixBrlyVQrystate != VecBrlyVQrystate::OOD) {
+		ixBrlyVQrystate = VecBrlyVQrystate::OOD;
 		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
 	};
 

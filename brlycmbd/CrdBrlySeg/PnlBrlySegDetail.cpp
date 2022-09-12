@@ -47,8 +47,8 @@ PnlBrlySegDetail::PnlBrlySegDetail(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecBrlyVCall::CALLBRLYSEG_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYSEG_RETEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYSEG_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -262,13 +262,13 @@ void PnlBrlySegDetail::handleDpchAppDoButReuViewClick(
 	string sref;
 
 	if (statshr.ButReuViewAvail && statshr.ButReuViewActive) {
-		if (xchg->getIxPreset(VecBrlyVPreset::PREBRLYIXCRDACCCON, jref)) if (recSeg.refIxVTbl == VecBrlyVMSegmentRefTbl::CON) {
-			sref = "CrdBrlyCon";
+		if (xchg->getIxPreset(VecBrlyVPreset::PREBRLYIXCRDACCFLT, jref)) if (recSeg.refIxVTbl == VecBrlyVMSegmentRefTbl::FLT) {
+			sref = "CrdBrlyFlt";
 			xchg->triggerIxRefSrefIntvalToRefCall(dbsbrly, VecBrlyVCall::CALLBRLYCRDOPEN, jref, 0, 0, sref, recSeg.refUref, jrefNew);
 		};
 		if (jrefNew == 0) {
-			if (xchg->getIxPreset(VecBrlyVPreset::PREBRLYIXCRDACCFLT, jref)) if (recSeg.refIxVTbl == VecBrlyVMSegmentRefTbl::FLT) {
-				sref = "CrdBrlyFlt";
+			if (xchg->getIxPreset(VecBrlyVPreset::PREBRLYIXCRDACCCON, jref)) if (recSeg.refIxVTbl == VecBrlyVMSegmentRefTbl::CON) {
+				sref = "CrdBrlyCon";
 				xchg->triggerIxRefSrefIntvalToRefCall(dbsbrly, VecBrlyVCall::CALLBRLYCRDOPEN, jref, 0, 0, sref, recSeg.refUref, jrefNew);
 			};
 		};
@@ -284,10 +284,10 @@ void PnlBrlySegDetail::handleCall(
 		) {
 	if (call->ixVCall == VecBrlyVCall::CALLBRLYSEGUPD_REFEQ) {
 		call->abort = handleCallBrlySegUpd_refEq(dbsbrly, call->jref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSEG_REUEQ) {
-		call->abort = handleCallBrlySeg_reuEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSEG_RETEQ) {
 		call->abort = handleCallBrlySeg_retEq(dbsbrly, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSEG_REUEQ) {
+		call->abort = handleCallBrlySeg_reuEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
@@ -300,17 +300,6 @@ bool PnlBrlySegDetail::handleCallBrlySegUpd_refEq(
 	return retval;
 };
 
-bool PnlBrlySegDetail::handleCallBrlySeg_reuEq(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recSeg.refUref == refInv); // IP handleCallBrlySeg_reuEq --- LINE
-	return retval;
-};
-
 bool PnlBrlySegDetail::handleCallBrlySeg_retEq(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
@@ -319,5 +308,16 @@ bool PnlBrlySegDetail::handleCallBrlySeg_retEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recSeg.refIxVTbl == ixInv); // IP handleCallBrlySeg_retEq --- LINE
+	return retval;
+};
+
+bool PnlBrlySegDetail::handleCallBrlySeg_reuEq(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recSeg.refUref == refInv); // IP handleCallBrlySeg_reuEq --- LINE
 	return retval;
 };

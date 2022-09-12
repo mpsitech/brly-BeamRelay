@@ -10,10 +10,10 @@
 #ifndef BRLY_H
 #define BRLY_H
 
-#define BRLY_VERSION "0.2.13"
+#define BRLY_VERSION "0.2.15"
 #define BRLY_VERSION_MAJOR 0
 #define BRLY_VERSION_MINOR 2
-#define BRLY_VERSION_SUB 13
+#define BRLY_VERSION_SUB 15
 
 // IP include.cust --- IBEGIN
 #include <netcdf.h>
@@ -268,7 +268,7 @@ public:
 /**
 	* ContInfBrlyAlert
 	*/
-class ContInfBrlyAlert : public Sbecore::Xmlio::Block {
+class ContInfBrlyAlert : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint TXTCPT = 1;
@@ -305,6 +305,7 @@ public:
 
 public:
 	static bool all(const std::set<Sbecore::uint>& items);
+	void writeJSON(Json::Value& sup, std::string difftag = "");
 	void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	std::set<Sbecore::uint> compare(const ContInfBrlyAlert* comp);
 };
@@ -312,7 +313,7 @@ public:
 /**
 	* DpchBrly
 	*/
-class DpchBrly : public Sbecore::Xmlio::Block {
+class DpchBrly : public Sbecore::Block {
 
 public:
 	DpchBrly(const Sbecore::uint ixBrlyVDpch = 0);

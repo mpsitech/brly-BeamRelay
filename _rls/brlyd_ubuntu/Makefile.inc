@@ -2,7 +2,7 @@
 # make file paths for Brly daemon, release brlyd_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 11 Jan 2021
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 BUILDROOT = ${WHIZSDKROOT}/build

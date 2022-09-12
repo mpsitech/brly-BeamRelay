@@ -79,6 +79,30 @@ PnlBrlyNavAdmin::ContIac::ContIac(
 	mask = {NUMFLSTUSG, NUMFLSTUSR, NUMFLSTPRS, NUMFLSTFIL, NUMFLSTOPR, NUMFLSTPTY};
 };
 
+bool PnlBrlyNavAdmin::ContIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacBrlyNavAdmin"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("numFLstUsg")) {numFLstUsg = me["numFLstUsg"].asUInt(); add(NUMFLSTUSG);};
+		if (me.isMember("numFLstUsr")) {numFLstUsr = me["numFLstUsr"].asUInt(); add(NUMFLSTUSR);};
+		if (me.isMember("numFLstPrs")) {numFLstPrs = me["numFLstPrs"].asUInt(); add(NUMFLSTPRS);};
+		if (me.isMember("numFLstFil")) {numFLstFil = me["numFLstFil"].asUInt(); add(NUMFLSTFIL);};
+		if (me.isMember("numFLstOpr")) {numFLstOpr = me["numFLstOpr"].asUInt(); add(NUMFLSTOPR);};
+		if (me.isMember("numFLstPty")) {numFLstPty = me["numFLstPty"].asUInt(); add(NUMFLSTPTY);};
+	};
+
+	return basefound;
+};
+
 bool PnlBrlyNavAdmin::ContIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -105,6 +129,22 @@ bool PnlBrlyNavAdmin::ContIac::readXML(
 	};
 
 	return basefound;
+};
+
+void PnlBrlyNavAdmin::ContIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContIacBrlyNavAdmin";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFLstUsg"] = numFLstUsg;
+	me["numFLstUsr"] = numFLstUsr;
+	me["numFLstPrs"] = numFLstPrs;
+	me["numFLstFil"] = numFLstFil;
+	me["numFLstOpr"] = numFLstOpr;
+	me["numFLstPty"] = numFLstPty;
 };
 
 void PnlBrlyNavAdmin::ContIac::writeXML(
@@ -160,6 +200,42 @@ set<uint> PnlBrlyNavAdmin::ContIac::diff(
 /******************************************************************************
  class PnlBrlyNavAdmin::StatApp
  ******************************************************************************/
+
+void PnlBrlyNavAdmin::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixBrlyVExpstate
+			, const bool LstUsgAlt
+			, const bool LstUsrAlt
+			, const bool LstPrsAlt
+			, const bool LstFilAlt
+			, const bool LstOprAlt
+			, const bool LstPtyAlt
+			, const uint LstUsgNumFirstdisp
+			, const uint LstUsrNumFirstdisp
+			, const uint LstPrsNumFirstdisp
+			, const uint LstFilNumFirstdisp
+			, const uint LstOprNumFirstdisp
+			, const uint LstPtyNumFirstdisp
+		) {
+	if (difftag.length() == 0) difftag = "StatAppBrlyNavAdmin";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxBrlyVExpstate"] = VecBrlyVExpstate::getSref(ixBrlyVExpstate);
+	me["LstUsgAlt"] = LstUsgAlt;
+	me["LstUsrAlt"] = LstUsrAlt;
+	me["LstPrsAlt"] = LstPrsAlt;
+	me["LstFilAlt"] = LstFilAlt;
+	me["LstOprAlt"] = LstOprAlt;
+	me["LstPtyAlt"] = LstPtyAlt;
+	me["LstUsgNumFirstdisp"] = LstUsgNumFirstdisp;
+	me["LstUsrNumFirstdisp"] = LstUsrNumFirstdisp;
+	me["LstPrsNumFirstdisp"] = LstPrsNumFirstdisp;
+	me["LstFilNumFirstdisp"] = LstFilNumFirstdisp;
+	me["LstOprNumFirstdisp"] = LstOprNumFirstdisp;
+	me["LstPtyNumFirstdisp"] = LstPtyNumFirstdisp;
+};
 
 void PnlBrlyNavAdmin::StatApp::writeXML(
 			xmlTextWriter* wr
@@ -238,6 +314,28 @@ PnlBrlyNavAdmin::StatShr::StatShr(
 	mask = {LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE, LSTOPRAVAIL, BUTOPRVIEWACTIVE, LSTPTYAVAIL, BUTPTYVIEWACTIVE};
 };
 
+void PnlBrlyNavAdmin::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrBrlyNavAdmin";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["LstUsgAvail"] = LstUsgAvail;
+	me["ButUsgViewActive"] = ButUsgViewActive;
+	me["LstUsrAvail"] = LstUsrAvail;
+	me["ButUsrViewActive"] = ButUsrViewActive;
+	me["LstPrsAvail"] = LstPrsAvail;
+	me["ButPrsViewActive"] = ButPrsViewActive;
+	me["LstFilAvail"] = LstFilAvail;
+	me["ButFilViewActive"] = ButFilViewActive;
+	me["LstOprAvail"] = LstOprAvail;
+	me["ButOprViewActive"] = ButOprViewActive;
+	me["LstPtyAvail"] = LstPtyAvail;
+	me["ButPtyViewActive"] = ButPtyViewActive;
+};
+
 void PnlBrlyNavAdmin::StatShr::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -304,6 +402,34 @@ set<uint> PnlBrlyNavAdmin::StatShr::diff(
  class PnlBrlyNavAdmin::Tag
  ******************************************************************************/
 
+void PnlBrlyNavAdmin::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyNavAdmin";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["Cpt"] = "Administration module";
+		me["CptUsg"] = "user groups";
+		me["CptUsr"] = "users";
+		me["CptPrs"] = "persons";
+		me["CptFil"] = "files";
+		me["CptOpr"] = "operators";
+		me["CptPty"] = "plane types";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["Cpt"] = "Verwaltung";
+		me["CptUsg"] = "Benutzergruppen";
+		me["CptUsr"] = "Benutzer";
+		me["CptPrs"] = "Personen";
+		me["CptFil"] = "Dateien";
+		me["CptOpr"] = "Betreiber";
+		me["CptPty"] = "Flugzeugtypen";
+	};
+};
+
 void PnlBrlyNavAdmin::Tag::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -358,6 +484,26 @@ string PnlBrlyNavAdmin::DpchAppData::getSrefsMask() {
 	return(srefs);
 };
 
+void PnlBrlyNavAdmin::DpchAppData::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyNavAdminData"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (contiac.readJSON(me, true)) add(CONTIAC);
+	} else {
+		contiac = ContIac();
+	};
+};
+
 void PnlBrlyNavAdmin::DpchAppData::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -405,6 +551,25 @@ string PnlBrlyNavAdmin::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlBrlyNavAdmin::DpchAppDo::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyNavAdminDo"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlBrlyNavAdmin::DpchAppDo::readXML(
@@ -505,6 +670,25 @@ void PnlBrlyNavAdmin::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlBrlyNavAdmin::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyNavAdminData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTIAC)) contiac.writeJSON(me);
+	if (has(FEEDFLSTFIL)) feedFLstFil.writeJSON(me);
+	if (has(FEEDFLSTOPR)) feedFLstOpr.writeJSON(me);
+	if (has(FEEDFLSTPRS)) feedFLstPrs.writeJSON(me);
+	if (has(FEEDFLSTPTY)) feedFLstPty.writeJSON(me);
+	if (has(FEEDFLSTUSG)) feedFLstUsg.writeJSON(me);
+	if (has(FEEDFLSTUSR)) feedFLstUsr.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
 };
 
 void PnlBrlyNavAdmin::DpchEngData::writeXML(

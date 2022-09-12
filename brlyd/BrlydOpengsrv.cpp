@@ -31,7 +31,7 @@ void BrlydOpengsrv::stop(
 	MHD_stop_daemon(d);
 };
 
-int BrlydOpengsrv::MhdAccept(
+MHD_Result BrlydOpengsrv::MhdAccept(
 			void* cls
 			, const sockaddr* addr
 			, socklen_t addrlen
@@ -39,7 +39,7 @@ int BrlydOpengsrv::MhdAccept(
 	return MHD_YES;
 };
 
-int BrlydOpengsrv::MhdCallback(
+MHD_Result BrlydOpengsrv::MhdCallback(
 			void* cls
 			, MHD_Connection* connection
 			, const char* url
@@ -52,7 +52,7 @@ int BrlydOpengsrv::MhdCallback(
 	XchgBrlyd* xchg = (XchgBrlyd*) cls;
 
 	MHD_Response* response;
-	int retval = MHD_YES;
+	MHD_Result retval = MHD_YES;
 
 	ReqopengconBrly* req = NULL;
 
@@ -164,7 +164,7 @@ int BrlydOpengsrv::MhdCallback(
 	return retval;
 };
 
-int BrlydOpengsrv::MhdPostrecv(
+MHD_Result BrlydOpengsrv::MhdPostrecv(
 			void* con_cls
 			, MHD_ValueKind kind
 			, const char* key

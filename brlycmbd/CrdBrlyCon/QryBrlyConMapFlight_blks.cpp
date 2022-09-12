@@ -25,6 +25,17 @@ QryBrlyConMapFlight::StatShr::StatShr(
 	mask = {NTOT};
 };
 
+void QryBrlyConMapFlight::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrQryBrlyConMapFlight";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ntot"] = ntot;
+};
+
 void QryBrlyConMapFlight::StatShr::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -78,6 +89,25 @@ QryBrlyConMapFlight::StgIac::StgIac(
 	mask = {JNUM};
 };
 
+bool QryBrlyConMapFlight::StgIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryBrlyConMapFlight"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("jnum")) {jnum = me["jnum"].asUInt(); add(JNUM);};
+	};
+
+	return basefound;
+};
+
 bool QryBrlyConMapFlight::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -99,6 +129,17 @@ bool QryBrlyConMapFlight::StgIac::readXML(
 	};
 
 	return basefound;
+};
+
+void QryBrlyConMapFlight::StgIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgIacQryBrlyConMapFlight";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["jnum"] = jnum;
 };
 
 void QryBrlyConMapFlight::StgIac::writeXML(

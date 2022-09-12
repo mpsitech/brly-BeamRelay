@@ -41,8 +41,8 @@ PnlBrlyConRec::PnlBrlyConRec(
 	pnlmnsegment = NULL;
 	pnlmnflight = NULL;
 	pnlconmnequipment = NULL;
-	pnlref1nsegment = NULL;
 	pnl1nrelay = NULL;
+	pnlref1nsegment = NULL;
 	pnlmap = NULL;
 	pnldetail = NULL;
 	pnlpre = NULL;

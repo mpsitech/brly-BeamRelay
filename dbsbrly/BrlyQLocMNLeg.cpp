@@ -45,6 +45,33 @@ BrlyQLocMNLeg::BrlyQLocMNLeg(
 	this->xVisLegphi1 = xVisLegphi1;
 };
 
+void BrlyQLocMNLeg::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["lp0"] = x1VisLegphi0;
+		me["lp1"] = x1VisLegphi1;
+		me["lph"] = legphi;
+		me["lth"] = legtheta;
+		me["xp0"] = xVisLegphi0;
+		me["xp1"] = xVisLegphi1;
+	} else {
+		me["stubMref"] = stubMref;
+		me["x1VisLegphi0"] = x1VisLegphi0;
+		me["x1VisLegphi1"] = x1VisLegphi1;
+		me["legphi"] = legphi;
+		me["legtheta"] = legtheta;
+		me["xVisLegphi0"] = xVisLegphi0;
+		me["xVisLegphi1"] = xVisLegphi1;
+	};
+};
+
 void BrlyQLocMNLeg::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -122,6 +149,16 @@ ListBrlyQLocMNLeg& ListBrlyQLocMNLeg::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLocMNLeg::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLocMNLeg";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLocMNLeg::writeXML(

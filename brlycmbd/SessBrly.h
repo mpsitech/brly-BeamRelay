@@ -43,7 +43,7 @@ public:
 	/**
 		* StatShr (full: StatShrSessBrly)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint JREFCRDNAV = 1;
@@ -55,6 +55,7 @@ public:
 		Sbecore::ubigint jrefCrdnav;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -72,16 +73,17 @@ public:
 		static const Sbecore::uint ALL = 4;
 
 	public:
-		DpchEngData(const Sbecore::ubigint jref = 0, Sbecore::Xmlio::Feed* feedFEnsSec = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+		DpchEngData(const Sbecore::ubigint jref = 0, Sbecore::Feed* feedFEnsSec = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 	public:
-		Sbecore::Xmlio::Feed feedFEnsSec;
+		Sbecore::Feed feedFEnsSec;
 		StatShr statshr;
 
 	public:
 		std::string getSrefsMask();
 		void merge(DpchEngBrly* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr);
 	};
 
@@ -92,21 +94,21 @@ public:
 public:
 	StatShr statshr;
 
-	std::list<CrdBrlyRly*> crdrlys;
-	std::list<CrdBrlyCon*> crdcons;
-	std::list<CrdBrlySeg*> crdsegs;
-	std::list<CrdBrlyFlt*> crdflts;
-	std::list<CrdBrlyTtb*> crdttbs;
-	std::list<CrdBrlyLeg*> crdlegs;
-	std::list<CrdBrlyLoc*> crdlocs;
-	std::list<CrdBrlyReg*> crdregs;
+	std::map<Sbecore::ubigint, JobBrly*> crdrlys;
+	std::map<Sbecore::ubigint, JobBrly*> crdcons;
+	std::map<Sbecore::ubigint, JobBrly*> crdsegs;
+	std::map<Sbecore::ubigint, JobBrly*> crdflts;
+	std::map<Sbecore::ubigint, JobBrly*> crdttbs;
+	std::map<Sbecore::ubigint, JobBrly*> crdlegs;
+	std::map<Sbecore::ubigint, JobBrly*> crdlocs;
+	std::map<Sbecore::ubigint, JobBrly*> crdregs;
 	CrdBrlyNav* crdnav;
-	std::list<CrdBrlyPty*> crdptys;
-	std::list<CrdBrlyOpr*> crdoprs;
-	std::list<CrdBrlyFil*> crdfils;
-	std::list<CrdBrlyPrs*> crdprss;
-	std::list<CrdBrlyUsr*> crdusrs;
-	std::list<CrdBrlyUsg*> crdusgs;
+	std::map<Sbecore::ubigint, JobBrly*> crdptys;
+	std::map<Sbecore::ubigint, JobBrly*> crdoprs;
+	std::map<Sbecore::ubigint, JobBrly*> crdfils;
+	std::map<Sbecore::ubigint, JobBrly*> crdprss;
+	std::map<Sbecore::ubigint, JobBrly*> crdusrs;
+	std::map<Sbecore::ubigint, JobBrly*> crdusgs;
 
 	std::map<Sbecore::ubigint,Sbecore::uint> usgaccs;
 
@@ -119,7 +121,10 @@ public:
 	// IP cust --- INSERT
 
 public:
+	void warnTerm(DbsBrly* dbsbrly);
 	void term(DbsBrly* dbsbrly);
+
+	void eraseCrd(std::map<Sbecore::ubigint, JobBrly*>& subjobs);
 
 	Sbecore::uint checkCrdActive(const Sbecore::uint ixBrlyVCard);
 
@@ -176,11 +181,11 @@ public:
 
 private:
 	bool handleCallBrlyRefPreSet(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
-	bool handleCallBrlyRecaccess(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, Sbecore::uint& ixRet);
-	bool handleCallBrlyLog(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, const std::string& srefInv, const int intvalInv);
-	bool handleCallBrlyCrdOpen(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, const std::string& srefInv, const int intvalInv, Sbecore::ubigint& refRet);
-	bool handleCallBrlyCrdClose(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv);
 	bool handleCallBrlyCrdActive(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, Sbecore::uint& ixRet);
+	bool handleCallBrlyCrdClose(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv);
+	bool handleCallBrlyCrdOpen(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, const std::string& srefInv, const int intvalInv, Sbecore::ubigint& refRet);
+	bool handleCallBrlyLog(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, const std::string& srefInv, const int intvalInv);
+	bool handleCallBrlyRecaccess(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, Sbecore::uint& ixRet);
 
 };
 

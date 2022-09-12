@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
+#include "PnlBrlyFltMNConnection.h"
 #include "PnlBrlyFltEqpMNConnection.h"
 #include "PnlBrlyFltOrgMNFlight.h"
-#include "PnlBrlyFltMNConnection.h"
 #include "PnlBrlyFltMNLocation.h"
 #include "PnlBrlyFltEqp1NNode.h"
 #include "PnlBrlyFltRef1NSegment.h"
@@ -57,7 +57,7 @@ public:
 	/**
 	  * ContInf (full: ContInfBrlyFltRec)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTREF = 1;
@@ -69,6 +69,7 @@ public:
 		std::string TxtRef;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const ContInf* comp);
 		std::set<Sbecore::uint> diff(const ContInf* comp);
@@ -80,13 +81,14 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdonePre = false, const bool initdoneDetail = false, const bool initdoneFafAWaypoint = false, const bool initdone1NConnection = false, const bool initdoneRef1NSegment = false, const bool initdoneEqp1NNode = false, const bool initdoneMNLocation = false, const bool initdoneMNConnection = false, const bool initdoneOrgMNFlight = false, const bool initdoneEqpMNConnection = false);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdonePre = false, const bool initdoneDetail = false, const bool initdoneFafAWaypoint = false, const bool initdone1NConnection = false, const bool initdoneRef1NSegment = false, const bool initdoneEqp1NNode = false, const bool initdoneMNLocation = false, const bool initdoneOrgMNFlight = false, const bool initdoneMNConnection = false, const bool initdoneEqpMNConnection = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdonePre = false, const bool initdoneDetail = false, const bool initdoneFafAWaypoint = false, const bool initdone1NConnection = false, const bool initdoneRef1NSegment = false, const bool initdoneEqp1NNode = false, const bool initdoneMNLocation = false, const bool initdoneOrgMNFlight = false, const bool initdoneMNConnection = false, const bool initdoneEqpMNConnection = false);
 	};
 
 	/**
 		* StatShr (full: StatShrBrlyFltRec)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXBRLYVEXPSTATE = 1;
@@ -99,14 +101,14 @@ public:
 		static const Sbecore::uint JREFEQP1NNODE = 8;
 		static const Sbecore::uint PNLEQP1NNODEAVAIL = 9;
 		static const Sbecore::uint JREFMNLOCATION = 10;
-		static const Sbecore::uint JREFMNCONNECTION = 11;
-		static const Sbecore::uint JREFORGMNFLIGHT = 12;
+		static const Sbecore::uint JREFORGMNFLIGHT = 11;
+		static const Sbecore::uint JREFMNCONNECTION = 12;
 		static const Sbecore::uint JREFEQPMNCONNECTION = 13;
 		static const Sbecore::uint PNLEQPMNCONNECTIONAVAIL = 14;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 15;
 
 	public:
-		StatShr(const Sbecore::uint ixBrlyVExpstate = VecBrlyVExpstate::REGD, const Sbecore::ubigint jrefPre = 0, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefFafAWaypoint = 0, const bool pnlfafawaypointAvail = false, const Sbecore::ubigint jref1NConnection = 0, const Sbecore::ubigint jrefRef1NSegment = 0, const Sbecore::ubigint jrefEqp1NNode = 0, const bool pnleqp1nnodeAvail = false, const Sbecore::ubigint jrefMNLocation = 0, const Sbecore::ubigint jrefMNConnection = 0, const Sbecore::ubigint jrefOrgMNFlight = 0, const Sbecore::ubigint jrefEqpMNConnection = 0, const bool pnleqpmnconnectionAvail = false, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixBrlyVExpstate = VecBrlyVExpstate::REGD, const Sbecore::ubigint jrefPre = 0, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefFafAWaypoint = 0, const bool pnlfafawaypointAvail = false, const Sbecore::ubigint jref1NConnection = 0, const Sbecore::ubigint jrefRef1NSegment = 0, const Sbecore::ubigint jrefEqp1NNode = 0, const bool pnleqp1nnodeAvail = false, const Sbecore::ubigint jrefMNLocation = 0, const Sbecore::ubigint jrefOrgMNFlight = 0, const Sbecore::ubigint jrefMNConnection = 0, const Sbecore::ubigint jrefEqpMNConnection = 0, const bool pnleqpmnconnectionAvail = false, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixBrlyVExpstate;
@@ -119,13 +121,14 @@ public:
 		Sbecore::ubigint jrefEqp1NNode;
 		bool pnleqp1nnodeAvail;
 		Sbecore::ubigint jrefMNLocation;
-		Sbecore::ubigint jrefMNConnection;
 		Sbecore::ubigint jrefOrgMNFlight;
+		Sbecore::ubigint jrefMNConnection;
 		Sbecore::ubigint jrefEqpMNConnection;
 		bool pnleqpmnconnectionAvail;
 		bool ButRegularizeActive;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -137,6 +140,7 @@ public:
 	class Tag {
 
 	public:
+		static void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup, std::string difftag = "");
 		static void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	};
 
@@ -158,6 +162,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -185,6 +190,7 @@ public:
 		std::string getSrefsMask();
 		void merge(DpchEngBrly* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr);
 	};
 
@@ -201,9 +207,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
+	PnlBrlyFltMNConnection* pnlmnconnection;
 	PnlBrlyFltEqpMNConnection* pnleqpmnconnection;
 	PnlBrlyFltOrgMNFlight* pnlorgmnflight;
-	PnlBrlyFltMNConnection* pnlmnconnection;
 	PnlBrlyFltMNLocation* pnlmnlocation;
 	PnlBrlyFltEqp1NNode* pnleqp1nnode;
 	PnlBrlyFltRef1NSegment* pnlref1nsegment;
@@ -252,13 +258,13 @@ private:
 	bool handleCallBrlyFltUpd_refEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
 	bool handleCallBrlyFafUpd_refEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
 	bool handleCallBrlyEqpUpd_refEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
-	bool handleCallBrlyFlt_fafEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallBrlyEqp_ptyEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallBrlyEqp_hktEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallBrlyFlt_ttbEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallBrlyFlt_fafEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallBrlyFlt_eqpEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallBrlyEqp_ptyEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallBrlyEqp_oprEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallBrlyEqp_inSbs(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallBrlyEqp_hktEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 
 };
 

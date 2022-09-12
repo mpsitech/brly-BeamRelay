@@ -49,6 +49,29 @@ BrlyQFltMNLocation::BrlyQFltMNLocation(
 	this->ftmXVisStop = ftmXVisStop;
 };
 
+void BrlyQFltMNLocation::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["sta"] = ftmX1VisStart;
+		me["sto"] = ftmX1VisStop;
+		me["xsa"] = ftmXVisStart;
+		me["xso"] = ftmXVisStop;
+	} else {
+		me["stubMref"] = stubMref;
+		me["ftmX1VisStart"] = ftmX1VisStart;
+		me["ftmX1VisStop"] = ftmX1VisStop;
+		me["ftmXVisStart"] = ftmXVisStart;
+		me["ftmXVisStop"] = ftmXVisStop;
+	};
+};
+
 void BrlyQFltMNLocation::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -122,6 +145,16 @@ ListBrlyQFltMNLocation& ListBrlyQFltMNLocation::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQFltMNLocation::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQFltMNLocation";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQFltMNLocation::writeXML(

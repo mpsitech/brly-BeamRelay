@@ -29,6 +29,10 @@ dbs	dbsbrly	BeamRelay database access library
 	any;mac	dbsbrly_mac
 	any;ubuntu	dbsbrly_ubuntu
 	ImeIMRelease.end
+vueapp	vueappbrly	BeamRelay Vue.js app
+	ImeIMRelease.hsrefRefWznmMMachine	sref	srefsKOption	Comment
+	any	vueappbrly_any
+	ImeIMRelease.end
 webapp	webappbrly	BeamRelay web app user interface files
 	ImeIMRelease.hsrefRefWznmMMachine	sref	srefsKOption	Comment
 	any	webappbrly_any

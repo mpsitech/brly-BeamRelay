@@ -190,7 +190,7 @@ string JobBrlyIexIni::getSquawk(
 			DbsBrly* dbsbrly
 		) {
 	string retval;
-	// IP getSquawk --- BEGIN
+	// IP getSquawk --- RBEGIN
 	if ( (ixVSge == VecVSge::PARSE) || (ixVSge == VecVSge::PRSDONE) || (ixVSge == VecVSge::IMPORT) || (ixVSge == VecVSge::REVERSE) || (ixVSge == VecVSge::COLLECT) || (ixVSge == VecVSge::CLTDONE) || (ixVSge == VecVSge::EXPORT) ) {
 		if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
 			if (ixVSge == VecVSge::PARSE) retval = "parsing initialization data";
@@ -216,7 +216,7 @@ string JobBrlyIexIni::getSquawk(
 	} else {
 		retval = VecVSge::getSref(ixVSge);
 	};
-	// IP getSquawk --- END
+	// IP getSquawk --- REND
 	return retval;
 };
 

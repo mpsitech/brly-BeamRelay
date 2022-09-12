@@ -47,8 +47,8 @@ PnlBrlyUsrRec::PnlBrlyUsrRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecBrlyVCall::CALLBRLYUSR_USGEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYUSR_PRSEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYUSR_USGEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -255,21 +255,23 @@ void PnlBrlyUsrRec::handleCall(
 			DbsBrly* dbsbrly
 			, Call* call
 		) {
-	if (call->ixVCall == VecBrlyVCall::CALLBRLYUSRUPD_REFEQ) {
-		call->abort = handleCallBrlyUsrUpd_refEq(dbsbrly, call->jref);
+	if (call->ixVCall == VecBrlyVCall::CALLBRLYUSR_PRSEQ) {
+		call->abort = handleCallBrlyUsr_prsEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYUSR_USGEQ) {
 		call->abort = handleCallBrlyUsr_usgEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYUSR_PRSEQ) {
-		call->abort = handleCallBrlyUsr_prsEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYUSRUPD_REFEQ) {
+		call->abort = handleCallBrlyUsrUpd_refEq(dbsbrly, call->jref);
 	};
 };
 
-bool PnlBrlyUsrRec::handleCallBrlyUsrUpd_refEq(
+bool PnlBrlyUsrRec::handleCallBrlyUsr_prsEq(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
 		) {
 	bool retval = false;
-	// IP handleCallBrlyUsrUpd_refEq --- INSERT
+	boolvalRet = (recUsr.refBrlyMPerson == refInv); // IP handleCallBrlyUsr_prsEq --- LINE
 	return retval;
 };
 
@@ -284,13 +286,11 @@ bool PnlBrlyUsrRec::handleCallBrlyUsr_usgEq(
 	return retval;
 };
 
-bool PnlBrlyUsrRec::handleCallBrlyUsr_prsEq(
+bool PnlBrlyUsrRec::handleCallBrlyUsrUpd_refEq(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recUsr.refBrlyMPerson == refInv); // IP handleCallBrlyUsr_prsEq --- LINE
+	// IP handleCallBrlyUsrUpd_refEq --- INSERT
 	return retval;
 };

@@ -54,11 +54,11 @@ PnlBrlyLocRec::PnlBrlyLocRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecBrlyVCall::CALLBRLYLOC_EQPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecBrlyVCall::CALLBRLYEQP_OPREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYLOC_TYPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYLOC_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYLOC_EQPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYEQP_PTYEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYEQP_OPREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYEQP_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYEQP_HKTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
@@ -317,16 +317,16 @@ void PnlBrlyLocRec::handleCall(
 		call->abort = handleCallBrlyLocUpd_refEq(dbsbrly, call->jref);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQPUPD_REFEQ) {
 		call->abort = handleCallBrlyEqpUpd_refEq(dbsbrly, call->jref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYLOC_EQPEQ) {
-		call->abort = handleCallBrlyLoc_eqpEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQP_OPREQ) {
-		call->abort = handleCallBrlyEqp_oprEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYLOC_TYPEQ) {
 		call->abort = handleCallBrlyLoc_typEq(dbsbrly, call->jref, call->argInv.ix, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYLOC_INSBS) {
 		call->abort = handleCallBrlyLoc_inSbs(dbsbrly, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYLOC_EQPEQ) {
+		call->abort = handleCallBrlyLoc_eqpEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQP_PTYEQ) {
 		call->abort = handleCallBrlyEqp_ptyEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQP_OPREQ) {
+		call->abort = handleCallBrlyEqp_oprEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQP_INSBS) {
 		call->abort = handleCallBrlyEqp_inSbs(dbsbrly, call->jref, call->argInv.ix, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQP_HKTEQ) {
@@ -352,28 +352,6 @@ bool PnlBrlyLocRec::handleCallBrlyEqpUpd_refEq(
 	return retval;
 };
 
-bool PnlBrlyLocRec::handleCallBrlyLoc_eqpEq(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recLoc.refBrlyMEquipment == refInv); // IP handleCallBrlyLoc_eqpEq --- LINE
-	return retval;
-};
-
-bool PnlBrlyLocRec::handleCallBrlyEqp_oprEq(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recEqp.refBrlyMOperator == refInv); // IP handleCallBrlyEqp_oprEq --- LINE
-	return retval;
-};
-
 bool PnlBrlyLocRec::handleCallBrlyLoc_typEq(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
@@ -396,6 +374,17 @@ bool PnlBrlyLocRec::handleCallBrlyLoc_inSbs(
 	return retval;
 };
 
+bool PnlBrlyLocRec::handleCallBrlyLoc_eqpEq(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recLoc.refBrlyMEquipment == refInv); // IP handleCallBrlyLoc_eqpEq --- LINE
+	return retval;
+};
+
 bool PnlBrlyLocRec::handleCallBrlyEqp_ptyEq(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
@@ -404,6 +393,17 @@ bool PnlBrlyLocRec::handleCallBrlyEqp_ptyEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recEqp.refBrlyMPlntype == refInv); // IP handleCallBrlyEqp_ptyEq --- LINE
+	return retval;
+};
+
+bool PnlBrlyLocRec::handleCallBrlyEqp_oprEq(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recEqp.refBrlyMOperator == refInv); // IP handleCallBrlyEqp_oprEq --- LINE
 	return retval;
 };
 

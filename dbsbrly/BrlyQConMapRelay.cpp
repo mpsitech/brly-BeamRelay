@@ -45,6 +45,29 @@ BrlyQConMapRelay::BrlyQConMapRelay(
 	this->Nhop = Nhop;
 };
 
+void BrlyQConMapRelay::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["sta"] = x1Start;
+		me["sto"] = x1Stop;
+		me["dir"] = srefIxVDir;
+		me["ctd"] = yesnoConnected;
+		me["nhp"] = Nhop;
+	} else {
+		me["x1Start"] = x1Start;
+		me["x1Stop"] = x1Stop;
+		me["srefIxVDir"] = srefIxVDir;
+		me["yesnoConnected"] = yesnoConnected;
+		me["Nhop"] = Nhop;
+	};
+};
+
 void BrlyQConMapRelay::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -118,6 +141,16 @@ ListBrlyQConMapRelay& ListBrlyQConMapRelay::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQConMapRelay::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQConMapRelay";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) if (nodes[i]->qwr) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQConMapRelay::writeXML(

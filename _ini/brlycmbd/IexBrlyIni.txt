@@ -1,65 +1,65 @@
-IexBrlyIni v0.2.13
+IexBrlyIni v0.2.15
 ImeIAVKeylistKey.srefKlsIxBrlyVKeylist	sref	Avail	Implied	Title	Comment
 KlstBrlyKAlliance	star			StarAlliance	
 KlstBrlyKAlliance	ow			oneworld	
 KlstBrlyKAlliance	st			SkyTeam	
 KlstBrlyKAMPersonDetailType	eml				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	e-mail	
 	dech	E-Mail	
 	ImeIJAVKeylistKey.end
 KlstBrlyKAMPersonDetailType	fax				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	fax	
 	dech	Telefax	
 	ImeIJAVKeylistKey.end
 KlstBrlyKAMPersonDetailType	mbl				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	mobile	
 	dech	Handy	
 	ImeIJAVKeylistKey.end
 KlstBrlyKAMPersonDetailType	tel				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	phone	
 	dech	Telefon	
 	ImeIJAVKeylistKey.end
 KlstBrlyKEqptype	bll				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	balloon (low)	
 	dech	Ballon (niedrig)	
 	ImeIJAVKeylistKey.end
 KlstBrlyKEqptype	blh				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	balloon (high)	
 	dech	Ballon (hoch)	
 	ImeIJAVKeylistKey.end
 KlstBrlyKEqptype	gnd				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	ground station	
 	dech	Bodenstation	
 	ImeIJAVKeylistKey.end
 KlstBrlyKEqptype	wby				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	widebody plane	
 	dech	Grossraumflugzeug	
 	ImeIJAVKeylistKey.end
 KlstBrlyKEqptype	nby				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	narrowbody plane	
 	dech	Standardrumpfflugzeug	
 	ImeIJAVKeylistKey.end
 KlstBrlyKEqptype	rgn				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	regional plane	
 	dech	Regionalflugzeug	
 	ImeIJAVKeylistKey.end
 KlstBrlyKMFileContent	etopo				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	ETOPO data	
 	dech	ETOPO Daten	
 	ImeIJAVKeylistKey.end
 KlstBrlyKMFileContent	rawtext				
-	- ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
+	ImeIJAVKeylistKey.srefX1BrlyVLocale	Title	Comment
 	enus	raw text	
 	dech	unbearbeitete Textdaten	
 	ImeIJAVKeylistKey.end

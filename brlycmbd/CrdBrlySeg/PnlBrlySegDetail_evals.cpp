@@ -56,23 +56,23 @@ bool PnlBrlySegDetail::evalTxtReuActive(
 bool PnlBrlySegDetail::evalButReuViewAvail(
 			DbsBrly* dbsbrly
 		) {
-	// seg.reuEq(0)|((pre.ixCrdaccCon()&seg.retEq(con))|(pre.ixCrdaccFlt()&seg.retEq(flt)))
+	// seg.reuEq(0)|((pre.ixCrdaccFlt()&seg.retEq(flt))|(pre.ixCrdaccCon()&seg.retEq(con)))
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (recSeg.refUref == 0);
 	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecBrlyVPreset::PREBRLYIXCRDACCCON, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecBrlyVPreset::PREBRLYIXCRDACCFLT, jref) != 0);
 	args.push_back(a);
-	a = false; a = (recSeg.refIxVTbl == VecBrlyVMSegmentRefTbl::CON);
+	a = false; a = (recSeg.refIxVTbl == VecBrlyVMSegmentRefTbl::FLT);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
-	a = false; a = (xchg->getIxPreset(VecBrlyVPreset::PREBRLYIXCRDACCFLT, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecBrlyVPreset::PREBRLYIXCRDACCCON, jref) != 0);
 	args.push_back(a);
-	a = false; a = (recSeg.refIxVTbl == VecBrlyVMSegmentRefTbl::FLT);
+	a = false; a = (recSeg.refIxVTbl == VecBrlyVMSegmentRefTbl::CON);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();

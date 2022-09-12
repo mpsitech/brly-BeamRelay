@@ -45,6 +45,29 @@ BrlyQFltMNConnection::BrlyQFltMNConnection(
 	this->x2Legphi1 = x2Legphi1;
 };
 
+void BrlyQFltMNConnection::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["sta"] = ftmX1Start;
+		me["sto"] = ftmX1Stop;
+		me["lp0"] = x2Legphi0;
+		me["lp1"] = x2Legphi1;
+	} else {
+		me["stubMref"] = stubMref;
+		me["ftmX1Start"] = ftmX1Start;
+		me["ftmX1Stop"] = ftmX1Stop;
+		me["x2Legphi0"] = x2Legphi0;
+		me["x2Legphi1"] = x2Legphi1;
+	};
+};
+
 void BrlyQFltMNConnection::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -118,6 +141,16 @@ ListBrlyQFltMNConnection& ListBrlyQFltMNConnection::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQFltMNConnection::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQFltMNConnection";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQFltMNConnection::writeXML(

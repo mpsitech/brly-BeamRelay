@@ -39,6 +39,25 @@ BrlyQUsgMNUser::BrlyQUsgMNUser(
 	this->titIxBrlyVUserlevel = titIxBrlyVUserlevel;
 };
 
+void BrlyQUsgMNUser::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["ulv"] = srefIxBrlyVUserlevel;
+		me["ulv2"] = titIxBrlyVUserlevel;
+	} else {
+		me["stubMref"] = stubMref;
+		me["srefIxBrlyVUserlevel"] = srefIxBrlyVUserlevel;
+		me["titIxBrlyVUserlevel"] = titIxBrlyVUserlevel;
+	};
+};
+
 void BrlyQUsgMNUser::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -108,6 +127,16 @@ ListBrlyQUsgMNUser& ListBrlyQUsgMNUser::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQUsgMNUser::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQUsgMNUser";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQUsgMNUser::writeXML(

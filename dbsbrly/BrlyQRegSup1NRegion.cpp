@@ -31,6 +31,21 @@ BrlyQRegSup1NRegion::BrlyQRegSup1NRegion(
 	this->stubRef = stubRef;
 };
 
+void BrlyQRegSup1NRegion::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void BrlyQRegSup1NRegion::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListBrlyQRegSup1NRegion& ListBrlyQRegSup1NRegion::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQRegSup1NRegion::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQRegSup1NRegion";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQRegSup1NRegion::writeXML(

@@ -132,11 +132,11 @@ SessBrly::SessBrly(
 	statshr.jrefCrdnav = crdnav->jref;
 
 	xchg->addClstn(VecBrlyVCall::CALLBRLYREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecBrlyVCall::CALLBRLYRECACCESS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecBrlyVCall::CALLBRLYLOG, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecBrlyVCall::CALLBRLYCRDOPEN, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecBrlyVCall::CALLBRLYCRDCLOSE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYCRDACTIVE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYCRDCLOSE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYCRDOPEN, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYLOG, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYRECACCESS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -152,6 +152,12 @@ SessBrly::~SessBrly() {
 };
 
 // IP cust --- INSERT
+
+void SessBrly::warnTerm(
+			DbsBrly* dbsbrly
+		) {
+	crdnav->warnTerm(dbsbrly);
+};
 
 void SessBrly::term(
 			DbsBrly* dbsbrly
@@ -169,6 +175,20 @@ void SessBrly::term(
 
 		delete ses;
 	};
+};
+
+void SessBrly::eraseCrd(
+			map<ubigint, JobBrly*>& subjobs
+		) {
+	string input;
+	ubigint iinput;
+
+	cout << "\tjob reference: ";
+	cin >> input;
+	iinput = atoll(input.c_str());
+
+	if (!eraseSubjobByJref(subjobs, iinput)) cout << "\tjob reference doesn't exist!" << endl;
+	else cout << "\tcard erased." << endl;
 };
 
 uint SessBrly::checkCrdActive(
@@ -565,14 +585,10 @@ bool SessBrly::handleCreateCrdcon(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyCon* crdcon = NULL;
 
-	crdcon = new CrdBrlyCon(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdcons.push_back(crdcon);
-	cout << "\tjob reference: " << crdcon->jref << endl;
-	xchg->jrefCmd = crdcon->jref;
+	xchg->jrefCmd = insertSubjob(crdcons, new CrdBrlyCon(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -580,14 +596,10 @@ bool SessBrly::handleCreateCrdfil(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyFil* crdfil = NULL;
 
-	crdfil = new CrdBrlyFil(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdfils.push_back(crdfil);
-	cout << "\tjob reference: " << crdfil->jref << endl;
-	xchg->jrefCmd = crdfil->jref;
+	xchg->jrefCmd = insertSubjob(crdfils, new CrdBrlyFil(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -595,14 +607,10 @@ bool SessBrly::handleCreateCrdflt(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyFlt* crdflt = NULL;
 
-	crdflt = new CrdBrlyFlt(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdflts.push_back(crdflt);
-	cout << "\tjob reference: " << crdflt->jref << endl;
-	xchg->jrefCmd = crdflt->jref;
+	xchg->jrefCmd = insertSubjob(crdflts, new CrdBrlyFlt(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -610,14 +618,10 @@ bool SessBrly::handleCreateCrdleg(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyLeg* crdleg = NULL;
 
-	crdleg = new CrdBrlyLeg(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdlegs.push_back(crdleg);
-	cout << "\tjob reference: " << crdleg->jref << endl;
-	xchg->jrefCmd = crdleg->jref;
+	xchg->jrefCmd = insertSubjob(crdlegs, new CrdBrlyLeg(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -625,14 +629,10 @@ bool SessBrly::handleCreateCrdloc(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyLoc* crdloc = NULL;
 
-	crdloc = new CrdBrlyLoc(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdlocs.push_back(crdloc);
-	cout << "\tjob reference: " << crdloc->jref << endl;
-	xchg->jrefCmd = crdloc->jref;
+	xchg->jrefCmd = insertSubjob(crdlocs, new CrdBrlyLoc(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -640,14 +640,10 @@ bool SessBrly::handleCreateCrdopr(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyOpr* crdopr = NULL;
 
-	crdopr = new CrdBrlyOpr(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdoprs.push_back(crdopr);
-	cout << "\tjob reference: " << crdopr->jref << endl;
-	xchg->jrefCmd = crdopr->jref;
+	xchg->jrefCmd = insertSubjob(crdoprs, new CrdBrlyOpr(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -655,14 +651,10 @@ bool SessBrly::handleCreateCrdprs(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyPrs* crdprs = NULL;
 
-	crdprs = new CrdBrlyPrs(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdprss.push_back(crdprs);
-	cout << "\tjob reference: " << crdprs->jref << endl;
-	xchg->jrefCmd = crdprs->jref;
+	xchg->jrefCmd = insertSubjob(crdprss, new CrdBrlyPrs(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -670,14 +662,10 @@ bool SessBrly::handleCreateCrdpty(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyPty* crdpty = NULL;
 
-	crdpty = new CrdBrlyPty(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdptys.push_back(crdpty);
-	cout << "\tjob reference: " << crdpty->jref << endl;
-	xchg->jrefCmd = crdpty->jref;
+	xchg->jrefCmd = insertSubjob(crdptys, new CrdBrlyPty(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -685,14 +673,10 @@ bool SessBrly::handleCreateCrdreg(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyReg* crdreg = NULL;
 
-	crdreg = new CrdBrlyReg(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdregs.push_back(crdreg);
-	cout << "\tjob reference: " << crdreg->jref << endl;
-	xchg->jrefCmd = crdreg->jref;
+	xchg->jrefCmd = insertSubjob(crdregs, new CrdBrlyReg(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -700,14 +684,10 @@ bool SessBrly::handleCreateCrdrly(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyRly* crdrly = NULL;
 
-	crdrly = new CrdBrlyRly(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdrlys.push_back(crdrly);
-	cout << "\tjob reference: " << crdrly->jref << endl;
-	xchg->jrefCmd = crdrly->jref;
+	xchg->jrefCmd = insertSubjob(crdrlys, new CrdBrlyRly(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -715,14 +695,10 @@ bool SessBrly::handleCreateCrdseg(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlySeg* crdseg = NULL;
 
-	crdseg = new CrdBrlySeg(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdsegs.push_back(crdseg);
-	cout << "\tjob reference: " << crdseg->jref << endl;
-	xchg->jrefCmd = crdseg->jref;
+	xchg->jrefCmd = insertSubjob(crdsegs, new CrdBrlySeg(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -730,14 +706,10 @@ bool SessBrly::handleCreateCrdttb(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyTtb* crdttb = NULL;
 
-	crdttb = new CrdBrlyTtb(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdttbs.push_back(crdttb);
-	cout << "\tjob reference: " << crdttb->jref << endl;
-	xchg->jrefCmd = crdttb->jref;
+	xchg->jrefCmd = insertSubjob(crdttbs, new CrdBrlyTtb(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -745,14 +717,10 @@ bool SessBrly::handleCreateCrdusg(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyUsg* crdusg = NULL;
 
-	crdusg = new CrdBrlyUsg(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdusgs.push_back(crdusg);
-	cout << "\tjob reference: " << crdusg->jref << endl;
-	xchg->jrefCmd = crdusg->jref;
+	xchg->jrefCmd = insertSubjob(crdusgs, new CrdBrlyUsg(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -760,14 +728,10 @@ bool SessBrly::handleCreateCrdusr(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	CrdBrlyUsr* crdusr = NULL;
 
-	crdusr = new CrdBrlyUsr(xchg, dbsbrly, jref, ixBrlyVLocale, 0);
-	crdusrs.push_back(crdusr);
-	cout << "\tjob reference: " << crdusr->jref << endl;
-	xchg->jrefCmd = crdusr->jref;
+	xchg->jrefCmd = insertSubjob(crdusrs, new CrdBrlyUsr(xchg, dbsbrly, jref, ixBrlyVLocale, 0));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-	return false;
 	return retval;
 };
 
@@ -775,24 +739,7 @@ bool SessBrly::handleEraseCrdcon(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyCon* crdcon = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdcons.begin(); it != crdcons.end();) {
-		crdcon = *it;
-		if (crdcon->jref == iinput) {
-			it = crdcons.erase(it);
-			delete crdcon;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdcons);
 	return retval;
 };
 
@@ -800,24 +747,7 @@ bool SessBrly::handleEraseCrdfil(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyFil* crdfil = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdfils.begin(); it != crdfils.end();) {
-		crdfil = *it;
-		if (crdfil->jref == iinput) {
-			it = crdfils.erase(it);
-			delete crdfil;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdfils);
 	return retval;
 };
 
@@ -825,24 +755,7 @@ bool SessBrly::handleEraseCrdflt(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyFlt* crdflt = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdflts.begin(); it != crdflts.end();) {
-		crdflt = *it;
-		if (crdflt->jref == iinput) {
-			it = crdflts.erase(it);
-			delete crdflt;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdflts);
 	return retval;
 };
 
@@ -850,24 +763,7 @@ bool SessBrly::handleEraseCrdleg(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyLeg* crdleg = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdlegs.begin(); it != crdlegs.end();) {
-		crdleg = *it;
-		if (crdleg->jref == iinput) {
-			it = crdlegs.erase(it);
-			delete crdleg;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdlegs);
 	return retval;
 };
 
@@ -875,24 +771,7 @@ bool SessBrly::handleEraseCrdloc(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyLoc* crdloc = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdlocs.begin(); it != crdlocs.end();) {
-		crdloc = *it;
-		if (crdloc->jref == iinput) {
-			it = crdlocs.erase(it);
-			delete crdloc;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdlocs);
 	return retval;
 };
 
@@ -900,24 +779,7 @@ bool SessBrly::handleEraseCrdopr(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyOpr* crdopr = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdoprs.begin(); it != crdoprs.end();) {
-		crdopr = *it;
-		if (crdopr->jref == iinput) {
-			it = crdoprs.erase(it);
-			delete crdopr;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdoprs);
 	return retval;
 };
 
@@ -925,24 +787,7 @@ bool SessBrly::handleEraseCrdprs(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyPrs* crdprs = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdprss.begin(); it != crdprss.end();) {
-		crdprs = *it;
-		if (crdprs->jref == iinput) {
-			it = crdprss.erase(it);
-			delete crdprs;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdprss);
 	return retval;
 };
 
@@ -950,24 +795,7 @@ bool SessBrly::handleEraseCrdpty(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyPty* crdpty = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdptys.begin(); it != crdptys.end();) {
-		crdpty = *it;
-		if (crdpty->jref == iinput) {
-			it = crdptys.erase(it);
-			delete crdpty;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdptys);
 	return retval;
 };
 
@@ -975,24 +803,7 @@ bool SessBrly::handleEraseCrdreg(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyReg* crdreg = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdregs.begin(); it != crdregs.end();) {
-		crdreg = *it;
-		if (crdreg->jref == iinput) {
-			it = crdregs.erase(it);
-			delete crdreg;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdregs);
 	return retval;
 };
 
@@ -1000,24 +811,7 @@ bool SessBrly::handleEraseCrdrly(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyRly* crdrly = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdrlys.begin(); it != crdrlys.end();) {
-		crdrly = *it;
-		if (crdrly->jref == iinput) {
-			it = crdrlys.erase(it);
-			delete crdrly;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdrlys);
 	return retval;
 };
 
@@ -1025,24 +819,7 @@ bool SessBrly::handleEraseCrdseg(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlySeg* crdseg = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdsegs.begin(); it != crdsegs.end();) {
-		crdseg = *it;
-		if (crdseg->jref == iinput) {
-			it = crdsegs.erase(it);
-			delete crdseg;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdsegs);
 	return retval;
 };
 
@@ -1050,24 +827,7 @@ bool SessBrly::handleEraseCrdttb(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyTtb* crdttb = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdttbs.begin(); it != crdttbs.end();) {
-		crdttb = *it;
-		if (crdttb->jref == iinput) {
-			it = crdttbs.erase(it);
-			delete crdttb;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdttbs);
 	return retval;
 };
 
@@ -1075,24 +835,7 @@ bool SessBrly::handleEraseCrdusg(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyUsg* crdusg = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdusgs.begin(); it != crdusgs.end();) {
-		crdusg = *it;
-		if (crdusg->jref == iinput) {
-			it = crdusgs.erase(it);
-			delete crdusg;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdusgs);
 	return retval;
 };
 
@@ -1100,24 +843,7 @@ bool SessBrly::handleEraseCrdusr(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
-
-	CrdBrlyUsr* crdusr = NULL;
-
-	cout << "\tjob reference: ";
-	cin >> input;
-	iinput = atoi(input.c_str());
-
-	for (auto it = crdusrs.begin(); it != crdusrs.end();) {
-		crdusr = *it;
-		if (crdusr->jref == iinput) {
-			it = crdusrs.erase(it);
-			delete crdusr;
-			break;
-		} else it++;
-	};
-
+	eraseCrd(crdusrs);
 	return retval;
 };
 
@@ -1131,20 +857,20 @@ void SessBrly::handleDpchAppBrlyInit(
 	// resume session
 	xchg->removePreset(VecBrlyVPreset::PREBRLYSUSPSESS, jref);
 
-	for (auto it = crdusgs.begin(); it != crdusgs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyUsg");
-	for (auto it = crdusrs.begin(); it != crdusrs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyUsr");
-	for (auto it = crdprss.begin(); it != crdprss.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyPrs");
-	for (auto it = crdfils.begin(); it != crdfils.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyFil");
-	for (auto it = crdoprs.begin(); it != crdoprs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyOpr");
-	for (auto it = crdptys.begin(); it != crdptys.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyPty");
-	for (auto it = crdregs.begin(); it != crdregs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyReg");
-	for (auto it = crdlocs.begin(); it != crdlocs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyLoc");
-	for (auto it = crdlegs.begin(); it != crdlegs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyLeg");
-	for (auto it = crdttbs.begin(); it != crdttbs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyTtb");
-	for (auto it = crdflts.begin(); it != crdflts.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyFlt");
-	for (auto it = crdsegs.begin(); it != crdsegs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlySeg");
-	for (auto it = crdcons.begin(); it != crdcons.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyCon");
-	for (auto it = crdrlys.begin(); it != crdrlys.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble((*it)->jref), "CrdBrlyRly");
+	for (auto it = crdusgs.begin(); it != crdusgs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyUsg");
+	for (auto it = crdusrs.begin(); it != crdusrs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyUsr");
+	for (auto it = crdprss.begin(); it != crdprss.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyPrs");
+	for (auto it = crdfils.begin(); it != crdfils.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyFil");
+	for (auto it = crdoprs.begin(); it != crdoprs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyOpr");
+	for (auto it = crdptys.begin(); it != crdptys.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyPty");
+	for (auto it = crdregs.begin(); it != crdregs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyReg");
+	for (auto it = crdlocs.begin(); it != crdlocs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyLoc");
+	for (auto it = crdlegs.begin(); it != crdlegs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyLeg");
+	for (auto it = crdttbs.begin(); it != crdttbs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyTtb");
+	for (auto it = crdflts.begin(); it != crdflts.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyFlt");
+	for (auto it = crdsegs.begin(); it != crdsegs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlySeg");
+	for (auto it = crdcons.begin(); it != crdcons.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyCon");
+	for (auto it = crdrlys.begin(); it != crdrlys.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdBrlyRly");
 
 	*dpcheng = new DpchEngData(jref, &feedFEnsSec, &statshr, {DpchEngData::ALL});
 };
@@ -1155,16 +881,16 @@ void SessBrly::handleCall(
 		) {
 	if (call->ixVCall == VecBrlyVCall::CALLBRLYREFPRESET) {
 		call->abort = handleCallBrlyRefPreSet(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYRECACCESS) {
-		call->abort = handleCallBrlyRecaccess(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref, call->argRet.ix);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYLOG) {
-		call->abort = handleCallBrlyLog(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYCRDOPEN) {
-		call->abort = handleCallBrlyCrdOpen(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval, call->argRet.ref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYCRDCLOSE) {
-		call->abort = handleCallBrlyCrdClose(dbsbrly, call->jref, call->argInv.ix);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYCRDACTIVE) {
 		call->abort = handleCallBrlyCrdActive(dbsbrly, call->jref, call->argInv.ix, call->argRet.ix);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYCRDCLOSE) {
+		call->abort = handleCallBrlyCrdClose(dbsbrly, call->jref, call->argInv.ix);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYCRDOPEN) {
+		call->abort = handleCallBrlyCrdOpen(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval, call->argRet.ref);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYLOG) {
+		call->abort = handleCallBrlyLog(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYRECACCESS) {
+		call->abort = handleCallBrlyRecaccess(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref, call->argRet.ix);
 	};
 };
 
@@ -1175,6 +901,7 @@ bool SessBrly::handleCallBrlyRefPreSet(
 			, const ubigint refInv
 		) {
 	bool retval = false;
+// IP handleCallBrlyRefPreSet --- BEGIN
 	if (ixInv == VecBrlyVPreset::PREBRLYJREFNOTIFY) {
 		ubigint jrefNotify_old = xchg->getRefPreset(VecBrlyVPreset::PREBRLYJREFNOTIFY, jref);
 
@@ -1185,32 +912,58 @@ bool SessBrly::handleCallBrlyRefPreSet(
 			else xchg->addRefPreset(ixInv, jref, refInv);
 		};
 
+	} else if (ixInv == VecBrlyVPreset::PREBRLYTLAST) {
+		if (xchg->stgbrlyappearance.sesstterm != 0) xchg->addRefPreset(ixInv, jref, refInv);
+
 	};
+// IP handleCallBrlyRefPreSet --- END
 	return retval;
 };
 
-bool SessBrly::handleCallBrlyRecaccess(
+bool SessBrly::handleCallBrlyCrdActive(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
 			, const uint ixInv
-			, const ubigint refInv
 			, uint& ixRet
 		) {
 	bool retval = false;
-	ixRet = checkRecaccess(dbsbrly, ixInv, refInv);
+	ixRet = checkCrdActive(ixInv);
 	return retval;
 };
 
-bool SessBrly::handleCallBrlyLog(
+bool SessBrly::handleCallBrlyCrdClose(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
 			, const uint ixInv
-			, const ubigint refInv
-			, const string& srefInv
-			, const int intvalInv
 		) {
 	bool retval = false;
-	logRecaccess(dbsbrly, ixInv, refInv, VecBrlyVCard::getIx(srefInv), intvalInv);
+	// delete only if card is not part of a suspended session
+	if (xchg->getBoolvalPreset(VecBrlyVPreset::PREBRLYSUSPSESS, jrefTrig)) return retval;
+
+	ubigint jrefNotif = xchg->getRefPreset(VecBrlyVPreset::PREBRLYJREFNOTIFY, jref);
+	if (jrefNotif == jrefTrig) xchg->removePreset(VecBrlyVPreset::PREBRLYJREFNOTIFY, jref);
+
+	if (ixInv == VecBrlyVCard::CRDBRLYUSG) eraseSubjobByJref(crdusgs, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYUSR) eraseSubjobByJref(crdusrs, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYPRS) eraseSubjobByJref(crdprss, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYFIL) eraseSubjobByJref(crdfils, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYOPR) eraseSubjobByJref(crdoprs, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYPTY) eraseSubjobByJref(crdptys, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYNAV) {
+		if (crdnav) {
+			delete crdnav;
+			crdnav = NULL;
+		};
+
+	} 
+else if (ixInv == VecBrlyVCard::CRDBRLYREG) eraseSubjobByJref(crdregs, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYLOC) eraseSubjobByJref(crdlocs, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYLEG) eraseSubjobByJref(crdlegs, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYTTB) eraseSubjobByJref(crdttbs, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYFLT) eraseSubjobByJref(crdflts, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYSEG) eraseSubjobByJref(crdsegs, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYCON) eraseSubjobByJref(crdcons, jrefTrig);
+	else if (ixInv == VecBrlyVCard::CRDBRLYRLY) eraseSubjobByJref(crdrlys, jrefTrig);
 	return retval;
 };
 
@@ -1273,308 +1026,46 @@ bool SessBrly::handleCallBrlyCrdOpen(
 		refRet = 0;
 
 	} else {
-		if (ixBrlyVCard == VecBrlyVCard::CRDBRLYUSG) {
-			CrdBrlyUsg* crdusg = NULL;
-
-			crdusg = new CrdBrlyUsg(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdusgs.push_back(crdusg);
-
-			refRet = crdusg->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYUSR) {
-			CrdBrlyUsr* crdusr = NULL;
-
-			crdusr = new CrdBrlyUsr(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdusrs.push_back(crdusr);
-
-			refRet = crdusr->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYPRS) {
-			CrdBrlyPrs* crdprs = NULL;
-
-			crdprs = new CrdBrlyPrs(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdprss.push_back(crdprs);
-
-			refRet = crdprs->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYFIL) {
-			CrdBrlyFil* crdfil = NULL;
-
-			crdfil = new CrdBrlyFil(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdfils.push_back(crdfil);
-
-			refRet = crdfil->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYOPR) {
-			CrdBrlyOpr* crdopr = NULL;
-
-			crdopr = new CrdBrlyOpr(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdoprs.push_back(crdopr);
-
-			refRet = crdopr->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYPTY) {
-			CrdBrlyPty* crdpty = NULL;
-
-			crdpty = new CrdBrlyPty(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdptys.push_back(crdpty);
-
-			refRet = crdpty->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYNAV) {
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYREG) {
-			CrdBrlyReg* crdreg = NULL;
-
-			crdreg = new CrdBrlyReg(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdregs.push_back(crdreg);
-
-			refRet = crdreg->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYLOC) {
-			CrdBrlyLoc* crdloc = NULL;
-
-			crdloc = new CrdBrlyLoc(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdlocs.push_back(crdloc);
-
-			refRet = crdloc->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYLEG) {
-			CrdBrlyLeg* crdleg = NULL;
-
-			crdleg = new CrdBrlyLeg(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdlegs.push_back(crdleg);
-
-			refRet = crdleg->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYTTB) {
-			CrdBrlyTtb* crdttb = NULL;
-
-			crdttb = new CrdBrlyTtb(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdttbs.push_back(crdttb);
-
-			refRet = crdttb->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYFLT) {
-			CrdBrlyFlt* crdflt = NULL;
-
-			crdflt = new CrdBrlyFlt(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdflts.push_back(crdflt);
-
-			refRet = crdflt->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYSEG) {
-			CrdBrlySeg* crdseg = NULL;
-
-			crdseg = new CrdBrlySeg(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdsegs.push_back(crdseg);
-
-			refRet = crdseg->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYCON) {
-			CrdBrlyCon* crdcon = NULL;
-
-			crdcon = new CrdBrlyCon(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdcons.push_back(crdcon);
-
-			refRet = crdcon->jref;
-
-		} else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYRLY) {
-			CrdBrlyRly* crdrly = NULL;
-
-			crdrly = new CrdBrlyRly(xchg, dbsbrly, jref, ixBrlyVLocale, ref);
-			crdrlys.push_back(crdrly);
-
-			refRet = crdrly->jref;
-
-		};
+		if (ixBrlyVCard == VecBrlyVCard::CRDBRLYUSG) refRet = insertSubjob(crdusgs, new CrdBrlyUsg(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYUSR) refRet = insertSubjob(crdusrs, new CrdBrlyUsr(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYPRS) refRet = insertSubjob(crdprss, new CrdBrlyPrs(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYFIL) refRet = insertSubjob(crdfils, new CrdBrlyFil(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYOPR) refRet = insertSubjob(crdoprs, new CrdBrlyOpr(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYPTY) refRet = insertSubjob(crdptys, new CrdBrlyPty(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYREG) refRet = insertSubjob(crdregs, new CrdBrlyReg(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYLOC) refRet = insertSubjob(crdlocs, new CrdBrlyLoc(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYLEG) refRet = insertSubjob(crdlegs, new CrdBrlyLeg(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYTTB) refRet = insertSubjob(crdttbs, new CrdBrlyTtb(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYFLT) refRet = insertSubjob(crdflts, new CrdBrlyFlt(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYSEG) refRet = insertSubjob(crdsegs, new CrdBrlySeg(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYCON) refRet = insertSubjob(crdcons, new CrdBrlyCon(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
+		else if (ixBrlyVCard == VecBrlyVCard::CRDBRLYRLY) refRet = insertSubjob(crdrlys, new CrdBrlyRly(xchg, dbsbrly, jref, ixBrlyVLocale, ref));
 	};
 
 	return retval;
 };
 
-bool SessBrly::handleCallBrlyCrdClose(
+bool SessBrly::handleCallBrlyLog(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
 			, const uint ixInv
+			, const ubigint refInv
+			, const string& srefInv
+			, const int intvalInv
 		) {
 	bool retval = false;
-	// delete only if card is not part of a suspended session
-	if (xchg->getBoolvalPreset(VecBrlyVPreset::PREBRLYSUSPSESS, jrefTrig)) return retval;
-
-	ubigint jrefNotif = xchg->getRefPreset(VecBrlyVPreset::PREBRLYJREFNOTIFY, jref);
-	if (jrefNotif == jrefTrig) xchg->removePreset(VecBrlyVPreset::PREBRLYJREFNOTIFY, jref);
-
-	if (ixInv == VecBrlyVCard::CRDBRLYUSG) {
-		CrdBrlyUsg* crdusg = NULL;
-
-		for (auto it = crdusgs.begin(); it != crdusgs.end();) {
-			crdusg = *it;
-			if (crdusg->jref == jrefTrig) {
-				it = crdusgs.erase(it);
-				delete crdusg;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYUSR) {
-		CrdBrlyUsr* crdusr = NULL;
-
-		for (auto it = crdusrs.begin(); it != crdusrs.end();) {
-			crdusr = *it;
-			if (crdusr->jref == jrefTrig) {
-				it = crdusrs.erase(it);
-				delete crdusr;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYPRS) {
-		CrdBrlyPrs* crdprs = NULL;
-
-		for (auto it = crdprss.begin(); it != crdprss.end();) {
-			crdprs = *it;
-			if (crdprs->jref == jrefTrig) {
-				it = crdprss.erase(it);
-				delete crdprs;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYFIL) {
-		CrdBrlyFil* crdfil = NULL;
-
-		for (auto it = crdfils.begin(); it != crdfils.end();) {
-			crdfil = *it;
-			if (crdfil->jref == jrefTrig) {
-				it = crdfils.erase(it);
-				delete crdfil;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYOPR) {
-		CrdBrlyOpr* crdopr = NULL;
-
-		for (auto it = crdoprs.begin(); it != crdoprs.end();) {
-			crdopr = *it;
-			if (crdopr->jref == jrefTrig) {
-				it = crdoprs.erase(it);
-				delete crdopr;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYPTY) {
-		CrdBrlyPty* crdpty = NULL;
-
-		for (auto it = crdptys.begin(); it != crdptys.end();) {
-			crdpty = *it;
-			if (crdpty->jref == jrefTrig) {
-				it = crdptys.erase(it);
-				delete crdpty;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYNAV) {
-		if (crdnav) {
-			delete crdnav;
-			crdnav = NULL;
-		};
-
-	} else if (ixInv == VecBrlyVCard::CRDBRLYREG) {
-		CrdBrlyReg* crdreg = NULL;
-
-		for (auto it = crdregs.begin(); it != crdregs.end();) {
-			crdreg = *it;
-			if (crdreg->jref == jrefTrig) {
-				it = crdregs.erase(it);
-				delete crdreg;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYLOC) {
-		CrdBrlyLoc* crdloc = NULL;
-
-		for (auto it = crdlocs.begin(); it != crdlocs.end();) {
-			crdloc = *it;
-			if (crdloc->jref == jrefTrig) {
-				it = crdlocs.erase(it);
-				delete crdloc;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYLEG) {
-		CrdBrlyLeg* crdleg = NULL;
-
-		for (auto it = crdlegs.begin(); it != crdlegs.end();) {
-			crdleg = *it;
-			if (crdleg->jref == jrefTrig) {
-				it = crdlegs.erase(it);
-				delete crdleg;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYTTB) {
-		CrdBrlyTtb* crdttb = NULL;
-
-		for (auto it = crdttbs.begin(); it != crdttbs.end();) {
-			crdttb = *it;
-			if (crdttb->jref == jrefTrig) {
-				it = crdttbs.erase(it);
-				delete crdttb;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYFLT) {
-		CrdBrlyFlt* crdflt = NULL;
-
-		for (auto it = crdflts.begin(); it != crdflts.end();) {
-			crdflt = *it;
-			if (crdflt->jref == jrefTrig) {
-				it = crdflts.erase(it);
-				delete crdflt;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYSEG) {
-		CrdBrlySeg* crdseg = NULL;
-
-		for (auto it = crdsegs.begin(); it != crdsegs.end();) {
-			crdseg = *it;
-			if (crdseg->jref == jrefTrig) {
-				it = crdsegs.erase(it);
-				delete crdseg;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYCON) {
-		CrdBrlyCon* crdcon = NULL;
-
-		for (auto it = crdcons.begin(); it != crdcons.end();) {
-			crdcon = *it;
-			if (crdcon->jref == jrefTrig) {
-				it = crdcons.erase(it);
-				delete crdcon;
-				break;
-			} else it++;
-		};
-	} else if (ixInv == VecBrlyVCard::CRDBRLYRLY) {
-		CrdBrlyRly* crdrly = NULL;
-
-		for (auto it = crdrlys.begin(); it != crdrlys.end();) {
-			crdrly = *it;
-			if (crdrly->jref == jrefTrig) {
-				it = crdrlys.erase(it);
-				delete crdrly;
-				break;
-			} else it++;
-		};
-	};
+	logRecaccess(dbsbrly, ixInv, refInv, VecBrlyVCard::getIx(srefInv), intvalInv);
 	return retval;
 };
 
-bool SessBrly::handleCallBrlyCrdActive(
+bool SessBrly::handleCallBrlyRecaccess(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
 			, const uint ixInv
+			, const ubigint refInv
 			, uint& ixRet
 		) {
 	bool retval = false;
-	ixRet = checkCrdActive(ixInv);
+	ixRet = checkRecaccess(dbsbrly, ixInv, refInv);
 	return retval;
 };

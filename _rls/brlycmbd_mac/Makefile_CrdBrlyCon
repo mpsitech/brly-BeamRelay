@@ -2,7 +2,7 @@
 # make file for CrdBrlyCon card job handler, release brlycmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 11 Jan 2021
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -14,9 +14,9 @@ STATLIB = ar
 STATLIBFLAGS = rcs
 
 INCPATH = -I$(BUILDROOT)/dbsbrly -I$(BUILDROOT)/brlycmbd/VecBrly -I$(BUILDROOT)/brlycmbd/IexBrly -I$(BUILDROOT)/brlycmbd
-INCPATH += -I${WHIZSDKROOT}/build -I/usr/local/include -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/libpng/include -I/usr/local/opt/sqlite/include
+INCPATH += -I${WHIZSDKROOT}/build -I/opt/homebrew/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libpng/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
-OBJS = CrdBrlyCon.o PnlBrlyConList.o QryBrlyConList.o PnlBrlyConHeadbar.o PnlBrlyConRec.o PnlBrlyConMNSegment.o QryBrlyConMNSegment.o PnlBrlyConMNFlight.o QryBrlyConMNFlight.o PnlBrlyConConMNEquipment.o QryBrlyConConMNEquipment.o PnlBrlyConRef1NSegment.o QryBrlyConRef1NSegment.o PnlBrlyCon1NRelay.o QryBrlyCon1NRelay.o PnlBrlyConMap.o QryBrlyConMapNode.o QryBrlyConMapLocation.o QryBrlyConMapLeg.o QryBrlyConMapFlight.o QryBrlyConMapRelay.o PnlBrlyConDetail.o PnlBrlyConPre.o DlgBrlyConNew.o
+OBJS = CrdBrlyCon.o PnlBrlyConList.o QryBrlyConList.o PnlBrlyConHeadbar.o PnlBrlyConRec.o PnlBrlyConMNSegment.o QryBrlyConMNSegment.o PnlBrlyConMNFlight.o QryBrlyConMNFlight.o PnlBrlyConConMNEquipment.o QryBrlyConConMNEquipment.o PnlBrlyCon1NRelay.o QryBrlyCon1NRelay.o PnlBrlyConRef1NSegment.o QryBrlyConRef1NSegment.o PnlBrlyConMap.o QryBrlyConMapRelay.o QryBrlyConMapLocation.o QryBrlyConMapNode.o QryBrlyConMapLeg.o QryBrlyConMapFlight.o PnlBrlyConDetail.o PnlBrlyConPre.o DlgBrlyConNew.o
 
 LIB = libcrdbrlycon
 
@@ -29,7 +29,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/brlycmbd/

@@ -57,6 +57,17 @@ PnlBrlyFltFafAWaypoint::ContInf::ContInf(
 	mask = {NUMFCSIQST};
 };
 
+void PnlBrlyFltFafAWaypoint::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfBrlyFltFafAWaypoint";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFCsiQst"] = numFCsiQst;
+};
+
 void PnlBrlyFltFafAWaypoint::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -100,6 +111,18 @@ set<uint> PnlBrlyFltFafAWaypoint::ContInf::diff(
 /******************************************************************************
  class PnlBrlyFltFafAWaypoint::StatApp
  ******************************************************************************/
+
+void PnlBrlyFltFafAWaypoint::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixBrlyVExpstate
+		) {
+	if (difftag.length() == 0) difftag = "StatAppBrlyFltFafAWaypoint";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxBrlyVExpstate"] = VecBrlyVExpstate::getSref(ixBrlyVExpstate);
+};
 
 void PnlBrlyFltFafAWaypoint::StatApp::writeXML(
 			xmlTextWriter* wr
@@ -146,6 +169,25 @@ PnlBrlyFltFafAWaypoint::StatShr::StatShr(
 	this->ButDeleteActive = ButDeleteActive;
 
 	mask = {BUTUPAVAIL, BUTUPACTIVE, BUTDOWNAVAIL, BUTDOWNACTIVE, BUTNEWAVAIL, BUTDUPLICATEAVAIL, BUTDUPLICATEACTIVE, BUTDELETEAVAIL, BUTDELETEACTIVE};
+};
+
+void PnlBrlyFltFafAWaypoint::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrBrlyFltFafAWaypoint";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButUpAvail"] = ButUpAvail;
+	me["ButUpActive"] = ButUpActive;
+	me["ButDownAvail"] = ButDownAvail;
+	me["ButDownActive"] = ButDownActive;
+	me["ButNewAvail"] = ButNewAvail;
+	me["ButDuplicateAvail"] = ButDuplicateAvail;
+	me["ButDuplicateActive"] = ButDuplicateActive;
+	me["ButDeleteAvail"] = ButDeleteAvail;
+	me["ButDeleteActive"] = ButDeleteActive;
 };
 
 void PnlBrlyFltFafAWaypoint::StatShr::writeXML(
@@ -231,6 +273,32 @@ PnlBrlyFltFafAWaypoint::StgIac::StgIac(
 	mask = {TCOTMSWIDTH, TCOLATWIDTH, TCOLONWIDTH, TCOGSPWIDTH, TCOALTWIDTH, TCOASTWIDTH, TCOUTYWIDTH, TCOACHWIDTH};
 };
 
+bool PnlBrlyFltFafAWaypoint::StgIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacBrlyFltFafAWaypoint"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("TcoTmsWidth")) {TcoTmsWidth = me["TcoTmsWidth"].asUInt(); add(TCOTMSWIDTH);};
+		if (me.isMember("TcoLatWidth")) {TcoLatWidth = me["TcoLatWidth"].asUInt(); add(TCOLATWIDTH);};
+		if (me.isMember("TcoLonWidth")) {TcoLonWidth = me["TcoLonWidth"].asUInt(); add(TCOLONWIDTH);};
+		if (me.isMember("TcoGspWidth")) {TcoGspWidth = me["TcoGspWidth"].asUInt(); add(TCOGSPWIDTH);};
+		if (me.isMember("TcoAltWidth")) {TcoAltWidth = me["TcoAltWidth"].asUInt(); add(TCOALTWIDTH);};
+		if (me.isMember("TcoAstWidth")) {TcoAstWidth = me["TcoAstWidth"].asUInt(); add(TCOASTWIDTH);};
+		if (me.isMember("TcoUtyWidth")) {TcoUtyWidth = me["TcoUtyWidth"].asUInt(); add(TCOUTYWIDTH);};
+		if (me.isMember("TcoAchWidth")) {TcoAchWidth = me["TcoAchWidth"].asUInt(); add(TCOACHWIDTH);};
+	};
+
+	return basefound;
+};
+
 bool PnlBrlyFltFafAWaypoint::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -259,6 +327,24 @@ bool PnlBrlyFltFafAWaypoint::StgIac::readXML(
 	};
 
 	return basefound;
+};
+
+void PnlBrlyFltFafAWaypoint::StgIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgIacBrlyFltFafAWaypoint";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TcoTmsWidth"] = TcoTmsWidth;
+	me["TcoLatWidth"] = TcoLatWidth;
+	me["TcoLonWidth"] = TcoLonWidth;
+	me["TcoGspWidth"] = TcoGspWidth;
+	me["TcoAltWidth"] = TcoAltWidth;
+	me["TcoAstWidth"] = TcoAstWidth;
+	me["TcoUtyWidth"] = TcoUtyWidth;
+	me["TcoAchWidth"] = TcoAchWidth;
 };
 
 void PnlBrlyFltFafAWaypoint::StgIac::writeXML(
@@ -318,6 +404,43 @@ set<uint> PnlBrlyFltFafAWaypoint::StgIac::diff(
 /******************************************************************************
  class PnlBrlyFltFafAWaypoint::Tag
  ******************************************************************************/
+
+void PnlBrlyFltFafAWaypoint::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyFltFafAWaypoint";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["Cpt"] = "Waypoints";
+		me["TcoTms"] = "Timestamp";
+		me["TcoLat"] = "Latitude";
+		me["TcoLon"] = "Longitude";
+		me["TcoGsp"] = "Groundspeed";
+		me["TcoAlt"] = "Altitude";
+		me["TcoAst"] = "AltitudeStatus";
+		me["TcoUty"] = "UpdateType";
+		me["TcoAch"] = "AltitudeChange";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["Cpt"] = "Wegpunkte";
+		me["TcoTms"] = "Timestamp";
+		me["TcoLat"] = "Latitude";
+		me["TcoLon"] = "Longitude";
+		me["TcoGsp"] = "Groundspeed";
+		me["TcoAlt"] = "Altitude";
+		me["TcoAst"] = "AltitudeStatus";
+		me["TcoUty"] = "UpdateType";
+		me["TcoAch"] = "AltitudeChange";
+	};
+	me["TxtRecord1"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::REC, ixBrlyVLocale));
+	me["TxtRecord2"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::EMPLONG, ixBrlyVLocale));
+	me["Trs"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::GOTO, ixBrlyVLocale)) + " ...";
+	me["TxtShowing1"] = VecBrlyVTag::getTitle(VecBrlyVTag::SHOWSHORT, ixBrlyVLocale);
+	me["TxtShowing2"] = VecBrlyVTag::getTitle(VecBrlyVTag::EMPSHORT, ixBrlyVLocale);
+};
 
 void PnlBrlyFltFafAWaypoint::Tag::writeXML(
 			const uint ixBrlyVLocale
@@ -383,6 +506,28 @@ string PnlBrlyFltFafAWaypoint::DpchAppData::getSrefsMask() {
 	return(srefs);
 };
 
+void PnlBrlyFltFafAWaypoint::DpchAppData::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyFltFafAWaypointData"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (stgiac.readJSON(me, true)) add(STGIAC);
+		if (stgiacqry.readJSON(me, true)) add(STGIACQRY);
+	} else {
+		stgiac = StgIac();
+		stgiacqry = QryBrlyFltFafAWaypoint::StgIac();
+	};
+};
+
 void PnlBrlyFltFafAWaypoint::DpchAppData::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -432,6 +577,25 @@ string PnlBrlyFltFafAWaypoint::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlBrlyFltFafAWaypoint::DpchAppDo::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyFltFafAWaypointDo"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlBrlyFltFafAWaypoint::DpchAppDo::readXML(
@@ -530,6 +694,25 @@ void PnlBrlyFltFafAWaypoint::DpchEngData::merge(
 	if (src->has(STATAPPQRY)) add(STATAPPQRY);
 	if (src->has(STATSHRQRY)) {statshrqry = src->statshrqry; add(STATSHRQRY);};
 	if (src->has(STGIACQRY)) {stgiacqry = src->stgiacqry; add(STGIACQRY);};
+};
+
+void PnlBrlyFltFafAWaypoint::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyFltFafAWaypointData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFCSIQST)) feedFCsiQst.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(STGIAC)) stgiac.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
+	if (has(RST)) rst.writeJSON(me);
+	if (has(STATAPPQRY)) QryBrlyFltFafAWaypoint::StatApp::writeJSON(me);
+	if (has(STATSHRQRY)) statshrqry.writeJSON(me);
+	if (has(STGIACQRY)) stgiacqry.writeJSON(me);
 };
 
 void PnlBrlyFltFafAWaypoint::DpchEngData::writeXML(

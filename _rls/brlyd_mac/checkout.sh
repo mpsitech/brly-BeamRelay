@@ -3,7 +3,7 @@
 # checkout script for Brly daemon, release brlyd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 11 Jan 2021
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -172,22 +172,22 @@ cp $CMBDBUILDROOT/BrlyTtimp/BrlyTtimp_blks.cpp $BUILDROOT/brlyd/
 cp $CMBDBUILDROOT/BrlyTtimp/SqkBrlyTtimp.h $BUILDROOT/brlyd/
 cp $CMBDBUILDROOT/BrlyTtimp/SqkBrlyTtimp.cpp $BUILDROOT/brlyd/
 
-cp $CMBDBUILDROOT/BrlyMapgen/BrlyMapgen_blks.h $BUILDROOT/brlyd/
-cp $CMBDBUILDROOT/BrlyMapgen/BrlyMapgen_blks.cpp $BUILDROOT/brlyd/
-cp $CMBDBUILDROOT/BrlyMapgen/SqkBrlyMapgen.h $BUILDROOT/brlyd/
-cp $CMBDBUILDROOT/BrlyMapgen/SqkBrlyMapgen.cpp $BUILDROOT/brlyd/
-
 cp $CMBDBUILDROOT/BrlyDyn/BrlyDyn_blks.h $BUILDROOT/brlyd/
 cp $CMBDBUILDROOT/BrlyDyn/BrlyDyn_blks.cpp $BUILDROOT/brlyd/
 cp $CMBDBUILDROOT/BrlyDyn/SqkBrlyDyn.h $BUILDROOT/brlyd/
 cp $CMBDBUILDROOT/BrlyDyn/SqkBrlyDyn.cpp $BUILDROOT/brlyd/
 
-cp $CMBDBUILDROOT/BrlyDnsmap/BrlyDnsmap_blks.h $BUILDROOT/brlyd/
-cp $CMBDBUILDROOT/BrlyDnsmap/BrlyDnsmap_blks.cpp $BUILDROOT/brlyd/
-cp $CMBDBUILDROOT/BrlyDnsmap/SqkBrlyDnsmap.h $BUILDROOT/brlyd/
-cp $CMBDBUILDROOT/BrlyDnsmap/SqkBrlyDnsmap.cpp $BUILDROOT/brlyd/
+cp $CMBDBUILDROOT/BrlyMapgen/BrlyMapgen_blks.h $BUILDROOT/brlyd/
+cp $CMBDBUILDROOT/BrlyMapgen/BrlyMapgen_blks.cpp $BUILDROOT/brlyd/
+cp $CMBDBUILDROOT/BrlyMapgen/SqkBrlyMapgen.h $BUILDROOT/brlyd/
+cp $CMBDBUILDROOT/BrlyMapgen/SqkBrlyMapgen.cpp $BUILDROOT/brlyd/
 
 cp $CMBDBUILDROOT/BrlyBase/BrlyBase_blks.h $BUILDROOT/brlyd/
 cp $CMBDBUILDROOT/BrlyBase/BrlyBase_blks.cpp $BUILDROOT/brlyd/
 cp $CMBDBUILDROOT/BrlyBase/SqkBrlyBase.h $BUILDROOT/brlyd/
 cp $CMBDBUILDROOT/BrlyBase/SqkBrlyBase.cpp $BUILDROOT/brlyd/
+
+cp $CMBDBUILDROOT/BrlyDnsmap/BrlyDnsmap_blks.h $BUILDROOT/brlyd/
+cp $CMBDBUILDROOT/BrlyDnsmap/BrlyDnsmap_blks.cpp $BUILDROOT/brlyd/
+cp $CMBDBUILDROOT/BrlyDnsmap/SqkBrlyDnsmap.h $BUILDROOT/brlyd/
+cp $CMBDBUILDROOT/BrlyDnsmap/SqkBrlyDnsmap.cpp $BUILDROOT/brlyd/

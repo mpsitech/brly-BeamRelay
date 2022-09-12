@@ -49,6 +49,35 @@ BrlyQFltFafAWaypoint::BrlyQFltFafAWaypoint(
 	this->altitudeChange = altitudeChange;
 };
 
+void BrlyQFltFafAWaypoint::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["tms"] = ftmTimestamp;
+		me["lat"] = latitude;
+		me["lon"] = longitude;
+		me["gsp"] = groundspeed;
+		me["alt"] = altitude;
+		me["ast"] = altitudeStatus;
+		me["uty"] = updateType;
+		me["ach"] = altitudeChange;
+	} else {
+		me["ftmTimestamp"] = ftmTimestamp;
+		me["latitude"] = latitude;
+		me["longitude"] = longitude;
+		me["groundspeed"] = groundspeed;
+		me["altitude"] = altitude;
+		me["altitudeStatus"] = altitudeStatus;
+		me["updateType"] = updateType;
+		me["altitudeChange"] = altitudeChange;
+	};
+};
+
 void BrlyQFltFafAWaypoint::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -128,6 +157,16 @@ ListBrlyQFltFafAWaypoint& ListBrlyQFltFafAWaypoint::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQFltFafAWaypoint::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQFltFafAWaypoint";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQFltFafAWaypoint::writeXML(

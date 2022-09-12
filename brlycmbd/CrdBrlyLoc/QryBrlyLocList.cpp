@@ -369,27 +369,13 @@ void QryBrlyLocList::handleCall(
 			DbsBrly* dbsbrly
 			, Call* call
 		) {
-	if (call->ixVCall == VecBrlyVCall::CALLBRLYLOCUPD_REFEQ) {
-		call->abort = handleCallBrlyLocUpd_refEq(dbsbrly, call->jref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYLOCMOD) {
+	if (call->ixVCall == VecBrlyVCall::CALLBRLYLOCMOD) {
 		call->abort = handleCallBrlyLocMod(dbsbrly, call->jref);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYLOCUPD_REFEQ) {
+		call->abort = handleCallBrlyLocUpd_refEq(dbsbrly, call->jref);
 	} else if ((call->ixVCall == VecBrlyVCall::CALLBRLYSTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallBrlyStubChgFromSelf(dbsbrly);
 	};
-};
-
-bool QryBrlyLocList::handleCallBrlyLocUpd_refEq(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if (ixBrlyVQrystate != VecBrlyVQrystate::OOD) {
-		ixBrlyVQrystate = VecBrlyVQrystate::OOD;
-		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
-	};
-
-	return retval;
 };
 
 bool QryBrlyLocList::handleCallBrlyLocMod(
@@ -400,6 +386,20 @@ bool QryBrlyLocList::handleCallBrlyLocMod(
 
 	if ((ixBrlyVQrystate == VecBrlyVQrystate::UTD) || (ixBrlyVQrystate == VecBrlyVQrystate::SLM)) {
 		ixBrlyVQrystate = VecBrlyVQrystate::MNR;
+		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
+	};
+
+	return retval;
+};
+
+bool QryBrlyLocList::handleCallBrlyLocUpd_refEq(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if (ixBrlyVQrystate != VecBrlyVQrystate::OOD) {
+		ixBrlyVQrystate = VecBrlyVQrystate::OOD;
 		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
 	};
 

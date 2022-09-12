@@ -51,12 +51,13 @@ RootBrly::RootBrly(
 
 	// IP constructor.spec2 --- INSERT
 
+	xchg->addClstn(VecBrlyVCall::CALLBRLYREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYSUSPSESS, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYLOGOUT, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
-	// IP constructor.spec3 --- INSERT
+	if (xchg->stgbrlyappearance.roottterm != 0) wrefLast = xchg->addWakeup(jref, "warnterm", 1e6 * xchg->stgbrlyappearance.roottterm);
 };
 
 RootBrly::~RootBrly() {
@@ -283,6 +284,19 @@ bool RootBrly::authenticate(
 	return valid;
 };
 
+void RootBrly::termSess(
+			DbsBrly* dbsbrly
+			, const ubigint jref
+		) {
+	JobBrly* job = NULL;
+
+	job = xchg->getJobByJref(jref);
+
+	if (job) {
+		if (job->ixBrlyVJob == VecBrlyVJob::SESSBRLY) ((SessBrly*) job)->term(dbsbrly);
+	};
+};
+
 void RootBrly::handleRequest(
 			DbsBrly* dbsbrly
 			, ReqBrly* req
@@ -314,6 +328,9 @@ void RootBrly::handleRequest(
 			handleDpchAppLogin(dbsbrly, (DpchAppLogin*) (req->dpchapp), req->ip, &(req->dpcheng));
 
 		};
+
+	} else if (req->ixVBasetype == ReqBrly::VecVBasetype::TIMER) {
+		if (req->sref == "warnterm") handleTimerWithSrefWarnterm(dbsbrly);
 	};
 };
 
@@ -334,8 +351,6 @@ bool RootBrly::handleCreateSess(
 
 	ubigint refUsr;
 
-	SessBrly* sess = NULL;
-
 	cout << "\tuser name: ";
 	cin >> input;
 	cout << "\tpassword: ";
@@ -343,11 +358,10 @@ bool RootBrly::handleCreateSess(
 
 	// verify password and create a session
 	if (authenticate(dbsbrly, input, input2, refUsr)) {
-		sess = new SessBrly(xchg, dbsbrly, jref, refUsr, "127.0.0.1");
-		sesss.push_back(sess);
+		xchg->jrefCmd = insertSubjob(sesss, new SessBrly(xchg, dbsbrly, jref, refUsr, "127.0.0.1"));
+		cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
-		cout << "\tjob reference: " << sess->jref << endl;
-		xchg->jrefCmd = sess->jref;
+		if ((xchg->stgbrlyappearance.sesstterm != 0) && (sesss.size() == 1)) wrefLast = xchg->addWakeup(jref, "warnterm", 1e6 * (xchg->stgbrlyappearance.sesstterm - xchg->stgbrlyappearance.sesstwarn));
 
 		xchg->appendToLogfile("command line session created for user '" + input + "'");
 
@@ -364,25 +378,19 @@ bool RootBrly::handleEraseSess(
 			DbsBrly* dbsbrly
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
 
-	SessBrly* sess = NULL;
+	string input;
+	ubigint iinput;
 
 	cout << "\tjob reference: ";
 	cin >> input;
 	iinput = atoi(input.c_str());
 
-	for (auto it = sesss.begin(); it != sesss.end();) {
-		sess = *it;
-		if (sess->jref == iinput) {
-			it = sesss.erase(it);
-			delete sess;
-			break;
-		} else it++;
-	};
+	termSess(dbsbrly, iinput);
 
-	return false;
+	if (!eraseSubjobByJref(sesss, iinput)) cout << "\tjob reference doesn't exist!" << endl;
+	else cout << "\tsession erased." << endl;
+
 	return retval;
 };
 
@@ -394,7 +402,7 @@ void RootBrly::handleDpchAppLogin(
 		) {
 	ubigint refUsr;
 
-	SessBrly* sess = NULL;
+	ubigint jrefSess;
 
 	Feed feedFEnsSps("FeedFEnsSps");
 
@@ -404,12 +412,12 @@ void RootBrly::handleDpchAppLogin(
 			if (xchg->stgbrlyappearance.suspsess && dpchapplogin->chksuspsess) {
 				// look for suspended sessions
 				for (auto it = sesss.begin(); it != sesss.end(); it++) {
-					sess = *it;
+					jrefSess = it->second->jref;
 
-					if (xchg->getRefPreset(VecBrlyVPreset::PREBRLYOWNER, sess->jref) == refUsr) {
-						if (xchg->getBoolvalPreset(VecBrlyVPreset::PREBRLYSUSPSESS, sess->jref)) {
-							xchg->addTxtvalPreset(VecBrlyVPreset::PREBRLYIP, sess->jref, ip);
-							feedFEnsSps.appendIxSrefTitles(0, Scr::scramble(sess->jref), StubBrly::getStubSesStd(dbsbrly, xchg->getRefPreset(VecBrlyVPreset::PREBRLYSESS, sess->jref)));
+					if (xchg->getRefPreset(VecBrlyVPreset::PREBRLYOWNER, jrefSess) == refUsr) {
+						if (xchg->getBoolvalPreset(VecBrlyVPreset::PREBRLYSUSPSESS, jrefSess)) {
+							xchg->addTxtvalPreset(VecBrlyVPreset::PREBRLYIP, jrefSess, ip);
+							feedFEnsSps.appendIxSrefTitles(0, Scr::scramble(jrefSess), StubBrly::getStubSesStd(dbsbrly, xchg->getRefPreset(VecBrlyVPreset::PREBRLYSESS, jrefSess)));
 						};
 					};
 				};
@@ -417,12 +425,13 @@ void RootBrly::handleDpchAppLogin(
 
 			if (feedFEnsSps.size() == 0) {
 				// start new session
-				sess = new SessBrly(xchg, dbsbrly, jref, refUsr, ip);
-				sesss.push_back(sess);
+				jrefSess = insertSubjob(sesss, new SessBrly(xchg, dbsbrly, jref, refUsr, ip));
+
+				if ((xchg->stgbrlyappearance.sesstterm != 0) && (sesss.size() == 1)) wrefLast = xchg->addWakeup(jref, "warnterm", 1e6 * (xchg->stgbrlyappearance.sesstterm - xchg->stgbrlyappearance.sesstwarn));
 
 				xchg->appendToLogfile("session created for user '" + dpchapplogin->username + "' from IP " + ip);
 
-				*dpcheng = new DpchEngBrlyConfirm(true, sess->jref, "");
+				*dpcheng = new DpchEngBrlyConfirm(true, jrefSess, "");
 
 			} else {
 				// return suspended sessions
@@ -438,15 +447,84 @@ void RootBrly::handleDpchAppLogin(
 	};
 };
 
+void RootBrly::handleTimerWithSrefWarnterm(
+			DbsBrly* dbsbrly
+		) {
+	SessBrly* sess = NULL;
+
+	time_t tlast;
+	time_t tnext = 0;
+
+	time_t rawtime;
+	time(&rawtime);
+
+	bool term;
+
+	if (xchg->stgbrlyappearance.sesstterm != 0) {
+		for (auto it = sesss.begin(); it != sesss.end();) {
+			sess = (SessBrly*) it->second;
+
+			term = false;
+
+			tlast = xchg->getRefPreset(VecBrlyVPreset::PREBRLYTLAST, sess->jref);
+
+			if ((tlast + ((int) xchg->stgbrlyappearance.sesstterm)) <= rawtime) term = true;
+			else if ((tlast + ((int) xchg->stgbrlyappearance.sesstterm) - ((int) xchg->stgbrlyappearance.sesstwarn)) <= rawtime) {
+				sess->warnTerm(dbsbrly);
+				if ((tnext == 0) || ((tlast + ((int) xchg->stgbrlyappearance.sesstterm)) < tnext)) tnext = tlast + ((int) xchg->stgbrlyappearance.sesstterm);
+			} else if ((tnext == 0) || ((tlast + ((int) xchg->stgbrlyappearance.sesstterm) - ((int) xchg->stgbrlyappearance.sesstwarn)) < tnext)) tnext = tlast + xchg->stgbrlyappearance.sesstterm - xchg->stgbrlyappearance.sesstwarn;
+
+			if (term) {
+				sess->term(dbsbrly);
+				it = sesss.erase(it);
+
+				delete sess;
+
+			} else it++;
+		};
+	};
+
+	term = false;
+
+	if (xchg->stgbrlyappearance.roottterm != 0) {
+		tlast = xchg->getRefPreset(VecBrlyVPreset::PREBRLYTLAST, jref);
+
+		if ((tlast + ((int) xchg->stgbrlyappearance.roottterm)) <= rawtime) term = true;
+		else if ((tnext == 0) || ((tlast + ((int) xchg->stgbrlyappearance.roottterm)) < tnext)) tnext = tlast + xchg->stgbrlyappearance.roottterm;
+	};
+
+	if (term) {
+		cout << endl << "\tterminating due to inactivity" << endl;
+		kill(getpid(), SIGTERM);
+	} else if (tnext != 0) wrefLast = xchg->addWakeup(jref, "warnterm", 1e6 * (tnext - rawtime));
+};
+
 void RootBrly::handleCall(
 			DbsBrly* dbsbrly
 			, Call* call
 		) {
-	if (call->ixVCall == VecBrlyVCall::CALLBRLYSUSPSESS) {
+	if (call->ixVCall == VecBrlyVCall::CALLBRLYREFPRESET) {
+		call->abort = handleCallBrlyRefPreSet(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSUSPSESS) {
 		call->abort = handleCallBrlySuspsess(dbsbrly, call->jref);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYLOGOUT) {
 		call->abort = handleCallBrlyLogout(dbsbrly, call->jref, call->argInv.boolval);
 	};
+};
+
+bool RootBrly::handleCallBrlyRefPreSet(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+		) {
+	bool retval = false;
+
+	if (ixInv == VecBrlyVPreset::PREBRLYTLAST) {
+		xchg->addRefPreset(ixInv, jref, refInv);
+	};
+
+	return retval;
 };
 
 bool RootBrly::handleCallBrlySuspsess(
@@ -468,18 +546,16 @@ bool RootBrly::handleCallBrlyLogout(
 		) {
 	bool retval = false;
 
-	SessBrly* sess = NULL;
+	time_t rawtime;
+
+	termSess(dbsbrly, jrefTrig);
 
 	if (!boolvalInv) {
-		for (auto it = sesss.begin(); it != sesss.end();) {
-			sess = *it;
-			if (sess->jref == jrefTrig) {
-				sess->term(dbsbrly);
-				it = sesss.erase(it);
+		eraseSubjobByJref(sesss, jrefTrig);
 
-				delete sess;
-				break;
-			} else it++;
+		if (xchg->stgbrlyappearance.roottterm) {
+			time(&rawtime);
+			xchg->addRefPreset(VecBrlyVPreset::PREBRLYTLAST, jref, rawtime);
 		};
 	};
 

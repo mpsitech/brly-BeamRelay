@@ -65,6 +65,41 @@ BrlyQUsrList::BrlyQUsrList(
 	this->titIxBrlyVUserlevel = titIxBrlyVUserlevel;
 };
 
+void BrlyQUsrList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["grp"] = stubGrp;
+		me["own"] = stubOwn;
+		me["prs"] = stubRefBrlyMPerson;
+		me["srf"] = sref;
+		me["usg"] = stubRefBrlyMUsergroup;
+		me["ste"] = srefIxVState;
+		me["ste2"] = titIxVState;
+		me["lcl"] = srefIxBrlyVLocale;
+		me["lcl2"] = titIxBrlyVLocale;
+		me["ulv"] = srefIxBrlyVUserlevel;
+		me["ulv2"] = titIxBrlyVUserlevel;
+	} else {
+		me["stubGrp"] = stubGrp;
+		me["stubOwn"] = stubOwn;
+		me["stubRefBrlyMPerson"] = stubRefBrlyMPerson;
+		me["sref"] = sref;
+		me["stubRefBrlyMUsergroup"] = stubRefBrlyMUsergroup;
+		me["srefIxVState"] = srefIxVState;
+		me["titIxVState"] = titIxVState;
+		me["srefIxBrlyVLocale"] = srefIxBrlyVLocale;
+		me["titIxBrlyVLocale"] = titIxBrlyVLocale;
+		me["srefIxBrlyVUserlevel"] = srefIxBrlyVUserlevel;
+		me["titIxBrlyVUserlevel"] = titIxBrlyVUserlevel;
+	};
+};
+
 void BrlyQUsrList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -150,6 +185,16 @@ ListBrlyQUsrList& ListBrlyQUsrList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQUsrList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQUsrList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQUsrList::writeXML(

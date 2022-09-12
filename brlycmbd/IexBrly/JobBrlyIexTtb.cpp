@@ -492,7 +492,7 @@ string JobBrlyIexTtb::getSquawk(
 		if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
 			if (ixVSge == VecVSge::PARSE) retval = "parsing timetable raw data";
 			else if (ixVSge == VecVSge::PRSDONE) retval = "timetable raw data parsed";
-			else if (ixVSge == VecVSge::IMPORT) retval = "importing timetable raw data (" + to_string(impcnt) + " records added)";
+			else if (ixVSge == VecVSge::IMPORT) retval = "importing timetable raw data (&impcnt; records added)";
 			else if (ixVSge == VecVSge::REVERSE) retval = "reversing timetable raw data import";
 			else if (ixVSge == VecVSge::COLLECT) retval = "collecting timetable raw data for export";
 			else if (ixVSge == VecVSge::CLTDONE) retval = "timetable raw data collected for export";
@@ -500,7 +500,7 @@ string JobBrlyIexTtb::getSquawk(
 		} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
 			if (ixVSge == VecVSge::PARSE) retval = "parsing timetable raw data";
 			else if (ixVSge == VecVSge::PRSDONE) retval = "timetable raw data parsed";
-			else if (ixVSge == VecVSge::IMPORT) retval = "importing timetable raw data (" + to_string(impcnt) + " records added)";
+			else if (ixVSge == VecVSge::IMPORT) retval = "importing timetable raw data (&impcnt; records added)";
 			else if (ixVSge == VecVSge::REVERSE) retval = "reversing timetable raw data import";
 			else if (ixVSge == VecVSge::COLLECT) retval = "collecting timetable raw data for export";
 			else if (ixVSge == VecVSge::CLTDONE) retval = "timetable raw data collected for export";

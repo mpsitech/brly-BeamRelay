@@ -84,8 +84,8 @@ void QryBrlyLegMapLeg::rerun(
 	sqlstr += " SELECT 1, " + to_string(jref) + ", 0, TblBrlyRMLegMLeg.ref, TblBrlyRMLegMLeg.VisOrgLegphi0, TblBrlyRMLegMLeg.VisOrgLegphi1, TblBrlyMLeg.ref, TblBrlyMLeg.bgnRefBrlyMLocation, TblBrlyMLeg.endRefBrlyMLocation";
 	sqlstr += " FROM TblBrlyMLeg, TblBrlyRMLegMLeg";
 	sqlstr += " WHERE TblBrlyMLeg.ixVBasetype = " + to_string(VecBrlyVMLegBasetype::RTE);
-	sqlstr += " AND TblBrlyRMLegMLeg.dstRefBrlyMLeg = " + to_string(preRefLeg) + "";
 	sqlstr += " AND TblBrlyMLeg.ref = TblBrlyRMLegMLeg.orgRefBrlyMLeg";
+	sqlstr += " AND TblBrlyRMLegMLeg.dstRefBrlyMLeg = " + to_string(preRefLeg) + "";
 	dbsbrly->executeQuery(sqlstr);
 
 	sqlstr = "UPDATE TblBrlyQLegMapLeg SET jnum = qref WHERE jref = " + to_string(jref);

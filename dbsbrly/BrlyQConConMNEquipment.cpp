@@ -39,6 +39,23 @@ BrlyQConConMNEquipment::BrlyQConConMNEquipment(
 	this->conNum = conNum;
 };
 
+void BrlyQConConMNEquipment::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["lat"] = srefConIxBrlyVLat;
+	} else {
+		me["stubMref"] = stubMref;
+		me["srefConIxBrlyVLat"] = srefConIxBrlyVLat;
+	};
+};
+
 void BrlyQConConMNEquipment::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -106,6 +123,16 @@ ListBrlyQConConMNEquipment& ListBrlyQConConMNEquipment::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQConConMNEquipment::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQConConMNEquipment";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQConConMNEquipment::writeXML(

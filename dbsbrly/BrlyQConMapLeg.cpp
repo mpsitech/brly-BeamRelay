@@ -53,6 +53,29 @@ BrlyQConMapLeg::BrlyQConMapLeg(
 	this->y0 = y0;
 };
 
+void BrlyQConMapLeg::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["dx"] = dx;
+		me["dy"] = dy;
+		me["x0"] = x0;
+		me["y0"] = y0;
+	} else {
+		me["stubMref"] = stubMref;
+		me["dx"] = dx;
+		me["dy"] = dy;
+		me["x0"] = x0;
+		me["y0"] = y0;
+	};
+};
+
 void BrlyQConMapLeg::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -126,6 +149,16 @@ ListBrlyQConMapLeg& ListBrlyQConMapLeg::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQConMapLeg::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQConMapLeg";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) if (nodes[i]->qwr) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQConMapLeg::writeXML(

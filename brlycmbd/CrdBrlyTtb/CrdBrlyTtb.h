@@ -22,8 +22,8 @@
 #include "PnlBrlyTtbHeadbar.h"
 #include "PnlBrlyTtbRec.h"
 #include "DlgBrlyTtbNew.h"
-#include "DlgBrlyTtbImpflt.h"
 #include "DlgBrlyTtbTrlorig.h"
+#include "DlgBrlyTtbImpflt.h"
 
 #define VecVBrlyTtbDo CrdBrlyTtb::VecVDo
 #define VecVBrlyTtbSge CrdBrlyTtb::VecVSge
@@ -75,13 +75,13 @@ public:
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
 
-		static void fillFeed(Sbecore::Xmlio::Feed& feed);
+		static void fillFeed(Sbecore::Feed& feed);
 	};
 
 	/**
 	  * ContInf (full: ContInfBrlyTtb)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFSGE = 1;
@@ -97,6 +97,7 @@ public:
 		std::string MtxCrdTtb;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const ContInf* comp);
 		std::set<Sbecore::uint> diff(const ContInf* comp);
@@ -108,13 +109,14 @@ public:
 	class StatApp {
 
 	public:
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const Sbecore::uint ixBrlyVReqitmode = VecBrlyVReqitmode::IDLE, const Sbecore::usmallint latency = 5, const std::string& shortMenu = "", const Sbecore::uint widthMenu = 0, const bool initdoneHeadbar = false, const bool initdoneList = false, const bool initdoneRec = false);
 		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint ixBrlyVReqitmode = VecBrlyVReqitmode::IDLE, const Sbecore::usmallint latency = 5, const std::string& shortMenu = "", const Sbecore::uint widthMenu = 0, const bool initdoneHeadbar = false, const bool initdoneList = false, const bool initdoneRec = false);
 	};
 
 	/**
 		* StatShr (full: StatShrBrlyTtb)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint JREFDLGIMPFLT = 1;
@@ -146,6 +148,7 @@ public:
 		bool MitCrdIflActive;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -157,6 +160,7 @@ public:
 	class Tag {
 
 	public:
+		static void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup, std::string difftag = "");
 		static void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	};
 
@@ -178,6 +182,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -196,17 +201,18 @@ public:
 		static const Sbecore::uint ALL = 7;
 
 	public:
-		DpchEngData(const Sbecore::ubigint jref = 0, ContInf* continf = NULL, Sbecore::Xmlio::Feed* feedFSge = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+		DpchEngData(const Sbecore::ubigint jref = 0, ContInf* continf = NULL, Sbecore::Feed* feedFSge = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 	public:
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFSge;
+		Sbecore::Feed feedFSge;
 		StatShr statshr;
 
 	public:
 		std::string getSrefsMask();
 		void merge(DpchEngBrly* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr);
 	};
 
@@ -224,16 +230,16 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	Sbecore::Xmlio::Feed feedFMcbAlert;
-	Sbecore::Xmlio::Feed feedFSge;
+	Sbecore::Feed feedFMcbAlert;
+	Sbecore::Feed feedFSge;
 
 	JobBrlyIexFlt* iex;
 	PnlBrlyTtbList* pnllist;
 	PnlBrlyTtbHeadbar* pnlheadbar;
 	PnlBrlyTtbRec* pnlrec;
 	DlgBrlyTtbNew* dlgnew;
-	DlgBrlyTtbImpflt* dlgimpflt;
 	DlgBrlyTtbTrlorig* dlgtrlorig;
+	DlgBrlyTtbImpflt* dlgimpflt;
 
 	// IP vars.cust --- IBEGIN
 	std::string infolder;
@@ -274,8 +280,8 @@ private:
 	void handleDpchAppDoMitCrdIflClick(DbsBrly* dbsbrly, DpchEngBrly** dpcheng);
 	void handleDpchAppBrlyAlert(DbsBrly* dbsbrly, DpchAppBrlyAlert* dpchappbrlyalert, DpchEngBrly** dpcheng);
 
-	void handleTimerInSgeImpidle(DbsBrly* dbsbrly, const std::string& sref);
 	void handleTimerWithSrefMonInSgeImport(DbsBrly* dbsbrly);
+	void handleTimerInSgeImpidle(DbsBrly* dbsbrly, const std::string& sref);
 	void handleTimerWithSrefMonInSgeSegment(DbsBrly* dbsbrly);
 
 public:
@@ -283,8 +289,8 @@ public:
 
 private:
 	bool handleCallBrlyRefPreSet(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
-	bool handleCallBrlyStatChg(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
 	bool handleCallBrlyDlgClose(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
+	bool handleCallBrlyStatChg(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
 
 private:
 	void changeStage(DbsBrly* dbsbrly, Sbecore::uint _ixVSge, DpchEngBrly** dpcheng = NULL);

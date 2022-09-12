@@ -6,8 +6,8 @@ function updateScrJrefs() {
 	scrJrefRef1NSegment = retrieveSi(srcdoc, "StatShrBrlyFltRec", "scrJrefRef1NSegment");
 	scrJrefEqp1NNode = retrieveSi(srcdoc, "StatShrBrlyFltRec", "scrJrefEqp1NNode");
 	scrJrefMNLocation = retrieveSi(srcdoc, "StatShrBrlyFltRec", "scrJrefMNLocation");
-	scrJrefMNConnection = retrieveSi(srcdoc, "StatShrBrlyFltRec", "scrJrefMNConnection");
 	scrJrefOrgMNFlight = retrieveSi(srcdoc, "StatShrBrlyFltRec", "scrJrefOrgMNFlight");
+	scrJrefMNConnection = retrieveSi(srcdoc, "StatShrBrlyFltRec", "scrJrefMNConnection");
 	scrJrefEqpMNConnection = retrieveSi(srcdoc, "StatShrBrlyFltRec", "scrJrefEqpMNConnection");
 };
 
@@ -19,8 +19,8 @@ function resetInitdones() {
 	setSi(srcdoc, "StatAppBrlyFltRec", "initdoneRef1NSegment", "false");
 	setSi(srcdoc, "StatAppBrlyFltRec", "initdoneEqp1NNode", "false");
 	setSi(srcdoc, "StatAppBrlyFltRec", "initdoneMNLocation", "false");
-	setSi(srcdoc, "StatAppBrlyFltRec", "initdoneMNConnection", "false");
 	setSi(srcdoc, "StatAppBrlyFltRec", "initdoneOrgMNFlight", "false");
+	setSi(srcdoc, "StatAppBrlyFltRec", "initdoneMNConnection", "false");
 	setSi(srcdoc, "StatAppBrlyFltRec", "initdoneEqpMNConnection", "false");
 };
 
@@ -32,8 +32,8 @@ function resetHeights() {
 	heightRef1NSegment = 30;
 	heightEqp1NNode = 30;
 	heightMNLocation = 30;
-	heightMNConnection = 30;
 	heightOrgMNFlight = 30;
+	heightMNConnection = 30;
 	heightEqpMNConnection = 30;
 };
 
@@ -59,8 +59,8 @@ function checkInitdone() {
 	var initdoneRef1NSegment = (retrieveSi(srcdoc, "StatAppBrlyFltRec", "initdoneRef1NSegment") == "true");
 	var initdoneEqp1NNode = (retrieveSi(srcdoc, "StatAppBrlyFltRec", "initdoneEqp1NNode") == "true");
 	var initdoneMNLocation = (retrieveSi(srcdoc, "StatAppBrlyFltRec", "initdoneMNLocation") == "true");
-	var initdoneMNConnection = (retrieveSi(srcdoc, "StatAppBrlyFltRec", "initdoneMNConnection") == "true");
 	var initdoneOrgMNFlight = (retrieveSi(srcdoc, "StatAppBrlyFltRec", "initdoneOrgMNFlight") == "true");
+	var initdoneMNConnection = (retrieveSi(srcdoc, "StatAppBrlyFltRec", "initdoneMNConnection") == "true");
 	var initdoneEqpMNConnection = (retrieveSi(srcdoc, "StatAppBrlyFltRec", "initdoneEqpMNConnection") == "true");
 
 	if (!initdonePre) {
@@ -77,10 +77,10 @@ function checkInitdone() {
 		rhsdoc.getElementById("Eqp1NNode").src = "./PnlBrlyFltEqp1NNode.html?scrJref=" + scrJrefEqp1NNode;
 	} else if (!initdoneMNLocation) {
 		rhsdoc.getElementById("MNLocation").src = "./PnlBrlyFltMNLocation.html?scrJref=" + scrJrefMNLocation;
-	} else if (!initdoneMNConnection) {
-		rhsdoc.getElementById("MNConnection").src = "./PnlBrlyFltMNConnection.html?scrJref=" + scrJrefMNConnection;
 	} else if (!initdoneOrgMNFlight) {
 		rhsdoc.getElementById("OrgMNFlight").src = "./PnlBrlyFltOrgMNFlight.html?scrJref=" + scrJrefOrgMNFlight;
+	} else if (!initdoneMNConnection) {
+		rhsdoc.getElementById("MNConnection").src = "./PnlBrlyFltMNConnection.html?scrJref=" + scrJrefMNConnection;
 	} else if (!initdoneEqpMNConnection) {
 		rhsdoc.getElementById("EqpMNConnection").src = "./PnlBrlyFltEqpMNConnection.html?scrJref=" + scrJrefEqpMNConnection;
 
@@ -128,8 +128,8 @@ function setPnlAvail(short, avail) {
 		else if (short == "Ref1NSegment") heightRef1NSegment = height;
 		else if (short == "Eqp1NNode") heightEqp1NNode = height;
 		else if (short == "MNLocation") heightMNLocation = height;
-		else if (short == "MNConnection") heightMNConnection = height;
 		else if (short == "OrgMNFlight") heightOrgMNFlight = height;
+		else if (short == "MNConnection") heightMNConnection = height;
 		else if (short == "EqpMNConnection") heightEqpMNConnection = height;
 	};
 
@@ -180,8 +180,8 @@ function changeHeight(pnlshort, height, update) {
 	else if (pnlshort == "Ref1NSegment") heightRef1NSegment = height;
 	else if (pnlshort == "Eqp1NNode") heightEqp1NNode = height;
 	else if (pnlshort == "MNLocation") heightMNLocation = height;
-	else if (pnlshort == "MNConnection") heightMNConnection = height;
 	else if (pnlshort == "OrgMNFlight") heightOrgMNFlight = height;
+	else if (pnlshort == "MNConnection") heightMNConnection = height;
 	else if (pnlshort == "EqpMNConnection") heightEqpMNConnection = height;
 
 	if (update) updateHeight();
@@ -191,7 +191,7 @@ function updateHeight() {
 	var heightLhs, heightRhs, heightGt;
 
 	heightLhs = heightPre+13 + heightDetail+13 + heightFafAWaypoint+13 + 5;
-	heightRhs = height1NConnection+13 + heightRef1NSegment+13 + heightEqp1NNode+13 + heightMNLocation+13 + heightMNConnection+13 + heightOrgMNFlight+13 + heightEqpMNConnection+13 + 5;
+	heightRhs = height1NConnection+13 + heightRef1NSegment+13 + heightEqp1NNode+13 + heightMNLocation+13 + heightOrgMNFlight+13 + heightMNConnection+13 + heightEqpMNConnection+13 + 5;
 
 	if (heightLhs > heightRhs) {
 		lhsdoc.getElementById("tdFill").setAttribute("height", "5");
@@ -404,10 +404,10 @@ function handleDpchEng(dom, dpch) {
 				if (getInitdone("Eqp1NNode")) rhsdoc.getElementById("Eqp1NNode").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefMNLocation) {
 				if (getInitdone("MNLocation")) rhsdoc.getElementById("MNLocation").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJrefMNConnection) {
-				if (getInitdone("MNConnection")) rhsdoc.getElementById("MNConnection").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefOrgMNFlight) {
 				if (getInitdone("OrgMNFlight")) rhsdoc.getElementById("OrgMNFlight").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefMNConnection) {
+				if (getInitdone("MNConnection")) rhsdoc.getElementById("MNConnection").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefEqpMNConnection) {
 				if (getInitdone("EqpMNConnection")) rhsdoc.getElementById("EqpMNConnection").contentWindow.handleDpchEng(dom, dpch);
 			} else {

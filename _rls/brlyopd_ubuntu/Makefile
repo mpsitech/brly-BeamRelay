@@ -2,7 +2,7 @@
 # make file for Brly operation daemon, release brlyopd_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 11 Jan 2021
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 include Makefile.inc
@@ -15,7 +15,7 @@ LINKFLAGS =
 
 INCPATH = -I$(BUILDROOT)/dbsbrly -I$(BUILDROOT)/brlyopd/VecBrly -I$(BUILDROOT)/brlyopd/IexBrly -I$(BUILDROOT)/brlyopd
 INCPATH += -I$(BUILDROOT)/brlyopd/BrlyTtimp -I$(BUILDROOT)/brlyopd/BrlyMapgen -I$(BUILDROOT)/brlyopd/BrlyDyn -I$(BUILDROOT)/brlyopd/BrlyDnsmap -I$(BUILDROOT)/brlyopd/BrlyBase
-INCPATH += -I${WHIZSDKROOT}/build -I/usr/include -I/usr/include/libxml2 -I/usr/include/mariadb
+INCPATH += -I${WHIZSDKROOT}/build -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
 PCHS = Brlyopd.h.gch
 
@@ -32,7 +32,7 @@ LIBS += -liexbrly -lvecbrly -ldbsbrly
 LIBS += -lcurl -lmicrohttpd -lnetcdf -lpng -lsbecore_mar
 LIBS += -lhdf5_hl -lmariadbclient -lsbecore_plus
 LIBS += -lhdf5 -lsbecore
-LIBS += -lxml2 -lz
+LIBS += -ljsoncpp -lxml2 -lz
 LIBS += -lpthread
 
 EXE = Brlyopd
@@ -49,7 +49,6 @@ all:	$(PCHS) $(EXE)
 
 $(EXE):	$(OBJS)
 	$(LINK) $(LINKFLAGS) $(OBJS) $(LIBPATH) $(LIBS) -o $(EXE)
-	rm -f *.o
 
 pch:	$(PCHS)
 

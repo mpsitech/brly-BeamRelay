@@ -25,6 +25,25 @@ PnlBrlyLegPre::ContIac::ContIac(
 	mask = {SLDPHI};
 };
 
+bool PnlBrlyLegPre::ContIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacBrlyLegPre"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("SldPhi")) {SldPhi = me["SldPhi"].asDouble(); add(SLDPHI);};
+	};
+
+	return basefound;
+};
+
 bool PnlBrlyLegPre::ContIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -46,6 +65,17 @@ bool PnlBrlyLegPre::ContIac::readXML(
 	};
 
 	return basefound;
+};
+
+void PnlBrlyLegPre::ContIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContIacBrlyLegPre";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["SldPhi"] = SldPhi;
 };
 
 void PnlBrlyLegPre::ContIac::writeXML(
@@ -92,6 +122,18 @@ set<uint> PnlBrlyLegPre::ContIac::diff(
  class PnlBrlyLegPre::StatApp
  ******************************************************************************/
 
+void PnlBrlyLegPre::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixBrlyVExpstate
+		) {
+	if (difftag.length() == 0) difftag = "StatAppBrlyLegPre";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxBrlyVExpstate"] = VecBrlyVExpstate::getSref(ixBrlyVExpstate);
+};
+
 void PnlBrlyLegPre::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -123,6 +165,18 @@ PnlBrlyLegPre::StatShr::StatShr(
 	this->SldPhiMax = SldPhiMax;
 
 	mask = {SLDPHIMIN, SLDPHIMAX};
+};
+
+void PnlBrlyLegPre::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrBrlyLegPre";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["SldPhiMin"] = SldPhiMin;
+	me["SldPhiMax"] = SldPhiMax;
 };
 
 void PnlBrlyLegPre::StatShr::writeXML(
@@ -171,6 +225,24 @@ set<uint> PnlBrlyLegPre::StatShr::diff(
  class PnlBrlyLegPre::Tag
  ******************************************************************************/
 
+void PnlBrlyLegPre::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyLegPre";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["Cpt"] = "Angular position";
+		me["CptPhi"] = "angular position [\\u00b0]";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["Cpt"] = "Winkelposition";
+		me["CptPhi"] = "Winkelposition [\\u00b0]";
+	};
+};
+
 void PnlBrlyLegPre::Tag::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -213,6 +285,26 @@ string PnlBrlyLegPre::DpchAppData::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlBrlyLegPre::DpchAppData::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyLegPreData"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (contiac.readJSON(me, true)) add(CONTIAC);
+	} else {
+		contiac = ContIac();
+	};
 };
 
 void PnlBrlyLegPre::DpchAppData::readXML(
@@ -286,6 +378,19 @@ void PnlBrlyLegPre::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlBrlyLegPre::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyLegPreData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTIAC)) contiac.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
 };
 
 void PnlBrlyLegPre::DpchEngData::writeXML(

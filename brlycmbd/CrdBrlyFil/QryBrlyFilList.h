@@ -41,7 +41,7 @@ public:
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
 
-		static void fillFeed(Sbecore::Xmlio::Feed& feed);
+		static void fillFeed(Sbecore::Feed& feed);
 	};
 
 	/**
@@ -50,13 +50,14 @@ public:
 	class StatApp {
 
 	public:
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 11, const Sbecore::uint ndisp = 25);
 		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 11, const Sbecore::uint ndisp = 25);
 	};
 
 	/**
 		* StatShr (full: StatShrQryBrlyFilList)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NTOT = 1;
@@ -72,6 +73,7 @@ public:
 		Sbecore::uint nload;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -80,7 +82,7 @@ public:
 	/**
 		* StgIac (full: StgIacQryBrlyFilList)
 		*/
-	class StgIac : public Sbecore::Xmlio::Block {
+	class StgIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint JNUM = 1;
@@ -96,7 +98,9 @@ public:
 		Sbecore::uint nload;
 
 	public:
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StgIac* comp);
 		std::set<Sbecore::uint> diff(const StgIac* comp);
@@ -146,8 +150,8 @@ public:
 	void handleCall(DbsBrly* dbsbrly, Sbecore::Call* call);
 
 private:
-	bool handleCallBrlyFilUpd_refEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
 	bool handleCallBrlyFilMod(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
+	bool handleCallBrlyFilUpd_refEq(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
 	bool handleCallBrlyStubChgFromSelf(DbsBrly* dbsbrly);
 
 };

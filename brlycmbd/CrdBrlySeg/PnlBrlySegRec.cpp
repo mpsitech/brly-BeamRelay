@@ -48,8 +48,8 @@ PnlBrlySegRec::PnlBrlySegRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecBrlyVCall::CALLBRLYSEG_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYSEG_RETEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYSEG_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -262,10 +262,10 @@ void PnlBrlySegRec::handleCall(
 		) {
 	if (call->ixVCall == VecBrlyVCall::CALLBRLYSEGUPD_REFEQ) {
 		call->abort = handleCallBrlySegUpd_refEq(dbsbrly, call->jref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSEG_REUEQ) {
-		call->abort = handleCallBrlySeg_reuEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSEG_RETEQ) {
 		call->abort = handleCallBrlySeg_retEq(dbsbrly, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSEG_REUEQ) {
+		call->abort = handleCallBrlySeg_reuEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
@@ -278,17 +278,6 @@ bool PnlBrlySegRec::handleCallBrlySegUpd_refEq(
 	return retval;
 };
 
-bool PnlBrlySegRec::handleCallBrlySeg_reuEq(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recSeg.refUref == refInv); // IP handleCallBrlySeg_reuEq --- LINE
-	return retval;
-};
-
 bool PnlBrlySegRec::handleCallBrlySeg_retEq(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
@@ -297,5 +286,16 @@ bool PnlBrlySegRec::handleCallBrlySeg_retEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recSeg.refIxVTbl == ixInv); // IP handleCallBrlySeg_retEq --- LINE
+	return retval;
+};
+
+bool PnlBrlySegRec::handleCallBrlySeg_reuEq(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recSeg.refUref == refInv); // IP handleCallBrlySeg_reuEq --- LINE
 	return retval;
 };

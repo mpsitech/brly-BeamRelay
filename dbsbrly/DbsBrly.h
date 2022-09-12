@@ -10,10 +10,10 @@
 #ifndef DBSBRLY_H
 #define DBSBRLY_H
 
-#define BRLY_VERSION "0.2.13"
+#define BRLY_VERSION "0.2.15"
 #define BRLY_VERSION_MAJOR 0
 #define BRLY_VERSION_MINOR 2
-#define BRLY_VERSION_SUB 13
+#define BRLY_VERSION_SUB 15
 
 #include <sbecore/Types.h>
 
@@ -192,7 +192,7 @@ public:
 
 		static std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixBrlyVLocale);
 
-		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feed);
+		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feed);
 	};
 
 	/**
@@ -346,16 +346,16 @@ public:
 		static const Sbecore::uint PNLBRLYFLTMNLOCATION_TCOSTO = 143;
 		static const Sbecore::uint PNLBRLYFLTMNLOCATION_TCOXSA = 144;
 		static const Sbecore::uint PNLBRLYFLTMNLOCATION_TCOXSO = 145;
-		static const Sbecore::uint PNLBRLYFLTMNCONNECTION_TCOMREF = 146;
-		static const Sbecore::uint PNLBRLYFLTMNCONNECTION_TCOSTA = 147;
-		static const Sbecore::uint PNLBRLYFLTMNCONNECTION_TCOSTO = 148;
-		static const Sbecore::uint PNLBRLYFLTMNCONNECTION_TCOLP0 = 149;
-		static const Sbecore::uint PNLBRLYFLTMNCONNECTION_TCOLP1 = 150;
-		static const Sbecore::uint PNLBRLYFLTORGMNFLIGHT_TCOMREF = 151;
-		static const Sbecore::uint PNLBRLYFLTORGMNFLIGHT_TCOSTA = 152;
-		static const Sbecore::uint PNLBRLYFLTORGMNFLIGHT_TCOSTO = 153;
-		static const Sbecore::uint PNLBRLYFLTORGMNFLIGHT_TCOXSA = 154;
-		static const Sbecore::uint PNLBRLYFLTORGMNFLIGHT_TCOXSO = 155;
+		static const Sbecore::uint PNLBRLYFLTORGMNFLIGHT_TCOMREF = 146;
+		static const Sbecore::uint PNLBRLYFLTORGMNFLIGHT_TCOSTA = 147;
+		static const Sbecore::uint PNLBRLYFLTORGMNFLIGHT_TCOSTO = 148;
+		static const Sbecore::uint PNLBRLYFLTORGMNFLIGHT_TCOXSA = 149;
+		static const Sbecore::uint PNLBRLYFLTORGMNFLIGHT_TCOXSO = 150;
+		static const Sbecore::uint PNLBRLYFLTMNCONNECTION_TCOMREF = 151;
+		static const Sbecore::uint PNLBRLYFLTMNCONNECTION_TCOSTA = 152;
+		static const Sbecore::uint PNLBRLYFLTMNCONNECTION_TCOSTO = 153;
+		static const Sbecore::uint PNLBRLYFLTMNCONNECTION_TCOLP0 = 154;
+		static const Sbecore::uint PNLBRLYFLTMNCONNECTION_TCOLP1 = 155;
 		static const Sbecore::uint PNLBRLYFLTEQPMNCONNECTION_TCOMREF = 156;
 		static const Sbecore::uint PNLBRLYSEGLIST_TCORET = 157;
 		static const Sbecore::uint PNLBRLYSEGLIST_TCOREU = 158;
@@ -430,7 +430,7 @@ public:
 
 		static std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixBrlyVLocale);
 
-		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feed);
+		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feed);
 	};
 
 	/**
@@ -478,7 +478,7 @@ public:
 
 		static std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixBrlyVLocale);
 
-		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feed);
+		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feed);
 	};
 
 	/**
@@ -525,7 +525,7 @@ public:
 
 		static std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixBrlyVLocale);
 
-		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feed);
+		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feed);
 	};
 
 	/**
@@ -680,21 +680,22 @@ public:
 		static const Sbecore::uint PREBRLYSYSSTAMP = 127;
 		static const Sbecore::uint PREBRLYSYSTIME = 128;
 		static const Sbecore::uint PREBRLYTIME = 129;
-		static const Sbecore::uint PREBRLYTTBLIST_FIL = 130;
-		static const Sbecore::uint PREBRLYTTBLIST_TIT = 131;
-		static const Sbecore::uint PREBRLYUSGAACCESS_X1 = 132;
-		static const Sbecore::uint PREBRLYUSGAACCESS_X2 = 133;
-		static const Sbecore::uint PREBRLYUSGLIST_GRP = 134;
-		static const Sbecore::uint PREBRLYUSGLIST_OWN = 135;
-		static const Sbecore::uint PREBRLYUSGLIST_SRF = 136;
-		static const Sbecore::uint PREBRLYUSRAACCESS_X1 = 137;
-		static const Sbecore::uint PREBRLYUSRAACCESS_X2 = 138;
-		static const Sbecore::uint PREBRLYUSRLIST_GRP = 139;
-		static const Sbecore::uint PREBRLYUSRLIST_OWN = 140;
-		static const Sbecore::uint PREBRLYUSRLIST_PRS = 141;
-		static const Sbecore::uint PREBRLYUSRLIST_SRF = 142;
-		static const Sbecore::uint PREBRLYUSRLIST_STE = 143;
-		static const Sbecore::uint PREBRLYUSRLIST_USG = 144;
+		static const Sbecore::uint PREBRLYTLAST = 130;
+		static const Sbecore::uint PREBRLYTTBLIST_FIL = 131;
+		static const Sbecore::uint PREBRLYTTBLIST_TIT = 132;
+		static const Sbecore::uint PREBRLYUSGAACCESS_X1 = 133;
+		static const Sbecore::uint PREBRLYUSGAACCESS_X2 = 134;
+		static const Sbecore::uint PREBRLYUSGLIST_GRP = 135;
+		static const Sbecore::uint PREBRLYUSGLIST_OWN = 136;
+		static const Sbecore::uint PREBRLYUSGLIST_SRF = 137;
+		static const Sbecore::uint PREBRLYUSRAACCESS_X1 = 138;
+		static const Sbecore::uint PREBRLYUSRAACCESS_X2 = 139;
+		static const Sbecore::uint PREBRLYUSRLIST_GRP = 140;
+		static const Sbecore::uint PREBRLYUSRLIST_OWN = 141;
+		static const Sbecore::uint PREBRLYUSRLIST_PRS = 142;
+		static const Sbecore::uint PREBRLYUSRLIST_SRF = 143;
+		static const Sbecore::uint PREBRLYUSRLIST_STE = 144;
+		static const Sbecore::uint PREBRLYUSRLIST_USG = 145;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -717,7 +718,7 @@ public:
 
 		static std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixBrlyVLocale);
 
-		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feed);
+		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feed);
 	};
 
 	/**
@@ -736,7 +737,7 @@ public:
 
 		static std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixBrlyVLocale);
 
-		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feed);
+		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feed);
 	};
 
 	/**
@@ -769,7 +770,7 @@ public:
 
 		static std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixBrlyVLocale);
 
-		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feed);
+		static void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feed);
 	};
 
 public:
@@ -862,13 +863,13 @@ public:
 	Sbecore::uint getIxWSubsetByRefBrlyMRegion(const Sbecore::ubigint ref);
 	Sbecore::uint getIxWSubsetByBrlyMRegion(BrlyMRegion* rec);
 
-	void fillFeedFromKlst(const Sbecore::uint klsIxBrlyVKeylist, const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feed);
-	void fillFeedFromKlstByMtbUref(const Sbecore::uint klsIxBrlyVKeylist, const Sbecore::uint x1IxBrlyVMaintable, const Sbecore::ubigint x1Uref, const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feed);
+	void fillFeedFromKlst(const Sbecore::uint klsIxBrlyVKeylist, const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feed);
+	void fillFeedFromKlstByMtbUref(const Sbecore::uint klsIxBrlyVKeylist, const Sbecore::uint x1IxBrlyVMaintable, const Sbecore::ubigint x1Uref, const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feed);
 
 	std::string getKlstTitleBySref(const Sbecore::uint klsIxBrlyVKeylist, const std::string& sref, const Sbecore::uint ixBrlyVLocale = 0);
 	std::string getKlstTitleByMtbUrefSref(const Sbecore::uint klsIxBrlyVKeylist, const Sbecore::uint x1IxBrlyVMaintable, const Sbecore::ubigint x1Uref, const std::string& sref, const Sbecore::uint ixBrlyVLocale = 0);
 
-	void fillFeedFromVlst(const Sbecore::uint vlsIxBrlyVValuelist, const Sbecore::uint x1IxBrlyVLocale, Sbecore::Xmlio::Feed& feed);
+	void fillFeedFromVlst(const Sbecore::uint vlsIxBrlyVValuelist, const Sbecore::uint x1IxBrlyVLocale, Sbecore::Feed& feed);
 
 public:
 	TblBrlyAccRMUserUniversal* tblbrlyaccrmuseruniversal;

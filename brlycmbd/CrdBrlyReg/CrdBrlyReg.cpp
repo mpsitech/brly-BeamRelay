@@ -69,8 +69,8 @@ CrdBrlyReg::CrdBrlyReg(
 	changeStage(dbsbrly, VecVSge::IDLE);
 
 	xchg->addClstn(VecBrlyVCall::CALLBRLYREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecBrlyVCall::CALLBRLYSTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYSTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -235,10 +235,10 @@ void CrdBrlyReg::handleCall(
 		) {
 	if (call->ixVCall == VecBrlyVCall::CALLBRLYREFPRESET) {
 		call->abort = handleCallBrlyRefPreSet(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSTATCHG) {
-		call->abort = handleCallBrlyStatChg(dbsbrly, call->jref);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYDLGCLOSE) {
 		call->abort = handleCallBrlyDlgClose(dbsbrly, call->jref);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSTATCHG) {
+		call->abort = handleCallBrlyStatChg(dbsbrly, call->jref);
 	};
 };
 
@@ -259,21 +259,21 @@ bool CrdBrlyReg::handleCallBrlyRefPreSet(
 	return retval;
 };
 
-bool CrdBrlyReg::handleCallBrlyStatChg(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD) && (pnlrec->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD)) pnllist->minimize(dbsbrly, true);
-	return retval;
-};
-
 bool CrdBrlyReg::handleCallBrlyDlgClose(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
 		) {
 	bool retval = false;
 	// IP handleCallBrlyDlgClose --- INSERT
+	return retval;
+};
+
+bool CrdBrlyReg::handleCallBrlyStatChg(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD) && (pnlrec->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD)) pnllist->minimize(dbsbrly, true);
 	return retval;
 };
 

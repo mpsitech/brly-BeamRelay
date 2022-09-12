@@ -43,6 +43,25 @@ BrlyQLocMapVisLocation::BrlyQLocMapVisLocation(
 	this->y = y;
 };
 
+void BrlyQLocMapVisLocation::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["x"] = x;
+		me["y"] = y;
+	} else {
+		me["stubMref"] = stubMref;
+		me["x"] = x;
+		me["y"] = y;
+	};
+};
+
 void BrlyQLocMapVisLocation::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -112,6 +131,16 @@ ListBrlyQLocMapVisLocation& ListBrlyQLocMapVisLocation::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLocMapVisLocation::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLocMapVisLocation";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) if (nodes[i]->qwr) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLocMapVisLocation::writeXML(

@@ -53,6 +53,33 @@ BrlyQLegList::BrlyQLegList(
 	this->alt = alt;
 };
 
+void BrlyQLegList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["grp"] = stubGrp;
+		me["own"] = stubOwn;
+		me["blo"] = stubBgnRefBrlyMLocation;
+		me["elo"] = stubEndRefBrlyMLocation;
+		me["typ"] = srefIxVBasetype;
+		me["typ2"] = titIxVBasetype;
+		me["alt"] = alt;
+	} else {
+		me["stubGrp"] = stubGrp;
+		me["stubOwn"] = stubOwn;
+		me["stubBgnRefBrlyMLocation"] = stubBgnRefBrlyMLocation;
+		me["stubEndRefBrlyMLocation"] = stubEndRefBrlyMLocation;
+		me["srefIxVBasetype"] = srefIxVBasetype;
+		me["titIxVBasetype"] = titIxVBasetype;
+		me["alt"] = alt;
+	};
+};
+
 void BrlyQLegList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -130,6 +157,16 @@ ListBrlyQLegList& ListBrlyQLegList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLegList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLegList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLegList::writeXML(

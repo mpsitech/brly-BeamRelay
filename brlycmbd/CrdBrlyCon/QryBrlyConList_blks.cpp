@@ -21,8 +21,8 @@ uint QryBrlyConList::VecVOrd::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "sta") return STA;
-	if (s == "cor") return COR;
 	if (s == "flt") return FLT;
+	if (s == "cor") return COR;
 	if (s == "own") return OWN;
 	if (s == "grp") return GRP;
 
@@ -33,8 +33,8 @@ string QryBrlyConList::VecVOrd::getSref(
 			const uint ix
 		) {
 	if (ix == STA) return("sta");
-	if (ix == COR) return("cor");
 	if (ix == FLT) return("flt");
+	if (ix == COR) return("cor");
 	if (ix == OWN) return("own");
 	if (ix == GRP) return("grp");
 
@@ -52,6 +52,24 @@ void QryBrlyConList::VecVOrd::fillFeed(
 /******************************************************************************
  class QryBrlyConList::StatApp
  ******************************************************************************/
+
+void QryBrlyConList::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint firstcol
+			, const uint jnumFirstdisp
+			, const uint ncol
+			, const uint ndisp
+		) {
+	if (difftag.length() == 0) difftag = "StatAppQryBrlyConList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["firstcol"] = firstcol;
+	me["jnumFirstdisp"] = jnumFirstdisp;
+	me["ncol"] = ncol;
+	me["ndisp"] = ndisp;
+};
 
 void QryBrlyConList::StatApp::writeXML(
 			xmlTextWriter* wr
@@ -92,6 +110,19 @@ QryBrlyConList::StatShr::StatShr(
 	this->nload = nload;
 
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
+};
+
+void QryBrlyConList::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrQryBrlyConList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ntot"] = ntot;
+	me["jnumFirstload"] = jnumFirstload;
+	me["nload"] = nload;
 };
 
 void QryBrlyConList::StatShr::writeXML(
@@ -155,6 +186,27 @@ QryBrlyConList::StgIac::StgIac(
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 
+bool QryBrlyConList::StgIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryBrlyConList"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("jnum")) {jnum = me["jnum"].asUInt(); add(JNUM);};
+		if (me.isMember("jnumFirstload")) {jnumFirstload = me["jnumFirstload"].asUInt(); add(JNUMFIRSTLOAD);};
+		if (me.isMember("nload")) {nload = me["nload"].asUInt(); add(NLOAD);};
+	};
+
+	return basefound;
+};
+
 bool QryBrlyConList::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -178,6 +230,19 @@ bool QryBrlyConList::StgIac::readXML(
 	};
 
 	return basefound;
+};
+
+void QryBrlyConList::StgIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgIacQryBrlyConList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["jnum"] = jnum;
+	me["jnumFirstload"] = jnumFirstload;
+	me["nload"] = nload;
 };
 
 void QryBrlyConList::StgIac::writeXML(

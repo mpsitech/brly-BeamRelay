@@ -84,8 +84,8 @@ void QryBrlyConMapLocation::rerun(
 	sqlstr += " SELECT 1, " + to_string(jref) + ", 0, TblBrlyRMLegMLocation.ref, TblBrlyRMLegMLocation.legphi, TblBrlyRMLegMLocation.legtheta, TblBrlyMLocation.ref, TblBrlyMLocation.refBrlyMEquipment";
 	sqlstr += " FROM TblBrlyMLocation, TblBrlyMConnection, TblBrlyRMLegMLocation";
 	sqlstr += " WHERE TblBrlyMLocation.ref = TblBrlyRMLegMLocation.refBrlyMLocation";
-	sqlstr += " AND TblBrlyRMLegMLocation.refBrlyMLeg = TblBrlyMConnection.corRefBrlyMLeg";
 	sqlstr += " AND TblBrlyMConnection.ref = " + to_string(preRefCon) + "";
+	sqlstr += " AND TblBrlyRMLegMLocation.refBrlyMLeg = TblBrlyMConnection.corRefBrlyMLeg";
 	dbsbrly->executeQuery(sqlstr);
 
 	sqlstr = "UPDATE TblBrlyQConMapLocation SET jnum = qref WHERE jref = " + to_string(jref);

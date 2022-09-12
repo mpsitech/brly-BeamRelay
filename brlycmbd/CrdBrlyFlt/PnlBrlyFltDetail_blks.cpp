@@ -119,6 +119,53 @@ PnlBrlyFltDetail::ContIac::ContIac(
 	mask = {TXFSTA, TXFSTO, TXFXSA, TXFXSO, CHKCDN, CHKSDN, TXFFAFFID, TXFFAFIDT, TXFFAFACT, TXFFAFFET, TXFFAFFTI, TXFFAFFDT, TXFFAFFSK, TXFFAFFSM, TXFFAFFAT, TXFFAFRTE, TXFFAFADT, TXFFAFEAT, TXFFAFAAT, TXFFAFDVT, TXFFAFORG, TXFFAFDST, TXFFAFONM, TXFFAFOCT, TXFFAFDNM, TXFFAFDCT, NUMFPUPEQPETY, TXFEQPETY, CHKEQPFIB};
 };
 
+bool PnlBrlyFltDetail::ContIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacBrlyFltDetail"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("TxfSta")) {TxfSta = me["TxfSta"].asString(); add(TXFSTA);};
+		if (me.isMember("TxfSto")) {TxfSto = me["TxfSto"].asString(); add(TXFSTO);};
+		if (me.isMember("TxfXsa")) {TxfXsa = me["TxfXsa"].asString(); add(TXFXSA);};
+		if (me.isMember("TxfXso")) {TxfXso = me["TxfXso"].asString(); add(TXFXSO);};
+		if (me.isMember("ChkCdn")) {ChkCdn = me["ChkCdn"].asBool(); add(CHKCDN);};
+		if (me.isMember("ChkSdn")) {ChkSdn = me["ChkSdn"].asBool(); add(CHKSDN);};
+		if (me.isMember("TxfFafFid")) {TxfFafFid = me["TxfFafFid"].asString(); add(TXFFAFFID);};
+		if (me.isMember("TxfFafIdt")) {TxfFafIdt = me["TxfFafIdt"].asString(); add(TXFFAFIDT);};
+		if (me.isMember("TxfFafAct")) {TxfFafAct = me["TxfFafAct"].asString(); add(TXFFAFACT);};
+		if (me.isMember("TxfFafFet")) {TxfFafFet = me["TxfFafFet"].asString(); add(TXFFAFFET);};
+		if (me.isMember("TxfFafFti")) {TxfFafFti = me["TxfFafFti"].asString(); add(TXFFAFFTI);};
+		if (me.isMember("TxfFafFdt")) {TxfFafFdt = me["TxfFafFdt"].asString(); add(TXFFAFFDT);};
+		if (me.isMember("TxfFafFsk")) {TxfFafFsk = me["TxfFafFsk"].asString(); add(TXFFAFFSK);};
+		if (me.isMember("TxfFafFsm")) {TxfFafFsm = me["TxfFafFsm"].asString(); add(TXFFAFFSM);};
+		if (me.isMember("TxfFafFat")) {TxfFafFat = me["TxfFafFat"].asString(); add(TXFFAFFAT);};
+		if (me.isMember("TxfFafRte")) {TxfFafRte = me["TxfFafRte"].asString(); add(TXFFAFRTE);};
+		if (me.isMember("TxfFafAdt")) {TxfFafAdt = me["TxfFafAdt"].asString(); add(TXFFAFADT);};
+		if (me.isMember("TxfFafEat")) {TxfFafEat = me["TxfFafEat"].asString(); add(TXFFAFEAT);};
+		if (me.isMember("TxfFafAat")) {TxfFafAat = me["TxfFafAat"].asString(); add(TXFFAFAAT);};
+		if (me.isMember("TxfFafDvt")) {TxfFafDvt = me["TxfFafDvt"].asString(); add(TXFFAFDVT);};
+		if (me.isMember("TxfFafOrg")) {TxfFafOrg = me["TxfFafOrg"].asString(); add(TXFFAFORG);};
+		if (me.isMember("TxfFafDst")) {TxfFafDst = me["TxfFafDst"].asString(); add(TXFFAFDST);};
+		if (me.isMember("TxfFafOnm")) {TxfFafOnm = me["TxfFafOnm"].asString(); add(TXFFAFONM);};
+		if (me.isMember("TxfFafOct")) {TxfFafOct = me["TxfFafOct"].asString(); add(TXFFAFOCT);};
+		if (me.isMember("TxfFafDnm")) {TxfFafDnm = me["TxfFafDnm"].asString(); add(TXFFAFDNM);};
+		if (me.isMember("TxfFafDct")) {TxfFafDct = me["TxfFafDct"].asString(); add(TXFFAFDCT);};
+		if (me.isMember("numFPupEqpEty")) {numFPupEqpEty = me["numFPupEqpEty"].asUInt(); add(NUMFPUPEQPETY);};
+		if (me.isMember("TxfEqpEty")) {TxfEqpEty = me["TxfEqpEty"].asString(); add(TXFEQPETY);};
+		if (me.isMember("ChkEqpFib")) {ChkEqpFib = me["ChkEqpFib"].asBool(); add(CHKEQPFIB);};
+	};
+
+	return basefound;
+};
+
 bool PnlBrlyFltDetail::ContIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -168,6 +215,45 @@ bool PnlBrlyFltDetail::ContIac::readXML(
 	};
 
 	return basefound;
+};
+
+void PnlBrlyFltDetail::ContIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContIacBrlyFltDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxfSta"] = TxfSta;
+	me["TxfSto"] = TxfSto;
+	me["TxfXsa"] = TxfXsa;
+	me["TxfXso"] = TxfXso;
+	me["ChkCdn"] = ChkCdn;
+	me["ChkSdn"] = ChkSdn;
+	me["TxfFafFid"] = TxfFafFid;
+	me["TxfFafIdt"] = TxfFafIdt;
+	me["TxfFafAct"] = TxfFafAct;
+	me["TxfFafFet"] = TxfFafFet;
+	me["TxfFafFti"] = TxfFafFti;
+	me["TxfFafFdt"] = TxfFafFdt;
+	me["TxfFafFsk"] = TxfFafFsk;
+	me["TxfFafFsm"] = TxfFafFsm;
+	me["TxfFafFat"] = TxfFafFat;
+	me["TxfFafRte"] = TxfFafRte;
+	me["TxfFafAdt"] = TxfFafAdt;
+	me["TxfFafEat"] = TxfFafEat;
+	me["TxfFafAat"] = TxfFafAat;
+	me["TxfFafDvt"] = TxfFafDvt;
+	me["TxfFafOrg"] = TxfFafOrg;
+	me["TxfFafDst"] = TxfFafDst;
+	me["TxfFafOnm"] = TxfFafOnm;
+	me["TxfFafOct"] = TxfFafOct;
+	me["TxfFafDnm"] = TxfFafDnm;
+	me["TxfFafDct"] = TxfFafDct;
+	me["numFPupEqpEty"] = numFPupEqpEty;
+	me["TxfEqpEty"] = TxfEqpEty;
+	me["ChkEqpFib"] = ChkEqpFib;
 };
 
 void PnlBrlyFltDetail::ContIac::writeXML(
@@ -288,6 +374,21 @@ PnlBrlyFltDetail::ContInf::ContInf(
 	mask = {TXTSRF, TXTTTB, TXTLEG, TXTEQPOPR, TXTEQPPTY};
 };
 
+void PnlBrlyFltDetail::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfBrlyFltDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxtSrf"] = TxtSrf;
+	me["TxtTtb"] = TxtTtb;
+	me["TxtLeg"] = TxtLeg;
+	me["TxtEqpOpr"] = TxtEqpOpr;
+	me["TxtEqpPty"] = TxtEqpPty;
+};
+
 void PnlBrlyFltDetail::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -339,6 +440,20 @@ set<uint> PnlBrlyFltDetail::ContInf::diff(
 /******************************************************************************
  class PnlBrlyFltDetail::StatApp
  ******************************************************************************/
+
+void PnlBrlyFltDetail::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixBrlyVExpstate
+			, const bool PupEqpEtyAlt
+		) {
+	if (difftag.length() == 0) difftag = "StatAppBrlyFltDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxBrlyVExpstate"] = VecBrlyVExpstate::getSref(ixBrlyVExpstate);
+	me["PupEqpEtyAlt"] = PupEqpEtyAlt;
+};
 
 void PnlBrlyFltDetail::StatApp::writeXML(
 			xmlTextWriter* wr
@@ -511,6 +626,87 @@ PnlBrlyFltDetail::StatShr::StatShr(
 	this->ChkEqpFibActive = ChkEqpFibActive;
 
 	mask = {TXFEQPETYVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTTTBACTIVE, BUTTTBVIEWAVAIL, BUTTTBVIEWACTIVE, TXTLEGACTIVE, TXFSTAACTIVE, TXFSTOACTIVE, TXFXSAACTIVE, TXFXSOACTIVE, CHKCDNACTIVE, CHKSDNACTIVE, BUTFAFNEWAVAIL, BUTFAFDELETEAVAIL, TXFFAFFIDAVAIL, TXFFAFFIDACTIVE, TXFFAFIDTAVAIL, TXFFAFIDTACTIVE, TXFFAFACTAVAIL, TXFFAFACTACTIVE, TXFFAFFETAVAIL, TXFFAFFETACTIVE, TXFFAFFTIAVAIL, TXFFAFFTIACTIVE, TXFFAFFDTAVAIL, TXFFAFFDTACTIVE, TXFFAFFSKAVAIL, TXFFAFFSKACTIVE, TXFFAFFSMAVAIL, TXFFAFFSMACTIVE, TXFFAFFATAVAIL, TXFFAFFATACTIVE, TXFFAFRTEAVAIL, TXFFAFRTEACTIVE, TXFFAFADTAVAIL, TXFFAFADTACTIVE, TXFFAFEATAVAIL, TXFFAFEATACTIVE, TXFFAFAATAVAIL, TXFFAFAATACTIVE, TXFFAFDVTAVAIL, TXFFAFDVTACTIVE, TXFFAFORGAVAIL, TXFFAFORGACTIVE, TXFFAFDSTAVAIL, TXFFAFDSTACTIVE, TXFFAFONMAVAIL, TXFFAFONMACTIVE, TXFFAFOCTAVAIL, TXFFAFOCTACTIVE, TXFFAFDNMAVAIL, TXFFAFDNMACTIVE, TXFFAFDCTAVAIL, TXFFAFDCTACTIVE, BUTEQPNEWAVAIL, BUTEQPDELETEAVAIL, TXTEQPOPRAVAIL, TXTEQPOPRACTIVE, BUTEQPOPRVIEWAVAIL, BUTEQPOPRVIEWACTIVE, TXTEQPPTYAVAIL, TXTEQPPTYACTIVE, BUTEQPPTYVIEWAVAIL, BUTEQPPTYVIEWACTIVE, PUPEQPETYAVAIL, PUPEQPETYACTIVE, BUTEQPETYEDITAVAIL, CHKEQPFIBAVAIL, CHKEQPFIBACTIVE};
+};
+
+void PnlBrlyFltDetail::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrBrlyFltDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxfEqpEtyValid"] = TxfEqpEtyValid;
+	me["ButSaveAvail"] = ButSaveAvail;
+	me["ButSaveActive"] = ButSaveActive;
+	me["TxtSrfActive"] = TxtSrfActive;
+	me["TxtTtbActive"] = TxtTtbActive;
+	me["ButTtbViewAvail"] = ButTtbViewAvail;
+	me["ButTtbViewActive"] = ButTtbViewActive;
+	me["TxtLegActive"] = TxtLegActive;
+	me["TxfStaActive"] = TxfStaActive;
+	me["TxfStoActive"] = TxfStoActive;
+	me["TxfXsaActive"] = TxfXsaActive;
+	me["TxfXsoActive"] = TxfXsoActive;
+	me["ChkCdnActive"] = ChkCdnActive;
+	me["ChkSdnActive"] = ChkSdnActive;
+	me["ButFafNewAvail"] = ButFafNewAvail;
+	me["ButFafDeleteAvail"] = ButFafDeleteAvail;
+	me["TxfFafFidAvail"] = TxfFafFidAvail;
+	me["TxfFafFidActive"] = TxfFafFidActive;
+	me["TxfFafIdtAvail"] = TxfFafIdtAvail;
+	me["TxfFafIdtActive"] = TxfFafIdtActive;
+	me["TxfFafActAvail"] = TxfFafActAvail;
+	me["TxfFafActActive"] = TxfFafActActive;
+	me["TxfFafFetAvail"] = TxfFafFetAvail;
+	me["TxfFafFetActive"] = TxfFafFetActive;
+	me["TxfFafFtiAvail"] = TxfFafFtiAvail;
+	me["TxfFafFtiActive"] = TxfFafFtiActive;
+	me["TxfFafFdtAvail"] = TxfFafFdtAvail;
+	me["TxfFafFdtActive"] = TxfFafFdtActive;
+	me["TxfFafFskAvail"] = TxfFafFskAvail;
+	me["TxfFafFskActive"] = TxfFafFskActive;
+	me["TxfFafFsmAvail"] = TxfFafFsmAvail;
+	me["TxfFafFsmActive"] = TxfFafFsmActive;
+	me["TxfFafFatAvail"] = TxfFafFatAvail;
+	me["TxfFafFatActive"] = TxfFafFatActive;
+	me["TxfFafRteAvail"] = TxfFafRteAvail;
+	me["TxfFafRteActive"] = TxfFafRteActive;
+	me["TxfFafAdtAvail"] = TxfFafAdtAvail;
+	me["TxfFafAdtActive"] = TxfFafAdtActive;
+	me["TxfFafEatAvail"] = TxfFafEatAvail;
+	me["TxfFafEatActive"] = TxfFafEatActive;
+	me["TxfFafAatAvail"] = TxfFafAatAvail;
+	me["TxfFafAatActive"] = TxfFafAatActive;
+	me["TxfFafDvtAvail"] = TxfFafDvtAvail;
+	me["TxfFafDvtActive"] = TxfFafDvtActive;
+	me["TxfFafOrgAvail"] = TxfFafOrgAvail;
+	me["TxfFafOrgActive"] = TxfFafOrgActive;
+	me["TxfFafDstAvail"] = TxfFafDstAvail;
+	me["TxfFafDstActive"] = TxfFafDstActive;
+	me["TxfFafOnmAvail"] = TxfFafOnmAvail;
+	me["TxfFafOnmActive"] = TxfFafOnmActive;
+	me["TxfFafOctAvail"] = TxfFafOctAvail;
+	me["TxfFafOctActive"] = TxfFafOctActive;
+	me["TxfFafDnmAvail"] = TxfFafDnmAvail;
+	me["TxfFafDnmActive"] = TxfFafDnmActive;
+	me["TxfFafDctAvail"] = TxfFafDctAvail;
+	me["TxfFafDctActive"] = TxfFafDctActive;
+	me["ButEqpNewAvail"] = ButEqpNewAvail;
+	me["ButEqpDeleteAvail"] = ButEqpDeleteAvail;
+	me["TxtEqpOprAvail"] = TxtEqpOprAvail;
+	me["TxtEqpOprActive"] = TxtEqpOprActive;
+	me["ButEqpOprViewAvail"] = ButEqpOprViewAvail;
+	me["ButEqpOprViewActive"] = ButEqpOprViewActive;
+	me["TxtEqpPtyAvail"] = TxtEqpPtyAvail;
+	me["TxtEqpPtyActive"] = TxtEqpPtyActive;
+	me["ButEqpPtyViewAvail"] = ButEqpPtyViewAvail;
+	me["ButEqpPtyViewActive"] = ButEqpPtyViewActive;
+	me["PupEqpEtyAvail"] = PupEqpEtyAvail;
+	me["PupEqpEtyActive"] = PupEqpEtyActive;
+	me["ButEqpEtyEditAvail"] = ButEqpEtyEditAvail;
+	me["ChkEqpFibAvail"] = ChkEqpFibAvail;
+	me["ChkEqpFibActive"] = ChkEqpFibActive;
 };
 
 void PnlBrlyFltDetail::StatShr::writeXML(
@@ -697,6 +893,91 @@ set<uint> PnlBrlyFltDetail::StatShr::diff(
  class PnlBrlyFltDetail::Tag
  ******************************************************************************/
 
+void PnlBrlyFltDetail::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyFltDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["CptSrf"] = "identifier";
+		me["CptTtb"] = "timetable";
+		me["CptLeg"] = "leg";
+		me["CptSta"] = "departure time";
+		me["CptSto"] = "arrival time";
+		me["CptXsa"] = "xStart";
+		me["CptXso"] = "xStop";
+		me["CptCdn"] = "calculated";
+		me["CptSdn"] = "segmented";
+		me["HdgFaf"] = "FlightAware flight";
+		me["CptFafFid"] = "faFlightID";
+		me["CptFafIdt"] = "ident";
+		me["CptFafAct"] = "aircrafttype";
+		me["CptFafFet"] = "filed_ete";
+		me["CptFafFti"] = "filed_time";
+		me["CptFafFdt"] = "filed_departuretime";
+		me["CptFafFsk"] = "filed_airspeed_kts";
+		me["CptFafFsm"] = "filed_airspeed_mach";
+		me["CptFafFat"] = "filed_altitude";
+		me["CptFafRte"] = "route";
+		me["CptFafAdt"] = "actualdeparturetime";
+		me["CptFafEat"] = "estimatedarrivaltime";
+		me["CptFafAat"] = "actualarrivaltime";
+		me["CptFafDvt"] = "diverted";
+		me["CptFafOrg"] = "origin";
+		me["CptFafDst"] = "destination";
+		me["CptFafOnm"] = "originName";
+		me["CptFafOct"] = "originCity";
+		me["CptFafDnm"] = "destinationName";
+		me["CptFafDct"] = "destinationCity";
+		me["HdgEqp"] = "Equipment";
+		me["CptEqpOpr"] = "operator";
+		me["CptEqpPty"] = "plane type";
+		me["CptEqpEty"] = "equipment type";
+		me["CptEqpFib"] = "Fiber";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["CptSrf"] = "Bezeichner";
+		me["CptTtb"] = "Flugplan";
+		me["CptLeg"] = "Strecke";
+		me["CptSta"] = "Abflugszeit";
+		me["CptSto"] = "Ankunftszeit";
+		me["CptXsa"] = "xStart";
+		me["CptXso"] = "xStop";
+		me["CptCdn"] = "berechnet";
+		me["CptSdn"] = "segmentiert";
+		me["HdgFaf"] = "FlightAware Flug";
+		me["CptFafFid"] = "faFlightID";
+		me["CptFafIdt"] = "ident";
+		me["CptFafAct"] = "aircrafttype";
+		me["CptFafFet"] = "filed_ete";
+		me["CptFafFti"] = "filed_time";
+		me["CptFafFdt"] = "filed_departuretime";
+		me["CptFafFsk"] = "filed_airspeed_kts";
+		me["CptFafFsm"] = "filed_airspeed_mach";
+		me["CptFafFat"] = "filed_altitude";
+		me["CptFafRte"] = "route";
+		me["CptFafAdt"] = "actualdeparturetime";
+		me["CptFafEat"] = "estimatedarrivaltime";
+		me["CptFafAat"] = "actualarrivaltime";
+		me["CptFafDvt"] = "diverted";
+		me["CptFafOrg"] = "origin";
+		me["CptFafDst"] = "destination";
+		me["CptFafOnm"] = "originName";
+		me["CptFafOct"] = "originCity";
+		me["CptFafDnm"] = "destinationName";
+		me["CptFafDct"] = "destinationCity";
+		me["HdgEqp"] = "Ger\\u00e4t";
+		me["CptEqpOpr"] = "Betreiber";
+		me["CptEqpPty"] = "Flugzeugtyp";
+		me["CptEqpEty"] = "Ger\\u00e4tetyp";
+		me["CptEqpFib"] = "Fiber";
+	};
+	me["Cpt"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::DETAIL, ixBrlyVLocale));
+};
+
 void PnlBrlyFltDetail::Tag::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -808,6 +1089,26 @@ string PnlBrlyFltDetail::DpchAppData::getSrefsMask() {
 	return(srefs);
 };
 
+void PnlBrlyFltDetail::DpchAppData::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyFltDetailData"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (contiac.readJSON(me, true)) add(CONTIAC);
+	} else {
+		contiac = ContIac();
+	};
+};
+
 void PnlBrlyFltDetail::DpchAppData::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -855,6 +1156,25 @@ string PnlBrlyFltDetail::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlBrlyFltDetail::DpchAppDo::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyFltDetailDo"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlBrlyFltDetail::DpchAppDo::readXML(
@@ -939,6 +1259,21 @@ void PnlBrlyFltDetail::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlBrlyFltDetail::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyFltDetailData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTIAC)) contiac.writeJSON(me);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFPUPEQPETY)) feedFPupEqpEty.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
 };
 
 void PnlBrlyFltDetail::DpchEngData::writeXML(

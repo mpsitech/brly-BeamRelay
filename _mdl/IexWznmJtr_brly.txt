@@ -1,586 +1,594 @@
-IexWznmJtr v0.9.29
-ImeIMJob.sref
-CrdBrlyCon
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	immcb	crgidle		corrgen
-	opp	corrgen	250000	corrcalc
-		ImeIMSquawk.Title	Example
-			generating corridors (1234 operations prepared)
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	generating corridors (&N; operations prepared)
-			dech	erzeuge Korridore (&N; Operationen vorbereitet)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	opiw	corrcalc	250000	crgdone		idle
-		ImeIMSquawk.Title	Example
-			calculating corridor visibility (123/1234 operations completed, last: calculate leg-to-leg visibility for leg 'FRA-JFK')
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	calculating corridor visibility (&Ndone;/&N; operations completed, last: &sqklast;)
-			dech	berechne Sichtbarkeit von Korridoren (&Ndone;/&N; Operationen ausgef\u00fchrt, letzte: &sqklast;)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	crgdone
-	other	congen		cngdone
-	other	cngdone
-	oppiw	calc1	250000	calc2		cngdone
-		ImeIMSquawk.Title	Example
-			determining relevant flights (123/1234 operations completed, last: calculate flight availability for connection '(location) FRA-(flight) LH401 14-1-2012, t0:14-1-2012 9:00:00')
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	determining relevant flights (&Ndone;/&N; operations completed, last: &sqklast;)
-			dech	bestimme relevante Fl\u00fcge (&Ndone;/&N; Operationen ausgef\u00fchrt, letzte: &sqklast;)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	oppiw	calc2	250000	calc3		calc3
-		ImeIMSquawk.Title	Example
-			calculating flight visibility (123/1234 operations completed, last: calculate flight-to-flight/location visibility for flight 'LH401 14-1-2012')
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	calculating flight visibility (&Ndone;/&N; operations completed, last: &sqklast;)
-			dech	berechne Sichtbarkeit von Fl\u00fcgen (&Ndone;/&N; Operationen ausgef\u00fchrt, letzte: &sqklast;)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	oppiw	calc3	250000	calc4		cngdone
-		ImeIMSquawk.Title	Example
-			calculating equipment line-up (123/1234 operations completed, last: calculate equipment line-up for connection '(location) FRA-(flight) LH401 14-1-2012, t0:14-1-2012 9:00:00')
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	calculating equipment line-up (&Ndone;/&N; operations completed, last: &sqklast;)
-			dech	berechne Aufreihung von Ger\u00e4t (&Ndone;/&N; Operationen ausgef\u00fchrt, letzte: &sqklast;)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	oppiw	calc4	250000	done		cngdone
-		ImeIMSquawk.Title	Example
-			calculating relays (123/1234 operations completed, last: calculate relays for connection '(location) FRA-(flight) LH401 14-1-2012, t0:14-1-2012 9:00:00')
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	calculating relays (&Ndone;/&N; operations completed, last: &sqklast;)
-			dech	berechne Verbindungsketten (&Ndone;/&N; Operationen ausgef\u00fchrt, letzte: &sqklast;)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	done
-	ImeIMStage.end
-	ImeIAMJobCmd.sref	Comment
-	pickup
-	corrgen
-	congen
-	calc
-	stats2
-	bargraph
-	lineup
-	cleanup1
-	cleanup2
-	ImeIAMJobCmd.end
-CrdBrlyFlt
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	oppiw	collect		coldone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	collecting data for time-resolved density map
-			dech	sammle Daten f\u00fcr zeitaufgel\u00f6ste Dichtekarte
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	coldone		idle
-	oppiw	plot		pltdone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	plotting density map
-			dech	plotte Dichtekarte
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	pltdone		idle
-	ImeIMStage.end
-	ImeIAMJobCmd.sref	Comment
-	dnscollect
-	dnsplot
-	ImeIAMJobCmd.end
-CrdBrlyLoc
-	ImeIAMJobCmd.sref	Comment
-	visgraph
-	ImeIAMJobCmd.end
-CrdBrlyTtb
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	immcb	impidle		import
-	other	import	250000	impdone
-		ImeIMSquawk.Title	Example
-			importing FlightAware data (1234 flights added)
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	importing FlightAware data (&fltcnt; flights added)
-			dech	importiere FlightAware-Daten (&fltcnt; Fl\u00fcge hinzugef\u00fcgt)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	impdone		idle
-	oppiw	segment	250000	segdone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	segmenting flights (&Ndone;/&N; operations completed, last: &sqklast;)
-			dech	segmentiere Fl\u00fcge (&Ndone;/&N; Operationen ausgef\u00fchrt, letzte: &sqklast;)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	segdone		idle
-	ImeIMStage.end
-	ImeIAMJobCmd.sref	Comment
-	validate
-	stats1
-	importFA
-	segment
-	ImeIAMJobCmd.end
-	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
-	JobBrlyIexFlt	iex	false	cre
-	ImeIRMJobMJob.end
-DlgBrlyConNew
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	other	idle
-	other	create		credone	idle
-	other	credone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	new connection created
-			dech	neue Verbindung erstellt
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			CalButRun		chgsge	calc1
-		ImeIMSensitivity2.end
-	oppiw	calc1		calc2		credone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	determining relevant flights
-			dech	bestimme relevante Fl\u00fcge
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	oppiw	calc2	250000	calc3		calc3
-		ImeIMSquawk.Title	Example
-			calculating flight visibility (123/1234 operations completed, last: calculate flight-to-flight/location visibility for flight 'LH401 14-1-2012')
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	calculating flight visibility (&Ndone;/&N; operations completed, last: &sqklast;)
-			dech	berechne Sichtbarkeit von Fl\u00fcgen (&Ndone;/&N; Operationen ausgef\u00fchrt, letzte: &sqklast;)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	oppiw	calc3		calc4
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	calculating equipment line-up
-			dech	berechne Aufreihung von Ger\u00e4t
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	oppiw	calc4		done
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	calculating relays
-			dech	berechne Verbindungsketten
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	done
-	ImeIMStage.end
-DlgBrlyLegNew
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	other	idle
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			DetButCre		chgsge	create
-		ImeIMSensitivity2.end
-	other	create		credone	idle
-	other	credone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	new leg created
-			dech	neue Strecke erstellt
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			IncButRun		chgsge	inco
-		ImeIMSensitivity2.end
-	oppiw	inco	250000	done
-		ImeIMSquawk.Title	Example
-			incorporating leg (1/3 operations completed)
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	incorporating leg (&Ndone;/&N; operations completed)
-			dech	gliedere Strecke ein (&Ndone;/&N; Operationen ausgef\u00fchrt)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	done
-	ImeIMStage.end
-DlgBrlyNavLoaini
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	other	idle
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		uld		lock	void					chgsge	prsidle
-		ImeIMSensitivity2.end
-	immcb	prsidle		parse
-	other	parse			alrbrlyper
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	parsing initialization data
-			dech	lese Initialisierungsdaten ein
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	alr	alrbrlyper		idle
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	parse error
-			dech	Fehler beim Einlesen
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	prsdone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	initialization data parsed
-			dech	Initialisierungsdaten eingelesen
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			ImpButRun		chgsge	impidle
-		ImeIMSensitivity2.end
-	immcb	impidle		import
-	other	import	250000	impdone
-		ImeIMSquawk.Title	Example
-			importing initialization data (1234 records added)
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	importing initialization data (&impcnt; records added)
-			dech	importiere Initialisierungsdaten (&impcnt; Datens\u00e4tze hinzugef\u00fcgt)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	impdone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	import done
-			dech	Import abgeschlossen
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			PprButRun		chgsge	postprc
-		ImeIMSensitivity2.end
-	oppiw	postprc	250000	done		done
-		ImeIMSquawk.Title	Example
-			incorporating locations (12/123 operations completed)
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	incorporating locations (&Ndone;/&N; operations completed)
-			dech	gliedere Orte ein (&Ndone;/&N; Operationen ausgef\u00fchrt)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	done	other
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		dld		lock	void					cust
-		ImeIMSensitivity2.end
-	ImeIMStage.end
-DlgBrlyTtbImpflt
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	other	idle
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		uld		lock	void					chgsge	prsidle
-		ImeIMSensitivity2.end
-	immcb	prsidle		parse
-	other	parse			alrbrlyper
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	parsing timetable data
-			dech	lese Flugplandaten ein
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	alr	alrbrlyper		idle
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	parse error
-			dech	Fehler beim Einlesen
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	prsdone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	timetable data parsed
-			dech	Flugplandaten eingelesen
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			ImpButRun		chgsge	impidle
-		ImeIMSensitivity2.end
-	immcb	impidle		import
-	other	import	250000	impdone
-		ImeIMSquawk.Title	Example
-			importing timetable data (1234 records added)
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	importing timetable data (&impcnt; records added)
-			dech	importiere Flugplandaten (&impcnt; Datens\u00e4tze hinzugef\u00fcgt)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	impdone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	import done
-			dech	Import abgeschlossen
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			PprButRun		chgsge	postprc
-		ImeIMSensitivity2.end
-	oppiw	postprc	250000	done
-		ImeIMSquawk.Title	Example
-			incorporating new routes (123/1234 operations completed, last: calculate leg-to-leg visibility)
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	incorporating new routes (&Ndone;/&N; operations completed, last: &sqklast;)
-			dech	gliedere neue Routen ein (&Ndone;/&N; Operationen ausgef\u00fchrt, letzte: &sqklast;)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	done
-	ImeIMStage.end
-DlgBrlyTtbNew
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	other	idle
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			ButCre		chgsge	create
-		ImeIMSensitivity2.end
-	other	create		done	idle
-	other	done
-	ImeIMStage.end
-DlgBrlyTtbTrlorig
-	ImeIMVector.srefIxVOp	srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
-	retrupd		VecVDlgBrlyTtbTrlorigSrc
-		ImeIMVectoritem.sref	Title	Comment
-		star	StarAlliance .pdf
-		ow	oneworld .pdf
-		ImeIMVectoritem.end
-	ImeIMVector.end
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	other	idle
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		uld		lock	void					chgsge	ulddone
-		ImeIMSensitivity2.end
-	other	ulddone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	raw data file loaded
-			dech	Rohdaten-Datei geladen
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			TrlButRun		chgsge	translate
-		ImeIMSensitivity2.end
-	oppiw	translate		done
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	translating
-			dech	\u00fcbersetze
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	done
-	ImeIMStage.end
-PnlBrlyConMap
-	ImeIMBlock1.srefIxWznmVIop	srefIxVBasetype	srefsReaIxWznmWScope	srefsWriIxWznmWScope	sref	Comment
-	retr				ContIacBrlyConMap
+IexWznmJtr v0.9.29														
+ImeIMJob.sref														
+CrdBrlyCon														
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	immcb	crgidle		corrgen										
+	opp	corrgen	250000	corrcalc										
+		ImeIMSquawk.Title	Example											
+		^	generating corridors (1234 operations prepared)											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"generating corridors (&N; operations prepared)"										
+			dech	"erzeuge Korridore (&N; Operationen vorbereitet)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	opiw	corrcalc	250000	crgdone		idle								
+		ImeIMSquawk.Title	Example											
+		^	calculating corridor visibility (123/1234 operations completed, last: calculate leg-to-leg visibility for leg 'FRA-JFK')											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"calculating corridor visibility (&Ndone;/&N; operations completed, last: &sqklast;)"										
+			dech	"berechne Sichtbarkeit von Korridoren (&Ndone;/&N; Operationen ausgef&#252;hrt, letzte: &sqklast;)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	crgdone												
+	other	congen		cngdone										
+	other	cngdone												
+	oppiw	calc1	250000	calc2		cngdone								
+		ImeIMSquawk.Title	Example											
+		^	determining relevant flights (123/1234 operations completed, last: calculate flight availability for connection '(location) FRA-(flight) LH401 14-1-2012, t0:14-1-2012 9:00:00')											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"determining relevant flights (&Ndone;/&N; operations completed, last: &sqklast;)"										
+			dech	"bestimme relevante Fl&#252;ge (&Ndone;/&N; Operationen ausgef&#252;hrt, letzte: &sqklast;)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	oppiw	calc2	250000	calc3		calc3								
+		ImeIMSquawk.Title	Example											
+		^	calculating flight visibility (123/1234 operations completed, last: calculate flight-to-flight/location visibility for flight 'LH401 14-1-2012')											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"calculating flight visibility (&Ndone;/&N; operations completed, last: &sqklast;)"										
+			dech	"berechne Sichtbarkeit von Fl&#252;gen (&Ndone;/&N; Operationen ausgef&#252;hrt, letzte: &sqklast;)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	oppiw	calc3	250000	calc4		cngdone								
+		ImeIMSquawk.Title	Example											
+		^	calculating equipment line-up (123/1234 operations completed, last: calculate equipment line-up for connection '(location) FRA-(flight) LH401 14-1-2012, t0:14-1-2012 9:00:00')											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"calculating equipment line-up (&Ndone;/&N; operations completed, last: &sqklast;)"										
+			dech	"berechne Aufreihung von Ger&#228;t (&Ndone;/&N; Operationen ausgef&#252;hrt, letzte: &sqklast;)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	oppiw	calc4	250000	done		cngdone								
+		ImeIMSquawk.Title	Example											
+		^	calculating relays (123/1234 operations completed, last: calculate relays for connection '(location) FRA-(flight) LH401 14-1-2012, t0:14-1-2012 9:00:00')											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"calculating relays (&Ndone;/&N; operations completed, last: &sqklast;)"										
+			dech	"berechne Verbindungsketten (&Ndone;/&N; Operationen ausgef&#252;hrt, letzte: &sqklast;)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	done												
+	ImeIMStage.end													
+	ImeIAMJobCmd.sref	Comment												
+	pickup													
+	corrgen													
+	congen													
+	calc													
+	stats2													
+	bargraph													
+	lineup													
+	cleanup1													
+	cleanup2													
+	ImeIAMJobCmd.end													
+CrdBrlyFlt														
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	oppiw	collect		coldone										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	collecting data for time-resolved density map										
+			dech	"sammle Daten f&#252;r zeitaufgel&#246;ste Dichtekarte"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	coldone		idle										
+	oppiw	plot		pltdone										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	plotting density map										
+			dech	plotte Dichtekarte										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	pltdone		idle										
+	ImeIMStage.end													
+	ImeIAMJobCmd.sref	Comment												
+	dnscollect													
+	dnsplot													
+	ImeIAMJobCmd.end													
+CrdBrlyLoc														
+	ImeIAMJobCmd.sref	Comment												
+	visgraph													
+	ImeIAMJobCmd.end													
+CrdBrlyTtb														
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	immcb	impidle		import										
+	other	import	250000	impdone										
+		ImeIMSquawk.Title	Example											
+		^	importing FlightAware data (1234 flights added)											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"importing FlightAware data (&fltcnt; flights added)"										
+			dech	"importiere FlightAware-Daten (&fltcnt; Fl&#252;ge hinzugef&#252;gt)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	impdone		idle										
+	oppiw	segment	250000	segdone										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"segmenting flights (&Ndone;/&N; operations completed, last: &sqklast;)"										
+			dech	"segmentiere Fl&#252;ge (&Ndone;/&N; Operationen ausgef&#252;hrt, letzte: &sqklast;)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	segdone		idle										
+	ImeIMStage.end													
+	ImeIAMJobCmd.sref	Comment												
+	validate													
+	stats1													
+	importFA													
+	segment													
+	ImeIAMJobCmd.end													
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract										
+	JobBrlyIexFlt	iex	false	cre										
+	ImeIRMJobMJob.end													
+DlgBrlyConNew														
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	other	idle												
+	other	create		credone	idle									
+	other	credone												
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	new connection created										
+			dech	neue Verbindung erstellt										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		con		lock	void			CalButRun		chgsge	calc1			
+		ImeIMSensitivity2.end												
+	oppiw	calc1		calc2		credone								
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	determining relevant flights										
+			dech	"bestimme relevante Fl&#252;ge"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	oppiw	calc2	250000	calc3		calc3								
+		ImeIMSquawk.Title	Example											
+		^	calculating flight visibility (123/1234 operations completed, last: calculate flight-to-flight/location visibility for flight 'LH401 14-1-2012')											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"calculating flight visibility (&Ndone;/&N; operations completed, last: &sqklast;)"										
+			dech	"berechne Sichtbarkeit von Fl&#252;gen (&Ndone;/&N; Operationen ausgef&#252;hrt, letzte: &sqklast;)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	oppiw	calc3		calc4										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	calculating equipment line-up										
+			dech	"berechne Aufreihung von Ger&#228;t"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	oppiw	calc4		done										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	calculating relays										
+			dech	berechne Verbindungsketten										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	done												
+	ImeIMStage.end													
+DlgBrlyLegNew														
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	other	idle												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		con		lock	void			DetButCre		chgsge	create			
+		ImeIMSensitivity2.end												
+	other	create		credone	idle									
+	other	credone												
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	new leg created										
+			dech	neue Strecke erstellt										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		con		lock	void			IncButRun		chgsge	inco			
+		ImeIMSensitivity2.end												
+	oppiw	inco	250000	done										
+		ImeIMSquawk.Title	Example											
+		^	incorporating leg (1/3 operations completed)											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"incorporating leg (&Ndone;/&N; operations completed)"										
+			dech	"gliedere Strecke ein (&Ndone;/&N; Operationen ausgef&#252;hrt)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	done												
+	ImeIMStage.end													
+DlgBrlyNavLoaini														
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	other	idle												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		uld		lock	void					chgsge	prsidle			
+		ImeIMSensitivity2.end												
+	immcb	prsidle		parse										
+	other	parse		prsdone	alrbrlyper									
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	parsing initialization data										
+			dech	lese Initialisierungsdaten ein										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	alr	alrbrlyper		idle										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	parse error										
+			dech	Fehler beim Einlesen										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	prsdone												
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	initialization data parsed										
+			dech	Initialisierungsdaten eingelesen										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		con		lock	void			ImpButRun		chgsge	impidle			
+		ImeIMSensitivity2.end												
+	immcb	impidle		import										
+	other	import	250000	impdone	alrbrlyier									
+		ImeIMSquawk.Title	Example											
+		^	importing initialization data (1234 records added)											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"importing initialization data (&impcnt; records added)"										
+			dech	"importiere Initialisierungsdaten (&impcnt; Datens&#228;tze hinzugef&#252;gt)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	alr	alrbrlyier		idle										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	import error										
+			dech	Fehler beim Importieren										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	impdone												
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	import done										
+			dech	Import abgeschlossen										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		con		lock	void			PprButRun		chgsge	postprc			
+		ImeIMSensitivity2.end												
+	oppiw	postprc	250000	done		done								
+		ImeIMSquawk.Title	Example											
+		^	incorporating locations (12/123 operations completed)											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"incorporating locations (&Ndone;/&N; operations completed)"										
+			dech	"gliedere Orte ein (&Ndone;/&N; Operationen ausgef&#252;hrt)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	done	other											
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		dld		lock	void					cust				
+		ImeIMSensitivity2.end												
+	ImeIMStage.end													
+DlgBrlyTtbImpflt														
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	other	idle												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		uld		lock	void					chgsge	prsidle			
+		ImeIMSensitivity2.end												
+	immcb	prsidle		parse										
+	other	parse		prsdone	alrbrlyper									
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	parsing timetable data										
+			dech	lese Flugplandaten ein										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	alr	alrbrlyper		idle										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	parse error										
+			dech	Fehler beim Einlesen										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	prsdone												
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	timetable data parsed										
+			dech	Flugplandaten eingelesen										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		con		lock	void			ImpButRun		chgsge	impidle			
+		ImeIMSensitivity2.end												
+	immcb	impidle		import										
+	other	import	250000	impdone										
+		ImeIMSquawk.Title	Example											
+		^	importing timetable data (1234 records added)											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"importing timetable data (&impcnt; records added)"										
+			dech	"importiere Flugplandaten (&impcnt; Datens&#228;tze hinzugef&#252;gt)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	impdone												
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	import done										
+			dech	Import abgeschlossen										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		con		lock	void			PprButRun		chgsge	postprc			
+		ImeIMSensitivity2.end												
+	oppiw	postprc	250000	done										
+		ImeIMSquawk.Title	Example											
+		^	incorporating new routes (123/1234 operations completed, last: calculate leg-to-leg visibility)											
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	"incorporating new routes (&Ndone;/&N; operations completed, last: &sqklast;)"										
+			dech	"gliedere neue Routen ein (&Ndone;/&N; Operationen ausgef&#252;hrt, letzte: &sqklast;)"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	done												
+	ImeIMStage.end													
+DlgBrlyTtbNew														
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	other	idle												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		con		lock	void			ButCre		chgsge	create			
+		ImeIMSensitivity2.end												
+	other	create		done	idle									
+	other	done												
+	ImeIMStage.end													
+DlgBrlyTtbTrlorig														
+	ImeIMVector.srefIxVOp	srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption									
+	retrupd		VecVDlgBrlyTtbTrlorigSrc											
+		ImeIMVectoritem.sref	Title	Comment										
+		star	StarAlliance .pdf											
+		ow	oneworld .pdf											
+		ImeIMVectoritem.end												
+	ImeIMVector.end													
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	other	idle												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		uld		lock	void					chgsge	ulddone			
+		ImeIMSensitivity2.end												
+	other	ulddone												
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	raw data file loaded										
+			dech	Rohdaten-Datei geladen										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode		
+		con		lock	void			TrlButRun		chgsge	translate			
+		ImeIMSensitivity2.end												
+	oppiw	translate		done										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	translating										
+			dech	"&#252;bersetze"										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	other	done												
+	ImeIMStage.end													
+PnlBrlyConMap														
+	ImeIMBlock1.srefIxWznmVIop	srefIxVBasetype	srefsReaIxWznmWScope	srefsWriIxWznmWScope	sref	Comment								
+	retr				ContIacBrlyConMap									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		retrupd	0		SldH	double						0.0
-		retrupd	0		SldV	double						0.0
-		retrupd	0		SldScl	double						1
-		ImeIAMBlockItem1.end
-	retr				StatShrBrlyConMap
+		retrupd	0		SldH	double						0.0		
+		retrupd	0		SldV	double						0.0		
+		retrupd	0		SldScl	double						1		
+		ImeIAMBlockItem1.end												
+	retr				StatShrBrlyConMap									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		retrupd	0		SldHMin	double						-1.0
-		retrupd	0		SldHMax	double						1.0
-		retrupd	0		SldVMin	double						-1.0
-		retrupd	0		SldVMax	double						1.0
-		retrupd	0		SldSclMin	double						1
-		retrupd	0		SldSclMax	double						10
-		ImeIAMBlockItem1.end
-	ins	stat	app	app;cmbeng;eng	StatAppBrlyConMap
+		retrupd	0		SldHMin	double						-1.0		
+		retrupd	0		SldHMax	double						1.0		
+		retrupd	0		SldVMin	double						-1.0		
+		retrupd	0		SldVMax	double						1.0		
+		retrupd	0		SldSclMin	double						1		
+		retrupd	0		SldSclMax	double						10		
+		ImeIAMBlockItem1.end												
+	ins	stat	app	"app;cmbeng;eng"	StatAppBrlyConMap									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	var	t	uint						0
-		ins	0	var	running	boolean						false
-		ImeIAMBlockItem1.end
-	ins	stg	app;cmbeng;eng	app;cmbeng;eng	StgIacBrlyConMap
+		ins	0	var	t	uint						0		
+		ins	0	var	running	boolean						false		
+		ImeIAMBlockItem1.end												
+	ins	stg	"app;cmbeng;eng"	"app;cmbeng;eng"	StgIacBrlyConMap									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	var	width	uint						400
-		ins	0	var	height	uint						300
-		ImeIAMBlockItem1.end
-	retr				DpchAppBrlyConMapData
+		ins	0	var	width	uint						400		
+		ins	0	var	height	uint						300		
+		ImeIAMBlockItem1.end												
+	retr				DpchAppBrlyConMapData									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	sub	stgiac	void					StgIacBrlyConMap
-		ImeIAMBlockItem1.end
-	retr				DpchEngBrlyConMapData
+		ins	0	sub	stgiac	void					StgIacBrlyConMap			
+		ImeIAMBlockItem1.end												
+	retr				DpchEngBrlyConMapData									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	sub	statapp	void					StatAppBrlyConMap
-		ins	0	sub	stgiac	void					StgIacBrlyConMap
-		ImeIAMBlockItem1.end
-	ins	dpch	app	cmbeng;eng	DpchEngBrlyConMapImage
+		ins	0	sub	statapp	void					StatAppBrlyConMap			
+		ins	0	sub	stgiac	void					StgIacBrlyConMap			
+		ImeIAMBlockItem1.end												
+	ins	dpch	app	"cmbeng;eng"	DpchEngBrlyConMapImage									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	var	jref	scrref						0
-		ins	0	rst	rstleg	void				TblBrlyQConMapLeg
-		ins	0	rst	rstlocation	void				TblBrlyQConMapLocation
-		ins	0	rst	rstflight	void				TblBrlyQConMapFlight
-		ins	0	rst	rstrelay	void				TblBrlyQConMapRelay
-		ins	0	rst	rstnode	void				TblBrlyQConMapNode
-		ins	0	sub	statshrqryleg	void					StatShrQryBrlyConMapLeg
-		ins	0	sub	statshrqrylocation	void					StatShrQryBrlyConMapLocation
-		ins	0	sub	statshrqryflight	void					StatShrQryBrlyConMapFlight
-		ins	0	sub	statshrqryrelay	void					StatShrQryBrlyConMapRelay
-		ins	0	sub	statshrqrynode	void					StatShrQryBrlyConMapNode
-		ImeIAMBlockItem1.end
-	ImeIMBlock1.end
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	other	idle
-	oppiw	mapgen		idle
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	generating map
-			dech	erzeuge Landkarte
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	ImeIMStage.end
-	ImeIAMJobCmd.sref	Comment
-	mapgen
-	ImeIAMJobCmd.end
-PnlBrlyLegMap
-	ImeIMBlock1.srefIxWznmVIop	srefIxVBasetype	srefsReaIxWznmWScope	srefsWriIxWznmWScope	sref	Comment
-	retr				ContIacBrlyLegMap
+		ins	0	var	jref	scrref						0		
+		ins	0	rst	rstleg	void				TblBrlyQConMapLeg				
+		ins	0	rst	rstlocation	void				TblBrlyQConMapLocation				
+		ins	0	rst	rstflight	void				TblBrlyQConMapFlight				
+		ins	0	rst	rstrelay	void				TblBrlyQConMapRelay				
+		ins	0	rst	rstnode	void				TblBrlyQConMapNode				
+		ins	0	sub	statshrqryleg	void					StatShrQryBrlyConMapLeg			
+		ins	0	sub	statshrqrylocation	void					StatShrQryBrlyConMapLocation			
+		ins	0	sub	statshrqryflight	void					StatShrQryBrlyConMapFlight			
+		ins	0	sub	statshrqryrelay	void					StatShrQryBrlyConMapRelay			
+		ins	0	sub	statshrqrynode	void					StatShrQryBrlyConMapNode			
+		ImeIAMBlockItem1.end												
+	ImeIMBlock1.end													
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	other	idle												
+	oppiw	mapgen		idle										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	generating map										
+			dech	erzeuge Landkarte										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	ImeIMStage.end													
+	ImeIAMJobCmd.sref	Comment												
+	mapgen													
+	ImeIAMJobCmd.end													
+PnlBrlyLegMap														
+	ImeIMBlock1.srefIxWznmVIop	srefIxVBasetype	srefsReaIxWznmWScope	srefsWriIxWznmWScope	sref	Comment								
+	retr				ContIacBrlyLegMap									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		retrupd	0		SldH	double						0.0
-		retrupd	0		SldV	double						0.0
-		retrupd	0		SldScl	double						1
-		ImeIAMBlockItem1.end
-	retr				StatShrBrlyLegMap
+		retrupd	0		SldH	double						0.0		
+		retrupd	0		SldV	double						0.0		
+		retrupd	0		SldScl	double						1		
+		ImeIAMBlockItem1.end												
+	retr				StatShrBrlyLegMap									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		retrupd	0		SldHMin	double						-1.0
-		retrupd	0		SldHMax	double						1.0
-		retrupd	0		SldVMin	double						-1.0
-		retrupd	0		SldVMax	double						1.0
-		retrupd	0		SldSclMin	double						1
-		retrupd	0		SldSclMax	double						10
-		ImeIAMBlockItem1.end
-	ins	stg	app;cmbeng;eng	app;cmbeng;eng	StgIacBrlyLegMap
+		retrupd	0		SldHMin	double						-1.0		
+		retrupd	0		SldHMax	double						1.0		
+		retrupd	0		SldVMin	double						-1.0		
+		retrupd	0		SldVMax	double						1.0		
+		retrupd	0		SldSclMin	double						1		
+		retrupd	0		SldSclMax	double						10		
+		ImeIAMBlockItem1.end												
+	ins	stg	"app;cmbeng;eng"	"app;cmbeng;eng"	StgIacBrlyLegMap									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	var	width	uint						400
-		ins	0	var	height	uint						300
-		ImeIAMBlockItem1.end
-	retr				DpchAppBrlyLegMapData
+		ins	0	var	width	uint						400		
+		ins	0	var	height	uint						300		
+		ImeIAMBlockItem1.end												
+	retr				DpchAppBrlyLegMapData									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	sub	stgiac	void					StgIacBrlyLegMap
-		ImeIAMBlockItem1.end
-	retr				DpchEngBrlyLegMapData
+		ins	0	sub	stgiac	void					StgIacBrlyLegMap			
+		ImeIAMBlockItem1.end												
+	retr				DpchEngBrlyLegMapData									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	sub	stgiac	void					StgIacBrlyLegMap
-		ImeIAMBlockItem1.end
-	ins	dpch	app	cmbeng;eng	DpchEngBrlyLegMapImage
+		ins	0	sub	stgiac	void					StgIacBrlyLegMap			
+		ImeIAMBlockItem1.end												
+	ins	dpch	app	"cmbeng;eng"	DpchEngBrlyLegMapImage									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	var	jref	scrref						0
-		ins	0	rst	rstleg	void				TblBrlyQLegMapLeg
-		ins	0	rst	rstlocation	void				TblBrlyQLegMapLocation
-		ins	0	sub	statshrqryleg	void					StatShrQryBrlyLegMapLeg
-		ins	0	sub	statshrqrylocation	void					StatShrQryBrlyLegMapLocation
-		ImeIAMBlockItem1.end
-	ImeIMBlock1.end
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	other	idle
-	oppiw	mapgen		idle
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	generating map
-			dech	erzeuge Landkarte
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	ImeIMStage.end
-	ImeIAMJobCmd.sref	Comment
-	mapgen
-	ImeIAMJobCmd.end
-PnlBrlyLocMap
-	ImeIMBlock1.srefIxWznmVIop	srefIxVBasetype	srefsReaIxWznmWScope	srefsWriIxWznmWScope	sref	Comment
-	retr				ContIacBrlyLocMap
+		ins	0	var	jref	scrref						0		
+		ins	0	rst	rstleg	void				TblBrlyQLegMapLeg				
+		ins	0	rst	rstlocation	void				TblBrlyQLegMapLocation				
+		ins	0	sub	statshrqryleg	void					StatShrQryBrlyLegMapLeg			
+		ins	0	sub	statshrqrylocation	void					StatShrQryBrlyLegMapLocation			
+		ImeIAMBlockItem1.end												
+	ImeIMBlock1.end													
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	other	idle												
+	oppiw	mapgen		idle										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	generating map										
+			dech	erzeuge Landkarte										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	ImeIMStage.end													
+	ImeIAMJobCmd.sref	Comment												
+	mapgen													
+	ImeIAMJobCmd.end													
+PnlBrlyLocMap														
+	ImeIMBlock1.srefIxWznmVIop	srefIxVBasetype	srefsReaIxWznmWScope	srefsWriIxWznmWScope	sref	Comment								
+	retr				ContIacBrlyLocMap									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		retrupd	0		SldH	double						0.0
-		retrupd	0		SldV	double						0.0
-		retrupd	0		SldScl	double						1
-		ImeIAMBlockItem1.end
-	retr				StatShrBrlyLocMap
+		retrupd	0		SldH	double						0.0		
+		retrupd	0		SldV	double						0.0		
+		retrupd	0		SldScl	double						1		
+		ImeIAMBlockItem1.end												
+	retr				StatShrBrlyLocMap									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		retrupd	0		SldHMin	double						-1.0
-		retrupd	0		SldHMax	double						1.0
-		retrupd	0		SldVMin	double						-1.0
-		retrupd	0		SldVMax	double						1.0
-		retrupd	0		SldSclMin	double						1
-		retrupd	0		SldSclMax	double						10
-		ImeIAMBlockItem1.end
-	ins	stg	app;cmbeng;eng	app;cmbeng;eng	StgIacBrlyLocMap
+		retrupd	0		SldHMin	double						-1.0		
+		retrupd	0		SldHMax	double						1.0		
+		retrupd	0		SldVMin	double						-1.0		
+		retrupd	0		SldVMax	double						1.0		
+		retrupd	0		SldSclMin	double						1		
+		retrupd	0		SldSclMax	double						10		
+		ImeIAMBlockItem1.end												
+	ins	stg	"app;cmbeng;eng"	"app;cmbeng;eng"	StgIacBrlyLocMap									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	var	width	uint						400
-		ins	0	var	height	uint						300
-		ImeIAMBlockItem1.end
-	retr				DpchAppBrlyLocMapData
+		ins	0	var	width	uint						400		
+		ins	0	var	height	uint						300		
+		ImeIAMBlockItem1.end												
+	retr				DpchAppBrlyLocMapData									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	sub	stgiac	void					StgIacBrlyLocMap
-		ImeIAMBlockItem1.end
-	retr				DpchEngBrlyLocMapData
+		ins	0	sub	stgiac	void					StgIacBrlyLocMap			
+		ImeIAMBlockItem1.end												
+	retr				DpchEngBrlyLocMapData									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	sub	stgiac	void					StgIacBrlyLocMap
-		ImeIAMBlockItem1.end
-	ins	dpch	app	cmbeng;eng	DpchEngBrlyLocMapImage
+		ins	0	sub	stgiac	void					StgIacBrlyLocMap			
+		ImeIAMBlockItem1.end												
+	ins	dpch	app	"cmbeng;eng"	DpchEngBrlyLocMapImage									
 		ImeIAMBlockItem1.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMControl	srefRefWznmMVector	srefRefWznmMFeed	srefRefWznmMTable	srefRefWznmMBlock	Defval	srefRefWznmMVectoritem	Comment
-		ins	0	var	jref	scrref				0
-		ins	0	rst	rstleg	void				TblBrlyQLocMapLeg
-		ins	0	rst	rstproxlocation	void				TblBrlyQLocMapProxLocation
-		ins	0	rst	rstvislocation	void				TblBrlyQLocMapVisLocation
-		ins	0	sub	statshrqryleg	void					StatShrQryBrlyLocMapLeg
-		ins	0	sub	statshrqryproxlocation	void					StatShrQryBrlyLocMapProxLocation
-		ins	0	sub	statshrqryvislocation	void					StatShrQryBrlyLocMapVisLocation
-		ImeIAMBlockItem1.end
-	ImeIMBlock1.end
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	other	idle
-	oppiw	mapgen		idle
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	generating map
-			dech	erzeuge Landkarte
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	ImeIMStage.end
-	ImeIAMJobCmd.sref	Comment
-	mapgen
-	ImeIAMJobCmd.end
-ImeIMJob.end
-ImeIRMCallMStub.srefRefWznmMCall	srefRefWznmMStub
-CallBrlyConUpd.refEq	StubBrlyConStd
-CallBrlyEqpUpd.refEq	StubBrlyEqpShort
-CallBrlyEqpUpd.refEq	StubBrlyEqpStd
-CallBrlyFilUpd.refEq	StubBrlyFilStd
-CallBrlyFltUpd.refEq	StubBrlyFltSref
-CallBrlyLegUpd.refEq	StubBrlyLegShort
-CallBrlyLegUpd.refEq	StubBrlyLegStd
-CallBrlyLocUpd.refEq	StubBrlyLocStd
-CallBrlyNdeUpd.refEq	StubBrlyNdeLong
-CallBrlyNdeUpd.refEq	StubBrlyNdeStd
-CallBrlyOprUpd.refEq	StubBrlyOprStd
-CallBrlyPrsUpd.refEq	StubBrlyPrsStd
-CallBrlyPtyUpd.refEq	StubBrlyPtyStd
-CallBrlyRegUpd.refEq	StubBrlyRegHsref
-CallBrlyRegUpd.refEq	StubBrlyRegStd
-CallBrlyRegUpd.refEq	StubBrlyRegLong
-CallBrlyRlyUpd.refEq	StubBrlyRlyLong
-CallBrlyRlyUpd.refEq	StubBrlyRlyStd
-CallBrlySegUpd.refEq	StubBrlySegStd
-CallBrlySesUpd.refEq	StubBrlySesMenu
-CallBrlySesUpd.refEq	StubBrlySesStd
-CallBrlyTtbUpd.refEq	StubBrlyTtbStd
-CallBrlyUsrUpd.refEq	StubBrlyUsrStd
-ImeIRMCallMStub.end
-ImeIMBlock2.sref
-StgBrlyDatabase
-	ImeIAMBlockItem2.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-	retrupd	0		username			mpsitech
-	retrupd	0		password			f9w8feeh
-	ImeIAMBlockItem2.end
-ImeIMBlock2.end
+		ins	0	var	jref	scrref				0				
+		ins	0	rst	rstleg	void				TblBrlyQLocMapLeg				
+		ins	0	rst	rstproxlocation	void				TblBrlyQLocMapProxLocation				
+		ins	0	rst	rstvislocation	void				TblBrlyQLocMapVisLocation				
+		ins	0	sub	statshrqryleg	void					StatShrQryBrlyLocMapLeg			
+		ins	0	sub	statshrqryproxlocation	void					StatShrQryBrlyLocMapProxLocation			
+		ins	0	sub	statshrqryvislocation	void					StatShrQryBrlyLocMapVisLocation			
+		ImeIAMBlockItem1.end												
+	ImeIMBlock1.end													
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment							
+	other	idle												
+	oppiw	mapgen		idle										
+		ImeIMSquawk.Title	Example											
+		^												
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title										
+			enus	generating map										
+			dech	erzeuge Landkarte										
+			ImeIJMSquawkTitle.end											
+		ImeIMSquawk.end												
+	ImeIMStage.end													
+	ImeIAMJobCmd.sref	Comment												
+	mapgen													
+	ImeIAMJobCmd.end													
+ImeIMJob.end														
+ImeIRMCallMStub.srefRefWznmMCall	srefRefWznmMStub													
+CallBrlyConUpd.refEq	StubBrlyConStd													
+CallBrlyEqpUpd.refEq	StubBrlyEqpShort													
+CallBrlyEqpUpd.refEq	StubBrlyEqpStd													
+CallBrlyFilUpd.refEq	StubBrlyFilStd													
+CallBrlyFltUpd.refEq	StubBrlyFltSref													
+CallBrlyLegUpd.refEq	StubBrlyLegShort													
+CallBrlyLegUpd.refEq	StubBrlyLegStd													
+CallBrlyLocUpd.refEq	StubBrlyLocStd													
+CallBrlyNdeUpd.refEq	StubBrlyNdeLong													
+CallBrlyNdeUpd.refEq	StubBrlyNdeStd													
+CallBrlyOprUpd.refEq	StubBrlyOprStd													
+CallBrlyPrsUpd.refEq	StubBrlyPrsStd													
+CallBrlyPtyUpd.refEq	StubBrlyPtyStd													
+CallBrlyRegUpd.refEq	StubBrlyRegHsref													
+CallBrlyRegUpd.refEq	StubBrlyRegStd													
+CallBrlyRegUpd.refEq	StubBrlyRegLong													
+CallBrlyRlyUpd.refEq	StubBrlyRlyLong													
+CallBrlyRlyUpd.refEq	StubBrlyRlyStd													
+CallBrlySegUpd.refEq	StubBrlySegStd													
+CallBrlySesUpd.refEq	StubBrlySesMenu													
+CallBrlySesUpd.refEq	StubBrlySesStd													
+CallBrlyTtbUpd.refEq	StubBrlyTtbStd													
+CallBrlyUsrUpd.refEq	StubBrlyUsrStd													
+ImeIRMCallMStub.end														
+ImeIMBlock2.sref														
+StgBrlyDatabase														
+	ImeIAMBlockItem2.srefIxWznmVIop	irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment					
+	retrupd	0		username			mpsitech							
+	retrupd	0		password			f9w8feeh							
+	ImeIAMBlockItem2.end													
+ImeIMBlock2.end														

@@ -31,6 +31,21 @@ BrlyQPty1NEquipment::BrlyQPty1NEquipment(
 	this->stubRef = stubRef;
 };
 
+void BrlyQPty1NEquipment::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void BrlyQPty1NEquipment::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListBrlyQPty1NEquipment& ListBrlyQPty1NEquipment::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQPty1NEquipment::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQPty1NEquipment";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQPty1NEquipment::writeXML(

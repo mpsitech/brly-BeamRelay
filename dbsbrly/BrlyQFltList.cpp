@@ -49,6 +49,29 @@ BrlyQFltList::BrlyQFltList(
 	this->ftmStop = ftmStop;
 };
 
+void BrlyQFltList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["eqp"] = stubRefBrlyMEquipment;
+		me["leg"] = stubRefBrlyMLeg;
+		me["sta"] = ftmStart;
+		me["sto"] = ftmStop;
+	} else {
+		me["sref"] = sref;
+		me["stubRefBrlyMEquipment"] = stubRefBrlyMEquipment;
+		me["stubRefBrlyMLeg"] = stubRefBrlyMLeg;
+		me["ftmStart"] = ftmStart;
+		me["ftmStop"] = ftmStop;
+	};
+};
+
 void BrlyQFltList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -122,6 +145,16 @@ ListBrlyQFltList& ListBrlyQFltList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQFltList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQFltList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQFltList::writeXML(

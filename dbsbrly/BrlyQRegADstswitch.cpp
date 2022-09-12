@@ -37,6 +37,23 @@ BrlyQRegADstswitch::BrlyQRegADstswitch(
 	this->ftmStartt = ftmStartt;
 };
 
+void BrlyQRegADstswitch::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["std"] = ftmStartd;
+		me["stt"] = ftmStartt;
+	} else {
+		me["ftmStartd"] = ftmStartd;
+		me["ftmStartt"] = ftmStartt;
+	};
+};
+
 void BrlyQRegADstswitch::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -104,6 +121,16 @@ ListBrlyQRegADstswitch& ListBrlyQRegADstswitch::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQRegADstswitch::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQRegADstswitch";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQRegADstswitch::writeXML(

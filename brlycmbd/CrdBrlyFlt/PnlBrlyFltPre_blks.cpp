@@ -25,6 +25,25 @@ PnlBrlyFltPre::ContIac::ContIac(
 	mask = {SLDTME};
 };
 
+bool PnlBrlyFltPre::ContIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacBrlyFltPre"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("SldTme")) {SldTme = me["SldTme"].asDouble(); add(SLDTME);};
+	};
+
+	return basefound;
+};
+
 bool PnlBrlyFltPre::ContIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -46,6 +65,17 @@ bool PnlBrlyFltPre::ContIac::readXML(
 	};
 
 	return basefound;
+};
+
+void PnlBrlyFltPre::ContIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContIacBrlyFltPre";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["SldTme"] = SldTme;
 };
 
 void PnlBrlyFltPre::ContIac::writeXML(
@@ -92,6 +122,18 @@ set<uint> PnlBrlyFltPre::ContIac::diff(
  class PnlBrlyFltPre::StatApp
  ******************************************************************************/
 
+void PnlBrlyFltPre::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixBrlyVExpstate
+		) {
+	if (difftag.length() == 0) difftag = "StatAppBrlyFltPre";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxBrlyVExpstate"] = VecBrlyVExpstate::getSref(ixBrlyVExpstate);
+};
+
 void PnlBrlyFltPre::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -123,6 +165,18 @@ PnlBrlyFltPre::StatShr::StatShr(
 	this->SldTmeMax = SldTmeMax;
 
 	mask = {SLDTMEMIN, SLDTMEMAX};
+};
+
+void PnlBrlyFltPre::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrBrlyFltPre";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["SldTmeMin"] = SldTmeMin;
+	me["SldTmeMax"] = SldTmeMax;
 };
 
 void PnlBrlyFltPre::StatShr::writeXML(
@@ -171,6 +225,24 @@ set<uint> PnlBrlyFltPre::StatShr::diff(
  class PnlBrlyFltPre::Tag
  ******************************************************************************/
 
+void PnlBrlyFltPre::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyFltPre";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["Cpt"] = "Time";
+		me["CptTme"] = "time";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["Cpt"] = "Zeit";
+		me["CptTme"] = "Zeit";
+	};
+};
+
 void PnlBrlyFltPre::Tag::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -213,6 +285,26 @@ string PnlBrlyFltPre::DpchAppData::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlBrlyFltPre::DpchAppData::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyFltPreData"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (contiac.readJSON(me, true)) add(CONTIAC);
+	} else {
+		contiac = ContIac();
+	};
 };
 
 void PnlBrlyFltPre::DpchAppData::readXML(
@@ -286,6 +378,19 @@ void PnlBrlyFltPre::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlBrlyFltPre::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyFltPreData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTIAC)) contiac.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
 };
 
 void PnlBrlyFltPre::DpchEngData::writeXML(

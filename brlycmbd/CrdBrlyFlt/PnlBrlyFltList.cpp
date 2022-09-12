@@ -247,7 +247,7 @@ void PnlBrlyFltList::handleDpchAppDataContiac(
 	diffitems = _contiac->diff(&contiac);
 
 	if (has(diffitems, ContIac::NUMFTOS)) {
-		if ((_contiac->numFTos >= QryBrlyFltList::VecVOrd::STO) && (_contiac->numFTos <= QryBrlyFltList::VecVOrd::SRF)) {
+		if ((_contiac->numFTos >= QryBrlyFltList::VecVOrd::STO) && (_contiac->numFTos <= QryBrlyFltList::VecVOrd::EQP)) {
 			muteRefresh = true;
 
 			xchg->addIxPreset(VecBrlyVPreset::PREBRLYIXORD, jref, _contiac->numFTos);

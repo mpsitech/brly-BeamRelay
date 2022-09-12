@@ -37,6 +37,28 @@ string RootBrly::DpchAppLogin::getSrefsMask() {
 	return(srefs);
 };
 
+void RootBrly::DpchAppLogin::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppRootBrlyLogin"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("username")) {username = me["username"].asString(); add(USERNAME);};
+		if (me.isMember("password")) {password = me["password"].asString(); add(PASSWORD);};
+		if (me.isMember("m2mNotReg")) {m2mNotReg = me["m2mNotReg"].asBool(); add(M2MNOTREG);};
+		if (me.isMember("chksuspsess")) {chksuspsess = me["chksuspsess"].asBool(); add(CHKSUSPSESS);};
+	} else {
+	};
+};
+
 void RootBrly::DpchAppLogin::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -102,6 +124,16 @@ void RootBrly::DpchEngData::merge(
 
 	if (src->has(JREF)) {jref = src->jref; add(JREF);};
 	if (src->has(FEEDFENSSPS)) {feedFEnsSps = src->feedFEnsSps; add(FEEDFENSSPS);};
+};
+
+void RootBrly::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngRootBrlyData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(FEEDFENSSPS)) feedFEnsSps.writeJSON(me);
 };
 
 void RootBrly::DpchEngData::writeXML(

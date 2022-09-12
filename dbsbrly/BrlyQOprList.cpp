@@ -35,6 +35,25 @@ BrlyQOprList::BrlyQOprList(
 	this->Title = Title;
 };
 
+void BrlyQOprList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["ica"] = srefICAO;
+		me["tit"] = Title;
+	} else {
+		me["sref"] = sref;
+		me["srefICAO"] = srefICAO;
+		me["Title"] = Title;
+	};
+};
+
 void BrlyQOprList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -104,6 +123,16 @@ ListBrlyQOprList& ListBrlyQOprList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQOprList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQOprList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQOprList::writeXML(

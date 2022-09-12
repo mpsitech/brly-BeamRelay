@@ -1,6 +1,6 @@
 /**
-	* \file Brlyd.cpp
-	* inter-thread exchange object for Brly daemon (implementation)
+	* \file Brlycmbd.cpp
+	* inter-thread exchange object for Brly combined daemon (implementation)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
 	* \date created: 11 Jan 2021
@@ -165,6 +165,26 @@ string DpchAppBrly::getSrefsMask() {
 	else return("");
 };
 
+void DpchAppBrly::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup[VecBrlyVDpch::getSref(ixBrlyVDpch)];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {
+			jref = Scr::descramble(me["scrJref"].asString());
+			add(JREF);
+		};
+	};
+};
+
 void DpchAppBrly::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -217,6 +237,27 @@ string DpchAppBrlyAlert::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void DpchAppBrlyAlert::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyAlert"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {
+			jref = Scr::descramble(me["scrJref"].asString());
+			add(JREF);
+		};
+		if (me.isMember("numFMcb")) {numFMcb = me["numFMcb"].asInt(); add(NUMFMCB);};
+	};
 };
 
 void DpchAppBrlyAlert::readXML(
@@ -302,6 +343,15 @@ void DpchEngBrly::merge(
 	if (src->has(JREF)) {jref = src->jref; add(JREF);};
 };
 
+void DpchEngBrly::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup[VecBrlyVDpch::getSref(ixBrlyVDpch)] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+};
+
 void DpchEngBrly::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -377,6 +427,17 @@ void DpchEngBrlyAlert::merge(
 	if (src->has(FEEDFMCB)) {feedFMcb = src->feedFMcb; add(FEEDFMCB);};
 };
 
+void DpchEngBrlyAlert::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyAlert"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFMCB)) feedFMcb.writeJSON(me);
+};
+
 void DpchEngBrlyAlert::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -442,6 +503,17 @@ void DpchEngBrlyConfirm::merge(
 	if (src->has(SREF)) {sref = src->sref; add(SREF);};
 };
 
+void DpchEngBrlyConfirm::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyConfirm"] = Json::Value(Json::objectValue);
+
+	if (has(ACCEPTED)) me["accepted"] = accepted;
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(SREF)) me["sref"] = sref;
+};
+
 void DpchEngBrlyConfirm::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -472,12 +544,18 @@ DpchEngBrlySuspend::DpchEngBrlySuspend(
 StgBrlyAppearance::StgBrlyAppearance(
 			const usmallint histlength
 			, const bool suspsess
+			, const uint sesstterm
+			, const uint sesstwarn
+			, const uint roottterm
 		) :
 			Block()
 		{
 	this->histlength = histlength;
 	this->suspsess = suspsess;
-	mask = {HISTLENGTH, SUSPSESS};
+	this->sesstterm = sesstterm;
+	this->sesstwarn = sesstwarn;
+	this->roottterm = roottterm;
+	mask = {HISTLENGTH, SUSPSESS, SESSTTERM, SESSTWARN, ROOTTTERM};
 };
 
 bool StgBrlyAppearance::readXML(
@@ -499,6 +577,9 @@ bool StgBrlyAppearance::readXML(
 	if (basefound) {
 		if (extractUsmallintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "histlength", histlength)) add(HISTLENGTH);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "suspsess", suspsess)) add(SUSPSESS);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "sesstterm", sesstterm)) add(SESSTTERM);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "sesstwarn", sesstwarn)) add(SESSTWARN);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "roottterm", roottterm)) add(ROOTTTERM);
 	};
 
 	return basefound;
@@ -518,6 +599,9 @@ void StgBrlyAppearance::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUsmallintAttr(wr, itemtag, "sref", "histlength", histlength);
 		writeBoolAttr(wr, itemtag, "sref", "suspsess", suspsess);
+		writeUintAttr(wr, itemtag, "sref", "sesstterm", sesstterm);
+		writeUintAttr(wr, itemtag, "sref", "sesstwarn", sesstwarn);
+		writeUintAttr(wr, itemtag, "sref", "roottterm", roottterm);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -528,6 +612,9 @@ set<uint> StgBrlyAppearance::comm(
 
 	if (histlength == comp->histlength) insert(items, HISTLENGTH);
 	if (suspsess == comp->suspsess) insert(items, SUSPSESS);
+	if (sesstterm == comp->sesstterm) insert(items, SESSTTERM);
+	if (sesstwarn == comp->sesstwarn) insert(items, SESSTWARN);
+	if (roottterm == comp->roottterm) insert(items, ROOTTTERM);
 
 	return(items);
 };
@@ -540,7 +627,7 @@ set<uint> StgBrlyAppearance::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {HISTLENGTH, SUSPSESS};
+	diffitems = {HISTLENGTH, SUSPSESS, SESSTTERM, SESSTWARN, ROOTTTERM};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -553,12 +640,14 @@ set<uint> StgBrlyAppearance::diff(
 StgBrlyAppsrv::StgBrlyAppsrv(
 			const usmallint port
 			, const bool https
+			, const string& cors
 		) :
 			Block()
 		{
 	this->port = port;
 	this->https = https;
-	mask = {PORT, HTTPS};
+	this->cors = cors;
+	mask = {PORT, HTTPS, CORS};
 };
 
 bool StgBrlyAppsrv::readXML(
@@ -580,6 +669,7 @@ bool StgBrlyAppsrv::readXML(
 	if (basefound) {
 		if (extractUsmallintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "port", port)) add(PORT);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "https", https)) add(HTTPS);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "cors", cors)) add(CORS);
 	};
 
 	return basefound;
@@ -599,6 +689,7 @@ void StgBrlyAppsrv::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUsmallintAttr(wr, itemtag, "sref", "port", port);
 		writeBoolAttr(wr, itemtag, "sref", "https", https);
+		writeStringAttr(wr, itemtag, "sref", "cors", cors);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -609,6 +700,7 @@ set<uint> StgBrlyAppsrv::comm(
 
 	if (port == comp->port) insert(items, PORT);
 	if (https == comp->https) insert(items, HTTPS);
+	if (cors == comp->cors) insert(items, CORS);
 
 	return(items);
 };
@@ -621,7 +713,7 @@ set<uint> StgBrlyAppsrv::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {PORT, HTTPS};
+	diffitems = {PORT, HTTPS, CORS};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -1238,13 +1330,13 @@ DpchEngBrlyAlert* AlrBrly::prepareAlrAbt(
 	continf.TxtCpt = StrMod::cap(continf.TxtCpt);
 
 	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
-		continf.TxtMsg1 = "BeamRelay version v0.2.13 released on 11-1-2021";
+		continf.TxtMsg1 = "BeamRelay version v0.2.15 released on 11-9-2022";
 		continf.TxtMsg2 = "\\u00a9 MPSI Technologies GmbH";
 		continf.TxtMsg4 = "contributors: Alexander Wirthmueller";
 		continf.TxtMsg6 = "libraries: png 1.6.36 and netcdf 4.7.3";
 		continf.TxtMsg8 = "BeamRelay uses airline alliance timetable data to calculate the feasibility of multi-hop free-space optical data relays.";
 	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
-		continf.TxtMsg1 = "BeamRelay Version v0.2.13 ver\\u00f6ffentlicht am 11-1-2021";
+		continf.TxtMsg1 = "BeamRelay Version v0.2.15 ver\\u00f6ffentlicht am 11-9-2022";
 		continf.TxtMsg2 = "\\u00a9 MPSI Technologies GmbH";
 		continf.TxtMsg4 = "Mitwirkende: Alexander Wirthmueller";
 		continf.TxtMsg6 = "Programmbibliotheken: png 1.6.36 und netcdf 4.7.3";
@@ -1336,6 +1428,60 @@ DpchEngBrlyAlert* AlrBrly::prepareAlrSav(
 	return(new DpchEngBrlyAlert(jref, &continf, &feedFMcbAlert, {DpchEngBrlyAlert::ALL}));
 };
 
+DpchEngBrlyAlert* AlrBrly::prepareAlrTrm(
+			const ubigint jref
+			, const uint ixBrlyVLocale
+			, const uint sesstterm
+			, const uint sesstwarn
+			, Feed& feedFMcbAlert
+		) {
+	ContInfBrlyAlert continf;
+	// IP prepareAlrTrm --- BEGIN
+	continf.TxtCpt = VecBrlyVTag::getTitle(VecBrlyVTag::ANNOUNCE, ixBrlyVLocale);
+	continf.TxtCpt = StrMod::cap(continf.TxtCpt);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		continf.TxtMsg1 = "Your session has been inactive for " + prepareAlrTrm_dtToString(ixBrlyVLocale, sesstterm) + ". It will be terminated in " + prepareAlrTrm_dtToString(ixBrlyVLocale, sesstwarn) + ".";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		continf.TxtMsg1 = "Ihre Sitzung ist seit " + prepareAlrTrm_dtToString(ixBrlyVLocale, sesstterm) + " inaktiv. Sie wird in " + prepareAlrTrm_dtToString(ixBrlyVLocale, sesstwarn) + " beendet.";
+	};
+
+	feedFMcbAlert.clear();
+
+	VecBrlyVTag::appendToFeed(VecBrlyVTag::OK, ixBrlyVLocale, feedFMcbAlert);
+	feedFMcbAlert.cap();
+	// IP prepareAlrTrm --- END
+	return(new DpchEngBrlyAlert(jref, &continf, &feedFMcbAlert, {DpchEngBrlyAlert::ALL}));
+};
+
+string AlrBrly::prepareAlrTrm_dtToString(
+			const uint ixBrlyVLocale
+			, const time_t dt
+		) {
+	string s;
+
+	if ((dt%3600) == 0) {
+		s = to_string(dt/3600);
+
+		if (dt == 3600) s += " " + VecBrlyVTag::getTitle(VecBrlyVTag::HOUR, ixBrlyVLocale);
+		else s += " " + VecBrlyVTag::getTitle(VecBrlyVTag::HOURS, ixBrlyVLocale);
+
+	} else if ((dt%60) == 0) {
+		s = to_string(dt/60);
+
+		if (dt == 60) s += " " + VecBrlyVTag::getTitle(VecBrlyVTag::MINUTE, ixBrlyVLocale);
+		else s += " " + VecBrlyVTag::getTitle(VecBrlyVTag::MINUTES, ixBrlyVLocale);
+
+	} else {
+		s = to_string(dt);
+
+		if (dt == 1) s += " " + VecBrlyVTag::getTitle(VecBrlyVTag::SECOND, ixBrlyVLocale);
+		else s += " " + VecBrlyVTag::getTitle(VecBrlyVTag::SECONDS, ixBrlyVLocale);
+	};
+
+	return s;
+};
+
 /******************************************************************************
  class ReqBrly
  ******************************************************************************/
@@ -1361,6 +1507,8 @@ ReqBrly::ReqBrly(
 
 	request = NULL;
 	requestlen = 0;
+
+	jsonNotXml = false;
 
 	jref = 0;
 
@@ -1531,6 +1679,31 @@ JobBrly::~JobBrly() {
 
 	mAccess.lock(VecBrlyVJob::getSref(ixBrlyVJob), "~" + VecBrlyVJob::getSref(ixBrlyVJob), "jref=" + to_string(jref));
 	mAccess.unlock(VecBrlyVJob::getSref(ixBrlyVJob), "~" + VecBrlyVJob::getSref(ixBrlyVJob), "jref=" + to_string(jref));
+};
+
+ubigint JobBrly::insertSubjob(
+			map<ubigint, JobBrly*>& subjobs
+			, JobBrly* subjob
+		) {
+	subjobs[subjob->jref] = subjob;
+
+	return subjob->jref;
+};
+
+bool JobBrly::eraseSubjobByJref(
+			map<ubigint, JobBrly*>& subjobs
+			, const ubigint _jref
+		) {
+	auto it = subjobs.find(_jref);
+
+	if (it != subjobs.end()) {
+		delete it->second;
+		subjobs.erase(it);
+
+		return true;
+	};
+
+	return false;
 };
 
 DpchEngBrly* JobBrly::getNewDpchEng(
@@ -1942,8 +2115,8 @@ void StmgrBrly::handleCall(
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYCONSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYCONSTD);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQPUPD_REFEQ) {
-		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYEQPSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYEQPSHORT);
+		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYEQPSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYEQPSHORT);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYEQPSTD);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYFAFUPD_REFEQ) {
@@ -1952,8 +2125,8 @@ void StmgrBrly::handleCall(
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYFILSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYFILSTD);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYFLTUPD_REFEQ) {
-		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYFLTSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYFLTSREF);
+		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYFLTSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYFLTSREF);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYLEGUPD_REFEQ) {
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYLEGSTD);
@@ -1972,8 +2145,8 @@ void StmgrBrly::handleCall(
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYNDELONG);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYOPRUPD_REFEQ) {
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYOPRSTD);
-		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYOPRSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYOPRSREF);
+		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYOPRSTD);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYPRSUPD_REFEQ) {
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYPRSSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYPRSSTD);
@@ -1997,8 +2170,8 @@ void StmgrBrly::handleCall(
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYSEGSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYSEGSTD);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSESUPD_REFEQ) {
-		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYSESSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYSESMENU);
+		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYSESSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYSESSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYSESMENU);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYTTBUPD_REFEQ) {
@@ -2006,8 +2179,8 @@ void StmgrBrly::handleCall(
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYTTBSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYTTBSTD);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYUSGUPD_REFEQ) {
-		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYGROUP);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYUSGSTD);
+		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYGROUP);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYUSRUPD_REFEQ) {
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYUSRSTD);
 		insert(icsBrlyVStub, VecBrlyVStub::STUBBRLYOWNER);
@@ -2168,7 +2341,7 @@ WakeupBrly::WakeupBrly(
 			, const ubigint wref
 			, const ubigint jref
 			, const string sref
-			, const unsigned int deltat
+			, const uint64_t deltat
 			, const bool weak
 		) {
 	this->xchg = xchg;
@@ -2309,7 +2482,7 @@ void XchgBrlyd::startMon() {
 	Preset* preset = NULL;
 	NodeBrly* node = NULL;
 
-	mon.start("BeamRelay v0.2.13", stgbrlymonitor.ixDbsVDbstype, stgbrlymonitor.dbspath, stgbrlymonitor.dbsname, stgbrlymonitor.ip, stgbrlymonitor.port, stgbrlymonitor.dbsusername, stgbrlymonitor.dbspassword, stgbrlymonitor.username, stgbrlymonitor.password);
+	mon.start("BeamRelay v0.2.15", stgbrlymonitor.ixDbsVDbstype, stgbrlymonitor.dbspath, stgbrlymonitor.dbsname, stgbrlymonitor.ip, stgbrlymonitor.port, stgbrlymonitor.dbsusername, stgbrlymonitor.dbspassword, stgbrlymonitor.username, stgbrlymonitor.password);
 
 	rwmJobs.rlock("XchgBrlyd", "startMon");
 	for (auto it = jobs.begin(); it != jobs.end(); it++) {
@@ -2604,11 +2777,16 @@ Arg XchgBrlyd::getPreset(
 		time_t rawtime;
 		time(&rawtime);
 
-		arg.mask = Arg::INTVAL;
+		if (ixBrlyVPreset == VecBrlyVPreset::PREBRLYSYSSTAMP) {
+			arg.mask = Arg::REF;
+			arg.ref = rawtime;
 
-		if (ixBrlyVPreset == VecBrlyVPreset::PREBRLYSYSDATE) arg.intval = (rawtime-rawtime%(3600*24))/(3600*24);
-		else if (ixBrlyVPreset == VecBrlyVPreset::PREBRLYSYSTIME) arg.intval = rawtime%(3600*24);
-		else if (ixBrlyVPreset == VecBrlyVPreset::PREBRLYSYSSTAMP) arg.intval = rawtime;
+		} else {
+			arg.mask = Arg::INTVAL;
+
+			if (ixBrlyVPreset == VecBrlyVPreset::PREBRLYSYSDATE) arg.intval = (rawtime-rawtime%(3600*24))/(3600*24);
+			else arg.intval = rawtime%(3600*24);
+		};
 
 	} else {
 		rwmJobs.rlock("XchgBrlyd", "getPreset", "jref=" + to_string(jref));
@@ -4293,7 +4471,7 @@ set<ubigint> XchgBrlyd::getCsjobClisByJref(
 ubigint XchgBrlyd::addWakeup(
 			const ubigint jref
 			, const string sref
-			, const unsigned int deltat
+			, const uint64_t deltat
 			, const bool weak
 		) {
 	int res;

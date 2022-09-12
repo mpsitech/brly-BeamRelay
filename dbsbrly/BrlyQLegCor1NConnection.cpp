@@ -31,6 +31,21 @@ BrlyQLegCor1NConnection::BrlyQLegCor1NConnection(
 	this->stubRef = stubRef;
 };
 
+void BrlyQLegCor1NConnection::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void BrlyQLegCor1NConnection::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListBrlyQLegCor1NConnection& ListBrlyQLegCor1NConnection::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLegCor1NConnection::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLegCor1NConnection";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLegCor1NConnection::writeXML(

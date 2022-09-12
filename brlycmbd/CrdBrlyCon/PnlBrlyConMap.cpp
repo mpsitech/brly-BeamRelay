@@ -40,21 +40,21 @@ PnlBrlyConMap::PnlBrlyConMap(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	qrynode = NULL;
+	qryrelay = NULL;
 	qrylocation = NULL;
+	qrynode = NULL;
 	qryleg = NULL;
 	qryflight = NULL;
-	qryrelay = NULL;
 
 	// IP constructor.cust1 --- IBEGIN
 	standalone = false;
 	// IP constructor.cust1 --- IEND
 
-	qrynode = new QryBrlyConMapNode(xchg, dbsbrly, jref, ixBrlyVLocale);
+	qryrelay = new QryBrlyConMapRelay(xchg, dbsbrly, jref, ixBrlyVLocale);
 	qrylocation = new QryBrlyConMapLocation(xchg, dbsbrly, jref, ixBrlyVLocale);
+	qrynode = new QryBrlyConMapNode(xchg, dbsbrly, jref, ixBrlyVLocale);
 	qryleg = new QryBrlyConMapLeg(xchg, dbsbrly, jref, ixBrlyVLocale);
 	qryflight = new QryBrlyConMapFlight(xchg, dbsbrly, jref, ixBrlyVLocale);
-	qryrelay = new QryBrlyConMapRelay(xchg, dbsbrly, jref, ixBrlyVLocale);
 
 	// IP constructor.cust2 --- IBEGIN
 	calcDist(dbsbrly);

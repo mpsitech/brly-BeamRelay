@@ -33,6 +33,21 @@ BrlyQFltRef1NSegment::BrlyQFltRef1NSegment(
 	this->refNum = refNum;
 };
 
+void BrlyQFltRef1NSegment::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void BrlyQFltRef1NSegment::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -98,6 +113,16 @@ ListBrlyQFltRef1NSegment& ListBrlyQFltRef1NSegment::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQFltRef1NSegment::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQFltRef1NSegment";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQFltRef1NSegment::writeXML(

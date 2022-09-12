@@ -354,7 +354,7 @@ function refresh() {
 		if (scrJrefDlg != scrJrefDlgtrlorig) showDlg("DlgBrlyTtbTrlorig", scrJrefDlgtrlorig);
 	} else if (scrJrefDlg != "") hideDlg();
 
-	doc.title = retrieveCi(srcdoc, "ContInfBrlyTtb", "MtxCrdTtb") + " - BeamRelay v0.2.13";
+	doc.title = retrieveCi(srcdoc, "ContInfBrlyTtb", "MtxCrdTtb") + " - BeamRelay v0.2.15";
 };
 
 // --- event handlers

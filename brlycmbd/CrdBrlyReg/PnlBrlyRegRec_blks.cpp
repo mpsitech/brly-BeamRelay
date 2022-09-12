@@ -49,6 +49,17 @@ PnlBrlyRegRec::ContInf::ContInf(
 	mask = {TXTREF};
 };
 
+void PnlBrlyRegRec::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfBrlyRegRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxtRef"] = TxtRef;
+};
+
 void PnlBrlyRegRec::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -92,6 +103,24 @@ set<uint> PnlBrlyRegRec::ContInf::diff(
 /******************************************************************************
  class PnlBrlyRegRec::StatApp
  ******************************************************************************/
+
+void PnlBrlyRegRec::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const bool initdoneDetail
+			, const bool initdoneADstswitch
+			, const bool initdone1NLocation
+			, const bool initdoneSup1NRegion
+		) {
+	if (difftag.length() == 0) difftag = "StatAppBrlyRegRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["initdoneDetail"] = initdoneDetail;
+	me["initdoneADstswitch"] = initdoneADstswitch;
+	me["initdone1NLocation"] = initdone1NLocation;
+	me["initdoneSup1NRegion"] = initdoneSup1NRegion;
+};
 
 void PnlBrlyRegRec::StatApp::writeXML(
 			xmlTextWriter* wr
@@ -140,6 +169,23 @@ PnlBrlyRegRec::StatShr::StatShr(
 	this->ButRegularizeActive = ButRegularizeActive;
 
 	mask = {IXBRLYVEXPSTATE, JREFDETAIL, JREFADSTSWITCH, JREF1NLOCATION, PNL1NLOCATIONAVAIL, JREFSUP1NREGION, BUTREGULARIZEACTIVE};
+};
+
+void PnlBrlyRegRec::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrBrlyRegRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxBrlyVExpstate"] = VecBrlyVExpstate::getSref(ixBrlyVExpstate);
+	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
+	me["scrJrefADstswitch"] = Scr::scramble(jrefADstswitch);
+	me["scrJref1NLocation"] = Scr::scramble(jref1NLocation);
+	me["pnl1nlocationAvail"] = pnl1nlocationAvail;
+	me["scrJrefSup1NRegion"] = Scr::scramble(jrefSup1NRegion);
+	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
 void PnlBrlyRegRec::StatShr::writeXML(
@@ -198,6 +244,22 @@ set<uint> PnlBrlyRegRec::StatShr::diff(
  class PnlBrlyRegRec::Tag
  ******************************************************************************/
 
+void PnlBrlyRegRec::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyRegRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["Cpt"] = "Region";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["Cpt"] = "Region";
+	};
+};
+
 void PnlBrlyRegRec::Tag::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -239,6 +301,25 @@ string PnlBrlyRegRec::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlBrlyRegRec::DpchAppDo::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyRegRecDo"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlBrlyRegRec::DpchAppDo::readXML(
@@ -315,6 +396,19 @@ void PnlBrlyRegRec::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlBrlyRegRec::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyRegRecData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
 };
 
 void PnlBrlyRegRec::DpchEngData::writeXML(

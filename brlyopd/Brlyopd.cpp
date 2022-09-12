@@ -1,6 +1,6 @@
 /**
-	* \file Brlyopd.cpp
-	* inter-thread exchange object for Brly operation daemon brlyopd (implementation)
+	* \file Brlycmbd.cpp
+	* inter-thread exchange object for Brly combined daemon (implementation)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
 	* \date created: 11 Jan 2021

@@ -63,6 +63,33 @@ BrlyQConMapFlight::BrlyQConMapFlight(
 	this->dt = dt;
 };
 
+void BrlyQConMapFlight::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["x0"] = x0;
+		me["y0"] = y0;
+		me["t0"] = t0;
+		me["dx"] = dx;
+		me["dy"] = dy;
+		me["dt"] = dt;
+	} else {
+		me["stubMref"] = stubMref;
+		me["x0"] = x0;
+		me["y0"] = y0;
+		me["t0"] = t0;
+		me["dx"] = dx;
+		me["dy"] = dy;
+		me["dt"] = dt;
+	};
+};
+
 void BrlyQConMapFlight::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -140,6 +167,16 @@ ListBrlyQConMapFlight& ListBrlyQConMapFlight::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQConMapFlight::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQConMapFlight";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) if (nodes[i]->qwr) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQConMapFlight::writeXML(

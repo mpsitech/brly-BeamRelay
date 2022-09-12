@@ -10,7 +10,7 @@
 #ifndef ROOTBRLY_H
 #define ROOTBRLY_H
 
-// IP include.spec --- INSERT
+#include <signal.h>
 
 // IP include.cust --- INSERT
 
@@ -49,6 +49,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -63,15 +64,16 @@ public:
 		static const Sbecore::uint ALL = 3;
 
 	public:
-		DpchEngData(const Sbecore::ubigint jref = 0, Sbecore::Xmlio::Feed* feedFEnsSps = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+		DpchEngData(const Sbecore::ubigint jref = 0, Sbecore::Feed* feedFEnsSps = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 	public:
-		Sbecore::Xmlio::Feed feedFEnsSps;
+		Sbecore::Feed feedFEnsSps;
 
 	public:
 		std::string getSrefsMask();
 		void merge(DpchEngBrly* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr);
 	};
 
@@ -81,7 +83,7 @@ public:
 
 public:
 
-	std::list<SessBrly*> sesss;
+	std::map<Sbecore::ubigint, JobBrly*> sesss;
 
 	// IP vars.spec --- INSERT
 
@@ -95,6 +97,7 @@ public:
 	void clearQtb(DbsBrly* dbsbrly);
 
 	bool authenticate(DbsBrly* dbsbrly, const std::string& username, const std::string& password, Sbecore::ubigint& refBrlyMUser);
+	void termSess(DbsBrly* dbsbrly, const Sbecore::ubigint jref);
 
 public:
 
@@ -108,10 +111,13 @@ private:
 
 	void handleDpchAppLogin(DbsBrly* dbsbrly, DpchAppLogin* dpchapplogin, const std::string ip, DpchEngBrly** dpcheng);
 
+	void handleTimerWithSrefWarnterm(DbsBrly* dbsbrly);
+
 public:
 	void handleCall(DbsBrly* dbsbrly, Sbecore::Call* call);
 
 private:
+	bool handleCallBrlyRefPreSet(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 	bool handleCallBrlySuspsess(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig);
 	bool handleCallBrlyLogout(DbsBrly* dbsbrly, const Sbecore::ubigint jrefTrig, const bool boolvalInv);
 

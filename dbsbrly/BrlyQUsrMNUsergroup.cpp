@@ -39,6 +39,25 @@ BrlyQUsrMNUsergroup::BrlyQUsrMNUsergroup(
 	this->titIxBrlyVUserlevel = titIxBrlyVUserlevel;
 };
 
+void BrlyQUsrMNUsergroup::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["ulv"] = srefIxBrlyVUserlevel;
+		me["ulv2"] = titIxBrlyVUserlevel;
+	} else {
+		me["stubMref"] = stubMref;
+		me["srefIxBrlyVUserlevel"] = srefIxBrlyVUserlevel;
+		me["titIxBrlyVUserlevel"] = titIxBrlyVUserlevel;
+	};
+};
+
 void BrlyQUsrMNUsergroup::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -108,6 +127,16 @@ ListBrlyQUsrMNUsergroup& ListBrlyQUsrMNUsergroup::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQUsrMNUsergroup::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQUsrMNUsergroup";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQUsrMNUsergroup::writeXML(

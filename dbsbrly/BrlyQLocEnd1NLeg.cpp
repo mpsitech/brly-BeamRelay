@@ -31,6 +31,21 @@ BrlyQLocEnd1NLeg::BrlyQLocEnd1NLeg(
 	this->stubRef = stubRef;
 };
 
+void BrlyQLocEnd1NLeg::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void BrlyQLocEnd1NLeg::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListBrlyQLocEnd1NLeg& ListBrlyQLocEnd1NLeg::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLocEnd1NLeg::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLocEnd1NLeg";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLocEnd1NLeg::writeXML(

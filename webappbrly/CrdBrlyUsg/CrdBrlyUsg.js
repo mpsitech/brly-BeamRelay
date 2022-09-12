@@ -324,7 +324,7 @@ function changeHeight(pnlshort, height) {
 // --- view initialization and refresh
 function refresh() {
 
-	doc.title = retrieveCi(srcdoc, "ContInfBrlyUsg", "MtxCrdUsg") + " - BeamRelay v0.2.13";
+	doc.title = retrieveCi(srcdoc, "ContInfBrlyUsg", "MtxCrdUsg") + " - BeamRelay v0.2.15";
 };
 
 // --- event handlers

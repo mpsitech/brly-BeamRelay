@@ -49,6 +49,17 @@ PnlBrlyFltRec::ContInf::ContInf(
 	mask = {TXTREF};
 };
 
+void PnlBrlyFltRec::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfBrlyFltRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxtRef"] = TxtRef;
+};
+
 void PnlBrlyFltRec::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -93,6 +104,36 @@ set<uint> PnlBrlyFltRec::ContInf::diff(
  class PnlBrlyFltRec::StatApp
  ******************************************************************************/
 
+void PnlBrlyFltRec::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const bool initdonePre
+			, const bool initdoneDetail
+			, const bool initdoneFafAWaypoint
+			, const bool initdone1NConnection
+			, const bool initdoneRef1NSegment
+			, const bool initdoneEqp1NNode
+			, const bool initdoneMNLocation
+			, const bool initdoneOrgMNFlight
+			, const bool initdoneMNConnection
+			, const bool initdoneEqpMNConnection
+		) {
+	if (difftag.length() == 0) difftag = "StatAppBrlyFltRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["initdonePre"] = initdonePre;
+	me["initdoneDetail"] = initdoneDetail;
+	me["initdoneFafAWaypoint"] = initdoneFafAWaypoint;
+	me["initdone1NConnection"] = initdone1NConnection;
+	me["initdoneRef1NSegment"] = initdoneRef1NSegment;
+	me["initdoneEqp1NNode"] = initdoneEqp1NNode;
+	me["initdoneMNLocation"] = initdoneMNLocation;
+	me["initdoneOrgMNFlight"] = initdoneOrgMNFlight;
+	me["initdoneMNConnection"] = initdoneMNConnection;
+	me["initdoneEqpMNConnection"] = initdoneEqpMNConnection;
+};
+
 void PnlBrlyFltRec::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -104,8 +145,8 @@ void PnlBrlyFltRec::StatApp::writeXML(
 			, const bool initdoneRef1NSegment
 			, const bool initdoneEqp1NNode
 			, const bool initdoneMNLocation
-			, const bool initdoneMNConnection
 			, const bool initdoneOrgMNFlight
+			, const bool initdoneMNConnection
 			, const bool initdoneEqpMNConnection
 		) {
 	if (difftag.length() == 0) difftag = "StatAppBrlyFltRec";
@@ -122,8 +163,8 @@ void PnlBrlyFltRec::StatApp::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NSegment", initdoneRef1NSegment);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneEqp1NNode", initdoneEqp1NNode);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneMNLocation", initdoneMNLocation);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneMNConnection", initdoneMNConnection);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneOrgMNFlight", initdoneOrgMNFlight);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneMNConnection", initdoneMNConnection);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneEqpMNConnection", initdoneEqpMNConnection);
 	xmlTextWriterEndElement(wr);
 };
@@ -143,8 +184,8 @@ PnlBrlyFltRec::StatShr::StatShr(
 			, const ubigint jrefEqp1NNode
 			, const bool pnleqp1nnodeAvail
 			, const ubigint jrefMNLocation
-			, const ubigint jrefMNConnection
 			, const ubigint jrefOrgMNFlight
+			, const ubigint jrefMNConnection
 			, const ubigint jrefEqpMNConnection
 			, const bool pnleqpmnconnectionAvail
 			, const bool ButRegularizeActive
@@ -161,13 +202,38 @@ PnlBrlyFltRec::StatShr::StatShr(
 	this->jrefEqp1NNode = jrefEqp1NNode;
 	this->pnleqp1nnodeAvail = pnleqp1nnodeAvail;
 	this->jrefMNLocation = jrefMNLocation;
-	this->jrefMNConnection = jrefMNConnection;
 	this->jrefOrgMNFlight = jrefOrgMNFlight;
+	this->jrefMNConnection = jrefMNConnection;
 	this->jrefEqpMNConnection = jrefEqpMNConnection;
 	this->pnleqpmnconnectionAvail = pnleqpmnconnectionAvail;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXBRLYVEXPSTATE, JREFPRE, JREFDETAIL, JREFFAFAWAYPOINT, PNLFAFAWAYPOINTAVAIL, JREF1NCONNECTION, JREFREF1NSEGMENT, JREFEQP1NNODE, PNLEQP1NNODEAVAIL, JREFMNLOCATION, JREFMNCONNECTION, JREFORGMNFLIGHT, JREFEQPMNCONNECTION, PNLEQPMNCONNECTIONAVAIL, BUTREGULARIZEACTIVE};
+	mask = {IXBRLYVEXPSTATE, JREFPRE, JREFDETAIL, JREFFAFAWAYPOINT, PNLFAFAWAYPOINTAVAIL, JREF1NCONNECTION, JREFREF1NSEGMENT, JREFEQP1NNODE, PNLEQP1NNODEAVAIL, JREFMNLOCATION, JREFORGMNFLIGHT, JREFMNCONNECTION, JREFEQPMNCONNECTION, PNLEQPMNCONNECTIONAVAIL, BUTREGULARIZEACTIVE};
+};
+
+void PnlBrlyFltRec::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrBrlyFltRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxBrlyVExpstate"] = VecBrlyVExpstate::getSref(ixBrlyVExpstate);
+	me["scrJrefPre"] = Scr::scramble(jrefPre);
+	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
+	me["scrJrefFafAWaypoint"] = Scr::scramble(jrefFafAWaypoint);
+	me["pnlfafawaypointAvail"] = pnlfafawaypointAvail;
+	me["scrJref1NConnection"] = Scr::scramble(jref1NConnection);
+	me["scrJrefRef1NSegment"] = Scr::scramble(jrefRef1NSegment);
+	me["scrJrefEqp1NNode"] = Scr::scramble(jrefEqp1NNode);
+	me["pnleqp1nnodeAvail"] = pnleqp1nnodeAvail;
+	me["scrJrefMNLocation"] = Scr::scramble(jrefMNLocation);
+	me["scrJrefOrgMNFlight"] = Scr::scramble(jrefOrgMNFlight);
+	me["scrJrefMNConnection"] = Scr::scramble(jrefMNConnection);
+	me["scrJrefEqpMNConnection"] = Scr::scramble(jrefEqpMNConnection);
+	me["pnleqpmnconnectionAvail"] = pnleqpmnconnectionAvail;
+	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
 void PnlBrlyFltRec::StatShr::writeXML(
@@ -192,8 +258,8 @@ void PnlBrlyFltRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "scrJrefEqp1NNode", Scr::scramble(jrefEqp1NNode));
 		writeBoolAttr(wr, itemtag, "sref", "pnleqp1nnodeAvail", pnleqp1nnodeAvail);
 		writeStringAttr(wr, itemtag, "sref", "scrJrefMNLocation", Scr::scramble(jrefMNLocation));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefMNConnection", Scr::scramble(jrefMNConnection));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefOrgMNFlight", Scr::scramble(jrefOrgMNFlight));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefMNConnection", Scr::scramble(jrefMNConnection));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefEqpMNConnection", Scr::scramble(jrefEqpMNConnection));
 		writeBoolAttr(wr, itemtag, "sref", "pnleqpmnconnectionAvail", pnleqpmnconnectionAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
@@ -215,8 +281,8 @@ set<uint> PnlBrlyFltRec::StatShr::comm(
 	if (jrefEqp1NNode == comp->jrefEqp1NNode) insert(items, JREFEQP1NNODE);
 	if (pnleqp1nnodeAvail == comp->pnleqp1nnodeAvail) insert(items, PNLEQP1NNODEAVAIL);
 	if (jrefMNLocation == comp->jrefMNLocation) insert(items, JREFMNLOCATION);
-	if (jrefMNConnection == comp->jrefMNConnection) insert(items, JREFMNCONNECTION);
 	if (jrefOrgMNFlight == comp->jrefOrgMNFlight) insert(items, JREFORGMNFLIGHT);
+	if (jrefMNConnection == comp->jrefMNConnection) insert(items, JREFMNCONNECTION);
 	if (jrefEqpMNConnection == comp->jrefEqpMNConnection) insert(items, JREFEQPMNCONNECTION);
 	if (pnleqpmnconnectionAvail == comp->pnleqpmnconnectionAvail) insert(items, PNLEQPMNCONNECTIONAVAIL);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
@@ -232,7 +298,7 @@ set<uint> PnlBrlyFltRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXBRLYVEXPSTATE, JREFPRE, JREFDETAIL, JREFFAFAWAYPOINT, PNLFAFAWAYPOINTAVAIL, JREF1NCONNECTION, JREFREF1NSEGMENT, JREFEQP1NNODE, PNLEQP1NNODEAVAIL, JREFMNLOCATION, JREFMNCONNECTION, JREFORGMNFLIGHT, JREFEQPMNCONNECTION, PNLEQPMNCONNECTIONAVAIL, BUTREGULARIZEACTIVE};
+	diffitems = {IXBRLYVEXPSTATE, JREFPRE, JREFDETAIL, JREFFAFAWAYPOINT, PNLFAFAWAYPOINTAVAIL, JREF1NCONNECTION, JREFREF1NSEGMENT, JREFEQP1NNODE, PNLEQP1NNODEAVAIL, JREFMNLOCATION, JREFORGMNFLIGHT, JREFMNCONNECTION, JREFEQPMNCONNECTION, PNLEQPMNCONNECTIONAVAIL, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -241,6 +307,22 @@ set<uint> PnlBrlyFltRec::StatShr::diff(
 /******************************************************************************
  class PnlBrlyFltRec::Tag
  ******************************************************************************/
+
+void PnlBrlyFltRec::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyFltRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["Cpt"] = "Flight";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["Cpt"] = "Flug";
+	};
+};
 
 void PnlBrlyFltRec::Tag::writeXML(
 			const uint ixBrlyVLocale
@@ -283,6 +365,25 @@ string PnlBrlyFltRec::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlBrlyFltRec::DpchAppDo::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyFltRecDo"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlBrlyFltRec::DpchAppDo::readXML(
@@ -359,6 +460,19 @@ void PnlBrlyFltRec::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlBrlyFltRec::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyFltRecData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
 };
 
 void PnlBrlyFltRec::DpchEngData::writeXML(

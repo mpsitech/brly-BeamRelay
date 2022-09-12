@@ -59,6 +59,41 @@ BrlyQSegList::BrlyQSegList(
 	this->ftmStop = ftmStop;
 };
 
+void BrlyQSegList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ret"] = srefRefIxVTbl;
+		me["ret2"] = titRefIxVTbl;
+		me["reu"] = stubRefUref;
+		me["al0"] = alt0;
+		me["al1"] = alt1;
+		me["th0"] = theta0;
+		me["th1"] = theta1;
+		me["ph0"] = phi0;
+		me["ph1"] = phi1;
+		me["sta"] = ftmStart;
+		me["sto"] = ftmStop;
+	} else {
+		me["srefRefIxVTbl"] = srefRefIxVTbl;
+		me["titRefIxVTbl"] = titRefIxVTbl;
+		me["stubRefUref"] = stubRefUref;
+		me["alt0"] = alt0;
+		me["alt1"] = alt1;
+		me["theta0"] = theta0;
+		me["theta1"] = theta1;
+		me["phi0"] = phi0;
+		me["phi1"] = phi1;
+		me["ftmStart"] = ftmStart;
+		me["ftmStop"] = ftmStop;
+	};
+};
+
 void BrlyQSegList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -144,6 +179,16 @@ ListBrlyQSegList& ListBrlyQSegList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQSegList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQSegList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQSegList::writeXML(

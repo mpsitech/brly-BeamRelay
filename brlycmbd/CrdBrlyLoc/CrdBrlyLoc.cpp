@@ -42,9 +42,9 @@ CrdBrlyLoc::CrdBrlyLoc(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnllist = NULL;
-	pnlheadbar = NULL;
 	pnlrec = NULL;
+	pnlheadbar = NULL;
+	pnllist = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -53,9 +53,9 @@ CrdBrlyLoc::CrdBrlyLoc(
 	// initialize according to ref
 	changeRef(dbsbrly, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
-	pnllist = new PnlBrlyLocList(xchg, dbsbrly, jref, ixBrlyVLocale);
-	pnlheadbar = new PnlBrlyLocHeadbar(xchg, dbsbrly, jref, ixBrlyVLocale);
 	pnlrec = new PnlBrlyLocRec(xchg, dbsbrly, jref, ixBrlyVLocale);
+	pnlheadbar = new PnlBrlyLocHeadbar(xchg, dbsbrly, jref, ixBrlyVLocale);
+	pnllist = new PnlBrlyLocList(xchg, dbsbrly, jref, ixBrlyVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -69,8 +69,8 @@ CrdBrlyLoc::CrdBrlyLoc(
 	changeStage(dbsbrly, VecVSge::IDLE);
 
 	xchg->addClstn(VecBrlyVCall::CALLBRLYREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecBrlyVCall::CALLBRLYSTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYSTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -392,10 +392,10 @@ void CrdBrlyLoc::handleCall(
 		) {
 	if (call->ixVCall == VecBrlyVCall::CALLBRLYREFPRESET) {
 		call->abort = handleCallBrlyRefPreSet(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSTATCHG) {
-		call->abort = handleCallBrlyStatChg(dbsbrly, call->jref);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYDLGCLOSE) {
 		call->abort = handleCallBrlyDlgClose(dbsbrly, call->jref);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSTATCHG) {
+		call->abort = handleCallBrlyStatChg(dbsbrly, call->jref);
 	};
 };
 
@@ -416,21 +416,21 @@ bool CrdBrlyLoc::handleCallBrlyRefPreSet(
 	return retval;
 };
 
-bool CrdBrlyLoc::handleCallBrlyStatChg(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD) && (pnlrec->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD)) pnllist->minimize(dbsbrly, true);
-	return retval;
-};
-
 bool CrdBrlyLoc::handleCallBrlyDlgClose(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
 		) {
 	bool retval = false;
 	// IP handleCallBrlyDlgClose --- INSERT
+	return retval;
+};
+
+bool CrdBrlyLoc::handleCallBrlyStatChg(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD) && (pnlrec->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD)) pnllist->minimize(dbsbrly, true);
 	return retval;
 };
 

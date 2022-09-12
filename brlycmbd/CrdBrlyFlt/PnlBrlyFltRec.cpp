@@ -38,9 +38,9 @@ PnlBrlyFltRec::PnlBrlyFltRec(
 		{
 	jref = xchg->addJob(dbsbrly, this, jrefSup);
 
+	pnlmnconnection = NULL;
 	pnleqpmnconnection = NULL;
 	pnlorgmnflight = NULL;
-	pnlmnconnection = NULL;
 	pnlmnlocation = NULL;
 	pnleqp1nnode = NULL;
 	pnlref1nsegment = NULL;
@@ -53,13 +53,13 @@ PnlBrlyFltRec::PnlBrlyFltRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecBrlyVCall::CALLBRLYFLT_FAFEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecBrlyVCall::CALLBRLYEQP_PTYEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecBrlyVCall::CALLBRLYEQP_HKTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYFLT_TTBEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYFLT_FAFEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYFLT_EQPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYEQP_PTYEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYEQP_OPREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYEQP_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYEQP_HKTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -122,8 +122,8 @@ void PnlBrlyFltRec::refresh(
 		if (pnlref1nsegment) {delete pnlref1nsegment; pnlref1nsegment = NULL;};
 		if (pnleqp1nnode) {delete pnleqp1nnode; pnleqp1nnode = NULL;};
 		if (pnlmnlocation) {delete pnlmnlocation; pnlmnlocation = NULL;};
-		if (pnlmnconnection) {delete pnlmnconnection; pnlmnconnection = NULL;};
 		if (pnlorgmnflight) {delete pnlorgmnflight; pnlorgmnflight = NULL;};
+		if (pnlmnconnection) {delete pnlmnconnection; pnlmnconnection = NULL;};
 		if (pnleqpmnconnection) {delete pnleqpmnconnection; pnleqpmnconnection = NULL;};
 	} else {
 		if (!pnlpre) pnlpre = new PnlBrlyFltPre(xchg, dbsbrly, jref, ixBrlyVLocale);
@@ -133,8 +133,8 @@ void PnlBrlyFltRec::refresh(
 		if (!pnlref1nsegment) pnlref1nsegment = new PnlBrlyFltRef1NSegment(xchg, dbsbrly, jref, ixBrlyVLocale);
 		if (!pnleqp1nnode) pnleqp1nnode = new PnlBrlyFltEqp1NNode(xchg, dbsbrly, jref, ixBrlyVLocale);
 		if (!pnlmnlocation) pnlmnlocation = new PnlBrlyFltMNLocation(xchg, dbsbrly, jref, ixBrlyVLocale);
-		if (!pnlmnconnection) pnlmnconnection = new PnlBrlyFltMNConnection(xchg, dbsbrly, jref, ixBrlyVLocale);
 		if (!pnlorgmnflight) pnlorgmnflight = new PnlBrlyFltOrgMNFlight(xchg, dbsbrly, jref, ixBrlyVLocale);
+		if (!pnlmnconnection) pnlmnconnection = new PnlBrlyFltMNConnection(xchg, dbsbrly, jref, ixBrlyVLocale);
 		if (!pnleqpmnconnection) pnleqpmnconnection = new PnlBrlyFltEqpMNConnection(xchg, dbsbrly, jref, ixBrlyVLocale);
 	};
 
@@ -145,8 +145,8 @@ void PnlBrlyFltRec::refresh(
 	statshr.jrefRef1NSegment = ((pnlref1nsegment) ? pnlref1nsegment->jref : 0);
 	statshr.jrefEqp1NNode = ((pnleqp1nnode) ? pnleqp1nnode->jref : 0);
 	statshr.jrefMNLocation = ((pnlmnlocation) ? pnlmnlocation->jref : 0);
-	statshr.jrefMNConnection = ((pnlmnconnection) ? pnlmnconnection->jref : 0);
 	statshr.jrefOrgMNFlight = ((pnlorgmnflight) ? pnlorgmnflight->jref : 0);
+	statshr.jrefMNConnection = ((pnlmnconnection) ? pnlmnconnection->jref : 0);
 	statshr.jrefEqpMNConnection = ((pnleqpmnconnection) ? pnleqpmnconnection->jref : 0);
 
 	// IP refresh --- END
@@ -197,8 +197,8 @@ void PnlBrlyFltRec::updatePreset(
 			if (pnlref1nsegment) pnlref1nsegment->updatePreset(dbsbrly, ixBrlyVPreset, jrefTrig, notif);
 			if (pnleqp1nnode) pnleqp1nnode->updatePreset(dbsbrly, ixBrlyVPreset, jrefTrig, notif);
 			if (pnlmnlocation) pnlmnlocation->updatePreset(dbsbrly, ixBrlyVPreset, jrefTrig, notif);
-			if (pnlmnconnection) pnlmnconnection->updatePreset(dbsbrly, ixBrlyVPreset, jrefTrig, notif);
 			if (pnlorgmnflight) pnlorgmnflight->updatePreset(dbsbrly, ixBrlyVPreset, jrefTrig, notif);
+			if (pnlmnconnection) pnlmnconnection->updatePreset(dbsbrly, ixBrlyVPreset, jrefTrig, notif);
 			if (pnleqpmnconnection) pnleqpmnconnection->updatePreset(dbsbrly, ixBrlyVPreset, jrefTrig, notif);
 		};
 
@@ -315,20 +315,20 @@ void PnlBrlyFltRec::handleCall(
 		call->abort = handleCallBrlyFafUpd_refEq(dbsbrly, call->jref);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQPUPD_REFEQ) {
 		call->abort = handleCallBrlyEqpUpd_refEq(dbsbrly, call->jref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYFLT_FAFEQ) {
-		call->abort = handleCallBrlyFlt_fafEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQP_PTYEQ) {
-		call->abort = handleCallBrlyEqp_ptyEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQP_HKTEQ) {
-		call->abort = handleCallBrlyEqp_hktEq(dbsbrly, call->jref, call->argInv.ix, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYFLT_TTBEQ) {
 		call->abort = handleCallBrlyFlt_ttbEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYFLT_FAFEQ) {
+		call->abort = handleCallBrlyFlt_fafEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYFLT_EQPEQ) {
 		call->abort = handleCallBrlyFlt_eqpEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQP_PTYEQ) {
+		call->abort = handleCallBrlyEqp_ptyEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQP_OPREQ) {
 		call->abort = handleCallBrlyEqp_oprEq(dbsbrly, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQP_INSBS) {
 		call->abort = handleCallBrlyEqp_inSbs(dbsbrly, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYEQP_HKTEQ) {
+		call->abort = handleCallBrlyEqp_hktEq(dbsbrly, call->jref, call->argInv.ix, call->argRet.boolval);
 	};
 };
 
@@ -359,39 +359,6 @@ bool PnlBrlyFltRec::handleCallBrlyEqpUpd_refEq(
 	return retval;
 };
 
-bool PnlBrlyFltRec::handleCallBrlyFlt_fafEq(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recFlt.refBrlyMFaflight == refInv); // IP handleCallBrlyFlt_fafEq --- LINE
-	return retval;
-};
-
-bool PnlBrlyFltRec::handleCallBrlyEqp_ptyEq(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recEqp.refBrlyMPlntype == refInv); // IP handleCallBrlyEqp_ptyEq --- LINE
-	return retval;
-};
-
-bool PnlBrlyFltRec::handleCallBrlyEqp_hktEq(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recEqp.hkIxVTbl == ixInv); // IP handleCallBrlyEqp_hktEq --- LINE
-	return retval;
-};
-
 bool PnlBrlyFltRec::handleCallBrlyFlt_ttbEq(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
@@ -403,6 +370,17 @@ bool PnlBrlyFltRec::handleCallBrlyFlt_ttbEq(
 	return retval;
 };
 
+bool PnlBrlyFltRec::handleCallBrlyFlt_fafEq(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recFlt.refBrlyMFaflight == refInv); // IP handleCallBrlyFlt_fafEq --- LINE
+	return retval;
+};
+
 bool PnlBrlyFltRec::handleCallBrlyFlt_eqpEq(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
@@ -411,6 +389,17 @@ bool PnlBrlyFltRec::handleCallBrlyFlt_eqpEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recFlt.refBrlyMEquipment == refInv); // IP handleCallBrlyFlt_eqpEq --- LINE
+	return retval;
+};
+
+bool PnlBrlyFltRec::handleCallBrlyEqp_ptyEq(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recEqp.refBrlyMPlntype == refInv); // IP handleCallBrlyEqp_ptyEq --- LINE
 	return retval;
 };
 
@@ -433,5 +422,16 @@ bool PnlBrlyFltRec::handleCallBrlyEqp_inSbs(
 		) {
 	bool retval = false;
 	boolvalRet = ((ixWSubsetEqp & ixInv) != 0); // IP handleCallBrlyEqp_inSbs --- LINE
+	return retval;
+};
+
+bool PnlBrlyFltRec::handleCallBrlyEqp_hktEq(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recEqp.hkIxVTbl == ixInv); // IP handleCallBrlyEqp_hktEq --- LINE
 	return retval;
 };

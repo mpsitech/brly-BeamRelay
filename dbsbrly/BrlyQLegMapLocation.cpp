@@ -43,6 +43,25 @@ BrlyQLegMapLocation::BrlyQLegMapLocation(
 	this->y = y;
 };
 
+void BrlyQLegMapLocation::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["x"] = x;
+		me["y"] = y;
+	} else {
+		me["stubMref"] = stubMref;
+		me["x"] = x;
+		me["y"] = y;
+	};
+};
+
 void BrlyQLegMapLocation::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -112,6 +131,16 @@ ListBrlyQLegMapLocation& ListBrlyQLegMapLocation::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLegMapLocation::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLegMapLocation";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) if (nodes[i]->qwr) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLegMapLocation::writeXML(

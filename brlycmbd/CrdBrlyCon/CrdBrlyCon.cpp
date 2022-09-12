@@ -76,8 +76,8 @@ CrdBrlyCon::CrdBrlyCon(
 	changeStage(dbsbrly, VecVSge::IDLE);
 
 	xchg->addClstn(VecBrlyVCall::CALLBRLYREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecBrlyVCall::CALLBRLYSTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYSTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -295,13 +295,13 @@ void CrdBrlyCon::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqBrly::VecVBasetype::TIMER) {
-		if ((req->sref == "mon") && (ixVSge == VecVSge::CORRCALC)) handleTimerWithSrefMonInSgeCorrcalc(dbsbrly);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::CALC1)) handleTimerWithSrefMonInSgeCalc1(dbsbrly);
+		if (ixVSge == VecVSge::CRGIDLE) handleTimerInSgeCrgidle(dbsbrly, req->sref);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::CORRGEN)) handleTimerWithSrefMonInSgeCorrgen(dbsbrly);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::CORRCALC)) handleTimerWithSrefMonInSgeCorrcalc(dbsbrly);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::CALC2)) handleTimerWithSrefMonInSgeCalc2(dbsbrly);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::CALC1)) handleTimerWithSrefMonInSgeCalc1(dbsbrly);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::CALC3)) handleTimerWithSrefMonInSgeCalc3(dbsbrly);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::CALC4)) handleTimerWithSrefMonInSgeCalc4(dbsbrly);
-		else if (ixVSge == VecVSge::CRGIDLE) handleTimerInSgeCrgidle(dbsbrly, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::CORRGEN)) handleTimerWithSrefMonInSgeCorrgen(dbsbrly);
 	};
 };
 
@@ -907,6 +907,20 @@ void CrdBrlyCon::handleDpchAppBrlyAlert(
 	// IP handleDpchAppBrlyAlert --- END
 };
 
+void CrdBrlyCon::handleTimerInSgeCrgidle(
+			DbsBrly* dbsbrly
+			, const string& sref
+		) {
+	changeStage(dbsbrly, nextIxVSgeSuccess);
+};
+
+void CrdBrlyCon::handleTimerWithSrefMonInSgeCorrgen(
+			DbsBrly* dbsbrly
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	// IP handleTimerWithSrefMonInSgeCorrgen --- INSERT
+};
+
 void CrdBrlyCon::handleTimerWithSrefMonInSgeCorrcalc(
 			DbsBrly* dbsbrly
 		) {
@@ -914,18 +928,18 @@ void CrdBrlyCon::handleTimerWithSrefMonInSgeCorrcalc(
 	// IP handleTimerWithSrefMonInSgeCorrcalc --- INSERT
 };
 
-void CrdBrlyCon::handleTimerWithSrefMonInSgeCalc1(
-			DbsBrly* dbsbrly
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	// IP handleTimerWithSrefMonInSgeCalc1 --- INSERT
-};
-
 void CrdBrlyCon::handleTimerWithSrefMonInSgeCalc2(
 			DbsBrly* dbsbrly
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	// IP handleTimerWithSrefMonInSgeCalc2 --- INSERT
+};
+
+void CrdBrlyCon::handleTimerWithSrefMonInSgeCalc1(
+			DbsBrly* dbsbrly
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	// IP handleTimerWithSrefMonInSgeCalc1 --- INSERT
 };
 
 void CrdBrlyCon::handleTimerWithSrefMonInSgeCalc3(
@@ -942,30 +956,16 @@ void CrdBrlyCon::handleTimerWithSrefMonInSgeCalc4(
 	// IP handleTimerWithSrefMonInSgeCalc4 --- INSERT
 };
 
-void CrdBrlyCon::handleTimerInSgeCrgidle(
-			DbsBrly* dbsbrly
-			, const string& sref
-		) {
-	changeStage(dbsbrly, nextIxVSgeSuccess);
-};
-
-void CrdBrlyCon::handleTimerWithSrefMonInSgeCorrgen(
-			DbsBrly* dbsbrly
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	// IP handleTimerWithSrefMonInSgeCorrgen --- INSERT
-};
-
 void CrdBrlyCon::handleCall(
 			DbsBrly* dbsbrly
 			, Call* call
 		) {
 	if (call->ixVCall == VecBrlyVCall::CALLBRLYREFPRESET) {
 		call->abort = handleCallBrlyRefPreSet(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSTATCHG) {
-		call->abort = handleCallBrlyStatChg(dbsbrly, call->jref);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYDLGCLOSE) {
 		call->abort = handleCallBrlyDlgClose(dbsbrly, call->jref);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSTATCHG) {
+		call->abort = handleCallBrlyStatChg(dbsbrly, call->jref);
 	};
 };
 
@@ -991,15 +991,6 @@ bool CrdBrlyCon::handleCallBrlyRefPreSet(
 	return retval;
 };
 
-bool CrdBrlyCon::handleCallBrlyStatChg(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD) && (pnlrec->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD)) pnllist->minimize(dbsbrly, true);
-	return retval;
-};
-
 bool CrdBrlyCon::handleCallBrlyDlgClose(
 			DbsBrly* dbsbrly
 			, const ubigint jrefTrig
@@ -1014,6 +1005,15 @@ bool CrdBrlyCon::handleCallBrlyDlgClose(
 		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
 	};
 
+	return retval;
+};
+
+bool CrdBrlyCon::handleCallBrlyStatChg(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD) && (pnlrec->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD)) pnllist->minimize(dbsbrly, true);
 	return retval;
 };
 
@@ -1428,7 +1428,7 @@ uint CrdBrlyCon::enterSgeCongen(
 
 	if (icsFeed.size() == feed.size()) srefsKEqptype = "";
 	else {
-		for (set<unsigned int>::iterator it=icsFeed.begin();it!=icsFeed.end();it++) ss.push_back(feed.nodes[*it]->sref);
+		for (set<unsigned int>::iterator it=icsFeed.begin(); it != icsFeed.end(); it++) ss.push_back(feed.nodes[*it]->sref);
 		StrMod::vectorToString(ss, srefsKEqptype);
 	};
 

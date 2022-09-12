@@ -115,26 +115,26 @@ void DlgBrlyLegNew::refreshDet(
 			DbsBrly* dbsbrly
 			, set<uint>& moditems
 		) {
-	StatShrDet oldStatshrdet(statshrdet);
 	ContIacDet oldContiacdet(contiacdet);
+	StatShrDet oldStatshrdet(statshrdet);
 
 	// IP refreshDet --- BEGIN
+	// contiacdet
+
 	// statshrdet
 	statshrdet.ButCreActive = evalDetButCreActive(dbsbrly);
 
-	// contiacdet
-
 	// IP refreshDet --- END
-	if (statshrdet.diff(&oldStatshrdet).size() != 0) insert(moditems, DpchEngData::STATSHRDET);
 	if (contiacdet.diff(&oldContiacdet).size() != 0) insert(moditems, DpchEngData::CONTIACDET);
+	if (statshrdet.diff(&oldStatshrdet).size() != 0) insert(moditems, DpchEngData::STATSHRDET);
 };
 
 void DlgBrlyLegNew::refreshInc(
 			DbsBrly* dbsbrly
 			, set<uint>& moditems
 		) {
-	StatShrInc oldStatshrinc(statshrinc);
 	ContInfInc oldContinfinc(continfinc);
+	StatShrInc oldStatshrinc(statshrinc);
 
 	// IP refreshInc --- RBEGIN
 	// continfinc
@@ -145,8 +145,8 @@ void DlgBrlyLegNew::refreshInc(
 	statshrinc.ButStoActive = evalIncButStoActive(dbsbrly);
 
 	// IP refreshInc --- REND
-	if (statshrinc.diff(&oldStatshrinc).size() != 0) insert(moditems, DpchEngData::STATSHRINC);
 	if (continfinc.diff(&oldContinfinc).size() != 0) insert(moditems, DpchEngData::CONTINFINC);
+	if (statshrinc.diff(&oldStatshrinc).size() != 0) insert(moditems, DpchEngData::STATSHRINC);
 };
 
 void DlgBrlyLegNew::refresh(

@@ -49,6 +49,33 @@ BrlyQSegOrgMNSegment::BrlyQSegOrgMNSegment(
 	this->VisOrgSegphi1 = VisOrgSegphi1;
 };
 
+void BrlyQSegOrgMNSegment::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["sta"] = ftmX1Start;
+		me["sto"] = ftmX1Stop;
+		me["dp0"] = x2VisDstSegphi0;
+		me["dp1"] = x2VisDstSegphi1;
+		me["op0"] = VisOrgSegphi0;
+		me["op1"] = VisOrgSegphi1;
+	} else {
+		me["stubMref"] = stubMref;
+		me["ftmX1Start"] = ftmX1Start;
+		me["ftmX1Stop"] = ftmX1Stop;
+		me["x2VisDstSegphi0"] = x2VisDstSegphi0;
+		me["x2VisDstSegphi1"] = x2VisDstSegphi1;
+		me["VisOrgSegphi0"] = VisOrgSegphi0;
+		me["VisOrgSegphi1"] = VisOrgSegphi1;
+	};
+};
+
 void BrlyQSegOrgMNSegment::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -126,6 +153,16 @@ ListBrlyQSegOrgMNSegment& ListBrlyQSegOrgMNSegment::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQSegOrgMNSegment::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQSegOrgMNSegment";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQSegOrgMNSegment::writeXML(

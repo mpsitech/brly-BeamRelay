@@ -2,7 +2,7 @@
 # make file for Brly database access library, release dbsbrly_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 11 Jan 2021
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 LIBROOT = ${WHIZSDKROOT}/lib
@@ -13,7 +13,7 @@ CPPFLAGS = -std=c++11 -g -Wall -Os -pthread
 STATLIB = ar
 STATLIBFLAGS = rcs
 
-INCPATH = -I${WHIZSDKROOT}/build -I/usr/local/include/libxml2 -I/usr/local/mysql/include
+INCPATH = -I${WHIZSDKROOT}/build -I/opt/homebrew/include -I/opt/homebrew/opt/libxml2/include -I/usr/local/mysql/include
 
 PCHS = DbsBrly.h.gch
 
@@ -35,7 +35,6 @@ all:	$(LIB)
 
 $(LIB):	$(PCHS) $(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/

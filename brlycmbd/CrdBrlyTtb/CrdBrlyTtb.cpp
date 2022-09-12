@@ -48,8 +48,8 @@ CrdBrlyTtb::CrdBrlyTtb(
 	pnlheadbar = NULL;
 	pnlrec = NULL;
 	dlgnew = NULL;
-	dlgimpflt = NULL;
 	dlgtrlorig = NULL;
+	dlgimpflt = NULL;
 
 	// IP constructor.cust1 --- IBEGIN
 	fltcnt = 0;
@@ -82,8 +82,8 @@ CrdBrlyTtb::CrdBrlyTtb(
 	changeStage(dbsbrly, VecVSge::IDLE);
 
 	xchg->addClstn(VecBrlyVCall::CALLBRLYREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecBrlyVCall::CALLBRLYSTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecBrlyVCall::CALLBRLYDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecBrlyVCall::CALLBRLYSTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -270,8 +270,8 @@ void CrdBrlyTtb::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqBrly::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbsbrly, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbsbrly);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbsbrly);
+		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbsbrly, req->sref);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::SEGMENT)) handleTimerWithSrefMonInSgeSegment(dbsbrly);
 	};
 };
@@ -895,18 +895,18 @@ void CrdBrlyTtb::handleDpchAppBrlyAlert(
 	// IP handleDpchAppBrlyAlert --- END
 };
 
-void CrdBrlyTtb::handleTimerInSgeImpidle(
-			DbsBrly* dbsbrly
-			, const string& sref
-		) {
-	changeStage(dbsbrly, nextIxVSgeSuccess);
-};
-
 void CrdBrlyTtb::handleTimerWithSrefMonInSgeImport(
 			DbsBrly* dbsbrly
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	// IP handleTimerWithSrefMonInSgeImport --- INSERT
+};
+
+void CrdBrlyTtb::handleTimerInSgeImpidle(
+			DbsBrly* dbsbrly
+			, const string& sref
+		) {
+	changeStage(dbsbrly, nextIxVSgeSuccess);
 };
 
 void CrdBrlyTtb::handleTimerWithSrefMonInSgeSegment(
@@ -922,10 +922,10 @@ void CrdBrlyTtb::handleCall(
 		) {
 	if (call->ixVCall == VecBrlyVCall::CALLBRLYREFPRESET) {
 		call->abort = handleCallBrlyRefPreSet(dbsbrly, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSTATCHG) {
-		call->abort = handleCallBrlyStatChg(dbsbrly, call->jref);
 	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYDLGCLOSE) {
 		call->abort = handleCallBrlyDlgClose(dbsbrly, call->jref);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSTATCHG) {
+		call->abort = handleCallBrlyStatChg(dbsbrly, call->jref);
 	};
 };
 
@@ -948,15 +948,6 @@ bool CrdBrlyTtb::handleCallBrlyRefPreSet(
 		};
 	};
 
-	return retval;
-};
-
-bool CrdBrlyTtb::handleCallBrlyStatChg(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD) && (pnlrec->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD)) pnllist->minimize(dbsbrly, true);
 	return retval;
 };
 
@@ -986,6 +977,15 @@ bool CrdBrlyTtb::handleCallBrlyDlgClose(
 		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
 	};
 
+	return retval;
+};
+
+bool CrdBrlyTtb::handleCallBrlyStatChg(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD) && (pnlrec->statshr.ixBrlyVExpstate == VecBrlyVExpstate::REGD)) pnllist->minimize(dbsbrly, true);
 	return retval;
 };
 

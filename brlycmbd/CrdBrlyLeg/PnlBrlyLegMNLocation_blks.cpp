@@ -53,6 +53,17 @@ PnlBrlyLegMNLocation::ContInf::ContInf(
 	mask = {NUMFCSIQST};
 };
 
+void PnlBrlyLegMNLocation::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfBrlyLegMNLocation";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFCsiQst"] = numFCsiQst;
+};
+
 void PnlBrlyLegMNLocation::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -97,6 +108,18 @@ set<uint> PnlBrlyLegMNLocation::ContInf::diff(
  class PnlBrlyLegMNLocation::StatApp
  ******************************************************************************/
 
+void PnlBrlyLegMNLocation::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixBrlyVExpstate
+		) {
+	if (difftag.length() == 0) difftag = "StatAppBrlyLegMNLocation";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxBrlyVExpstate"] = VecBrlyVExpstate::getSref(ixBrlyVExpstate);
+};
+
 void PnlBrlyLegMNLocation::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -134,6 +157,21 @@ PnlBrlyLegMNLocation::StatShr::StatShr(
 	this->ButSubActive = ButSubActive;
 
 	mask = {BUTVIEWAVAIL, BUTVIEWACTIVE, BUTADDAVAIL, BUTSUBAVAIL, BUTSUBACTIVE};
+};
+
+void PnlBrlyLegMNLocation::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrBrlyLegMNLocation";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButViewAvail"] = ButViewAvail;
+	me["ButViewActive"] = ButViewActive;
+	me["ButAddAvail"] = ButAddAvail;
+	me["ButSubAvail"] = ButSubAvail;
+	me["ButSubActive"] = ButSubActive;
 };
 
 void PnlBrlyLegMNLocation::StatShr::writeXML(
@@ -209,6 +247,31 @@ PnlBrlyLegMNLocation::StgIac::StgIac(
 	mask = {TCOMREFWIDTH, TCOLP0WIDTH, TCOLP1WIDTH, TCOLPHWIDTH, TCOLTHWIDTH, TCOXP0WIDTH, TCOXP1WIDTH};
 };
 
+bool PnlBrlyLegMNLocation::StgIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacBrlyLegMNLocation"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("TcoMrefWidth")) {TcoMrefWidth = me["TcoMrefWidth"].asUInt(); add(TCOMREFWIDTH);};
+		if (me.isMember("TcoLp0Width")) {TcoLp0Width = me["TcoLp0Width"].asUInt(); add(TCOLP0WIDTH);};
+		if (me.isMember("TcoLp1Width")) {TcoLp1Width = me["TcoLp1Width"].asUInt(); add(TCOLP1WIDTH);};
+		if (me.isMember("TcoLphWidth")) {TcoLphWidth = me["TcoLphWidth"].asUInt(); add(TCOLPHWIDTH);};
+		if (me.isMember("TcoLthWidth")) {TcoLthWidth = me["TcoLthWidth"].asUInt(); add(TCOLTHWIDTH);};
+		if (me.isMember("TcoXp0Width")) {TcoXp0Width = me["TcoXp0Width"].asUInt(); add(TCOXP0WIDTH);};
+		if (me.isMember("TcoXp1Width")) {TcoXp1Width = me["TcoXp1Width"].asUInt(); add(TCOXP1WIDTH);};
+	};
+
+	return basefound;
+};
+
 bool PnlBrlyLegMNLocation::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -236,6 +299,23 @@ bool PnlBrlyLegMNLocation::StgIac::readXML(
 	};
 
 	return basefound;
+};
+
+void PnlBrlyLegMNLocation::StgIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgIacBrlyLegMNLocation";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TcoMrefWidth"] = TcoMrefWidth;
+	me["TcoLp0Width"] = TcoLp0Width;
+	me["TcoLp1Width"] = TcoLp1Width;
+	me["TcoLphWidth"] = TcoLphWidth;
+	me["TcoLthWidth"] = TcoLthWidth;
+	me["TcoXp0Width"] = TcoXp0Width;
+	me["TcoXp1Width"] = TcoXp1Width;
 };
 
 void PnlBrlyLegMNLocation::StgIac::writeXML(
@@ -293,6 +373,41 @@ set<uint> PnlBrlyLegMNLocation::StgIac::diff(
 /******************************************************************************
  class PnlBrlyLegMNLocation::Tag
  ******************************************************************************/
+
+void PnlBrlyLegMNLocation::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyLegMNLocation";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["Cpt"] = "Locations within visiblity range";
+		me["TcoMref"] = "Location";
+		me["TcoLp0"] = "Vis. from [\\u00b0]";
+		me["TcoLp1"] = "Vis. to [\\u00b0]";
+		me["TcoLph"] = "Azimuth [\\u00b0]";
+		me["TcoLth"] = "Elevation [\\u00b0]";
+		me["TcoXp0"] = "XVisLegphi0";
+		me["TcoXp1"] = "XVisLegphi1";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["Cpt"] = "Orte im Bereich der Sichtbarkeit";
+		me["TcoMref"] = "Ort";
+		me["TcoLp0"] = "Sichtb. von [\\u00b0]";
+		me["TcoLp1"] = "Sichtb. bis [\\u00b0]";
+		me["TcoLph"] = "Azimut [\\u00b0]";
+		me["TcoLth"] = "Elevation [\\u00b0]";
+		me["TcoXp0"] = "XVisLegphi0";
+		me["TcoXp1"] = "XVisLegphi1";
+	};
+	me["TxtRecord1"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::REC, ixBrlyVLocale));
+	me["TxtRecord2"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::EMPLONG, ixBrlyVLocale));
+	me["Trs"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::GOTO, ixBrlyVLocale)) + " ...";
+	me["TxtShowing1"] = VecBrlyVTag::getTitle(VecBrlyVTag::SHOWSHORT, ixBrlyVLocale);
+	me["TxtShowing2"] = VecBrlyVTag::getTitle(VecBrlyVTag::EMPSHORT, ixBrlyVLocale);
+};
 
 void PnlBrlyLegMNLocation::Tag::writeXML(
 			const uint ixBrlyVLocale
@@ -356,6 +471,28 @@ string PnlBrlyLegMNLocation::DpchAppData::getSrefsMask() {
 	return(srefs);
 };
 
+void PnlBrlyLegMNLocation::DpchAppData::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyLegMNLocationData"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (stgiac.readJSON(me, true)) add(STGIAC);
+		if (stgiacqry.readJSON(me, true)) add(STGIACQRY);
+	} else {
+		stgiac = StgIac();
+		stgiacqry = QryBrlyLegMNLocation::StgIac();
+	};
+};
+
 void PnlBrlyLegMNLocation::DpchAppData::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -405,6 +542,25 @@ string PnlBrlyLegMNLocation::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlBrlyLegMNLocation::DpchAppDo::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyLegMNLocationDo"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlBrlyLegMNLocation::DpchAppDo::readXML(
@@ -503,6 +659,25 @@ void PnlBrlyLegMNLocation::DpchEngData::merge(
 	if (src->has(STATAPPQRY)) add(STATAPPQRY);
 	if (src->has(STATSHRQRY)) {statshrqry = src->statshrqry; add(STATSHRQRY);};
 	if (src->has(STGIACQRY)) {stgiacqry = src->stgiacqry; add(STGIACQRY);};
+};
+
+void PnlBrlyLegMNLocation::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyLegMNLocationData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFCSIQST)) feedFCsiQst.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(STGIAC)) stgiac.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
+	if (has(RST)) rst.writeJSON(me);
+	if (has(STATAPPQRY)) QryBrlyLegMNLocation::StatApp::writeJSON(me);
+	if (has(STATSHRQRY)) statshrqry.writeJSON(me);
+	if (has(STGIACQRY)) stgiacqry.writeJSON(me);
 };
 
 void PnlBrlyLegMNLocation::DpchEngData::writeXML(

@@ -165,7 +165,7 @@ void* BrlydJobprc::run(
 		throw;
 	};
 
-	pthread_cleanup_pop(0);
+	pthread_cleanup_pop(1);
 
 	return(NULL);
 };
@@ -183,8 +183,17 @@ void BrlydJobprc::accessJob(
 			, DbsBrly* dbsbrly
 			, ReqBrly* req
 		) {
+	time_t rawtime;
+
 	JobBrly* job = NULL;
-	
+
+	if ((req->ixVBasetype == ReqBrly::VecVBasetype::CMD) || (req->ixVBasetype == ReqBrly::VecVBasetype::DPCHAPP) || (req->ixVBasetype == ReqBrly::VecVBasetype::UPLOAD) || (req->ixVBasetype == ReqBrly::VecVBasetype::DOWNLOAD)) {
+		if ((xchg->stgbrlyappearance.roottterm != 0) || (xchg->stgbrlyappearance.sesstterm != 0)) {
+			time(&rawtime);
+			xchg->triggerIxRefCall(dbsbrly, VecBrlyVCall::CALLBRLYREFPRESET, req->jref, VecBrlyVPreset::PREBRLYTLAST, rawtime);
+		};
+	};
+
 	job = xchg->getJobByJref(req->jref);
 	if (job) {
 		if (!req->weak) job->lockAccess("BrlydJobprc", "accessJob");

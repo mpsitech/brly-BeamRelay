@@ -40,17 +40,17 @@ PnlBrlyLocMap::PnlBrlyLocMap(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	qryleg = NULL;
 	qryvislocation = NULL;
 	qryproxlocation = NULL;
+	qryleg = NULL;
 
 	// IP constructor.cust1 --- IBEGIN
 	standalone = false;
 	// IP constructor.cust1 --- IEND
 
-	qryleg = new QryBrlyLocMapLeg(xchg, dbsbrly, jref, ixBrlyVLocale);
 	qryvislocation = new QryBrlyLocMapVisLocation(xchg, dbsbrly, jref, ixBrlyVLocale);
 	qryproxlocation = new QryBrlyLocMapProxLocation(xchg, dbsbrly, jref, ixBrlyVLocale);
+	qryleg = new QryBrlyLocMapLeg(xchg, dbsbrly, jref, ixBrlyVLocale);
 
 	// IP constructor.cust2 --- IBEGIN
 	set<uint> moditems;

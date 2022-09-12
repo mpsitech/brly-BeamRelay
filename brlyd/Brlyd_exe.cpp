@@ -1,6 +1,6 @@
 /**
-	* \file Brlyd_exe.cpp
-	* Brly daemon main (implementation)
+	* \file Brlycmbd_exe.cpp
+	* Brly combined daemon main (implementation)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
 	* \date created: 11 Jan 2021
@@ -486,7 +486,7 @@ int main(
 
 	try {
 		// welcome message
-		cout << "Welcome to BeamRelay v0.2.13!" << endl;
+		cout << "Welcome to BeamRelay v0.2.15!" << endl;
 
 		// calls brlyd.init()
 		brlyd = new Brlyd(exedir, clearAll, startMon);

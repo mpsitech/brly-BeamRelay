@@ -39,6 +39,29 @@ BrlyQPtyList::BrlyQPtyList(
 	this->Capacity = Capacity;
 };
 
+void BrlyQPtyList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["tit"] = Title;
+		me["ety"] = srefBrlyKEqptype;
+		me["ety2"] = titSrefBrlyKEqptype;
+		me["cap"] = Capacity;
+	} else {
+		me["sref"] = sref;
+		me["Title"] = Title;
+		me["srefBrlyKEqptype"] = srefBrlyKEqptype;
+		me["titSrefBrlyKEqptype"] = titSrefBrlyKEqptype;
+		me["Capacity"] = Capacity;
+	};
+};
+
 void BrlyQPtyList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -112,6 +135,16 @@ ListBrlyQPtyList& ListBrlyQPtyList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQPtyList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQPtyList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQPtyList::writeXML(

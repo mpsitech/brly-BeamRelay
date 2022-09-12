@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "QryBrlyLocMapLeg.h"
 #include "QryBrlyLocMapVisLocation.h"
 #include "QryBrlyLocMapProxLocation.h"
+#include "QryBrlyLocMapLeg.h"
 
 #define VecVBrlyLocMapDo PnlBrlyLocMap::VecVDo
 #define VecVBrlyLocMapSge PnlBrlyLocMap::VecVSge
@@ -65,13 +65,13 @@ public:
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
 
-		static void fillFeed(Sbecore::Xmlio::Feed& feed);
+		static void fillFeed(Sbecore::Feed& feed);
 	};
 
 	/**
 	  * ContIac (full: ContIacBrlyLocMap)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint SLDH = 1;
@@ -87,7 +87,9 @@ public:
 		double SldScl;
 
 	public:
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const ContIac* comp);
 		std::set<Sbecore::uint> diff(const ContIac* comp);
@@ -96,7 +98,7 @@ public:
 	/**
 	  * ContInf (full: ContInfBrlyLocMap)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFSGE = 1;
@@ -110,6 +112,7 @@ public:
 		std::string Dld;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const ContInf* comp);
 		std::set<Sbecore::uint> diff(const ContInf* comp);
@@ -118,7 +121,7 @@ public:
 	/**
 		* StatShr (full: StatShrBrlyLocMap)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXBRLYVEXPSTATE = 1;
@@ -144,6 +147,7 @@ public:
 		double SldSclRast;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -152,7 +156,7 @@ public:
 	/**
 		* StgIac (full: StgIacBrlyLocMap)
 		*/
-	class StgIac : public Sbecore::Xmlio::Block {
+	class StgIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint WIDTH = 1;
@@ -166,7 +170,9 @@ public:
 		Sbecore::uint height;
 
 	public:
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StgIac* comp);
 		std::set<Sbecore::uint> diff(const StgIac* comp);
@@ -178,6 +184,7 @@ public:
 	class Tag {
 
 	public:
+		static void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup, std::string difftag = "");
 		static void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	};
 
@@ -207,6 +214,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -228,6 +236,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -256,12 +265,12 @@ public:
 		static const Sbecore::uint ALL = 17;
 
 	public:
-		DpchEngData(const Sbecore::ubigint jref = 0, ContIac* contiac = NULL, ContInf* continf = NULL, Sbecore::Xmlio::Feed* feedFSge = NULL, StatShr* statshr = NULL, ListBrlyQLocMapLeg* rstleg = NULL, ListBrlyQLocMapProxLocation* rstproxlocation = NULL, ListBrlyQLocMapVisLocation* rstvislocation = NULL, QryBrlyLocMapLeg::StatShr* statshrqryleg = NULL, QryBrlyLocMapProxLocation::StatShr* statshrqryproxlocation = NULL, QryBrlyLocMapVisLocation::StatShr* statshrqryvislocation = NULL, QryBrlyLocMapLeg::StgIac* stgiacqryleg = NULL, QryBrlyLocMapProxLocation::StgIac* stgiacqryproxlocation = NULL, QryBrlyLocMapVisLocation::StgIac* stgiacqryvislocation = NULL, StgIac* stgiac = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+		DpchEngData(const Sbecore::ubigint jref = 0, ContIac* contiac = NULL, ContInf* continf = NULL, Sbecore::Feed* feedFSge = NULL, StatShr* statshr = NULL, ListBrlyQLocMapLeg* rstleg = NULL, ListBrlyQLocMapProxLocation* rstproxlocation = NULL, ListBrlyQLocMapVisLocation* rstvislocation = NULL, QryBrlyLocMapLeg::StatShr* statshrqryleg = NULL, QryBrlyLocMapProxLocation::StatShr* statshrqryproxlocation = NULL, QryBrlyLocMapVisLocation::StatShr* statshrqryvislocation = NULL, QryBrlyLocMapLeg::StgIac* stgiacqryleg = NULL, QryBrlyLocMapProxLocation::StgIac* stgiacqryproxlocation = NULL, QryBrlyLocMapVisLocation::StgIac* stgiacqryvislocation = NULL, StgIac* stgiac = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 	public:
 		ContIac contiac;
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFSge;
+		Sbecore::Feed feedFSge;
 		StatShr statshr;
 		ListBrlyQLocMapLeg rstleg;
 		ListBrlyQLocMapProxLocation rstproxlocation;
@@ -278,6 +287,7 @@ public:
 		std::string getSrefsMask();
 		void merge(DpchEngBrly* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr);
 	};
 
@@ -311,6 +321,7 @@ public:
 		std::string getSrefsMask();
 		void merge(DpchEngBrly* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr);
 	};
 
@@ -324,11 +335,11 @@ public:
 	StatShr statshr;
 	StgIac stgiac;
 
-	Sbecore::Xmlio::Feed feedFSge;
+	Sbecore::Feed feedFSge;
 
-	QryBrlyLocMapLeg* qryleg;
 	QryBrlyLocMapVisLocation* qryvislocation;
 	QryBrlyLocMapProxLocation* qryproxlocation;
+	QryBrlyLocMapLeg* qryleg;
 
 	// IP vars.cust --- IBEGIN
 	bool standalone;

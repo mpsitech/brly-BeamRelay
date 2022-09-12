@@ -17,8 +17,8 @@
 #include "PnlBrlyConMNSegment.h"
 #include "PnlBrlyConMNFlight.h"
 #include "PnlBrlyConConMNEquipment.h"
-#include "PnlBrlyConRef1NSegment.h"
 #include "PnlBrlyCon1NRelay.h"
+#include "PnlBrlyConRef1NSegment.h"
 #include "PnlBrlyConMap.h"
 #include "PnlBrlyConDetail.h"
 #include "PnlBrlyConPre.h"
@@ -55,7 +55,7 @@ public:
 	/**
 	  * ContInf (full: ContInfBrlyConRec)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTREF = 1;
@@ -67,6 +67,7 @@ public:
 		std::string TxtRef;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const ContInf* comp);
 		std::set<Sbecore::uint> diff(const ContInf* comp);
@@ -78,13 +79,14 @@ public:
 	class StatApp {
 
 	public:
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdonePre = false, const bool initdoneDetail = false, const bool initdoneMap = false, const bool initdone1NRelay = false, const bool initdoneRef1NSegment = false, const bool initdoneConMNEquipment = false, const bool initdoneMNFlight = false, const bool initdoneMNSegment = false);
 		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdonePre = false, const bool initdoneDetail = false, const bool initdoneMap = false, const bool initdone1NRelay = false, const bool initdoneRef1NSegment = false, const bool initdoneConMNEquipment = false, const bool initdoneMNFlight = false, const bool initdoneMNSegment = false);
 	};
 
 	/**
 		* StatShr (full: StatShrBrlyConRec)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXBRLYVEXPSTATE = 1;
@@ -114,6 +116,7 @@ public:
 		bool ButRegularizeActive;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -125,6 +128,7 @@ public:
 	class Tag {
 
 	public:
+		static void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup, std::string difftag = "");
 		static void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	};
 
@@ -146,6 +150,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -173,6 +178,7 @@ public:
 		std::string getSrefsMask();
 		void merge(DpchEngBrly* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixBrlyVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixBrlyVLocale, xmlTextWriter* wr);
 	};
 
@@ -189,8 +195,8 @@ public:
 	PnlBrlyConMNSegment* pnlmnsegment;
 	PnlBrlyConMNFlight* pnlmnflight;
 	PnlBrlyConConMNEquipment* pnlconmnequipment;
-	PnlBrlyConRef1NSegment* pnlref1nsegment;
 	PnlBrlyCon1NRelay* pnl1nrelay;
+	PnlBrlyConRef1NSegment* pnlref1nsegment;
 	PnlBrlyConMap* pnlmap;
 	PnlBrlyConDetail* pnldetail;
 	PnlBrlyConPre* pnlpre;

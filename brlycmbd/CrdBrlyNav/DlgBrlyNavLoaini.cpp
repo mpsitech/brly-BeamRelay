@@ -125,8 +125,8 @@ void DlgBrlyNavLoaini::refreshPpr(
 			DbsBrly* dbsbrly
 			, set<uint>& moditems
 		) {
-	StatShrPpr oldStatshrppr(statshrppr);
 	ContInfPpr oldContinfppr(continfppr);
+	StatShrPpr oldStatshrppr(statshrppr);
 
 	// IP refreshPpr --- RBEGIN
 	// continfppr
@@ -137,8 +137,8 @@ void DlgBrlyNavLoaini::refreshPpr(
 	statshrppr.ButStoActive = evalPprButStoActive(dbsbrly);
 
 	// IP refreshPpr --- REND
-	if (statshrppr.diff(&oldStatshrppr).size() != 0) insert(moditems, DpchEngData::STATSHRPPR);
 	if (continfppr.diff(&oldContinfppr).size() != 0) insert(moditems, DpchEngData::CONTINFPPR);
+	if (statshrppr.diff(&oldStatshrppr).size() != 0) insert(moditems, DpchEngData::STATSHRPPR);
 };
 
 void DlgBrlyNavLoaini::refreshLfi(
@@ -277,10 +277,10 @@ void DlgBrlyNavLoaini::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqBrly::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbsbrly, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbsbrly);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC)) handleTimerWithSrefMonInSgePostprc(dbsbrly);
 		else if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbsbrly, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC)) handleTimerWithSrefMonInSgePostprc(dbsbrly);
+		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbsbrly, req->sref);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbsbrly);
 	};
 };
 
@@ -378,7 +378,7 @@ void DlgBrlyNavLoaini::handleUploadInSgeIdle(
 			DbsBrly* dbsbrly
 			, const string& filename
 		) {
-	// IP handleUploadInSgeIdle --- INSERT
+	infilename = filename;  // IP handleUploadInSgeIdle --- ILINE
 	changeStage(dbsbrly, VecVSge::PRSIDLE);
 };
 
@@ -386,6 +386,20 @@ string DlgBrlyNavLoaini::handleDownloadInSgeDone(
 			DbsBrly* dbsbrly
 		) {
 	return(""); // IP handleDownloadInSgeDone --- LINE
+};
+
+void DlgBrlyNavLoaini::handleTimerWithSrefMonInSgePostprc(
+			DbsBrly* dbsbrly
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbsbrly); // IP handleTimerWithSrefMonInSgePostprc --- ILINE
+};
+
+void DlgBrlyNavLoaini::handleTimerInSgePrsidle(
+			DbsBrly* dbsbrly
+			, const string& sref
+		) {
+	changeStage(dbsbrly, nextIxVSgeSuccess);
 };
 
 void DlgBrlyNavLoaini::handleTimerInSgeImpidle(
@@ -400,20 +414,6 @@ void DlgBrlyNavLoaini::handleTimerWithSrefMonInSgeImport(
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	refreshWithDpchEng(dbsbrly); // IP handleTimerWithSrefMonInSgeImport --- ILINE
-};
-
-void DlgBrlyNavLoaini::handleTimerInSgePrsidle(
-			DbsBrly* dbsbrly
-			, const string& sref
-		) {
-	changeStage(dbsbrly, nextIxVSgeSuccess);
-};
-
-void DlgBrlyNavLoaini::handleTimerWithSrefMonInSgePostprc(
-			DbsBrly* dbsbrly
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbsbrly); // IP handleTimerWithSrefMonInSgePostprc --- ILINE
 };
 
 void DlgBrlyNavLoaini::changeStage(
@@ -530,7 +530,9 @@ uint DlgBrlyNavLoaini::enterSgeParse(
 			DbsBrly* dbsbrly
 			, const bool reenter
 		) {
-	uint retval = VecVSge::PARSE;
+	uint retval;
+	nextIxVSgeSuccess = VecVSge::PRSDONE;
+	retval = nextIxVSgeSuccess;
 	nextIxVSgeFailure = VecVSge::ALRBRLYPER;
 
 	// IP enterSgeParse --- IBEGIN
@@ -591,12 +593,13 @@ uint DlgBrlyNavLoaini::enterSgeAlrbrlyper(
 	nextIxVSgeSuccess = VecVSge::IDLE;
 
 	// IP enterSgeAlrbrlyper --- RBEGIN
-
 	ContInfBrlyAlert continf;
 
 	continf.TxtCpt = VecBrlyVTag::getTitle(VecBrlyVTag::ERROR, ixBrlyVLocale);
 	continf.TxtCpt = StrMod::cap(continf.TxtCpt);
-	continf.TxtMsg1 = iex->getSquawk(dbsbrly);
+
+	if (iex->ixVSge == JobBrlyIexIni::VecVSge::PRSERR) continf.TxtMsg1 = iex->getSquawk(dbsbrly);
+	else continf.TxtMsg1 = "neither text-based nor XML file format recognized";
 
 	feedFMcbAlert.clear();
 

@@ -55,6 +55,39 @@ BrlyQLocList::BrlyQLocList(
 	this->phi = phi;
 };
 
+void BrlyQLocList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["ica"] = srefICAO;
+		me["tit"] = Title;
+		me["typ"] = srefIxVBasetype;
+		me["typ2"] = titIxVBasetype;
+		me["reg"] = stubRefBrlyMRegion;
+		me["eqp"] = stubRefBrlyMEquipment;
+		me["alt"] = alt;
+		me["the"] = theta;
+		me["phi"] = phi;
+	} else {
+		me["sref"] = sref;
+		me["srefICAO"] = srefICAO;
+		me["Title"] = Title;
+		me["srefIxVBasetype"] = srefIxVBasetype;
+		me["titIxVBasetype"] = titIxVBasetype;
+		me["stubRefBrlyMRegion"] = stubRefBrlyMRegion;
+		me["stubRefBrlyMEquipment"] = stubRefBrlyMEquipment;
+		me["alt"] = alt;
+		me["theta"] = theta;
+		me["phi"] = phi;
+	};
+};
+
 void BrlyQLocList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -138,6 +171,16 @@ ListBrlyQLocList& ListBrlyQLocList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLocList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLocList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLocList::writeXML(

@@ -80,6 +80,7 @@ uint CrdBrlyNav::VecVSge::getIx(
 
 	if (s == "idle") return IDLE;
 	if (s == "alrbrlyabt") return ALRBRLYABT;
+	if (s == "alrbrlytrm") return ALRBRLYTRM;
 
 	return(0);
 };
@@ -89,6 +90,7 @@ string CrdBrlyNav::VecVSge::getSref(
 		) {
 	if (ix == IDLE) return("idle");
 	if (ix == ALRBRLYABT) return("alrbrlyabt");
+	if (ix == ALRBRLYTRM) return("alrbrlytrm");
 
 	return("");
 };
@@ -98,7 +100,7 @@ void CrdBrlyNav::VecVSge::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 2; i++) feed.appendIxSrefTitles(i, getSref(i), getSref(i));
+	for (unsigned int i = 1; i <= 3; i++) feed.appendIxSrefTitles(i, getSref(i), getSref(i));
 };
 
 /******************************************************************************
@@ -121,6 +123,21 @@ CrdBrlyNav::ContInf::ContInf(
 	this->MtxSesSes3 = MtxSesSes3;
 
 	mask = {NUMFSGE, MRLAPPHLP, MTXSESSES1, MTXSESSES2, MTXSESSES3};
+};
+
+void CrdBrlyNav::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfBrlyNav";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFSge"] = numFSge;
+	me["MrlAppHlp"] = MrlAppHlp;
+	me["MtxSesSes1"] = MtxSesSes1;
+	me["MtxSesSes2"] = MtxSesSes2;
+	me["MtxSesSes3"] = MtxSesSes3;
 };
 
 void CrdBrlyNav::ContInf::writeXML(
@@ -174,6 +191,32 @@ set<uint> CrdBrlyNav::ContInf::diff(
 /******************************************************************************
  class CrdBrlyNav::StatApp
  ******************************************************************************/
+
+void CrdBrlyNav::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixBrlyVReqitmode
+			, const usmallint latency
+			, const string& shortMenu
+			, const uint widthMenu
+			, const bool initdoneHeadbar
+			, const bool initdoneAdmin
+			, const bool initdoneBase
+			, const bool initdoneConnect
+		) {
+	if (difftag.length() == 0) difftag = "StatAppBrlyNav";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxBrlyVReqitmode"] = VecBrlyVReqitmode::getSref(ixBrlyVReqitmode);
+	me["latency"] = latency;
+	me["shortMenu"] = shortMenu;
+	me["widthMenu"] = widthMenu;
+	me["initdoneHeadbar"] = initdoneHeadbar;
+	me["initdoneAdmin"] = initdoneAdmin;
+	me["initdoneBase"] = initdoneBase;
+	me["initdoneConnect"] = initdoneConnect;
+};
 
 void CrdBrlyNav::StatApp::writeXML(
 			xmlTextWriter* wr
@@ -274,6 +317,44 @@ CrdBrlyNav::StatShr::StatShr(
 	mask = {JREFDLGLOAINI, JREFHEADBAR, JREFADMIN, PNLADMINAVAIL, JREFBASE, PNLBASEAVAIL, JREFCONNECT, PNLCONNECTAVAIL, MITSESSPSAVAIL, MSPCRD1AVAIL, MITCRDUSGAVAIL, MITCRDUSRAVAIL, MITCRDPRSAVAIL, MITCRDFILAVAIL, MITCRDOPRAVAIL, MITCRDPTYAVAIL, MSPCRD2AVAIL, MITCRDREGAVAIL, MITCRDLOCAVAIL, MITCRDLEGAVAIL, MITCRDTTBAVAIL, MITCRDFLTAVAIL, MITCRDSEGAVAIL, MSPCRD3AVAIL, MITCRDCONAVAIL, MITCRDRLYAVAIL, MSPAPP2AVAIL, MITAPPLOIAVAIL};
 };
 
+void CrdBrlyNav::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrBrlyNav";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["scrJrefDlgloaini"] = Scr::scramble(jrefDlgloaini);
+	me["scrJrefHeadbar"] = Scr::scramble(jrefHeadbar);
+	me["scrJrefAdmin"] = Scr::scramble(jrefAdmin);
+	me["pnladminAvail"] = pnladminAvail;
+	me["scrJrefBase"] = Scr::scramble(jrefBase);
+	me["pnlbaseAvail"] = pnlbaseAvail;
+	me["scrJrefConnect"] = Scr::scramble(jrefConnect);
+	me["pnlconnectAvail"] = pnlconnectAvail;
+	me["MitSesSpsAvail"] = MitSesSpsAvail;
+	me["MspCrd1Avail"] = MspCrd1Avail;
+	me["MitCrdUsgAvail"] = MitCrdUsgAvail;
+	me["MitCrdUsrAvail"] = MitCrdUsrAvail;
+	me["MitCrdPrsAvail"] = MitCrdPrsAvail;
+	me["MitCrdFilAvail"] = MitCrdFilAvail;
+	me["MitCrdOprAvail"] = MitCrdOprAvail;
+	me["MitCrdPtyAvail"] = MitCrdPtyAvail;
+	me["MspCrd2Avail"] = MspCrd2Avail;
+	me["MitCrdRegAvail"] = MitCrdRegAvail;
+	me["MitCrdLocAvail"] = MitCrdLocAvail;
+	me["MitCrdLegAvail"] = MitCrdLegAvail;
+	me["MitCrdTtbAvail"] = MitCrdTtbAvail;
+	me["MitCrdFltAvail"] = MitCrdFltAvail;
+	me["MitCrdSegAvail"] = MitCrdSegAvail;
+	me["MspCrd3Avail"] = MspCrd3Avail;
+	me["MitCrdConAvail"] = MitCrdConAvail;
+	me["MitCrdRlyAvail"] = MitCrdRlyAvail;
+	me["MspApp2Avail"] = MspApp2Avail;
+	me["MitAppLoiAvail"] = MitAppLoiAvail;
+};
+
 void CrdBrlyNav::StatShr::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -372,6 +453,53 @@ set<uint> CrdBrlyNav::StatShr::diff(
  class CrdBrlyNav::Tag
  ******************************************************************************/
 
+void CrdBrlyNav::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyNav";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["MitCrdUsg"] = "User groups ...";
+		me["MitCrdUsr"] = "Users ...";
+		me["MitCrdPrs"] = "Persons ...";
+		me["MitCrdFil"] = "Files ...";
+		me["MitCrdOpr"] = "Operators ...";
+		me["MitCrdPty"] = "Plane types ...";
+		me["MitCrdReg"] = "Regions ...";
+		me["MitCrdLoc"] = "Locations ...";
+		me["MitCrdLeg"] = "Legs ...";
+		me["MitCrdTtb"] = "Timetables ...";
+		me["MitCrdFlt"] = "Flights ...";
+		me["MitCrdSeg"] = "Segments ...";
+		me["MitCrdCon"] = "Connections ...";
+		me["MitCrdRly"] = "Relays ...";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["MitCrdUsg"] = "Benutzergruppen ...";
+		me["MitCrdUsr"] = "Benutzer ...";
+		me["MitCrdPrs"] = "Personen ...";
+		me["MitCrdFil"] = "Dateien ...";
+		me["MitCrdOpr"] = "Betreiber ...";
+		me["MitCrdPty"] = "Flugzeugtypen ...";
+		me["MitCrdReg"] = "Regionen ...";
+		me["MitCrdLoc"] = "Orte ...";
+		me["MitCrdLeg"] = "Strecken ...";
+		me["MitCrdTtb"] = "Flugpl\\u00e4ne ...";
+		me["MitCrdFlt"] = "Fl\\u00fcge ...";
+		me["MitCrdSeg"] = "Segmente ...";
+		me["MitCrdCon"] = "Verbindungen ...";
+		me["MitCrdRly"] = "Verbindungsketten ...";
+	};
+	me["MitAppAbt"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::ABOUT, ixBrlyVLocale)) + " ...";
+	me["MrlAppHlp"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::HELP, ixBrlyVLocale)) + " ...";
+	me["MitSesSps"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::SUSPSESS, ixBrlyVLocale));
+	me["MitSesTrm"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::CLSESS, ixBrlyVLocale));
+	me["MitAppLoi"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::LOAINI, ixBrlyVLocale)) + " ...";
+};
+
 void CrdBrlyNav::Tag::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -444,6 +572,25 @@ string CrdBrlyNav::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void CrdBrlyNav::DpchAppDo::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyNavDo"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void CrdBrlyNav::DpchAppDo::readXML(
@@ -524,6 +671,20 @@ void CrdBrlyNav::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void CrdBrlyNav::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyNavData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFSGE)) feedFSge.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
 };
 
 void CrdBrlyNav::DpchEngData::writeXML(

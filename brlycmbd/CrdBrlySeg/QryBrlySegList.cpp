@@ -201,10 +201,10 @@ void QryBrlySegList::fetch(
 			rec->jnum = statshr.jnumFirstload + i;
 			rec->srefRefIxVTbl = VecBrlyVMSegmentRefTbl::getSref(rec->refIxVTbl);
 			rec->titRefIxVTbl = VecBrlyVMSegmentRefTbl::getTitle(rec->refIxVTbl, ixBrlyVLocale);
-			if (rec->refIxVTbl == VecBrlyVMSegmentRefTbl::FLT) {
-				rec->stubRefUref = StubBrly::getStubFltStd(dbsbrly, rec->refUref, ixBrlyVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->refIxVTbl == VecBrlyVMSegmentRefTbl::CON) {
+			if (rec->refIxVTbl == VecBrlyVMSegmentRefTbl::CON) {
 				rec->stubRefUref = StubBrly::getStubConStd(dbsbrly, rec->refUref, ixBrlyVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->refIxVTbl == VecBrlyVMSegmentRefTbl::FLT) {
+				rec->stubRefUref = StubBrly::getStubFltStd(dbsbrly, rec->refUref, ixBrlyVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubRefUref = "-";
 			rec->ftmStart = Ftm::stamp(rec->start);
 			rec->ftmStop = Ftm::stamp(rec->stop);
@@ -362,27 +362,13 @@ void QryBrlySegList::handleCall(
 			DbsBrly* dbsbrly
 			, Call* call
 		) {
-	if (call->ixVCall == VecBrlyVCall::CALLBRLYSEGUPD_REFEQ) {
-		call->abort = handleCallBrlySegUpd_refEq(dbsbrly, call->jref);
-	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSEGMOD) {
+	if (call->ixVCall == VecBrlyVCall::CALLBRLYSEGMOD) {
 		call->abort = handleCallBrlySegMod(dbsbrly, call->jref);
+	} else if (call->ixVCall == VecBrlyVCall::CALLBRLYSEGUPD_REFEQ) {
+		call->abort = handleCallBrlySegUpd_refEq(dbsbrly, call->jref);
 	} else if ((call->ixVCall == VecBrlyVCall::CALLBRLYSTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallBrlyStubChgFromSelf(dbsbrly);
 	};
-};
-
-bool QryBrlySegList::handleCallBrlySegUpd_refEq(
-			DbsBrly* dbsbrly
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if (ixBrlyVQrystate != VecBrlyVQrystate::OOD) {
-		ixBrlyVQrystate = VecBrlyVQrystate::OOD;
-		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
-	};
-
-	return retval;
 };
 
 bool QryBrlySegList::handleCallBrlySegMod(
@@ -393,6 +379,20 @@ bool QryBrlySegList::handleCallBrlySegMod(
 
 	if ((ixBrlyVQrystate == VecBrlyVQrystate::UTD) || (ixBrlyVQrystate == VecBrlyVQrystate::SLM)) {
 		ixBrlyVQrystate = VecBrlyVQrystate::MNR;
+		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
+	};
+
+	return retval;
+};
+
+bool QryBrlySegList::handleCallBrlySegUpd_refEq(
+			DbsBrly* dbsbrly
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if (ixBrlyVQrystate != VecBrlyVQrystate::OOD) {
+		ixBrlyVQrystate = VecBrlyVQrystate::OOD;
 		xchg->triggerCall(dbsbrly, VecBrlyVCall::CALLBRLYSTATCHG, jref);
 	};
 

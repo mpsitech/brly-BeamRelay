@@ -35,6 +35,23 @@ BrlyQLocProxOrgMNLocation::BrlyQLocProxOrgMNLocation(
 	this->deltaphi = deltaphi;
 };
 
+void BrlyQLocProxOrgMNLocation::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["dph"] = deltaphi;
+	} else {
+		me["stubMref"] = stubMref;
+		me["deltaphi"] = deltaphi;
+	};
+};
+
 void BrlyQLocProxOrgMNLocation::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -102,6 +119,16 @@ ListBrlyQLocProxOrgMNLocation& ListBrlyQLocProxOrgMNLocation::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLocProxOrgMNLocation::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLocProxOrgMNLocation";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLocProxOrgMNLocation::writeXML(

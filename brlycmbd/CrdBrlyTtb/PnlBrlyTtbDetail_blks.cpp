@@ -59,6 +59,29 @@ PnlBrlyTtbDetail::ContIac::ContIac(
 	mask = {TXFTIT, NUMFPUPALI, TXFALI, TXFSTA, TXFSTO};
 };
 
+bool PnlBrlyTtbDetail::ContIac::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacBrlyTtbDetail"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("TxfTit")) {TxfTit = me["TxfTit"].asString(); add(TXFTIT);};
+		if (me.isMember("numFPupAli")) {numFPupAli = me["numFPupAli"].asUInt(); add(NUMFPUPALI);};
+		if (me.isMember("TxfAli")) {TxfAli = me["TxfAli"].asString(); add(TXFALI);};
+		if (me.isMember("TxfSta")) {TxfSta = me["TxfSta"].asString(); add(TXFSTA);};
+		if (me.isMember("TxfSto")) {TxfSto = me["TxfSto"].asString(); add(TXFSTO);};
+	};
+
+	return basefound;
+};
+
 bool PnlBrlyTtbDetail::ContIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -84,6 +107,21 @@ bool PnlBrlyTtbDetail::ContIac::readXML(
 	};
 
 	return basefound;
+};
+
+void PnlBrlyTtbDetail::ContIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContIacBrlyTtbDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxfTit"] = TxfTit;
+	me["numFPupAli"] = numFPupAli;
+	me["TxfAli"] = TxfAli;
+	me["TxfSta"] = TxfSta;
+	me["TxfSto"] = TxfSto;
 };
 
 void PnlBrlyTtbDetail::ContIac::writeXML(
@@ -148,6 +186,17 @@ PnlBrlyTtbDetail::ContInf::ContInf(
 	mask = {TXTFIL};
 };
 
+void PnlBrlyTtbDetail::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfBrlyTtbDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxtFil"] = TxtFil;
+};
+
 void PnlBrlyTtbDetail::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -191,6 +240,20 @@ set<uint> PnlBrlyTtbDetail::ContInf::diff(
 /******************************************************************************
  class PnlBrlyTtbDetail::StatApp
  ******************************************************************************/
+
+void PnlBrlyTtbDetail::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixBrlyVExpstate
+			, const bool PupAliAlt
+		) {
+	if (difftag.length() == 0) difftag = "StatAppBrlyTtbDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxBrlyVExpstate"] = VecBrlyVExpstate::getSref(ixBrlyVExpstate);
+	me["PupAliAlt"] = PupAliAlt;
+};
 
 void PnlBrlyTtbDetail::StatApp::writeXML(
 			xmlTextWriter* wr
@@ -243,6 +306,27 @@ PnlBrlyTtbDetail::StatShr::StatShr(
 	this->TxfStoActive = TxfStoActive;
 
 	mask = {TXFALIVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXFTITACTIVE, TXTFILACTIVE, BUTFILVIEWAVAIL, BUTFILVIEWACTIVE, PUPALIACTIVE, BUTALIEDITAVAIL, TXFSTAACTIVE, TXFSTOACTIVE};
+};
+
+void PnlBrlyTtbDetail::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrBrlyTtbDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxfAliValid"] = TxfAliValid;
+	me["ButSaveAvail"] = ButSaveAvail;
+	me["ButSaveActive"] = ButSaveActive;
+	me["TxfTitActive"] = TxfTitActive;
+	me["TxtFilActive"] = TxtFilActive;
+	me["ButFilViewAvail"] = ButFilViewAvail;
+	me["ButFilViewActive"] = ButFilViewActive;
+	me["PupAliActive"] = PupAliActive;
+	me["ButAliEditAvail"] = ButAliEditAvail;
+	me["TxfStaActive"] = TxfStaActive;
+	me["TxfStoActive"] = TxfStoActive;
 };
 
 void PnlBrlyTtbDetail::StatShr::writeXML(
@@ -309,6 +393,31 @@ set<uint> PnlBrlyTtbDetail::StatShr::diff(
  class PnlBrlyTtbDetail::Tag
  ******************************************************************************/
 
+void PnlBrlyTtbDetail::Tag::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagBrlyTtbDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixBrlyVLocale == VecBrlyVLocale::ENUS) {
+		me["CptTit"] = "name";
+		me["CptFil"] = "file";
+		me["CptAli"] = "airline alliance";
+		me["CptSta"] = "validity start";
+		me["CptSto"] = "validity stop";
+	} else if (ixBrlyVLocale == VecBrlyVLocale::DECH) {
+		me["CptTit"] = "Name";
+		me["CptFil"] = "Datei";
+		me["CptAli"] = "Luftfahrtallianz";
+		me["CptSta"] = "G\\u00fcltigkeitsbeginn";
+		me["CptSto"] = "G\\u00fcltigkeitsende";
+	};
+	me["Cpt"] = StrMod::cap(VecBrlyVTag::getTitle(VecBrlyVTag::DETAIL, ixBrlyVLocale));
+};
+
 void PnlBrlyTtbDetail::Tag::writeXML(
 			const uint ixBrlyVLocale
 			, xmlTextWriter* wr
@@ -360,6 +469,26 @@ string PnlBrlyTtbDetail::DpchAppData::getSrefsMask() {
 	return(srefs);
 };
 
+void PnlBrlyTtbDetail::DpchAppData::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyTtbDetailData"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (contiac.readJSON(me, true)) add(CONTIAC);
+	} else {
+		contiac = ContIac();
+	};
+};
+
 void PnlBrlyTtbDetail::DpchAppData::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -407,6 +536,25 @@ string PnlBrlyTtbDetail::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlBrlyTtbDetail::DpchAppDo::readJSON(
+			const Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppBrlyTtbDetailDo"];}();
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlBrlyTtbDetail::DpchAppDo::readXML(
@@ -491,6 +639,21 @@ void PnlBrlyTtbDetail::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlBrlyTtbDetail::DpchEngData::writeJSON(
+			const uint ixBrlyVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngBrlyTtbDetailData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTIAC)) contiac.writeJSON(me);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFPUPALI)) feedFPupAli.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixBrlyVLocale, me);
 };
 
 void PnlBrlyTtbDetail::DpchEngData::writeXML(

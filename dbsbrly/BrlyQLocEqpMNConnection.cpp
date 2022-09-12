@@ -37,6 +37,23 @@ BrlyQLocEqpMNConnection::BrlyQLocEqpMNConnection(
 	this->srefConIxBrlyVLat = srefConIxBrlyVLat;
 };
 
+void BrlyQLocEqpMNConnection::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["lat"] = srefConIxBrlyVLat;
+	} else {
+		me["stubMref"] = stubMref;
+		me["srefConIxBrlyVLat"] = srefConIxBrlyVLat;
+	};
+};
+
 void BrlyQLocEqpMNConnection::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -104,6 +121,16 @@ ListBrlyQLocEqpMNConnection& ListBrlyQLocEqpMNConnection::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLocEqpMNConnection::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLocEqpMNConnection";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLocEqpMNConnection::writeXML(

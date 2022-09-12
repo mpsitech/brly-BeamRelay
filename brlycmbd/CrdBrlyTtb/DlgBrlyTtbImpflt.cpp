@@ -169,23 +169,23 @@ void DlgBrlyTtbImpflt::refresh(
 	muteRefresh = true;
 
 	StatShr oldStatshr(statshr);
-	ContIac oldContiac(contiac);
 	ContInf oldContinf(continf);
+	ContIac oldContiac(contiac);
 
 	// IP refresh --- BEGIN
 	// statshr
 	statshr.ButDneActive = evalButDneActive(dbsbrly);
 
-	// contiac
-	contiac.numFDse = ixVDit;
-
 	// continf
 	continf.numFSge = ixVSge;
 
+	// contiac
+	contiac.numFDse = ixVDit;
+
 	// IP refresh --- END
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 
 	refreshIfi(dbsbrly, moditems);
 	refreshImp(dbsbrly, moditems);
@@ -277,10 +277,10 @@ void DlgBrlyTtbImpflt::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqBrly::VecVBasetype::TIMER) {
-		if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC)) handleTimerWithSrefMonInSgePostprc(dbsbrly);
-		else if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbsbrly, req->sref);
+		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbsbrly, req->sref);
 		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbsbrly, req->sref);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbsbrly);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC)) handleTimerWithSrefMonInSgePostprc(dbsbrly);
 	};
 };
 
@@ -378,7 +378,7 @@ void DlgBrlyTtbImpflt::handleUploadInSgeIdle(
 			DbsBrly* dbsbrly
 			, const string& filename
 		) {
-	// IP handleUploadInSgeIdle --- INSERT
+	infilename = filename; // IP handleUploadInSgeIdle --- ILINE
 	changeStage(dbsbrly, VecVSge::PRSIDLE);
 };
 
@@ -386,13 +386,6 @@ string DlgBrlyTtbImpflt::handleDownload(
 			DbsBrly* dbsbrly
 		) {
 	return(""); // IP handleDownload --- LINE
-};
-
-void DlgBrlyTtbImpflt::handleTimerWithSrefMonInSgePostprc(
-			DbsBrly* dbsbrly
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbsbrly); // IP handleTimerWithSrefMonInSgePostprc --- ILINE
 };
 
 void DlgBrlyTtbImpflt::handleTimerInSgePrsidle(
@@ -414,6 +407,13 @@ void DlgBrlyTtbImpflt::handleTimerWithSrefMonInSgeImport(
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	refreshWithDpchEng(dbsbrly); // IP handleTimerWithSrefMonInSgeImport --- ILINE
+};
+
+void DlgBrlyTtbImpflt::handleTimerWithSrefMonInSgePostprc(
+			DbsBrly* dbsbrly
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbsbrly); // IP handleTimerWithSrefMonInSgePostprc --- ILINE
 };
 
 void DlgBrlyTtbImpflt::changeStage(
@@ -530,7 +530,9 @@ uint DlgBrlyTtbImpflt::enterSgeParse(
 			DbsBrly* dbsbrly
 			, const bool reenter
 		) {
-	uint retval = VecVSge::PARSE;
+	uint retval;
+	nextIxVSgeSuccess = VecVSge::PRSDONE;
+	retval = nextIxVSgeSuccess;
 	nextIxVSgeFailure = VecVSge::ALRBRLYPER;
 
 	// IP enterSgeParse --- IBEGIN
@@ -595,7 +597,9 @@ uint DlgBrlyTtbImpflt::enterSgeAlrbrlyper(
 
 	continf.TxtCpt = VecBrlyVTag::getTitle(VecBrlyVTag::ERROR, ixBrlyVLocale);
 	continf.TxtCpt = StrMod::cap(continf.TxtCpt);
-	continf.TxtMsg1 = iex->getSquawk(dbsbrly);
+
+	if (iex->ixVSge == JobBrlyIexTtb::VecVSge::PRSERR) continf.TxtMsg1 = iex->getSquawk(dbsbrly);
+	else continf.TxtMsg1 = "neither text-based nor XML file format recognized";
 
 	feedFMcbAlert.clear();
 

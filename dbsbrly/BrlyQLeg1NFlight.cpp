@@ -31,6 +31,21 @@ BrlyQLeg1NFlight::BrlyQLeg1NFlight(
 	this->stubRef = stubRef;
 };
 
+void BrlyQLeg1NFlight::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void BrlyQLeg1NFlight::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListBrlyQLeg1NFlight& ListBrlyQLeg1NFlight::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQLeg1NFlight::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQLeg1NFlight";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQLeg1NFlight::writeXML(

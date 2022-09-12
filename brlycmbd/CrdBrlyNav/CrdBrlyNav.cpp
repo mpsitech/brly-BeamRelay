@@ -176,6 +176,12 @@ void CrdBrlyNav::updatePreset(
 	// IP updatePreset --- END
 };
 
+void CrdBrlyNav::warnTerm(
+			DbsBrly* dbsbrly
+		) {
+	if (ixVSge == VecVSge::IDLE) changeStage(dbsbrly, VecVSge::ALRBRLYTRM);
+};
+
 void CrdBrlyNav::handleRequest(
 			DbsBrly* dbsbrly
 			, ReqBrly* req
@@ -487,6 +493,8 @@ void CrdBrlyNav::handleDpchAppBrlyAlert(
 	// IP handleDpchAppBrlyAlert --- BEGIN
 	if (ixVSge == VecVSge::ALRBRLYABT) {
 		changeStage(dbsbrly, nextIxVSgeSuccess);
+	} else if (ixVSge == VecVSge::ALRBRLYTRM) {
+		changeStage(dbsbrly, nextIxVSgeSuccess);
 	};
 
 	*dpcheng = new DpchEngBrlyConfirm(true, jref, "");
@@ -531,6 +539,7 @@ void CrdBrlyNav::changeStage(
 			switch (ixVSge) {
 				case VecVSge::IDLE: leaveSgeIdle(dbsbrly); break;
 				case VecVSge::ALRBRLYABT: leaveSgeAlrbrlyabt(dbsbrly); break;
+				case VecVSge::ALRBRLYTRM: leaveSgeAlrbrlytrm(dbsbrly); break;
 			};
 
 			setStage(dbsbrly, _ixVSge);
@@ -541,6 +550,7 @@ void CrdBrlyNav::changeStage(
 		switch (_ixVSge) {
 			case VecVSge::IDLE: _ixVSge = enterSgeIdle(dbsbrly, reenter); break;
 			case VecVSge::ALRBRLYABT: _ixVSge = enterSgeAlrbrlyabt(dbsbrly, reenter); break;
+			case VecVSge::ALRBRLYTRM: _ixVSge = enterSgeAlrbrlytrm(dbsbrly, reenter); break;
 		};
 
 		// IP changeStage.refresh2 --- INSERT
@@ -590,4 +600,22 @@ void CrdBrlyNav::leaveSgeAlrbrlyabt(
 			DbsBrly* dbsbrly
 		) {
 	// IP leaveSgeAlrbrlyabt --- INSERT
+};
+
+uint CrdBrlyNav::enterSgeAlrbrlytrm(
+			DbsBrly* dbsbrly
+			, const bool reenter
+		) {
+	uint retval = VecVSge::ALRBRLYTRM;
+	nextIxVSgeSuccess = VecVSge::IDLE;
+
+	xchg->submitDpch(AlrBrly::prepareAlrTrm(jref, ixBrlyVLocale, xchg->stgbrlyappearance.sesstterm, xchg->stgbrlyappearance.sesstwarn, feedFMcbAlert)); // IP enterSgeAlrbrlytrm --- LINE
+
+	return retval;
+};
+
+void CrdBrlyNav::leaveSgeAlrbrlytrm(
+			DbsBrly* dbsbrly
+		) {
+	// IP leaveSgeAlrbrlytrm --- INSERT
 };

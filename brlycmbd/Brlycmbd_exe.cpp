@@ -492,7 +492,7 @@ int main(
 
 	try {
 		// welcome message
-		cout << "Welcome to BeamRelay v0.2.13!" << endl;
+		cout << "Welcome to BeamRelay v0.2.15!" << endl;
 
 		// calls brlycmbd.init()
 		brlycmbd = new Brlycmbd(exedir, clearAll, startMon);

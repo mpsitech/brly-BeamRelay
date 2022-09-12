@@ -59,6 +59,35 @@ BrlyQConList::BrlyQConList(
 	this->titIxVModel = titIxVModel;
 };
 
+void BrlyQConList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["grp"] = stubGrp;
+		me["own"] = stubOwn;
+		me["flt"] = stubRefBrlyMFlight;
+		me["cor"] = stubCorRefBrlyMLeg;
+		me["sta"] = ftmStart;
+		me["sto"] = ftmStop;
+		me["mod"] = srefIxVModel;
+		me["mod2"] = titIxVModel;
+	} else {
+		me["stubGrp"] = stubGrp;
+		me["stubOwn"] = stubOwn;
+		me["stubRefBrlyMFlight"] = stubRefBrlyMFlight;
+		me["stubCorRefBrlyMLeg"] = stubCorRefBrlyMLeg;
+		me["ftmStart"] = ftmStart;
+		me["ftmStop"] = ftmStop;
+		me["srefIxVModel"] = srefIxVModel;
+		me["titIxVModel"] = titIxVModel;
+	};
+};
+
 void BrlyQConList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -138,6 +167,16 @@ ListBrlyQConList& ListBrlyQConList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListBrlyQConList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListBrlyQConList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListBrlyQConList::writeXML(

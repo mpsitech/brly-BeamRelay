@@ -23,8 +23,8 @@ namespace VecBrlyVOpengtype {
 
 	std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixBrlyVLocale);
 
-	void appendToFeed(const Sbecore::uint ix, const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feed);
-	void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Xmlio::Feed& feed);
+	void appendToFeed(const Sbecore::uint ix, const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feed);
+	void fillFeed(const Sbecore::uint ixBrlyVLocale, Sbecore::Feed& feed);
 };
 
 #endif
